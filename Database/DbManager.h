@@ -17,14 +17,16 @@
 -(void) open;
 -(void) close;
 
+// actions on single objects
 -(int) saveProject:(Project*)project;
 -(int) saveSnippet:(Snippet*)snippet;
-
 -(Snippet*) loadSnippet:(NSString*)name language:(int)lang;
 -(Project*) loadProject:(NSString*)name;
-
 -(void) deleteProject:(NSString*)name;
 -(void) deleteSnippet:(NSString*)name language:(int)lang;
+
+// actions on multipte objects
+-(NSDictionary*) getProjectsBasicInfo; // <key: name, value:language>
 
 -(NSString*) getLanguageName:(int)language;
 

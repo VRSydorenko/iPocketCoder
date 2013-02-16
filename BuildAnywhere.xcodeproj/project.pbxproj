@@ -28,6 +28,9 @@
 		7F51CC6416D007A100DDE28F /* Snippet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6316D007A100DDE28F /* Snippet.m */; };
 		7F51CC6716D0095E00DDE28F /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6616D0095E00DDE28F /* DataManager.m */; };
 		7F51CC6A16D0251A00DDE28F /* MainNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6916D0251A00DDE28F /* MainNavController.m */; };
+		7F51CC6D16D0273600DDE28F /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6C16D0273500DDE28F /* MainVC.m */; };
+		7F51CC7016D030AF00DDE28F /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6F16D030AF00DDE28F /* Utils.m */; };
+		7F51CC7316D0432000DDE28F /* ProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC7216D0432000DDE28F /* ProjectCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +68,12 @@
 		7F51CC6616D0095E00DDE28F /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		7F51CC6816D0251A00DDE28F /* MainNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavController.h; sourceTree = "<group>"; };
 		7F51CC6916D0251A00DDE28F /* MainNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavController.m; sourceTree = "<group>"; };
+		7F51CC6B16D0273500DDE28F /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
+		7F51CC6C16D0273500DDE28F /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
+		7F51CC6E16D030AE00DDE28F /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		7F51CC6F16D030AF00DDE28F /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		7F51CC7116D0431F00DDE28F /* ProjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectCell.h; sourceTree = "<group>"; };
+		7F51CC7216D0432000DDE28F /* ProjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +126,8 @@
 			children = (
 				7F51CC6816D0251A00DDE28F /* MainNavController.h */,
 				7F51CC6916D0251A00DDE28F /* MainNavController.m */,
+				7F51CC6B16D0273500DDE28F /* MainVC.h */,
+				7F51CC6C16D0273500DDE28F /* MainVC.m */,
 				7F51CC2D16CFFCBF00DDE28F /* iPhoneMain.storyboard */,
 				7F51CC3016CFFCBF00DDE28F /* iPadMain.storyboard */,
 				7F51CC1C16CFFCBF00DDE28F /* Supporting Files */,
@@ -166,6 +177,10 @@
 				7F51CC6016D004BF00DDE28F /* Project.m */,
 				7F51CC6516D0095D00DDE28F /* DataManager.h */,
 				7F51CC6616D0095E00DDE28F /* DataManager.m */,
+				7F51CC6E16D030AE00DDE28F /* Utils.h */,
+				7F51CC6F16D030AF00DDE28F /* Utils.m */,
+				7F51CC7116D0431F00DDE28F /* ProjectCell.h */,
+				7F51CC7216D0432000DDE28F /* ProjectCell.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -248,6 +263,9 @@
 				7F51CC6416D007A100DDE28F /* Snippet.m in Sources */,
 				7F51CC6716D0095E00DDE28F /* DataManager.m in Sources */,
 				7F51CC6A16D0251A00DDE28F /* MainNavController.m in Sources */,
+				7F51CC6D16D0273600DDE28F /* MainVC.m in Sources */,
+				7F51CC7016D030AF00DDE28F /* Utils.m in Sources */,
+				7F51CC7316D0432000DDE28F /* ProjectCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +324,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -331,7 +349,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

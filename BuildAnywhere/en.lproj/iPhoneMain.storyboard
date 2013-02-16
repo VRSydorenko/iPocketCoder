@@ -17,22 +17,69 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ffF-mK-M4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10" y="-115"/>
+            <point key="canvasLocation" x="-94" y="-211"/>
         </scene>
-        <!--View Controller-->
+        <!--MainVC-->
         <scene sceneID="IfW-iR-npd">
             <objects>
-                <viewController id="jaB-nD-xTd" sceneMemberID="viewController">
+                <viewController id="jaB-nD-xTd" customClass="MainVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K5V-8G-A0O">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zTR-aJ-uBp">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Df3-2l-zng">
+                                    <size key="itemSize" width="280" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellProjectiPhone" id="NTW-ve-eix" customClass="ProjectCell">
+                                        <rect key="frame" x="20" y="0.0" width="280" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nke-P9-afw">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.23529411759999999" green="0.66666666669999997" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="nke-P9-afw" firstAttribute="trailing" secondItem="NTW-ve-eix" secondAttribute="trailing" type="default" id="4yw-EZ-f7n"/>
+                                            <constraint firstItem="nke-P9-afw" firstAttribute="top" secondItem="NTW-ve-eix" secondAttribute="top" constant="20" type="default" id="9f4-Ci-haY"/>
+                                            <constraint firstItem="nke-P9-afw" firstAttribute="leading" secondItem="NTW-ve-eix" secondAttribute="leading" type="default" id="diu-aR-zn3"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="labelProjectName" destination="nke-P9-afw" id="nTl-Rf-vEZ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="zTR-aJ-uBp" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="32m-6c-uNt"/>
+                            <constraint firstItem="zTR-aJ-uBp" firstAttribute="leading" secondItem="K5V-8G-A0O" secondAttribute="leading" type="default" id="6Lg-MQ-ZPg"/>
+                            <constraint firstItem="zTR-aJ-uBp" firstAttribute="trailing" secondItem="K5V-8G-A0O" secondAttribute="trailing" type="default" id="UqU-Hg-a0W"/>
+                            <constraint firstItem="zTR-aJ-uBp" firstAttribute="top" secondItem="K5V-8G-A0O" secondAttribute="top" constant="20" symbolic="YES" type="default" id="pav-Jf-3wo"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IyX-sa-8JC"/>
+                    <connections>
+                        <outlet property="collectionProjects" destination="zTR-aJ-uBp" id="EyD-c5-2PA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9x3-hU-LDg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="492" y="-115"/>
+            <point key="canvasLocation" x="372" y="-211"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

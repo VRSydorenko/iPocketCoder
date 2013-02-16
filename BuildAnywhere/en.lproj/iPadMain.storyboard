@@ -17,29 +17,71 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fe1-dw-5eg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-570" y="-318"/>
+            <point key="canvasLocation" x="-458" y="-790"/>
         </scene>
-        <!--View Controller-->
+        <!--MainVC-->
         <scene sceneID="DRa-sG-JGP">
             <objects>
-                <viewController id="HIc-k8-SfY" sceneMemberID="viewController">
+                <viewController id="HIc-k8-SfY" customClass="MainVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WrK-7Q-FJk">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DWq-vJ-ewi">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gle-08-8NT">
+                                    <size key="itemSize" width="300" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellProjectiPad" id="987-Tr-0Q9" customClass="ProjectCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXs-0s-l69">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.23529411759999999" green="0.66666666669999997" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="WXs-0s-l69" firstAttribute="top" secondItem="987-Tr-0Q9" secondAttribute="top" constant="20" type="default" id="59h-Eh-dKF"/>
+                                            <constraint firstItem="WXs-0s-l69" firstAttribute="leading" secondItem="987-Tr-0Q9" secondAttribute="leading" constant="20" type="default" id="AGl-Mr-UCX"/>
+                                            <constraint firstAttribute="trailing" secondItem="WXs-0s-l69" secondAttribute="trailing" constant="20" type="default" id="Abc-uu-doz"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="labelProjectName" destination="WXs-0s-l69" id="gti-cV-gWo"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="DWq-vJ-ewi" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="b44-pU-BBk"/>
+                            <constraint firstItem="DWq-vJ-ewi" firstAttribute="top" secondItem="WrK-7Q-FJk" secondAttribute="top" constant="20" symbolic="YES" type="default" id="jXY-oi-H2x"/>
+                            <constraint firstAttribute="bottom" secondItem="DWq-vJ-ewi" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="sh0-gx-8No"/>
+                            <constraint firstItem="DWq-vJ-ewi" firstAttribute="leading" secondItem="WrK-7Q-FJk" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="xfw-7e-927"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kcQ-NE-l7f"/>
+                    <connections>
+                        <outlet property="collectionProjects" destination="DWq-vJ-ewi" id="ZFQ-C8-66w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="scC-a0-Oky" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="645" y="-318"/>
+            <point key="canvasLocation" x="473" y="-790"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="MainNavController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainNavController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

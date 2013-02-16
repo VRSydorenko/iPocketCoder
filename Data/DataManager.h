@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
+#import "Utils.h"
+#import "ProjectCell.h"
 
 @interface DataManager : NSObject
 
 +(NSString*) getLanguageName:(int)language;
++(NSDictionary*) getProjectsBasicInfo;
 
 @end

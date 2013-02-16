@@ -7,7 +7,8 @@
 //
 
 #import "DataManager.h"
-#import "DbManager.h"
+
+#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
 @implementation DataManager
 
@@ -18,5 +19,10 @@
 +(NSString*) getLanguageName:(int)language{
     return [[self getDbManager] getLanguageName:language];
 }
+
++(NSDictionary*) getProjectsBasicInfo{
+    return [[self getDbManager] getProjectsBasicInfo];
+}
+
 
 @end
