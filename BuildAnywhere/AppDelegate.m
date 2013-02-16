@@ -7,12 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "DbManager.h"
 
 @implementation AppDelegate
 
+@synthesize dbManager;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.dbManager = [[DbManager alloc] init];
+    
     return YES;
 }
 							

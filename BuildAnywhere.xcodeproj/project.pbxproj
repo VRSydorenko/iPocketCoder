@@ -16,9 +16,18 @@
 		7F51CC2816CFFCBF00DDE28F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F51CC2716CFFCBF00DDE28F /* Default.png */; };
 		7F51CC2A16CFFCBF00DDE28F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F51CC2916CFFCBF00DDE28F /* Default@2x.png */; };
 		7F51CC2C16CFFCBF00DDE28F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F51CC2B16CFFCBF00DDE28F /* Default-568h@2x.png */; };
-		7F51CC2F16CFFCBF00DDE28F /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F51CC2D16CFFCBF00DDE28F /* MainStoryboard_iPhone.storyboard */; };
-		7F51CC3216CFFCBF00DDE28F /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F51CC3016CFFCBF00DDE28F /* MainStoryboard_iPad.storyboard */; };
+		7F51CC2F16CFFCBF00DDE28F /* iPhoneMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F51CC2D16CFFCBF00DDE28F /* iPhoneMain.storyboard */; };
+		7F51CC3216CFFCBF00DDE28F /* iPadMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F51CC3016CFFCBF00DDE28F /* iPadMain.storyboard */; };
 		7F51CC3516CFFCBF00DDE28F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC3416CFFCBF00DDE28F /* ViewController.m */; };
+		7F51CC5716D0002C00DDE28F /* DBDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC4E16D0002B00DDE28F /* DBDefinition.m */; };
+		7F51CC5816D0002C00DDE28F /* DbField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC5016D0002C00DDE28F /* DbField.m */; };
+		7F51CC5916D0002C00DDE28F /* DbForeignKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC5216D0002C00DDE28F /* DbForeignKey.m */; };
+		7F51CC5A16D0002C00DDE28F /* DbManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC5416D0002C00DDE28F /* DbManager.m */; };
+		7F51CC5B16D0002C00DDE28F /* DbTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC5616D0002C00DDE28F /* DbTable.m */; };
+		7F51CC5D16D000B400DDE28F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F51CC5C16D000B400DDE28F /* libsqlite3.0.dylib */; };
+		7F51CC6116D004BF00DDE28F /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6016D004BF00DDE28F /* Project.m */; };
+		7F51CC6416D007A100DDE28F /* Snippet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6316D007A100DDE28F /* Snippet.m */; };
+		7F51CC6716D0095E00DDE28F /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6616D0095E00DDE28F /* DataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,10 +44,27 @@
 		7F51CC2716CFFCBF00DDE28F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		7F51CC2916CFFCBF00DDE28F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7F51CC2B16CFFCBF00DDE28F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		7F51CC2E16CFFCBF00DDE28F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		7F51CC3116CFFCBF00DDE28F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		7F51CC2E16CFFCBF00DDE28F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhoneMain.storyboard; sourceTree = "<group>"; };
+		7F51CC3116CFFCBF00DDE28F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPadMain.storyboard; sourceTree = "<group>"; };
 		7F51CC3316CFFCBF00DDE28F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		7F51CC3416CFFCBF00DDE28F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7F51CC4D16D0002B00DDE28F /* DBDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDefinition.h; sourceTree = "<group>"; };
+		7F51CC4E16D0002B00DDE28F /* DBDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDefinition.m; sourceTree = "<group>"; };
+		7F51CC4F16D0002B00DDE28F /* DbField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbField.h; sourceTree = "<group>"; };
+		7F51CC5016D0002C00DDE28F /* DbField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DbField.m; sourceTree = "<group>"; };
+		7F51CC5116D0002C00DDE28F /* DbForeignKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbForeignKey.h; sourceTree = "<group>"; };
+		7F51CC5216D0002C00DDE28F /* DbForeignKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DbForeignKey.m; sourceTree = "<group>"; };
+		7F51CC5316D0002C00DDE28F /* DbManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbManager.h; sourceTree = "<group>"; };
+		7F51CC5416D0002C00DDE28F /* DbManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DbManager.m; sourceTree = "<group>"; };
+		7F51CC5516D0002C00DDE28F /* DbTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbTable.h; sourceTree = "<group>"; };
+		7F51CC5616D0002C00DDE28F /* DbTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DbTable.m; sourceTree = "<group>"; };
+		7F51CC5C16D000B400DDE28F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		7F51CC5F16D004BE00DDE28F /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		7F51CC6016D004BF00DDE28F /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
+		7F51CC6216D007A100DDE28F /* Snippet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snippet.h; sourceTree = "<group>"; };
+		7F51CC6316D007A100DDE28F /* Snippet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snippet.m; sourceTree = "<group>"; };
+		7F51CC6516D0095D00DDE28F /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		7F51CC6616D0095E00DDE28F /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F51CC5D16D000B400DDE28F /* libsqlite3.0.dylib in Frameworks */,
 				7F51CC1616CFFCBF00DDE28F /* UIKit.framework in Frameworks */,
 				7F51CC1816CFFCBF00DDE28F /* Foundation.framework in Frameworks */,
 				7F51CC1A16CFFCBF00DDE28F /* CoreGraphics.framework in Frameworks */,
@@ -58,6 +85,8 @@
 		7F51CC0916CFFCBF00DDE28F = {
 			isa = PBXGroup;
 			children = (
+				7F51CC4C16D0002B00DDE28F /* Database */,
+				7F51CC5E16D004A400DDE28F /* Data */,
 				7F51CC1B16CFFCBF00DDE28F /* BuildAnywhere */,
 				7F51CC1416CFFCBF00DDE28F /* Frameworks */,
 				7F51CC1316CFFCBF00DDE28F /* Products */,
@@ -75,6 +104,7 @@
 		7F51CC1416CFFCBF00DDE28F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F51CC5C16D000B400DDE28F /* libsqlite3.0.dylib */,
 				7F51CC1516CFFCBF00DDE28F /* UIKit.framework */,
 				7F51CC1716CFFCBF00DDE28F /* Foundation.framework */,
 				7F51CC1916CFFCBF00DDE28F /* CoreGraphics.framework */,
@@ -87,8 +117,8 @@
 			children = (
 				7F51CC2416CFFCBF00DDE28F /* AppDelegate.h */,
 				7F51CC2516CFFCBF00DDE28F /* AppDelegate.m */,
-				7F51CC2D16CFFCBF00DDE28F /* MainStoryboard_iPhone.storyboard */,
-				7F51CC3016CFFCBF00DDE28F /* MainStoryboard_iPad.storyboard */,
+				7F51CC2D16CFFCBF00DDE28F /* iPhoneMain.storyboard */,
+				7F51CC3016CFFCBF00DDE28F /* iPadMain.storyboard */,
 				7F51CC3316CFFCBF00DDE28F /* ViewController.h */,
 				7F51CC3416CFFCBF00DDE28F /* ViewController.m */,
 				7F51CC1C16CFFCBF00DDE28F /* Supporting Files */,
@@ -108,6 +138,36 @@
 				7F51CC2B16CFFCBF00DDE28F /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7F51CC4C16D0002B00DDE28F /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				7F51CC4D16D0002B00DDE28F /* DBDefinition.h */,
+				7F51CC4E16D0002B00DDE28F /* DBDefinition.m */,
+				7F51CC4F16D0002B00DDE28F /* DbField.h */,
+				7F51CC5016D0002C00DDE28F /* DbField.m */,
+				7F51CC5116D0002C00DDE28F /* DbForeignKey.h */,
+				7F51CC5216D0002C00DDE28F /* DbForeignKey.m */,
+				7F51CC5316D0002C00DDE28F /* DbManager.h */,
+				7F51CC5416D0002C00DDE28F /* DbManager.m */,
+				7F51CC5516D0002C00DDE28F /* DbTable.h */,
+				7F51CC5616D0002C00DDE28F /* DbTable.m */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		7F51CC5E16D004A400DDE28F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7F51CC6216D007A100DDE28F /* Snippet.h */,
+				7F51CC6316D007A100DDE28F /* Snippet.m */,
+				7F51CC5F16D004BE00DDE28F /* Project.h */,
+				7F51CC6016D004BF00DDE28F /* Project.m */,
+				7F51CC6516D0095D00DDE28F /* DataManager.h */,
+				7F51CC6616D0095E00DDE28F /* DataManager.m */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,8 +225,8 @@
 				7F51CC2816CFFCBF00DDE28F /* Default.png in Resources */,
 				7F51CC2A16CFFCBF00DDE28F /* Default@2x.png in Resources */,
 				7F51CC2C16CFFCBF00DDE28F /* Default-568h@2x.png in Resources */,
-				7F51CC2F16CFFCBF00DDE28F /* MainStoryboard_iPhone.storyboard in Resources */,
-				7F51CC3216CFFCBF00DDE28F /* MainStoryboard_iPad.storyboard in Resources */,
+				7F51CC2F16CFFCBF00DDE28F /* iPhoneMain.storyboard in Resources */,
+				7F51CC3216CFFCBF00DDE28F /* iPadMain.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +240,14 @@
 				7F51CC2216CFFCBF00DDE28F /* main.m in Sources */,
 				7F51CC2616CFFCBF00DDE28F /* AppDelegate.m in Sources */,
 				7F51CC3516CFFCBF00DDE28F /* ViewController.m in Sources */,
+				7F51CC5716D0002C00DDE28F /* DBDefinition.m in Sources */,
+				7F51CC5816D0002C00DDE28F /* DbField.m in Sources */,
+				7F51CC5916D0002C00DDE28F /* DbForeignKey.m in Sources */,
+				7F51CC5A16D0002C00DDE28F /* DbManager.m in Sources */,
+				7F51CC5B16D0002C00DDE28F /* DbTable.m in Sources */,
+				7F51CC6116D004BF00DDE28F /* Project.m in Sources */,
+				7F51CC6416D007A100DDE28F /* Snippet.m in Sources */,
+				7F51CC6716D0095E00DDE28F /* DataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,20 +262,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		7F51CC2D16CFFCBF00DDE28F /* MainStoryboard_iPhone.storyboard */ = {
+		7F51CC2D16CFFCBF00DDE28F /* iPhoneMain.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7F51CC2E16CFFCBF00DDE28F /* en */,
 			);
-			name = MainStoryboard_iPhone.storyboard;
+			name = iPhoneMain.storyboard;
 			sourceTree = "<group>";
 		};
-		7F51CC3016CFFCBF00DDE28F /* MainStoryboard_iPad.storyboard */ = {
+		7F51CC3016CFFCBF00DDE28F /* iPadMain.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7F51CC3116CFFCBF00DDE28F /* en */,
 			);
-			name = MainStoryboard_iPad.storyboard;
+			name = iPadMain.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -277,6 +345,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BuildAnywhere/BuildAnywhere-Prefix.pch";
 				INFOPLIST_FILE = "BuildAnywhere/BuildAnywhere-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -288,6 +357,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BuildAnywhere/BuildAnywhere-Prefix.pch";
 				INFOPLIST_FILE = "BuildAnywhere/BuildAnywhere-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
