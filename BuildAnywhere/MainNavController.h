@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainNavController.h
 //  BuildAnywhere
 //
 //  Created by Viktor Sydorenko on 2/16/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface MainNavController : UINavigationController
 
 @end

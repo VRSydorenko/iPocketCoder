@@ -18,7 +18,6 @@
 		7F51CC2C16CFFCBF00DDE28F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F51CC2B16CFFCBF00DDE28F /* Default-568h@2x.png */; };
 		7F51CC2F16CFFCBF00DDE28F /* iPhoneMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F51CC2D16CFFCBF00DDE28F /* iPhoneMain.storyboard */; };
 		7F51CC3216CFFCBF00DDE28F /* iPadMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F51CC3016CFFCBF00DDE28F /* iPadMain.storyboard */; };
-		7F51CC3516CFFCBF00DDE28F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC3416CFFCBF00DDE28F /* ViewController.m */; };
 		7F51CC5716D0002C00DDE28F /* DBDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC4E16D0002B00DDE28F /* DBDefinition.m */; };
 		7F51CC5816D0002C00DDE28F /* DbField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC5016D0002C00DDE28F /* DbField.m */; };
 		7F51CC5916D0002C00DDE28F /* DbForeignKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC5216D0002C00DDE28F /* DbForeignKey.m */; };
@@ -28,6 +27,7 @@
 		7F51CC6116D004BF00DDE28F /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6016D004BF00DDE28F /* Project.m */; };
 		7F51CC6416D007A100DDE28F /* Snippet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6316D007A100DDE28F /* Snippet.m */; };
 		7F51CC6716D0095E00DDE28F /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6616D0095E00DDE28F /* DataManager.m */; };
+		7F51CC6A16D0251A00DDE28F /* MainNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6916D0251A00DDE28F /* MainNavController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,8 +46,6 @@
 		7F51CC2B16CFFCBF00DDE28F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7F51CC2E16CFFCBF00DDE28F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhoneMain.storyboard; sourceTree = "<group>"; };
 		7F51CC3116CFFCBF00DDE28F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPadMain.storyboard; sourceTree = "<group>"; };
-		7F51CC3316CFFCBF00DDE28F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7F51CC3416CFFCBF00DDE28F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7F51CC4D16D0002B00DDE28F /* DBDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDefinition.h; sourceTree = "<group>"; };
 		7F51CC4E16D0002B00DDE28F /* DBDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDefinition.m; sourceTree = "<group>"; };
 		7F51CC4F16D0002B00DDE28F /* DbField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbField.h; sourceTree = "<group>"; };
@@ -65,6 +63,8 @@
 		7F51CC6316D007A100DDE28F /* Snippet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snippet.m; sourceTree = "<group>"; };
 		7F51CC6516D0095D00DDE28F /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		7F51CC6616D0095E00DDE28F /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		7F51CC6816D0251A00DDE28F /* MainNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavController.h; sourceTree = "<group>"; };
+		7F51CC6916D0251A00DDE28F /* MainNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,12 +115,10 @@
 		7F51CC1B16CFFCBF00DDE28F /* BuildAnywhere */ = {
 			isa = PBXGroup;
 			children = (
-				7F51CC2416CFFCBF00DDE28F /* AppDelegate.h */,
-				7F51CC2516CFFCBF00DDE28F /* AppDelegate.m */,
+				7F51CC6816D0251A00DDE28F /* MainNavController.h */,
+				7F51CC6916D0251A00DDE28F /* MainNavController.m */,
 				7F51CC2D16CFFCBF00DDE28F /* iPhoneMain.storyboard */,
 				7F51CC3016CFFCBF00DDE28F /* iPadMain.storyboard */,
-				7F51CC3316CFFCBF00DDE28F /* ViewController.h */,
-				7F51CC3416CFFCBF00DDE28F /* ViewController.m */,
 				7F51CC1C16CFFCBF00DDE28F /* Supporting Files */,
 			);
 			path = BuildAnywhere;
@@ -129,6 +127,8 @@
 		7F51CC1C16CFFCBF00DDE28F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7F51CC2416CFFCBF00DDE28F /* AppDelegate.h */,
+				7F51CC2516CFFCBF00DDE28F /* AppDelegate.m */,
 				7F51CC1D16CFFCBF00DDE28F /* BuildAnywhere-Info.plist */,
 				7F51CC1E16CFFCBF00DDE28F /* InfoPlist.strings */,
 				7F51CC2116CFFCBF00DDE28F /* main.m */,
@@ -239,7 +239,6 @@
 			files = (
 				7F51CC2216CFFCBF00DDE28F /* main.m in Sources */,
 				7F51CC2616CFFCBF00DDE28F /* AppDelegate.m in Sources */,
-				7F51CC3516CFFCBF00DDE28F /* ViewController.m in Sources */,
 				7F51CC5716D0002C00DDE28F /* DBDefinition.m in Sources */,
 				7F51CC5816D0002C00DDE28F /* DbField.m in Sources */,
 				7F51CC5916D0002C00DDE28F /* DbForeignKey.m in Sources */,
@@ -248,6 +247,7 @@
 				7F51CC6116D004BF00DDE28F /* Project.m in Sources */,
 				7F51CC6416D007A100DDE28F /* Snippet.m in Sources */,
 				7F51CC6716D0095E00DDE28F /* DataManager.m in Sources */,
+				7F51CC6A16D0251A00DDE28F /* MainNavController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
