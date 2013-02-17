@@ -1,31 +1,26 @@
 //
-//  SnippetsVC.m
+//  NewSnippetVC.m
 //  BuildAnywhere
 //
-//  Created by Viktor Sydorenko on 2/17/13.
+//  Created by Viktor Sydorenko on 2/18/13.
 //  Copyright (c) 2013 Viktor Sydorenko. All rights reserved.
 //
 
-#import "SnippetsVC.h"
+#import "NewSnippetVC.h"
 
-#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
-
-@interface SnippetsVC ()
+@interface NewSnippetVC ()
 
 @end
 
-@implementation SnippetsVC
+@implementation NewSnippetVC
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if (!IPAD){
+	
     self.navigationItem.leftBarButtonItem = [Utils createBackButtonWithSelectorBackPressedOnTarget:self];
-    }
 }
 
-// iPhone
 -(void)backPressed{
     [self.navigationController popViewControllerAnimated:YES];
 }
