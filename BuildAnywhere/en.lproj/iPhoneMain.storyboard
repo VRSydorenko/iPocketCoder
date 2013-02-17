@@ -19,7 +19,7 @@
             </objects>
             <point key="canvasLocation" x="-94" y="-211"/>
         </scene>
-        <!--MainVC - Projects-->
+        <!--MainVC - Build Anywhere-->
         <scene sceneID="IfW-iR-npd">
             <objects>
                 <viewController id="jaB-nD-xTd" customClass="MainVC" sceneMemberID="viewController">
@@ -63,16 +63,27 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAh-rW-YF2">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="AGg-3Y-rZb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="zTR-aJ-uBp" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="32m-6c-uNt"/>
+                            <constraint firstAttribute="trailing" secondItem="gAh-rW-YF2" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="43u-Tj-dda"/>
                             <constraint firstItem="zTR-aJ-uBp" firstAttribute="leading" secondItem="K5V-8G-A0O" secondAttribute="leading" type="default" id="6Lg-MQ-ZPg"/>
+                            <constraint firstItem="gAh-rW-YF2" firstAttribute="top" secondItem="K5V-8G-A0O" secondAttribute="top" type="default" id="Gga-uW-r9Q"/>
+                            <constraint firstItem="gAh-rW-YF2" firstAttribute="leading" secondItem="K5V-8G-A0O" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="HsF-0B-DdF"/>
                             <constraint firstItem="zTR-aJ-uBp" firstAttribute="trailing" secondItem="K5V-8G-A0O" secondAttribute="trailing" type="default" id="UqU-Hg-a0W"/>
-                            <constraint firstItem="zTR-aJ-uBp" firstAttribute="top" secondItem="K5V-8G-A0O" secondAttribute="top" constant="20" symbolic="YES" type="default" id="pav-Jf-3wo"/>
+                            <constraint firstItem="zTR-aJ-uBp" firstAttribute="top" secondItem="gAh-rW-YF2" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="m6q-jN-hag"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Projects" id="IyX-sa-8JC">
+                    <navigationItem key="navigationItem" title="Build Anywhere" id="IyX-sa-8JC">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="daI-2t-Ivg">
                             <connections>
                                 <segue destination="whh-L9-eYI" kind="push" id="KFe-Wd-vMd"/>
@@ -81,6 +92,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionProjects" destination="zTR-aJ-uBp" id="EyD-c5-2PA"/>
+                        <outlet property="labelHeader" destination="gAh-rW-YF2" id="8SK-1n-Fgn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9x3-hU-LDg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -97,7 +109,7 @@
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUM-0A-XFK">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="81" id="ZM0-Gx-jQV"/>
+                                    <constraint firstAttribute="width" constant="60" id="Gja-hC-nCO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -146,10 +158,14 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="createPressed:" destination="whh-L9-eYI" eventType="touchUpInside" id="Kf6-Sm-dlT"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xn0-Fr-5sc" firstAttribute="leading" secondItem="CUM-0A-XFK" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="BoZ-9S-zgo"/>
                             <constraint firstItem="g0l-b9-ShU" firstAttribute="top" secondItem="xn0-Fr-5sc" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="BuX-vy-j9d"/>
                             <constraint firstAttribute="trailing" secondItem="xn0-Fr-5sc" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Eht-J8-zU4"/>
                             <constraint firstItem="g0l-b9-ShU" firstAttribute="centerX" secondItem="6rj-TD-1hC" secondAttribute="centerX" type="default" id="Ir8-4m-Fze"/>
@@ -159,7 +175,6 @@
                             <constraint firstItem="g0l-b9-ShU" firstAttribute="leading" secondItem="def-ka-yAF" secondAttribute="leading" type="default" id="Y1z-CO-tys"/>
                             <constraint firstItem="CUM-0A-XFK" firstAttribute="leading" secondItem="def-ka-yAF" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="ffQ-tq-ACq"/>
                             <constraint firstAttribute="bottom" secondItem="6rj-TD-1hC" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="g9D-LG-HpS"/>
-                            <constraint firstItem="xn0-Fr-5sc" firstAttribute="leading" secondItem="CUM-0A-XFK" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="gc5-37-Htm"/>
                             <constraint firstItem="g0l-b9-ShU" firstAttribute="centerY" secondItem="def-ka-yAF" secondAttribute="centerY" type="default" id="hxl-LF-Ad1"/>
                             <constraint firstItem="g0l-b9-ShU" firstAttribute="trailing" secondItem="def-ka-yAF" secondAttribute="trailing" type="default" id="y9n-P1-5jk"/>
                         </constraints>
@@ -167,6 +182,7 @@
                     <navigationItem key="navigationItem" title="New project" id="pxN-js-LxV"/>
                     <connections>
                         <outlet property="tableLanguages" destination="g0l-b9-ShU" id="ZbS-mh-phg"/>
+                        <outlet property="textName" destination="xn0-Fr-5sc" id="jYQ-6i-kcE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9iT-TL-yYA" userLabel="First Responder" sceneMemberID="firstResponder"/>

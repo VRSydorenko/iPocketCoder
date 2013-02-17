@@ -16,9 +16,10 @@
 @property NSString* projName;
 @property NSString* projLink;
 
--(id) initWithLanguage:(int)language name:(NSString*)name code:(NSString*)code;
+-(id) initWithLanguage:(int)language name:(NSString*)name;
 
 -(void) setId:(int)iD;
+-(void) setCode:(NSString*)code;
 -(void) setLink:(NSString*)link;
 
 @end

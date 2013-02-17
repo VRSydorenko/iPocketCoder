@@ -11,9 +11,12 @@
 #import "NewProjectVC.h"
 
 @interface MainVC : UIViewController<UICollectionViewDataSource,
-                                     UICollectionViewDelegate>
+                                     UICollectionViewDelegate,
+                                     NewProjectCreationDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionProjects;
+@property (strong, nonatomic) IBOutlet UILabel *labelHeader;
 
 - (IBAction)createNewProjectPressed:(id)sender;
+
 @end

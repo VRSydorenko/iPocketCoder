@@ -13,6 +13,8 @@
 
 @interface DataManager : NSObject
 
++(int) saveProject:(Project*)project;
+
 +(NSDictionary*) getLanguages;
 +(NSString*) getLanguageName:(int)language;
 +(NSDictionary*) getProjectsBasicInfo;

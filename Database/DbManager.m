@@ -298,8 +298,9 @@
             
             NSString *linkField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 3)];
             
-            project = [[Project alloc] initWithLanguage:language name:name code:codeField];
+            project = [[Project alloc] initWithLanguage:language name:name];
             [project setId:iD];
+            [project setCode:codeField];
             [project setLink:linkField];
         } else {
             NSLog(@"Project not found in the database");

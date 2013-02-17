@@ -32,7 +32,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section{
-    return MAX(1, projectBasicData.count); // min 1 for "No data" message
+    return projectBasicData.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -50,12 +50,15 @@
 
 -(void) updateData{
     projectBasicData = [DataManager getProjectsBasicInfo];
+    self.labelHeader.text = projectBasicData.count == 0 ? @"No projects yet" : @"Projects";
     [self.collectionProjects reloadData];
 }
 
 - (IBAction)createNewProjectPressed:(id)sender {
     if (IPAD){
         NewProjectVC *newProjectVC = [[UIStoryboard storyboardWithName:@"iPhoneMain" bundle:nil] instantiateViewControllerWithIdentifier:@"screenNewProject"];
+        newProjectVC.delegate = self;
+        
         if (popoverController){
             if ([popoverController isPopoverVisible]){
                 [popoverController dismissPopoverAnimated:YES];
@@ -68,4 +71,18 @@
     }
 }
 
+-(void) newProjectCreated{
+    if (popoverController){
+        if ([popoverController isPopoverVisible]){
+            [popoverController dismissPopoverAnimated:YES];
+        }
+        popoverController = nil;
+    }
+    [self updateData];
+}
+
+- (void)viewDidUnload {
+    [self setLabelHeader:nil];
+    [super viewDidUnload];
+}
 @end

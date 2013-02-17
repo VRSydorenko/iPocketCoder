@@ -16,6 +16,10 @@
     return ((AppDelegate*)[[UIApplication sharedApplication] delegate]).dbManager;
 }
 
++(int) saveProject:(Project*)project{
+    return [[self getDbManager] saveProject:project];
+}
+
 +(NSString*) getLanguageName:(int)language{
     return [[self getDbManager] getLanguageName:language];
 }

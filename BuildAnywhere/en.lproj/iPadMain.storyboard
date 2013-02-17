@@ -19,7 +19,7 @@
             </objects>
             <point key="canvasLocation" x="-458" y="-790"/>
         </scene>
-        <!--MainVC - Projects-->
+        <!--MainVC - Buid Anywhere-->
         <scene sceneID="DRa-sG-JGP">
             <objects>
                 <viewController id="HIc-k8-SfY" customClass="MainVC" sceneMemberID="viewController">
@@ -63,16 +63,27 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zop-uH-rUJ">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="FPL-SE-YCT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Zop-uH-rUJ" firstAttribute="leading" secondItem="WrK-7Q-FJk" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="AZe-vT-oty"/>
+                            <constraint firstAttribute="trailing" secondItem="Zop-uH-rUJ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="PX3-bc-ksQ"/>
+                            <constraint firstItem="DWq-vJ-ewi" firstAttribute="top" secondItem="Zop-uH-rUJ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="VJ4-sZ-Wzn"/>
+                            <constraint firstItem="Zop-uH-rUJ" firstAttribute="top" secondItem="WrK-7Q-FJk" secondAttribute="top" type="default" id="WXh-CS-FQY"/>
                             <constraint firstAttribute="trailing" secondItem="DWq-vJ-ewi" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="b44-pU-BBk"/>
-                            <constraint firstItem="DWq-vJ-ewi" firstAttribute="top" secondItem="WrK-7Q-FJk" secondAttribute="top" constant="20" symbolic="YES" type="default" id="jXY-oi-H2x"/>
                             <constraint firstAttribute="bottom" secondItem="DWq-vJ-ewi" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="sh0-gx-8No"/>
                             <constraint firstItem="DWq-vJ-ewi" firstAttribute="leading" secondItem="WrK-7Q-FJk" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="xfw-7e-927"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Projects" id="kcQ-NE-l7f">
+                    <navigationItem key="navigationItem" title="Buid Anywhere" id="kcQ-NE-l7f">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HEt-a5-1l1">
                             <connections>
                                 <action selector="createNewProjectPressed:" destination="HIc-k8-SfY" id="87v-gB-hFN"/>
@@ -81,6 +92,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionProjects" destination="DWq-vJ-ewi" id="ZFQ-C8-66w"/>
+                        <outlet property="labelHeader" destination="Zop-uH-rUJ" id="ZAe-LE-isR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="scC-a0-Oky" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -88,6 +100,37 @@
             <point key="canvasLocation" x="473" y="-790"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="MainNavController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainNavController.h"/>
+        </class>
+        <class className="MainVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainVC.h"/>
+            <relationships>
+                <relationship kind="action" name="createNewProjectPressed:"/>
+                <relationship kind="outlet" name="collectionProjects" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="labelHeader" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ProjectCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProjectCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="labelProjectName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -14,12 +14,12 @@
 @synthesize projLanguage, projCode, projName;
 @synthesize projLink  = _projLink;
 
--(id) initWithLanguage:(int)language name:(NSString*)name code:(NSString*)code{
+-(id) initWithLanguage:(int)language name:(NSString*)name{
     self = [super init];
     if (self){
         self.projLanguage = language;
         self.projName = name;
-        self.projCode = code;
+        self.projCode = @"";
         self.projLink = @"";
         self.projId = -1;
     }
@@ -28,6 +28,10 @@
 
 -(void) setId:(int)iD{
     self.projId = iD;
+}
+
+-(void) setCode:(NSString*)code{
+    self.projCode = code;
 }
 
 -(void) setLink:(NSString*)link{
