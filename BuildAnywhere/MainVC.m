@@ -71,14 +71,29 @@
     }
 }
 
--(void) newProjectCreated{
-    if (popoverController){
-        if ([popoverController isPopoverVisible]){
-            [popoverController dismissPopoverAnimated:YES];
-        }
-        popoverController = nil;
+// iPhone
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"SegueMainToNewProject"]){
+        NewProjectVC* newProjectVC = (NewProjectVC*)segue.destinationViewController;
+        newProjectVC.delegate = self;
     }
-    [self updateData];
+}
+
+-(void) newProjectCreationFinished:(BOOL)projectCreated fromController:(NewProjectVC*)controller{
+    if (IPAD){
+        if (popoverController){
+            if ([popoverController isPopoverVisible]){
+                [popoverController dismissPopoverAnimated:YES];
+            }
+            popoverController = nil;
+        }
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+    if (projectCreated){
+        [self updateData];
+    }
 }
 
 - (void)viewDidUnload {

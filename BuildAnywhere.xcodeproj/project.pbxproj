@@ -32,6 +32,10 @@
 		7F51CC7016D030AF00DDE28F /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6F16D030AF00DDE28F /* Utils.m */; };
 		7F51CC7316D0432000DDE28F /* ProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC7216D0432000DDE28F /* ProjectCell.m */; };
 		7F51CC7716D065F400DDE28F /* NewProjectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC7516D065F200DDE28F /* NewProjectVC.m */; };
+		7F6CD07F16D10C51009750F4 /* InfoBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F6CD07C16D10C51009750F4 /* InfoBarManager.m */; };
+		7F6CD08016D10C51009750F4 /* InfoBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F6CD07E16D10C51009750F4 /* InfoBarView.m */; };
+		7FD331A316D13741006D7A0D /* crossLines.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD331A116D13741006D7A0D /* crossLines.png */; };
+		7FD331A416D13741006D7A0D /* crossLines@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD331A216D13741006D7A0D /* crossLines@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +81,12 @@
 		7F51CC7216D0432000DDE28F /* ProjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectCell.m; sourceTree = "<group>"; };
 		7F51CC7416D065F200DDE28F /* NewProjectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectVC.h; sourceTree = "<group>"; };
 		7F51CC7516D065F200DDE28F /* NewProjectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectVC.m; sourceTree = "<group>"; };
+		7F6CD07B16D10C51009750F4 /* InfoBarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoBarManager.h; sourceTree = "<group>"; };
+		7F6CD07C16D10C51009750F4 /* InfoBarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoBarManager.m; sourceTree = "<group>"; };
+		7F6CD07D16D10C51009750F4 /* InfoBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoBarView.h; sourceTree = "<group>"; };
+		7F6CD07E16D10C51009750F4 /* InfoBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoBarView.m; sourceTree = "<group>"; };
+		7FD331A116D13741006D7A0D /* crossLines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crossLines.png; sourceTree = "<group>"; };
+		7FD331A216D13741006D7A0D /* crossLines@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "crossLines@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +107,7 @@
 		7F51CC0916CFFCBF00DDE28F = {
 			isa = PBXGroup;
 			children = (
+				7F6CD07916D10C51009750F4 /* CustomControls */,
 				7F51CC4C16D0002B00DDE28F /* Database */,
 				7F51CC5E16D004A400DDE28F /* Data */,
 				7F51CC1B16CFFCBF00DDE28F /* BuildAnywhere */,
@@ -127,6 +138,7 @@
 		7F51CC1B16CFFCBF00DDE28F /* BuildAnywhere */ = {
 			isa = PBXGroup;
 			children = (
+				7FD331A016D13741006D7A0D /* Images */,
 				7F51CC6816D0251A00DDE28F /* MainNavController.h */,
 				7F51CC6916D0251A00DDE28F /* MainNavController.m */,
 				7F51CC6B16D0273500DDE28F /* MainVC.h */,
@@ -190,6 +202,34 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		7F6CD07916D10C51009750F4 /* CustomControls */ = {
+			isa = PBXGroup;
+			children = (
+				7F6CD07A16D10C51009750F4 /* InfoBar */,
+			);
+			path = CustomControls;
+			sourceTree = "<group>";
+		};
+		7F6CD07A16D10C51009750F4 /* InfoBar */ = {
+			isa = PBXGroup;
+			children = (
+				7F6CD07B16D10C51009750F4 /* InfoBarManager.h */,
+				7F6CD07C16D10C51009750F4 /* InfoBarManager.m */,
+				7F6CD07D16D10C51009750F4 /* InfoBarView.h */,
+				7F6CD07E16D10C51009750F4 /* InfoBarView.m */,
+			);
+			path = InfoBar;
+			sourceTree = "<group>";
+		};
+		7FD331A016D13741006D7A0D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7FD331A116D13741006D7A0D /* crossLines.png */,
+				7FD331A216D13741006D7A0D /* crossLines@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -247,6 +287,8 @@
 				7F51CC2C16CFFCBF00DDE28F /* Default-568h@2x.png in Resources */,
 				7F51CC2F16CFFCBF00DDE28F /* iPhoneMain.storyboard in Resources */,
 				7F51CC3216CFFCBF00DDE28F /* iPadMain.storyboard in Resources */,
+				7FD331A316D13741006D7A0D /* crossLines.png in Resources */,
+				7FD331A416D13741006D7A0D /* crossLines@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +314,8 @@
 				7F51CC7016D030AF00DDE28F /* Utils.m in Sources */,
 				7F51CC7316D0432000DDE28F /* ProjectCell.m in Sources */,
 				7F51CC7716D065F400DDE28F /* NewProjectVC.m in Sources */,
+				7F6CD07F16D10C51009750F4 /* InfoBarManager.m in Sources */,
+				7F6CD08016D10C51009750F4 /* InfoBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +450,7 @@
 				7F51CC3A16CFFCBF00DDE28F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

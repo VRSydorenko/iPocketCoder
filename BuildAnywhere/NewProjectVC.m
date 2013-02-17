@@ -11,6 +11,8 @@
 @interface NewProjectVC (){
     NSDictionary *languages;
     NSIndexPath *selectedPath;
+    InfoBarManager *infoManager;
+    NSDictionary* projectBasicData;
 }
 
 @end
@@ -21,15 +23,52 @@
 {
     [super viewDidLoad];
     
+    [self initInfoBar];
+    
+    self.labelTitle.shadowColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    self.labelTitle.shadowOffset = CGSizeMake(0, -1.0);
+    
+    projectBasicData = [DataManager getProjectsBasicInfo];
+    
     selectedPath = nil;
     languages = [DataManager getLanguages];
     self.tableLanguages.dataSource = self;
     self.tableLanguages.delegate = self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
+}
+
 - (void)dealloc {
     [self setTableLanguages:nil];
+    [self setTextName:nil];
+    [self setLabelTitle:nil];
+    [self setFakeNavBar:nil];
     [super viewDidUnload];
+}
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration {
+    [self initInfoBar];
+}
+
+-(void) initInfoBar{
+    if (infoManager){
+        [infoManager hideInfoBar];
+        infoManager = nil;
+    }
+    infoManager = [[InfoBarManager alloc] init];
+    CGRect frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, 44.0);
+    [infoManager initInfoBarWithTopViewFrame:frame andHeight:40];
+    [self.view insertSubview:infoManager.infoBar belowSubview:self.fakeNavBar];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -65,14 +104,29 @@
 }
 
 - (IBAction)createPressed:(id)sender {
+    self.textName.text = [self.textName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if (self.textName.text.length == 0){
+        [infoManager showInfoBarWithMessage:@"Enter project name" withMood:NEUTRAL];
+        return;
+    }
+    if ([projectBasicData.allKeys containsObject:self.textName.text]){
+        [infoManager showInfoBarWithMessage:@"Project exists" withMood:NEUTRAL];
+        return;
+    }
+    if (!selectedPath){
+        [infoManager showInfoBarWithMessage:@"Select programming language" withMood:NEUTRAL];
+        return;
+    }
+    
     int language = ((NSNumber*)[languages.allValues objectAtIndex:selectedPath.row]).intValue;
     Project* newProject = [[Project alloc] initWithLanguage:language name:self.textName.text];
     [DataManager saveProject:newProject];
-    [self.delegate newProjectCreated];
+    [self.delegate newProjectCreationFinished:YES fromController:self];
 }
 
-- (void)viewDidUnload {
-    [self setTextName:nil];
-    [super viewDidUnload];
+- (IBAction)closePressed:(id)sender {
+    [self.delegate newProjectCreationFinished:NO fromController:self];
 }
+
 @end
