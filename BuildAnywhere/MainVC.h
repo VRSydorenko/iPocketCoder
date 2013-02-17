@@ -14,4 +14,5 @@
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionProjects;
 
+- (IBAction)createNewProjectPressed:(id)sender;
 @end

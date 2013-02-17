@@ -19,7 +19,7 @@
             </objects>
             <point key="canvasLocation" x="-458" y="-790"/>
         </scene>
-        <!--MainVC-->
+        <!--MainVC - Projects-->
         <scene sceneID="DRa-sG-JGP">
             <objects>
                 <viewController id="HIc-k8-SfY" customClass="MainVC" sceneMemberID="viewController">
@@ -72,7 +72,13 @@
                             <constraint firstItem="DWq-vJ-ewi" firstAttribute="leading" secondItem="WrK-7Q-FJk" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="xfw-7e-927"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="kcQ-NE-l7f"/>
+                    <navigationItem key="navigationItem" title="Projects" id="kcQ-NE-l7f">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="HEt-a5-1l1">
+                            <connections>
+                                <action selector="createNewProjectPressed:" destination="HIc-k8-SfY" id="Vum-r5-FBl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionProjects" destination="DWq-vJ-ewi" id="ZFQ-C8-66w"/>
                     </connections>

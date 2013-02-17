@@ -52,8 +52,7 @@
     [self.collectionProjects reloadData];
 }
 
--(IBAction) createNewProjectPressed{
-    
-}
 
+- (IBAction)createNewProjectPressed:(id)sender {
+}
 @end

@@ -19,7 +19,7 @@
             </objects>
             <point key="canvasLocation" x="-94" y="-211"/>
         </scene>
-        <!--MainVC-->
+        <!--MainVC - Projects-->
         <scene sceneID="IfW-iR-npd">
             <objects>
                 <viewController id="jaB-nD-xTd" customClass="MainVC" sceneMemberID="viewController">
@@ -72,7 +72,13 @@
                             <constraint firstItem="zTR-aJ-uBp" firstAttribute="top" secondItem="K5V-8G-A0O" secondAttribute="top" constant="20" symbolic="YES" type="default" id="pav-Jf-3wo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="IyX-sa-8JC"/>
+                    <navigationItem key="navigationItem" title="Projects" id="IyX-sa-8JC">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="daI-2t-Ivg">
+                            <connections>
+                                <action selector="createNewProjectPressed:" destination="jaB-nD-xTd" id="GS6-As-GJ5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionProjects" destination="zTR-aJ-uBp" id="EyD-c5-2PA"/>
                     </connections>

@@ -18,6 +18,7 @@
     self = [super init];
     if (self){
         [self initDatabase];
+        [self initLanguages];
     }
     return self;
 }
@@ -55,9 +56,100 @@
     }
 }
 
+-(void) initLanguages{
+    if ([self getLanguageName:1].length == 0){
+        [self saveLanguage:7 withName:@"Ada"];
+        [self saveLanguage:13 withName:@"Assembler (nasm-2.07)"];
+        [self saveLanguage:45 withName:@"Assembler (gcc-4.7.2)"];
+        [self saveLanguage:104 withName:@"AWK (gawk)"];
+        [self saveLanguage:105 withName:@"AWK (mawk)"];
+        [self saveLanguage:28 withName:@"Bash"];
+        [self saveLanguage:110 withName:@"bc"];
+        [self saveLanguage:12 withName:@"Brainf**k"];
+        [self saveLanguage:11 withName:@"C"];
+        [self saveLanguage:27 withName:@"C#"];
+        [self saveLanguage:1 withName:@"C++"];
+        [self saveLanguage:44 withName:@"C++ 11"];
+        [self saveLanguage:34 withName:@"C99"];
+        [self saveLanguage:14 withName:@"CLIPS"];
+        [self saveLanguage:111 withName:@"Clojure"];
+        [self saveLanguage:118 withName:@"COBOL"];
+        [self saveLanguage:106 withName:@"COBOL 85"];
+        [self saveLanguage:32 withName:@"Common Lisp (clisp)"];
+        [self saveLanguage:102 withName:@"D (dmd)"];
+        [self saveLanguage:36 withName:@"Erlang"];
+        [self saveLanguage:124 withName:@"F#"];
+        [self saveLanguage:123 withName:@"Factor"];
+        [self saveLanguage:125 withName:@"Falcon"];
+        [self saveLanguage:107 withName:@"Forth"];
+        [self saveLanguage:5 withName:@"Fortran"];
+        [self saveLanguage:114 withName:@"Go"];
+        [self saveLanguage:121 withName:@"Groovy"];
+        [self saveLanguage:21 withName:@"Haskell"];
+        [self saveLanguage:16 withName:@"Icon"];
+        [self saveLanguage:9 withName:@"Intercal"];
+        [self saveLanguage:10 withName:@"Java"];
+        [self saveLanguage:55 withName:@"Java 7"];
+        [self saveLanguage:35 withName:@"JavaScript (rhino)"];
+        [self saveLanguage:112 withName:@"JavaScript (spidermonkey)"];
+        [self saveLanguage:26 withName:@"Lua"];
+        [self saveLanguage:30 withName:@"Nemerle"];
+        [self saveLanguage:25 withName:@"Nice"];
+        [self saveLanguage:122 withName:@"Nimrod"];
+        [self saveLanguage:56 withName:@"Node.js"];
+        [self saveLanguage:43 withName:@"Objective-C"];
+        [self saveLanguage:8 withName:@"Ocaml"];
+        [self saveLanguage:127 withName:@"Octave"];
+        [self saveLanguage:119 withName:@"Oz"];
+        [self saveLanguage:57 withName:@"PARI/GP"];
+        [self saveLanguage:22 withName:@"Pascal (fpc)"];
+        [self saveLanguage:2 withName:@"Pascal (gpc)"];
+        [self saveLanguage:3 withName:@"Perl"];
+        [self saveLanguage:54 withName:@"Perl 6"];
+        [self saveLanguage:29 withName:@"PHP"];
+        [self saveLanguage:19 withName:@"Pike"];
+        [self saveLanguage:108 withName:@"Prolog (gnu)"];
+        [self saveLanguage:15 withName:@"Prolog (swi)"];
+        [self saveLanguage:4 withName:@"Python"];
+        [self saveLanguage:116 withName:@"Python 3"];
+        [self saveLanguage:117 withName:@"R"];
+        [self saveLanguage:17 withName:@"Ruby"];
+        [self saveLanguage:39 withName:@"Scala"];
+        [self saveLanguage:33 withName:@"Scheme (guile)"];
+        [self saveLanguage:23 withName:@"Smalltalk"];
+        [self saveLanguage:40 withName:@"SQL"];
+        [self saveLanguage:38 withName:@"Tcl"];
+        [self saveLanguage:62 withName:@"Text"];
+        [self saveLanguage:115 withName:@"Unlambda"];
+        [self saveLanguage:101 withName:@"VB.NET"];
+        [self saveLanguage:6 withName:@"Whitespace"];
+    }
+}
+
+-(void) saveLanguage:(int)language withName:(NSString*)name{
+    NSString* sql = [NSString stringWithFormat: @"INSERT INTO %@ (%@, %@) VALUES (%d, ?)", T_LANGS, F_LANG, F_NAME, language];
+
+    const char *insert_stmt = [sql UTF8String];
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, insert_stmt, -1, &statement, NULL) == SQLITE_OK){
+        sqlite3_bind_text(statement, 1, [name cStringUsingEncoding:NSUTF8StringEncoding], -1, SQLITE_TRANSIENT);
+        
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            NSLog(@"Added language: %@", name);
+        } else {
+            NSLog(@"Failed to save language %@", name);
+            NSLog(@"Info:%s", sqlite3_errmsg(buildAnywhereDb));
+        }
+    }
+    sqlite3_finalize(statement);
+}
+
+
 // public methods
 -(NSString*) getLanguageName:(int)language{
-    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@ FROM %@ WHERE %@=%d", F_NAME, T_LANGS, F_ID, language];
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@ FROM %@ WHERE %@=%d", F_NAME, T_LANGS, F_LANG, language];
     const char *query_stmt = [querySQL UTF8String];
     
     sqlite3_stmt *statement;

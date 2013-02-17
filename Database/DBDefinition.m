@@ -25,6 +25,7 @@
     tables = [[NSMutableArray alloc] init];
     
     DbTable* tLangs = [[DbTable alloc] initWithTableName:T_LANGS];
+    [tLangs addField:F_LANG type:DBTYPE_REAL notNull:YES];
     [tLangs addField:F_NAME type:DBTYPE_TEXT notNull:YES];
     [tables addObject:tLangs];
     
@@ -33,14 +34,12 @@
     [tProjects addField:F_NAME type:DBTYPE_TEXT notNull:YES];
     [tProjects addField:F_CODE type:DBTYPE_TEXT notNull:YES];
     [tProjects addField:F_LINK type:DBTYPE_TEXT notNull:NO];
-    [tProjects addForeignKey:F_LANG refTable:T_LANGS refField:F_ID];
     [tables addObject:tProjects];
     
     DbTable* tSnippets = [[DbTable alloc] initWithTableName:T_SNIPPETS];
     [tSnippets addField:F_LANG type:DBTYPE_REAL notNull:YES];
     [tSnippets addField:F_NAME type:DBTYPE_TEXT notNull:YES];
     [tSnippets addField:F_CODE type:DBTYPE_TEXT notNull:YES];
-    [tSnippets addForeignKey:F_LANG refTable:T_LANGS refField:F_ID];
     [tables addObject:tSnippets];
 }
 
