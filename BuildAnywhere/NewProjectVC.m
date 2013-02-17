@@ -8,6 +8,8 @@
 
 #import "NewProjectVC.h"
 
+#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+
 @interface NewProjectVC (){
     NSDictionary *languages;
     NSIndexPath *selectedPath;
@@ -62,11 +64,18 @@
 
 -(void) initInfoBar{
     if (infoManager){
+        if (IPAD){
+            // if it has already been created on iPad so do nothing here
+            // because it has fixed size on iPad 
+            return;
+        }
         [infoManager hideInfoBar];
         infoManager = nil;
     }
+    
+    float width = IPAD ? 320.0 : self.view.frame.size.width;
     infoManager = [[InfoBarManager alloc] init];
-    CGRect frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, 44.0);
+    CGRect frame = CGRectMake(0.0, 0.0, width, 44.0);
     [infoManager initInfoBarWithTopViewFrame:frame andHeight:40];
     [self.view insertSubview:infoManager.infoBar belowSubview:self.fakeNavBar];
 }

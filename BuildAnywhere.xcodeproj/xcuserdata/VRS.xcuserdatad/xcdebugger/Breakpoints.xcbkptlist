@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BuildAnywhere/NewProjectVC.m"
-         timestampString = "382818475.834011"
+         timestampString = "382819917.412182"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "113"
-         endingLineNumber = "113"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
          landmarkName = "-createPressed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,12 +21,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BuildAnywhere/NewProjectVC.m"
-         timestampString = "382818475.834011"
+         timestampString = "382819917.412182"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "107"
-         endingLineNumber = "107"
+         startingLineNumber = "116"
+         endingLineNumber = "116"
          landmarkName = "-createPressed:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BuildAnywhere/NewProjectVC.m"
+         timestampString = "382819917.412182"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
+         landmarkName = "-initInfoBar"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BuildAnywhere/MainVC.m"
+         timestampString = "382819497.164678"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "70"
+         endingLineNumber = "70"
+         landmarkName = "-createNewProjectPressed:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
