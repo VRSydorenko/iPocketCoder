@@ -11,5 +11,6 @@
 @interface ProjectCell : UICollectionViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *labelProjectName;
+@property (strong, nonatomic) IBOutlet UILabel *labelProjectLanguage;
 
 @end

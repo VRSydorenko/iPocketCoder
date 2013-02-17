@@ -37,10 +37,12 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* cellReuseId = IPAD ? @"cellProjectiPad" : @"cellProjectiPhone";
-    
-    ProjectCell* cell = [cv dequeueReusableCellWithReuseIdentifier:cellReuseId forIndexPath:indexPath];
-    cell.labelProjectName.text = projectBasicData.count == 0 ? @"No data" : [projectBasicData.allKeys objectAtIndex:indexPath.row];
+    ProjectCell* cell = [cv dequeueReusableCellWithReuseIdentifier:@"cellProject" forIndexPath:indexPath];
+    NSString *projectName = [projectBasicData.allKeys objectAtIndex:indexPath.row];
+    int projectLanguage = ((NSNumber*)[projectBasicData objectForKey:projectName]).intValue;
+
+    cell.labelProjectName.text = projectName;
+    cell.labelProjectLanguage.text =  [DataManager getLanguageName:projectLanguage];
     
     return cell;
 }
