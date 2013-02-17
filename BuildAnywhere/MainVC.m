@@ -12,6 +12,7 @@
 
 @interface MainVC (){
     NSDictionary* projectBasicData;
+    UIPopoverController* popoverController;
 }
 
 @end
@@ -52,7 +53,19 @@
     [self.collectionProjects reloadData];
 }
 
-
 - (IBAction)createNewProjectPressed:(id)sender {
+    if (IPAD){
+        NewProjectVC *newProjectVC = [[UIStoryboard storyboardWithName:@"iPhoneMain" bundle:nil] instantiateViewControllerWithIdentifier:@"screenNewProject"];
+        if (popoverController){
+            if ([popoverController isPopoverVisible]){
+                [popoverController dismissPopoverAnimated:YES];
+                return;
+            }
+            popoverController = nil;
+        }
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:newProjectVC];
+        [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
+
 @end

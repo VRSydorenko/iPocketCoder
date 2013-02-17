@@ -148,6 +148,26 @@
 
 
 // public methods
+-(NSDictionary*) getLanguages{ // key: name, value:language
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@ FROM %@", F_NAME, F_LANG, T_LANGS];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        while (sqlite3_step(statement) == SQLITE_ROW){
+            NSString *nameField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
+            int language = sqlite3_column_int(statement, 1);
+            
+            [result setObject:[NSNumber numberWithInt:language] forKey:nameField];
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return [[NSDictionary alloc] initWithDictionary:result];
+}
+
 -(NSString*) getLanguageName:(int)language{
     NSString *querySQL = [NSString stringWithFormat: @"SELECT %@ FROM %@ WHERE %@=%d", F_NAME, T_LANGS, F_LANG, language];
     const char *query_stmt = [querySQL UTF8String];

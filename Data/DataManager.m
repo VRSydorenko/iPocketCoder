@@ -24,5 +24,9 @@
     return [[self getDbManager] getProjectsBasicInfo];
 }
 
++(NSDictionary*) getLanguages{
+    return [[self getDbManager] getLanguages];
+}
+
 
 @end

@@ -28,6 +28,7 @@
 // actions on multipte objects
 -(NSDictionary*) getProjectsBasicInfo; // <key: name, value:language>
 
+-(NSDictionary*) getLanguages;
 -(NSString*) getLanguageName:(int)language;
 
 @end

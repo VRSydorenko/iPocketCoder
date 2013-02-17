@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DataManager.h"
+#import "NewProjectVC.h"
 
 @interface MainVC : UIViewController<UICollectionViewDataSource,
                                      UICollectionViewDelegate>

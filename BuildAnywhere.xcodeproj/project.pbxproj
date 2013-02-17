@@ -31,6 +31,7 @@
 		7F51CC6D16D0273600DDE28F /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6C16D0273500DDE28F /* MainVC.m */; };
 		7F51CC7016D030AF00DDE28F /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC6F16D030AF00DDE28F /* Utils.m */; };
 		7F51CC7316D0432000DDE28F /* ProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC7216D0432000DDE28F /* ProjectCell.m */; };
+		7F51CC7716D065F400DDE28F /* NewProjectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F51CC7516D065F200DDE28F /* NewProjectVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,8 @@
 		7F51CC6F16D030AF00DDE28F /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		7F51CC7116D0431F00DDE28F /* ProjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectCell.h; sourceTree = "<group>"; };
 		7F51CC7216D0432000DDE28F /* ProjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectCell.m; sourceTree = "<group>"; };
+		7F51CC7416D065F200DDE28F /* NewProjectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectVC.h; sourceTree = "<group>"; };
+		7F51CC7516D065F200DDE28F /* NewProjectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				7F51CC6916D0251A00DDE28F /* MainNavController.m */,
 				7F51CC6B16D0273500DDE28F /* MainVC.h */,
 				7F51CC6C16D0273500DDE28F /* MainVC.m */,
+				7F51CC7416D065F200DDE28F /* NewProjectVC.h */,
+				7F51CC7516D065F200DDE28F /* NewProjectVC.m */,
 				7F51CC2D16CFFCBF00DDE28F /* iPhoneMain.storyboard */,
 				7F51CC3016CFFCBF00DDE28F /* iPadMain.storyboard */,
 				7F51CC1C16CFFCBF00DDE28F /* Supporting Files */,
@@ -266,6 +271,7 @@
 				7F51CC6D16D0273600DDE28F /* MainVC.m in Sources */,
 				7F51CC7016D030AF00DDE28F /* Utils.m in Sources */,
 				7F51CC7316D0432000DDE28F /* ProjectCell.m in Sources */,
+				7F51CC7716D065F400DDE28F /* NewProjectVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

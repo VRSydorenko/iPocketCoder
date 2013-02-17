@@ -75,7 +75,7 @@
                     <navigationItem key="navigationItem" title="Projects" id="kcQ-NE-l7f">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HEt-a5-1l1">
                             <connections>
-                                <action selector="createNewProjectPressed:" destination="HIc-k8-SfY" id="Vum-r5-FBl"/>
+                                <action selector="createNewProjectPressed:" destination="HIc-k8-SfY" id="87v-gB-hFN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
