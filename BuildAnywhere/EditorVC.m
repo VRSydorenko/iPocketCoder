@@ -12,6 +12,7 @@
 
 @interface EditorVC (){
     Project* project;
+    UIPopoverController* popoverController;
 }
 
 @end
@@ -37,4 +38,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)snippetsPressed:(id)sender {
+    if (IPAD){
+        SnippetsVC *snippetsVC = [[UIStoryboard storyboardWithName:@"iPhoneMain" bundle:nil] instantiateViewControllerWithIdentifier:@"screenSnippets"];
+        if (!snippetsVC){
+            return;
+        }
+    
+        if (popoverController){
+            if ([popoverController isPopoverVisible]){
+                [popoverController dismissPopoverAnimated:YES];
+                return;
+            }
+            popoverController = nil;
+        }
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:snippetsVC];
+        [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
 @end

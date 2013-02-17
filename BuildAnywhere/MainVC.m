@@ -64,6 +64,9 @@
 - (IBAction)createNewProjectPressed:(id)sender {
     if (IPAD){
         NewProjectVC *newProjectVC = [[UIStoryboard storyboardWithName:@"iPhoneMain" bundle:nil] instantiateViewControllerWithIdentifier:@"screenNewProject"];
+        if (!newProjectVC){
+            return;
+        }
         newProjectVC.delegate = self;
         
         if (popoverController){
@@ -109,9 +112,8 @@
     }
 }
 
-- (void)viewDidUnload {
+- (void)dealloc {
     [self setLabelHeader:nil];
     selectedIndexPath = nil;
-    [super viewDidUnload];
 }
 @end

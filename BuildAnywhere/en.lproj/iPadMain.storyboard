@@ -126,7 +126,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="vg4-RI-8br"/>
+                    <navigationItem key="navigationItem" id="vg4-RI-8br">
+                        <barButtonItem key="rightBarButtonItem" title="{...}" id="0Ld-Ol-1sY">
+                            <connections>
+                                <action selector="snippetsPressed:" destination="aI8-wJ-ZcF" id="NJ4-fw-lFr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLf-it-OtI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -136,6 +142,9 @@
     <classes>
         <class className="EditorVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EditorVC.h"/>
+            <relationships>
+                <relationship kind="action" name="snippetsPressed:"/>
+            </relationships>
         </class>
         <class className="MainNavController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainNavController.h"/>

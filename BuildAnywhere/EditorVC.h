@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Project.h"
 #import "DataManager.h"
+#import "SnippetsVC.h"
 
 @interface EditorVC : UIViewController
 
 @property (nonatomic) NSString* projectName;
+- (IBAction)snippetsPressed:(id)sender;
 
 @end
