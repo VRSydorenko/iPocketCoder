@@ -19,4 +19,6 @@
 +(NSString*) getLanguageName:(int)language;
 +(NSDictionary*) getProjectsBasicInfo;
 
++(Project*) loadProject:(NSString*)name;
+
 @end

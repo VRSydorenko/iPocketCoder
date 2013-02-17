@@ -13,6 +13,7 @@
 @interface MainVC (){
     NSDictionary* projectBasicData;
     UIPopoverController* popoverController;
+    NSIndexPath *selectedIndexPath;
 }
 
 @end
@@ -24,6 +25,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    selectedIndexPath = nil;
     
     self.collectionProjects.dataSource = self;
     self.collectionProjects.delegate = self;
@@ -48,6 +51,8 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    selectedIndexPath = indexPath;
+    [self performSegueWithIdentifier:@"segueMainToEditor" sender:self];
 }
 
 -(void) updateData{
@@ -75,9 +80,15 @@
 
 // iPhone
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"SegueMainToNewProject"]){
+    if ([segue.identifier isEqualToString:@"segueMainToNewProject"]){
         NewProjectVC* newProjectVC = (NewProjectVC*)segue.destinationViewController;
         newProjectVC.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"segueMainToEditor"]){
+        if (!selectedIndexPath){
+            return;
+        }
+        EditorVC* editorVC = (EditorVC*)segue.destinationViewController;
+        editorVC.projectName = [projectBasicData.allKeys objectAtIndex:selectedIndexPath.row];
     }
 }
 
@@ -100,6 +111,7 @@
 
 - (void)viewDidUnload {
     [self setLabelHeader:nil];
+    selectedIndexPath = nil;
     [super viewDidUnload];
 }
 @end

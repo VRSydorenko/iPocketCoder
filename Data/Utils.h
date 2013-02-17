@@ -10,6 +10,6 @@
 
 @interface Utils : NSObject
 
-+(BOOL) isOnIPad;
++(UIBarButtonItem*) createBackButtonWithSelectorBackPressedOnTarget:(UIViewController*)viewController;
 
 @end

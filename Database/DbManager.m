@@ -305,6 +305,9 @@
         } else {
             NSLog(@"Project not found in the database");
         }
+    } else {
+        NSLog(@"Failed to load project");
+        NSLog(@"Info:%s", sqlite3_errmsg(buildAnywhereDb));
     }
     sqlite3_finalize(statement);
     

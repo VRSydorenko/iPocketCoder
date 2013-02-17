@@ -15,7 +15,7 @@
 #define DBTYPE_BOOL @"boolean"
 #define DBTYPE_BLOB @"blob"
 
-#define F_ID @"f_id"
+#define F_ID @"_id"
 
 #define T_LANGS @"t_langs"
 #define F_LANG @"f_lang"

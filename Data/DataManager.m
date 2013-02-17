@@ -32,5 +32,8 @@
     return [[self getDbManager] getLanguages];
 }
 
++(Project*) loadProject:(NSString*)name{
+    return [[self getDbManager] loadProject:name];
+}
 
 @end
