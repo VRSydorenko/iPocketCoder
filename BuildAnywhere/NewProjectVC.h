@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DataManager.h"
-#import "InfoBarManager.h"
+#import "MainNavController.h"
 
 @class NewProjectVC;
 
@@ -21,14 +21,11 @@
 @interface NewProjectVC : UIViewController<UITableViewDataSource,
                                            UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIView *fakeNavBar;
-@property (strong, nonatomic) IBOutlet UILabel *labelTitle;
 @property (strong, nonatomic) IBOutlet UITextField *textName;
 @property (strong, nonatomic) IBOutlet UITableView *tableLanguages;
 @property (strong, nonatomic) id<NewProjectCreationDelegate> delegate;
 
 - (IBAction)didEndOnExit:(UITextField *)sender;
 - (IBAction)createPressed:(id)sender;
-- (IBAction)closePressed:(id)sender;
 
 @end

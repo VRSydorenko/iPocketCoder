@@ -8,31 +8,58 @@
 
 #import "MainNavController.h"
 
-@interface MainNavController ()
+#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+
+@interface MainNavController (){
+    InfoBarManager* infoManager;
+}
 
 @end
 
 @implementation MainNavController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewDidAppear:(BOOL)animated{
+    [self initInfoBar];
+}
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration {
+    [self initInfoBar];
+}
+
+-(void) initInfoBar{
+    if (infoManager){
+        if (IPAD){
+            // if it has already been created on iPad so do nothing here
+            // because it has fixed size on iPad
+            return;
+        }
+        [infoManager hideInfoBar];
+        infoManager = nil;
+    }
+    infoManager = [[InfoBarManager alloc] init];
+    if (infoManager){
+        [infoManager initInfoBarWithTopViewFrame:self.navigationBar.frame andHeight:40];
+        [self.view insertSubview:infoManager.infoBar belowSubview:self.navigationBar];
+    }
+}
+
+- (void)showInfoBarWithNegativeMessage:(NSString*)text {
+    [infoManager showInfoBarWithMessage:text withMood:NEGATIVE];
+}
+
+- (void)showInfoBarWithNeutralMessage:(NSString*)text {
+    [infoManager showInfoBarWithMessage:text withMood:NEUTRAL];
+}
+
+- (void)showInfoBarWithPositiveMessage:(NSString*)text {
+    [infoManager showInfoBarWithMessage:text withMood:POSITIVE];
 }
 
 @end

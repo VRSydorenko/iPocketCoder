@@ -13,8 +13,8 @@
 @interface NewProjectVC (){
     NSDictionary *languages;
     NSIndexPath *selectedPath;
-    InfoBarManager *infoManager;
     NSDictionary* projectBasicData;
+    MainNavController* navController;
 }
 
 @end
@@ -25,10 +25,11 @@
 {
     [super viewDidLoad];
     
-    [self initInfoBar];
+    navController = (MainNavController*)self.navigationController;
     
-    self.labelTitle.shadowColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-    self.labelTitle.shadowOffset = CGSizeMake(0, -1.0);
+    if (!IPAD){
+        self.navigationItem.leftBarButtonItem = [Utils createBackButtonWithSelectorBackPressedOnTarget:self];
+    }
     
     projectBasicData = [DataManager getProjectsBasicInfo];
     
@@ -38,50 +39,14 @@
     self.tableLanguages.delegate = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [super viewWillDisappear:animated];
-}
-
 - (void)dealloc {
     [self setTableLanguages:nil];
     [self setTextName:nil];
-    [self setLabelTitle:nil];
-    [self setFakeNavBar:nil];
     [super viewDidUnload];
 }
 
--(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration {
-    [self initInfoBar];
-}
-
--(void) initInfoBar{
-    if (infoManager){
-        if (IPAD){
-            // if it has already been created on iPad so do nothing here
-            // because it has fixed size on iPad 
-            return;
-        }
-        [infoManager hideInfoBar];
-        infoManager = nil;
-    }
-    
-    float width = IPAD ? 320.0 : self.view.frame.size.width;
-    infoManager = [[InfoBarManager alloc] init];
-    CGRect frame = CGRectMake(0.0, 0.0, width, 44.0);
-    [infoManager initInfoBarWithTopViewFrame:frame andHeight:40];
-    [self.view insertSubview:infoManager.infoBar belowSubview:self.fakeNavBar];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  languages.count;
+    return languages.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -116,15 +81,15 @@
     self.textName.text = [self.textName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if (self.textName.text.length == 0){
-        [infoManager showInfoBarWithMessage:@"Enter project name" withMood:NEUTRAL];
+        [navController showInfoBarWithNeutralMessage:@"Enter project name"];
         return;
     }
     if ([projectBasicData.allKeys containsObject:self.textName.text]){
-        [infoManager showInfoBarWithMessage:@"Project exists" withMood:NEUTRAL];
+        [navController showInfoBarWithNeutralMessage:@"Project exists"];
         return;
     }
     if (!selectedPath){
-        [infoManager showInfoBarWithMessage:@"Select programming language" withMood:NEUTRAL];
+        [navController showInfoBarWithNeutralMessage:@"Select programmingn language"];
         return;
     }
     
@@ -134,8 +99,8 @@
     [self.delegate newProjectCreationFinished:YES fromController:self];
 }
 
-- (IBAction)closePressed:(id)sender {
-    [self.delegate newProjectCreationFinished:NO fromController:self];
+-(void)backPressed{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

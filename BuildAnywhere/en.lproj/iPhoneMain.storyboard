@@ -84,7 +84,7 @@
                     <navigationItem key="navigationItem" title="Build Anywhere" id="IyX-sa-8JC">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="daI-2t-Ivg">
                             <connections>
-                                <segue destination="whh-L9-eYI" kind="push" identifier="segueMainToNewProject" id="KFe-Wd-vMd"/>
+                                <segue destination="whh-L9-eYI" kind="push" identifier="segueMainToNewProject" id="eCf-Qe-pbV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -123,20 +123,20 @@
         <!--New ProjectVC - New project-->
         <scene sceneID="BC0-Zn-Fl5">
             <objects>
-                <viewController storyboardIdentifier="screenNewProject" id="whh-L9-eYI" customClass="NewProjectVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="" id="whh-L9-eYI" customClass="NewProjectVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="def-ka-yAF">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CUM-0A-XFK">
-                                <rect key="frame" x="20" y="56" width="60" height="21"/>
+                                <rect key="frame" x="20" y="23" width="60" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="xn0-Fr-5sc">
-                                <rect key="frame" x="88" y="52" width="212" height="30"/>
+                                <rect key="frame" x="88" y="20" width="212" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -145,7 +145,7 @@
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="g0l-b9-ShU">
-                                <rect key="frame" x="0.0" y="90" width="321" height="313"/>
+                                <rect key="frame" x="0.0" y="58" width="321" height="301"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -169,8 +169,8 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6rj-TD-1hC">
-                                <rect key="frame" x="101" y="411" width="119" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <rect key="frame" x="101" y="367" width="119" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Create">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -183,48 +183,18 @@
                                     <action selector="createPressed:" destination="whh-L9-eYI" eventType="touchUpInside" id="Kf6-Sm-dlT"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" id="h0g-gN-mmr">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="New Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YqA-WD-QSY">
-                                        <rect key="frame" x="60" y="12" width="201" height="21"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="56Q-XG-RW7">
-                                        <rect key="frame" x="283" y="0.0" width="37" height="44"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                        <state key="normal" image="crossLines.png">
-                                            <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="closePressed:" destination="whh-L9-eYI" eventType="touchUpInside" id="5EJ-ld-qq6"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="New project" id="pxN-js-LxV"/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="fakeNavBar" destination="h0g-gN-mmr" id="jRv-vE-Pwr"/>
-                        <outlet property="labelTitle" destination="YqA-WD-QSY" id="XPD-xN-HEC"/>
                         <outlet property="tableLanguages" destination="g0l-b9-ShU" id="ZbS-mh-phg"/>
                         <outlet property="textName" destination="xn0-Fr-5sc" id="jYQ-6i-kcE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9iT-TL-yYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="372" y="-901"/>
+            <point key="canvasLocation" x="898" y="-901"/>
         </scene>
         <!--SnippetsVC - Code Snippets-->
         <scene sceneID="oSm-UE-xxd">
@@ -245,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PIj-vR-MpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1467" y="-901"/>
+            <point key="canvasLocation" x="1993" y="-901"/>
         </scene>
         <!--New SnippetVC - New Snippet-->
         <scene sceneID="WDl-Ea-gAr">
@@ -274,12 +244,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPA-Zz-1bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1906" y="-901"/>
+            <point key="canvasLocation" x="2432" y="-901"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main Nav Controller-->
         <scene sceneID="uAw-rn-YYm">
             <objects>
-                <navigationController storyboardIdentifier="screenSnippets" id="QKF-3a-GLn" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="screenSnippets" id="QKF-3a-GLn" customClass="MainNavController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="C2W-F6-ZPE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F87-cw-ghl">
@@ -293,12 +263,28 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3v-Gt-HqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="941" y="-901"/>
+            <point key="canvasLocation" x="1467" y="-901"/>
+        </scene>
+        <!--Main Nav Controller-->
+        <scene sceneID="JsT-wM-sgl">
+            <objects>
+                <navigationController storyboardIdentifier="screenNewProject" id="hj2-oc-PKR" customClass="MainNavController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="yQG-xZ-Dat"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a3c-HI-9Tv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="whh-L9-eYI" kind="relationship" relationship="rootViewController" id="3fe-fd-2Ee"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WnP-37-T1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="372" y="-901"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="crossLines.png" width="32" height="32"/>
-    </resources>
     <classes>
         <class className="EditorVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EditorVC.h"/>
@@ -320,11 +306,8 @@
         <class className="NewProjectVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewProjectVC.h"/>
             <relationships>
-                <relationship kind="action" name="closePressed:"/>
                 <relationship kind="action" name="createPressed:"/>
                 <relationship kind="action" name="didEndOnExit:" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="fakeNavBar" candidateClass="UIView"/>
-                <relationship kind="outlet" name="labelTitle" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tableLanguages" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="textName" candidateClass="UITextField"/>
             </relationships>
@@ -341,9 +324,6 @@
         </class>
         <class className="SnippetsVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SnippetsVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="labelTitle" candidateClass="UILabel"/>
-            </relationships>
         </class>
         <class className="UICollectionReusableView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
@@ -354,6 +334,9 @@
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
         </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
+        </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -361,6 +344,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mEh-N2-dcu"/>
+        <segue reference="fFc-pr-XAy"/>
+        <segue reference="3fe-fd-2Ee"/>
     </inferredMetricsTieBreakers>
 </document>

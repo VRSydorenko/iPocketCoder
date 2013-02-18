@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BuildAnywhere/NewProjectVC.m"
-         timestampString = "382819917.412182"
+         timestampString = "382909899.403071"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "122"
-         endingLineNumber = "122"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "-createPressed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,25 +21,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BuildAnywhere/NewProjectVC.m"
-         timestampString = "382819917.412182"
+         timestampString = "382909899.403071"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "116"
-         endingLineNumber = "116"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
          landmarkName = "-createPressed:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BuildAnywhere/NewProjectVC.m"
-         timestampString = "382819917.412182"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
-         landmarkName = "-initInfoBar"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
