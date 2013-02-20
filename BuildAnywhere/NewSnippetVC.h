@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Utils.h"
+#import "MainNavController.h"
 
 @interface NewSnippetVC : UIViewController
 

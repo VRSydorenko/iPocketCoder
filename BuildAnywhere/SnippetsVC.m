@@ -8,10 +8,9 @@
 
 #import "SnippetsVC.h"
 
-#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
-
-@interface SnippetsVC ()
-
+@interface SnippetsVC (){
+    MainNavController* navCon;
+}
 @end
 
 @implementation SnippetsVC
@@ -20,9 +19,15 @@
 {
     [super viewDidLoad];
     
-    if (!IPAD){
-    self.navigationItem.leftBarButtonItem = [Utils createBackButtonWithSelectorBackPressedOnTarget:self];
+    navCon = (MainNavController*)self.navigationController;
+    
+    if (!IPAD){ // to save more space on navigation bar
+        [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [navCon hideToolBarAnimated:YES];
 }
 
 // iPhone

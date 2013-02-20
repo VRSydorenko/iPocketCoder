@@ -26,7 +26,7 @@
         CGFloat halfWidth = frame.size.width / 2.0;
         CGFloat halfHeight = frame.size.height / 2.0;
         hiddenCP = CGPointMake(frame.origin.x + halfWidth, frame.origin.y + halfHeight);
-        showCP = CGPointMake(frame.origin.x + halfWidth, frame.origin.y + halfHeight + frame.size.height);
+        showCP = CGPointMake(frame.origin.x + halfWidth, frame.origin.y + halfHeight - frame.size.height);
         
         //UIColor *bg = [UIColor colorWithRed:90.0 green:140.0 blue:0.0 alpha:0.9];
         self.backgroundColor = [UIColor colorWithRed:120.0/255.0 green:190.0/255.0 blue:95.0/255.0 alpha:0.9];

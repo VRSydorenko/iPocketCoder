@@ -21,6 +21,7 @@ typedef enum MessageMoodTypes{
 
 - (void)initInfoBarWithTopViewFrame:(CGRect)frame andHeight:(CGFloat)height;
 - (void)showInfoBarWithMessage:(NSString *)message withMood:(MessageMoodTypes)mood;
-- (void) hideInfoBar;
+- (void)hideInfoBar;
+- (void)reset;
 
 @end

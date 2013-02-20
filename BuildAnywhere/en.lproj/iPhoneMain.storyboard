@@ -8,10 +8,14 @@
         <!--Main Nav Controller-->
         <scene sceneID="HUe-C1-4vM">
             <objects>
-                <navigationController definesPresentationContext="YES" id="TmM-Wb-YAV" customClass="MainNavController" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="TmM-Wb-YAV" customClass="MainNavController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pla-dZ-mye">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ppl-U4-X0h">
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="jaB-nD-xTd" kind="relationship" relationship="rootViewController" id="CBs-A4-aaH"/>
                     </connections>
@@ -25,11 +29,11 @@
             <objects>
                 <viewController id="jaB-nD-xTd" customClass="MainVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K5V-8G-A0O">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="zTR-aJ-uBp">
-                                <rect key="frame" x="0.0" y="38" width="320" height="378"/>
+                                <rect key="frame" x="0.0" y="38" width="320" height="334"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Df3-2l-zng">
@@ -103,7 +107,7 @@
             <objects>
                 <viewController id="Esg-49-CC9" customClass="EditorVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yHt-ju-jxI">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -118,14 +122,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MUC-Hm-gTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="941" y="-211"/>
+            <point key="canvasLocation" x="898" y="-211"/>
         </scene>
         <!--New ProjectVC - New project-->
         <scene sceneID="BC0-Zn-Fl5">
             <objects>
                 <viewController storyboardIdentifier="" id="whh-L9-eYI" customClass="NewProjectVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="def-ka-yAF">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CUM-0A-XFK">
@@ -145,7 +149,7 @@
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="g0l-b9-ShU">
-                                <rect key="frame" x="0.0" y="58" width="321" height="301"/>
+                                <rect key="frame" x="0.0" y="58" width="321" height="314"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -168,25 +172,20 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6rj-TD-1hC">
-                                <rect key="frame" x="101" y="367" width="119" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Create">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createPressed:" destination="whh-L9-eYI" eventType="touchUpInside" id="Kf6-Sm-dlT"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="qqt-R5-C2s"/>
+                        <barButtonItem title="Create" id="MML-kc-7r3">
+                            <connections>
+                                <action selector="createPressed:" destination="whh-L9-eYI" id="39p-Qu-wVD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="R5V-P0-MAp"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="New project" id="pxN-js-LxV"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableLanguages" destination="g0l-b9-ShU" id="ZbS-mh-phg"/>
                         <outlet property="textName" destination="xn0-Fr-5sc" id="jYQ-6i-kcE"/>
@@ -201,7 +200,7 @@
             <objects>
                 <viewController storyboardIdentifier="" id="VE0-ln-Ad1" customClass="SnippetsVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kwc-VI-MMO">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -215,32 +214,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PIj-vR-MpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1993" y="-901"/>
+            <point key="canvasLocation" x="1953" y="-901"/>
         </scene>
         <!--New SnippetVC - New Snippet-->
         <scene sceneID="WDl-Ea-gAr">
             <objects>
                 <viewController id="tys-cq-2hh" customClass="NewSnippetVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fKT-yE-SCq">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Umy-LU-WSb">
-                                <rect key="frame" x="114" y="361" width="92" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Add">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="rge-2a-x0Y"/>
+                        <barButtonItem title="Add" id="ac5-Xd-y6E"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="vca-wL-W9n"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="New Snippet" id="N0g-X5-Y59"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPA-Zz-1bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -249,7 +240,7 @@
         <!--Main Nav Controller-->
         <scene sceneID="uAw-rn-YYm">
             <objects>
-                <navigationController storyboardIdentifier="screenSnippets" id="QKF-3a-GLn" customClass="MainNavController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="screenSnippets" toolbarHidden="NO" id="QKF-3a-GLn" customClass="MainNavController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="C2W-F6-ZPE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F87-cw-ghl">
@@ -257,18 +248,22 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="eSy-ym-5c7">
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="VE0-ln-Ad1" kind="relationship" relationship="rootViewController" id="fFc-pr-XAy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3v-Gt-HqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1467" y="-901"/>
+            <point key="canvasLocation" x="1371" y="-901"/>
         </scene>
         <!--Main Nav Controller-->
         <scene sceneID="JsT-wM-sgl">
             <objects>
-                <navigationController storyboardIdentifier="screenNewProject" id="hj2-oc-PKR" customClass="MainNavController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="screenNewProject" toolbarHidden="NO" id="hj2-oc-PKR" customClass="MainNavController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="yQG-xZ-Dat"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a3c-HI-9Tv">
@@ -276,6 +271,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="CaM-E8-lNz">
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="whh-L9-eYI" kind="relationship" relationship="rootViewController" id="3fe-fd-2Ee"/>
                     </connections>
@@ -285,59 +284,6 @@
             <point key="canvasLocation" x="372" y="-901"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="EditorVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditorVC.h"/>
-            <relationships>
-                <relationship kind="action" name="snippetsPressed:"/>
-            </relationships>
-        </class>
-        <class className="MainNavController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainNavController.h"/>
-        </class>
-        <class className="MainVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainVC.h"/>
-            <relationships>
-                <relationship kind="action" name="createNewProjectPressed:"/>
-                <relationship kind="outlet" name="collectionProjects" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="labelHeader" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NewProjectVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewProjectVC.h"/>
-            <relationships>
-                <relationship kind="action" name="createPressed:"/>
-                <relationship kind="action" name="didEndOnExit:" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tableLanguages" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="textName" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="NewSnippetVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewSnippetVC.h"/>
-        </class>
-        <class className="ProjectCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProjectCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="labelProjectLanguage" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelProjectName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SnippetsVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SnippetsVC.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

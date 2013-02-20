@@ -8,15 +8,12 @@
 
 #import "NewProjectVC.h"
 
-#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
-
 @interface NewProjectVC (){
     NSDictionary *languages;
     NSIndexPath *selectedPath;
     NSDictionary* projectBasicData;
-    MainNavController* navController;
+    MainNavController* navCon;
 }
-
 @end
 
 @implementation NewProjectVC
@@ -25,10 +22,10 @@
 {
     [super viewDidLoad];
     
-    navController = (MainNavController*)self.navigationController;
+    navCon = (MainNavController*)self.navigationController;
     
     if (!IPAD){
-        self.navigationItem.leftBarButtonItem = [Utils createBackButtonWithSelectorBackPressedOnTarget:self];
+        [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
     
     projectBasicData = [DataManager getProjectsBasicInfo];
@@ -43,6 +40,10 @@
     [self setTableLanguages:nil];
     [self setTextName:nil];
     [super viewDidUnload];
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [navCon showToolbarAnimated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -81,15 +82,15 @@
     self.textName.text = [self.textName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if (self.textName.text.length == 0){
-        [navController showInfoBarWithNeutralMessage:@"Enter project name"];
+        [navCon showInfoBarWithNeutralMessage:@"Enter project name"];
         return;
     }
     if ([projectBasicData.allKeys containsObject:self.textName.text]){
-        [navController showInfoBarWithNeutralMessage:@"Project exists"];
+        [navCon showInfoBarWithNeutralMessage:@"Project exists"];
         return;
     }
     if (!selectedPath){
-        [navController showInfoBarWithNeutralMessage:@"Select programmingn language"];
+        [navCon showInfoBarWithNeutralMessage:@"Select programming language"];
         return;
     }
     

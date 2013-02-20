@@ -8,14 +8,12 @@
 
 #import "MainVC.h"
 
-#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
-
 @interface MainVC (){
     NSDictionary* projectBasicData;
     UIPopoverController* popoverController;
     NSIndexPath *selectedIndexPath;
+    MainNavController* navCon;
 }
-
 @end
 
 @implementation MainVC
@@ -28,10 +26,18 @@
     
     selectedIndexPath = nil;
     
+    navCon = (MainNavController*)self.navigationController;
+    [navCon hideToolBarAnimated:NO];
+    
+    
     self.collectionProjects.dataSource = self;
     self.collectionProjects.delegate = self;
     
     [self updateData];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [navCon hideToolBarAnimated:YES];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section{

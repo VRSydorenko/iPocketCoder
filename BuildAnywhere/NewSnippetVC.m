@@ -8,8 +8,9 @@
 
 #import "NewSnippetVC.h"
 
-@interface NewSnippetVC ()
-
+@interface NewSnippetVC (){
+    MainNavController* navCon;
+}
 @end
 
 @implementation NewSnippetVC
@@ -18,7 +19,15 @@
 {
     [super viewDidLoad];
 	
-    self.navigationItem.leftBarButtonItem = [Utils createBackButtonWithSelectorBackPressedOnTarget:self];
+    navCon = (MainNavController*)self.navigationController;
+    
+    if (!IPAD){ // to save more space on navigation bar
+        [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
+    }
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [navCon showToolbarAnimated:YES];
 }
 
 -(void)backPressed{

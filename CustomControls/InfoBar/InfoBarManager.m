@@ -56,8 +56,16 @@
     [self.infoBar hideInfoBar];
 }
 
+- (void)reset{
+    [self hideInfoBar];
+    if (self.infoBar) {
+        [self.infoBar removeFromSuperview];
+        self.infoBar = nil;
+    }
+}
+
 -(void) dealloc{
-    self.infoBar = nil;
+    [self reset];
 }
 
 @end

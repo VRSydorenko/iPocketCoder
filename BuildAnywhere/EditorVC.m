@@ -8,13 +8,11 @@
 
 #import "EditorVC.h"
 
-#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
-
 @interface EditorVC (){
     Project* project;
     UIPopoverController* popoverController;
+    MainNavController* navCon;
 }
-
 @end
 
 @implementation EditorVC
@@ -25,12 +23,18 @@
 {
     [super viewDidLoad];
     
+    navCon = (MainNavController*)self.navigationController;
+    
     if (!IPAD){ // to save more space on navigation bar 
-        self.navigationItem.leftBarButtonItem = [Utils createBackButtonWithSelectorBackPressedOnTarget:self];
+        [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
     
     project = self.projectName.length > 0 ? [DataManager loadProject:self.projectName] : nil;
     self.navigationItem.title = project.projName;
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [navCon showToolbarAnimated:YES];
 }
 
 // iPhone

@@ -10,6 +10,6 @@
 
 @interface Utils : NSObject
 
-+(UIBarButtonItem*) createBackButtonWithSelectorBackPressedOnTarget:(UIViewController*)viewController;
+
 
 @end
