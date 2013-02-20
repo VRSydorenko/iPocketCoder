@@ -42,13 +42,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)snippetsPressed:(id)sender {
-    if (IPAD){
-        SnippetsVC *snippetsVC = [[UIStoryboard storyboardWithName:@"iPhoneMain" bundle:nil] instantiateViewControllerWithIdentifier:@"screenSnippets"];
-        if (!snippetsVC){
-            return;
-        }
-    
+-(void) viewWillDisappear:(BOOL)animated{
+    if ([navCon.viewControllers indexOfObject:self] == NSNotFound){ // back button
         if (popoverController){
             if ([popoverController isPopoverVisible]){
                 [popoverController dismissPopoverAnimated:YES];
@@ -56,8 +51,28 @@
             }
             popoverController = nil;
         }
-        popoverController = [[UIPopoverController alloc] initWithContentViewController:snippetsVC];
+    }
+}
+
+- (IBAction)snippetsPressed:(id)sender {
+    if (IPAD){
+        if (popoverController){
+            if ([popoverController isPopoverVisible]){
+                [popoverController dismissPopoverAnimated:YES];
+                return;
+            }
+            popoverController = nil;
+        }
+        
+        MainNavController *snippetsMainVC = [[UIStoryboard storyboardWithName:@"iPhoneMain" bundle:nil] instantiateViewControllerWithIdentifier:@"screenSnippets"];
+        if (!snippetsMainVC){
+            return;
+        }
+        ((SnippetsVC*)[snippetsMainVC.viewControllers objectAtIndex:0]).language = project.projLanguage;
+        
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:snippetsMainVC];
         [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
+
 @end

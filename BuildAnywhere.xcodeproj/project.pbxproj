@@ -38,6 +38,7 @@
 		7F78A46E16D17F3D00BCE579 /* backArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F78A46D16D17F3D00BCE579 /* backArrow.png */; };
 		7F78A47416D18AD900BCE579 /* SnippetsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F78A47316D18AD800BCE579 /* SnippetsVC.m */; };
 		7F78A47716D1990200BCE579 /* NewSnippetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F78A47616D1990100BCE579 /* NewSnippetVC.m */; };
+		7FCA8DEA16D56C8B00DA15FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */; };
 		7FD331A316D13741006D7A0D /* crossLines.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD331A116D13741006D7A0D /* crossLines.png */; };
 		7FD331A416D13741006D7A0D /* crossLines@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD331A216D13741006D7A0D /* crossLines@2x.png */; };
 /* End PBXBuildFile section */
@@ -96,6 +97,7 @@
 		7F78A47316D18AD800BCE579 /* SnippetsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnippetsVC.m; sourceTree = "<group>"; };
 		7F78A47516D1990100BCE579 /* NewSnippetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewSnippetVC.h; sourceTree = "<group>"; };
 		7F78A47616D1990100BCE579 /* NewSnippetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewSnippetVC.m; sourceTree = "<group>"; };
+		7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7FD331A116D13741006D7A0D /* crossLines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crossLines.png; sourceTree = "<group>"; };
 		7FD331A216D13741006D7A0D /* crossLines@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "crossLines@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FCA8DEA16D56C8B00DA15FB /* QuartzCore.framework in Frameworks */,
 				7F51CC5D16D000B400DDE28F /* libsqlite3.0.dylib in Frameworks */,
 				7F51CC1616CFFCBF00DDE28F /* UIKit.framework in Frameworks */,
 				7F51CC1816CFFCBF00DDE28F /* Foundation.framework in Frameworks */,
@@ -139,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				7F51CC5C16D000B400DDE28F /* libsqlite3.0.dylib */,
+				7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */,
 				7F51CC1516CFFCBF00DDE28F /* UIKit.framework */,
 				7F51CC1716CFFCBF00DDE28F /* Foundation.framework */,
 				7F51CC1916CFFCBF00DDE28F /* CoreGraphics.framework */,

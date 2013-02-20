@@ -82,15 +82,27 @@
     self.textName.text = [self.textName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if (self.textName.text.length == 0){
-        [navCon showInfoBarWithNeutralMessage:@"Enter project name"];
+        if (IPAD){
+            [navCon showMessageBox:@"Enter project title" text:@""];
+        } else {
+            [navCon showInfoBarWithNeutralMessage:@"Enter project title"];
+        }
         return;
     }
     if ([projectBasicData.allKeys containsObject:self.textName.text]){
-        [navCon showInfoBarWithNeutralMessage:@"Project exists"];
+        if (IPAD){
+            [navCon showMessageBox:@"Project exists" text:@""];
+        } else {
+            [navCon showInfoBarWithNeutralMessage:@"Project exists"];
+        }
         return;
     }
     if (!selectedPath){
-        [navCon showInfoBarWithNeutralMessage:@"Select programming language"];
+        if (IPAD){
+            [navCon showMessageBox:@"Select programming language" text:@""];
+        } else {
+            [navCon showInfoBarWithNeutralMessage:@"Select programming language"];
+        }
         return;
     }
     

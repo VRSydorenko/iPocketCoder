@@ -20,12 +20,20 @@
     return [[self getDbManager] saveProject:project];
 }
 
++(int) saveSnippet:(Snippet *)snippet{
+    return [[self getDbManager] saveSnippet:snippet];
+}
+
 +(NSString*) getLanguageName:(int)language{
     return [[self getDbManager] getLanguageName:language];
 }
 
 +(NSDictionary*) getProjectsBasicInfo{
     return [[self getDbManager] getProjectsBasicInfo];
+}
+
++(NSArray*) getSnippetNamesForLanguage:(int)lang{
+    return [[self getDbManager] getSnippetNamesForLanguage:lang];
 }
 
 +(NSDictionary*) getLanguages{

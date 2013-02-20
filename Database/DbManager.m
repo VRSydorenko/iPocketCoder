@@ -365,6 +365,24 @@
     
     return [[NSDictionary alloc] initWithDictionary:result];
 }
+
+-(NSArray*) getSnippetNamesForLanguage:(int)lang{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@ FROM %@ WHERE %@=%d", F_NAME, T_SNIPPETS, F_LANG, lang];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    NSMutableArray* result = [[NSMutableArray alloc] init];
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        while (sqlite3_step(statement) == SQLITE_ROW){
+            NSString *nameField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
+            [result addObject:nameField];
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return [[NSArray alloc] initWithArray:result];
+}
 /*
 -(void)updateOwnNick:(NSString*)nick{
     NSString* querySQL = [NSString stringWithFormat:@"UPDATE %@ SET %@ = ? WHERE %@ = \"%@\" AND %@ = \"%@\"", T_USERS, F_NICK, F_EMAIL, [UserSettings getEmail], F_AUTHOR, [UserSettings getEmail]];

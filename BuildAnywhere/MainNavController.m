@@ -15,14 +15,6 @@
 
 @implementation MainNavController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [self initInfoBar];
-}
 
 -(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     if (!IPAD){
@@ -91,6 +83,11 @@
         [self initInfoBar];
     }
     [infoManager showInfoBarWithMessage:text withMood:POSITIVE];
+}
+
+-(void) showMessageBox:(NSString*)title text:(NSString*)text{
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:text delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

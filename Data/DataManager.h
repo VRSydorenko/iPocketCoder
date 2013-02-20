@@ -14,10 +14,12 @@
 @interface DataManager : NSObject
 
 +(int) saveProject:(Project*)project;
++(int) saveSnippet:(Snippet*)snippet;
 
 +(NSDictionary*) getLanguages;
 +(NSString*) getLanguageName:(int)language;
 +(NSDictionary*) getProjectsBasicInfo;
++(NSArray*) getSnippetNamesForLanguage:(int)lang;
 
 +(Project*) loadProject:(NSString*)name;
 

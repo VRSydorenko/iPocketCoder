@@ -14,6 +14,7 @@
     NSIndexPath *selectedIndexPath;
     MainNavController* navCon;
 }
+
 @end
 
 @implementation MainVC
@@ -69,12 +70,6 @@
 
 - (IBAction)createNewProjectPressed:(id)sender {
     if (IPAD){
-        NewProjectVC *newProjectVC = [[UIStoryboard storyboardWithName:@"iPhoneMain" bundle:nil] instantiateViewControllerWithIdentifier:@"screenNewProject"];
-        if (!newProjectVC){
-            return;
-        }
-        newProjectVC.delegate = self;
-        
         if (popoverController){
             if ([popoverController isPopoverVisible]){
                 [popoverController dismissPopoverAnimated:YES];
@@ -82,7 +77,14 @@
             }
             popoverController = nil;
         }
-        popoverController = [[UIPopoverController alloc] initWithContentViewController:newProjectVC];
+        
+        MainNavController *newProjectMainVC = [[UIStoryboard storyboardWithName:@"iPhoneMain" bundle:nil] instantiateViewControllerWithIdentifier:@"screenNewProject"];
+        if (!newProjectMainVC){
+            return;
+        }
+        ((NewProjectVC*)[newProjectMainVC.viewControllers objectAtIndex:0]).delegate = self;
+        
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:newProjectMainVC];
         [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }

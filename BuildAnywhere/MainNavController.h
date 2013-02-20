@@ -23,5 +23,6 @@
 - (void)showInfoBarWithNegativeMessage:(NSString*)text;
 - (void)showInfoBarWithNeutralMessage:(NSString*)text;
 - (void)showInfoBarWithPositiveMessage:(NSString*)text;
+-(void) showMessageBox:(NSString*)title text:(NSString*)text;
 
 @end
