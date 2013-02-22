@@ -11,7 +11,10 @@
 #import "DataManager.h"
 #import "SnippetsVC.h"
 
-@interface EditorVC : UIViewController
+@interface EditorVC : UIViewController<UITextViewDelegate>
+
+@property (nonatomic, weak) IBOutlet UITextView *textCode;
+@property (nonatomic, strong) IBOutlet UIView *accessoryView;
 
 @property (nonatomic) NSString* projectName;
 - (IBAction)snippetsPressed:(id)sender;

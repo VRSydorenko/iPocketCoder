@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="J1M-iJ-Pyp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="J1M-iJ-Pyp">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -7,10 +7,14 @@
         <!--Main Nav Controller-->
         <scene sceneID="tvU-QZ-zXV">
             <objects>
-                <navigationController definesPresentationContext="YES" id="J1M-iJ-Pyp" customClass="MainNavController" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="J1M-iJ-Pyp" customClass="MainNavController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="D0V-BQ-4iq">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3oZ-dl-jCj">
+                        <rect key="frame" x="0.0" y="980" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="HIc-k8-SfY" kind="relationship" relationship="rootViewController" id="CMl-MV-XWX"/>
                     </connections>
@@ -24,10 +28,12 @@
             <objects>
                 <viewController id="HIc-k8-SfY" customClass="MainVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WrK-7Q-FJk">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="916"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DWq-vJ-ewi">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="DWq-vJ-ewi">
+                                <rect key="frame" x="20" y="48" width="728" height="848"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gle-08-8NT">
                                     <size key="itemSize" width="300" height="100"/>
@@ -43,20 +49,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="WXs-0s-l69">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" id="WXs-0s-l69">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="A7T-qc-Gps"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Language" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="dTS-pn-bpb">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Language" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" id="dTS-pn-bpb">
+                                                    <rect key="frame" x="0.0" y="30" width="300" height="70"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="70" id="Cmu-40-fCX"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="51"/>
                                                     <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -65,14 +67,6 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="dTS-pn-bpb" firstAttribute="trailing" secondItem="987-Tr-0Q9" secondAttribute="trailing" type="default" id="5Uw-0P-KhT"/>
-                                            <constraint firstItem="WXs-0s-l69" firstAttribute="leading" secondItem="987-Tr-0Q9" secondAttribute="leading" type="default" id="8lk-aP-TNd"/>
-                                            <constraint firstItem="dTS-pn-bpb" firstAttribute="bottom" secondItem="987-Tr-0Q9" secondAttribute="bottom" type="default" id="a7s-5L-lwr"/>
-                                            <constraint firstItem="WXs-0s-l69" firstAttribute="top" secondItem="987-Tr-0Q9" secondAttribute="top" type="default" id="qhO-yn-DYD"/>
-                                            <constraint firstItem="WXs-0s-l69" firstAttribute="trailing" secondItem="987-Tr-0Q9" secondAttribute="trailing" type="default" id="ufE-oB-6ST"/>
-                                            <constraint firstItem="dTS-pn-bpb" firstAttribute="leading" secondItem="987-Tr-0Q9" secondAttribute="leading" type="default" id="ynE-ZN-3pg"/>
-                                        </constraints>
                                         <connections>
                                             <outlet property="labelProjectLanguage" destination="dTS-pn-bpb" id="l1Z-GF-lVb"/>
                                             <outlet property="labelProjectName" destination="WXs-0s-l69" id="gti-cV-gWo"/>
@@ -80,25 +74,15 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Projects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zop-uH-rUJ">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="FPL-SE-YCT"/>
-                                </constraints>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Projects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zop-uH-rUJ">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Zop-uH-rUJ" firstAttribute="leading" secondItem="WrK-7Q-FJk" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="AZe-vT-oty"/>
-                            <constraint firstAttribute="trailing" secondItem="Zop-uH-rUJ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="PX3-bc-ksQ"/>
-                            <constraint firstItem="DWq-vJ-ewi" firstAttribute="top" secondItem="Zop-uH-rUJ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="VJ4-sZ-Wzn"/>
-                            <constraint firstItem="Zop-uH-rUJ" firstAttribute="top" secondItem="WrK-7Q-FJk" secondAttribute="top" type="default" id="WXh-CS-FQY"/>
-                            <constraint firstAttribute="trailing" secondItem="DWq-vJ-ewi" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="b44-pU-BBk"/>
-                            <constraint firstAttribute="bottom" secondItem="DWq-vJ-ewi" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="sh0-gx-8No"/>
-                            <constraint firstItem="DWq-vJ-ewi" firstAttribute="leading" secondItem="WrK-7Q-FJk" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="xfw-7e-927"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Buid Anywhere" id="kcQ-NE-l7f">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HEt-a5-1l1">
@@ -122,8 +106,17 @@
             <objects>
                 <viewController id="aI8-wJ-ZcF" customClass="EditorVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FE6-4f-c5U">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="916"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="Tjz-im-6oc">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="916"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="vg4-RI-8br">
@@ -133,53 +126,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textCode" destination="Tjz-im-6oc" id="SvU-1E-MkO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLf-it-OtI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1401" y="-790"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="EditorVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditorVC.h"/>
-            <relationships>
-                <relationship kind="action" name="snippetsPressed:"/>
-            </relationships>
-        </class>
-        <class className="MainNavController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainNavController.h"/>
-        </class>
-        <class className="MainVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainVC.h"/>
-            <relationships>
-                <relationship kind="action" name="createNewProjectPressed:"/>
-                <relationship kind="outlet" name="collectionProjects" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="labelHeader" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ProjectCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProjectCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="labelProjectLanguage" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelProjectName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

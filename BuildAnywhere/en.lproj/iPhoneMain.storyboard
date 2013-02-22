@@ -109,6 +109,15 @@
                     <view key="view" contentMode="scaleToFill" id="yHt-ju-jxI">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="cJ0-L9-bxx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Project name" id="gld-Hc-NNv">
@@ -119,6 +128,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textCode" destination="cJ0-L9-bxx" id="7v7-Tg-RvC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MUC-Hm-gTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -336,13 +348,73 @@
             <point key="canvasLocation" x="372" y="-901"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="EditorVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditorVC.h"/>
+            <relationships>
+                <relationship kind="action" name="snippetsPressed:"/>
+                <relationship kind="outlet" name="accessoryView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="textCode" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="MainNavController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainNavController.h"/>
+        </class>
+        <class className="MainVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainVC.h"/>
+            <relationships>
+                <relationship kind="action" name="createNewProjectPressed:"/>
+                <relationship kind="outlet" name="collectionProjects" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="labelHeader" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NewProjectVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewProjectVC.h"/>
+            <relationships>
+                <relationship kind="action" name="createPressed:"/>
+                <relationship kind="action" name="didEndOnExit:" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tableLanguages" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="textName" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="NewSnippetVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewSnippetVC.h"/>
+            <relationships>
+                <relationship kind="action" name="addPressed:"/>
+                <relationship kind="outlet" name="textCode" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="textName" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ProjectCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProjectCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="labelProjectLanguage" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelProjectName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SnippetsVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SnippetsVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableSnippets" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fFc-pr-XAy"/>
+        <segue reference="mEh-N2-dcu"/>
         <segue reference="3fe-fd-2Ee"/>
     </inferredMetricsTieBreakers>
 </document>
