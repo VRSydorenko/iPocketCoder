@@ -12,6 +12,7 @@
     Project* project;
     UIPopoverController* popoverController;
     MainNavController* navCon;
+    NSDictionary* quickSymbols;
 }
 @end
 
@@ -143,8 +144,7 @@
         return;
     }
     
-    int buttonsCount = 50;
-    float buttonWidth = IPAD ? 50.0 : 24.0;
+    float buttonWidth = IPAD ? 50.0 : 25.0;
     float buttonPadding = IPAD ? 10.0 : 5.0; // left & right
     float barHeight = IPAD ? 60.0 : 40.0;
     float buttonFontSize = IPAD ? 25.0 : 15.0;
@@ -159,29 +159,11 @@
     scrollView.backgroundColor = [UIColor lightGrayColor];
     
     UIFont *accessoryButtonFont = [UIFont fontWithName:@"Helvetica" size:buttonFontSize];
-	for (int i = 0; i < buttonsCount; i++) {
-        
-        // setup button
-        NSString* title;
-        switch (i) {
-            case 0: title = @"{";   break;
-            case 1: title = @"}";   break;
-            case 2: title = @",";   break;
-            case 3: title = @";";   break;
-            case 4: title = @":";   break;
-            case 5: title = @"[";   break;
-            case 6: title = @"]";   break;
-            case 7: title = @"(";   break;
-            case 8: title = @")";   break;
-            case 9: title = @"<";   break;
-            case 10: title = @">";   break;
-            case 11: title = @"+";   break;
-            case 12: title = @"=";   break;
-            case 13: title = @"*";   break;
-            case 14: title = @"-";   break;
-        }
-		
-        float btnX = i*buttonWidth + (i+1.0)*buttonPadding;
+    
+    NSMutableDictionary* symbolsMap = [[NSMutableDictionary alloc] init];
+    NSArray *symbols = [DataManager getQuickSymbols];
+    for (QuickSymbol* symbol in symbols) {
+        float btnX = symbol.symbId*buttonWidth + (symbol.symbId+1.0)*buttonPadding;
         float btnHeight = barHeight - 2.0*barPadding;
         float btnWidth = buttonWidth;
 		CGRect btnRect = CGRectMake(btnX, 0.0, btnWidth, btnHeight);
@@ -191,7 +173,8 @@
         button.layer.borderColor = [UIColor blackColor].CGColor;
         button.layer.borderWidth = 0.5f;
         button.backgroundColor = [UIColor whiteColor];
-        button.text = title;
+        button.text = [symbol.symbTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+;
         button.textAlignment = NSTextAlignmentCenter;
         button.font = accessoryButtonFont;
         
@@ -199,25 +182,34 @@
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessoryButtonPressed:)];
         [button addGestureRecognizer:tapGesture];
         
-        button.tag = i;
+        button.tag = symbol.symbId;
         
         [scrollView addSubview:button];
         button.center = CGPointMake(btnRect.origin.x+btnWidth/2.0, barRect.size.height/2.0);
+        
+        [symbolsMap setObject:symbol.symbContent forKey:[NSNumber numberWithInt:symbol.symbId]];
 	}
 	
-	[scrollView setContentSize:CGSizeMake(buttonsCount*(buttonPadding+buttonWidth)+buttonPadding, barHeight)];
+	[scrollView setContentSize:CGSizeMake(symbols.count*(buttonPadding+buttonWidth)+buttonPadding, barHeight)];
+    
+    quickSymbols = [[NSDictionary alloc] initWithDictionary:symbolsMap];
     
     self.accessoryView = scrollView;
                                           
 }
 
-- (IBAction)accessoryButtonPressed:(id)sender {
+- (IBAction)accessoryButtonPressed:(UIGestureRecognizer*)gestureRecognizer {
+    UILabel* accessoryButton = (UILabel*)gestureRecognizer.view;
+    if (!accessoryButton){
+        return;
+    }
     
-    // When the accessory view button is tapped, add a suitable string to the text view.
+    NSString* content = (NSString*)[quickSymbols objectForKey:[NSNumber numberWithInt:accessoryButton.tag]];
+        
     NSMutableString *text = [self.textCode.text mutableCopy];
     NSRange selectedRange = self.textCode.selectedRange;
     
-    [text replaceCharactersInRange:selectedRange withString:@"You tapped me.\n"];
+    [text replaceCharactersInRange:selectedRange withString:content];
     self.textCode.text = text;
 }
 

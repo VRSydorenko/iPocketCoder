@@ -19,6 +19,7 @@
     if (self){
         [self initDatabase];
         [self initLanguages];
+        [self initQuickSymbols];
     }
     return self;
 }
@@ -146,6 +147,57 @@
     sqlite3_finalize(statement);
 }
 
+-(void) initQuickSymbols{
+    if ([self loadQuickSymbol:0]){
+        return;
+    }
+    
+    NSMutableDictionary* symbols = [[NSMutableDictionary alloc] init];
+    [symbols setObject:@"{" forKey:@"{"];
+    [symbols setObject:@"}" forKey:@"}"];
+    [symbols setObject:@"(" forKey:@"("];
+    [symbols setObject:@")" forKey:@")"];
+    [symbols setObject:@"[" forKey:@"["];
+    [symbols setObject:@"]" forKey:@"]"];
+    [symbols setObject:@";" forKey:@";"];
+    [symbols setObject:@"@" forKey:@" @"]; // workaround
+    [symbols setObject:@"-" forKey:@"-"];
+    [symbols setObject:@"=" forKey:@"="];
+    [symbols setObject:@"$" forKey:@"$"];
+    [symbols setObject:@"*" forKey:@"*"];
+    [symbols setObject:@"_" forKey:@"_"];
+    [symbols setObject:@":" forKey:@":"];
+    //[symbols setObject:@"" forKey:@""];
+
+    for (int i = 0; i < symbols.count; i++) {
+        NSString* key = [symbols.allKeys objectAtIndex:i];
+        [self saveQuickSymbol:[[QuickSymbol alloc] initWithId:i title:key content:[symbols valueForKey:key]]];
+    }
+}
+
+-(void) saveQuickSymbol:(QuickSymbol*)symbol{
+    if ([self loadQuickSymbol:symbol.symbId]){
+        return;
+    }
+    
+    NSString* sql = [NSString stringWithFormat: @"INSERT INTO %@ (%@, %@, %@) VALUES (%d, ?, ?)", T_SYMBOLS, F_SYMB_ID, F_NAME, F_CODE, symbol.symbId];
+    const char *insert_stmt = [sql UTF8String];
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, insert_stmt, -1, &statement, NULL) == SQLITE_OK){
+        sqlite3_bind_text(statement, 1, [symbol.symbTitle cStringUsingEncoding:NSUTF8StringEncoding], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 2, [symbol.symbContent cStringUsingEncoding:NSUTF8StringEncoding], -1, SQLITE_TRANSIENT);
+        
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            NSLog(@"Symbol inserted");
+        } else {
+            NSLog(@"Failed to save symbol");
+            NSLog(@"Info:%s", sqlite3_errmsg(buildAnywhereDb));
+        }
+    }
+    sqlite3_finalize(statement);
+}
 
 // public methods
 -(NSDictionary*) getLanguages{ // key: name, value:language
@@ -280,6 +332,28 @@
     return snippet;
 }
 
+-(QuickSymbol*) loadQuickSymbol:(int)iD{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@ FROM %@ WHERE %@=%d", F_NAME, F_CODE, T_SYMBOLS, F_SYMB_ID, iD];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    QuickSymbol* symbol = nil;
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        if (sqlite3_step(statement) == SQLITE_ROW){
+            NSString *titleField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
+            
+            NSString *contentField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
+            
+            symbol = [[QuickSymbol alloc] initWithId:iD title:titleField content:contentField];
+        } else {
+            NSLog(@"Quick symbol not found in the database");
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return symbol;
+}
+
 -(Project*) loadProject:(NSString*)name{
     NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@, %@, %@ FROM %@ WHERE %@=?", F_ID, F_LANG, F_CODE, F_LINK, T_PROJECTS, F_NAME];
     const char *query_stmt = [querySQL UTF8String];
@@ -383,70 +457,29 @@
     
     return [[NSArray alloc] initWithArray:result];
 }
-/*
--(void)updateOwnNick:(NSString*)nick{
-    NSString* querySQL = [NSString stringWithFormat:@"UPDATE %@ SET %@ = ? WHERE %@ = \"%@\" AND %@ = \"%@\"", T_USERS, F_NICK, F_EMAIL, [UserSettings getEmail], F_AUTHOR, [UserSettings getEmail]];
-    const char *query_stmt = [querySQL UTF8String];
-    
-    sqlite3_stmt *statement;
-    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-    {
-        sqlite3_bind_text(statement, 1, [nick cStringUsingEncoding:NSUTF8StringEncoding], -1, SQLITE_TRANSIENT);
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
-        } else {
-            NSLog(@"Error updating nick");
-            NSLog(@"Info:%s", sqlite3_errmsg(buildAnywhereDb));
-        }
-    }
-    sqlite3_finalize(statement);
-}*/
 
-/*
--(NSArray*) loadMessagesWithCondition:(NSString*)condition{ // user specific method
-    NSString* cond = condition.length > 0 ? [NSString stringWithFormat:@" AND %@", condition] : @"";
-    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@, %@, %@, %@, %@, %@, %@, %@ FROM %@ WHERE %@=\"%@\" %@", F_FROM, F_TO, F_WHEN, F_TEXT, F_TYPE, F_LATD, F_LOND, F_ATTNAME, F_ATTDATA, T_MSGS, F_AUTHOR, [UserSettings getEmail], cond];
+-(NSArray*) getQuickSymbols{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@, %@ FROM %@ ORDER BY %@", F_SYMB_ID, F_NAME, F_CODE, T_SYMBOLS, F_SYMB_ID];
     const char *query_stmt = [querySQL UTF8String];
     
-    NSMutableArray* msgs = [[NSMutableArray alloc] init];
+    NSMutableArray* result = [[NSMutableArray alloc] init];
+    
     sqlite3_stmt *statement;
-    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-    {
-        while (sqlite3_step(statement) == SQLITE_ROW)
-        {
-            Message* msg = [[Message alloc] init];
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        while (sqlite3_step(statement) == SQLITE_ROW){
+            int iD = sqlite3_column_int(statement, 0);
             
-            NSString *fromField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 0)];
-            msg.from = fromField;
+            NSString *titleField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
             
-            NSString *toField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
-            msg.to = toField;
+            NSString *contentField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
             
-            msg.when = sqlite3_column_int(statement, 2);
-            
-            NSString *textField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 3)];
-            msg.text = textField;
-            
-            NSString *typeField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 4)];
-            msg.type = typeField.intValue;
-            
-            NSString *latitudeField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 5)];
-            msg.latitude = latitudeField.doubleValue;
-            
-            NSString *longitudeField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 6)];
-            msg.longitude = longitudeField.doubleValue;
-            
-            NSString *attachmentField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 7)];
-            msg.attachmentName = attachmentField;
-            
-            int len = sqlite3_column_bytes(statement, 8);
-            msg.attachmentData = [[NSData alloc] initWithBytes:sqlite3_column_blob(statement, 8) length:len];
-            
-            [msgs addObject:msg];
+            [result addObject:[[QuickSymbol alloc] initWithId:iD title:titleField content:contentField]];
         }
     }
     sqlite3_finalize(statement);
     
-    return [[NSArray alloc] initWithArray:msgs];
-}*/
+    return [[NSArray alloc] initWithArray:result];
+
+}
+
 @end

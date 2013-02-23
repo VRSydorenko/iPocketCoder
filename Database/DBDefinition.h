@@ -32,6 +32,11 @@
 // F_NAME
 // F_CODE
 
+#define T_SYMBOLS @"t_symbols"
+#define F_SYMB_ID @"f_symb_id"
+// F_NAME
+// F_CODE
+
 @interface DBDefinition : NSObject
 
 -(NSString*) getTablesCreationSQL;

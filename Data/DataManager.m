@@ -44,4 +44,8 @@
     return [[self getDbManager] loadProject:name];
 }
 
++(NSArray*) getQuickSymbols{
+    return [[self getDbManager] getQuickSymbols];
+}
+
 @end

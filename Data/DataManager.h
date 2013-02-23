@@ -23,4 +23,6 @@
 
 +(Project*) loadProject:(NSString*)name;
 
++(NSArray*) getQuickSymbols;
+
 @end

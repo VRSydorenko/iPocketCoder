@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Project.h"
 #import "Snippet.h"
+#import "QuickSymbol.h"
 
 @interface DbManager : NSObject
 
@@ -22,6 +23,7 @@
 -(int) saveSnippet:(Snippet*)snippet;
 -(Snippet*) loadSnippet:(NSString*)name language:(int)lang;
 -(Project*) loadProject:(NSString*)name;
+-(QuickSymbol*) loadQuickSymbol:(int)iD;
 -(void) deleteProject:(NSString*)name;
 -(void) deleteSnippet:(NSString*)name language:(int)lang;
 
@@ -31,5 +33,7 @@
 
 -(NSDictionary*) getLanguages;
 -(NSString*) getLanguageName:(int)language;
+
+-(NSArray*) getQuickSymbols;
 
 @end

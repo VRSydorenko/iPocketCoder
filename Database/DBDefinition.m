@@ -41,6 +41,12 @@
     [tSnippets addField:F_NAME type:DBTYPE_TEXT notNull:YES];
     [tSnippets addField:F_CODE type:DBTYPE_TEXT notNull:YES];
     [tables addObject:tSnippets];
+    
+    DbTable* tSymbols = [[DbTable alloc] initWithTableName:T_SYMBOLS];
+    [tSymbols addField:F_SYMB_ID type:DBTYPE_REAL notNull:YES];
+    [tSymbols addField:F_NAME type:DBTYPE_TEXT notNull:YES];
+    [tSymbols addField:F_CODE type:DBTYPE_TEXT notNull:YES];
+    [tables addObject:tSymbols];
 }
 
 -(NSString*) getTablesCreationSQL{
