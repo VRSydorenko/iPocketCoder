@@ -117,9 +117,37 @@
                                 <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J2G-Fm-O6H">
+                                <rect key="frame" x="283" y="5" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="K">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="hideKeyboardPressed:" destination="Esg-49-CC9" eventType="touchUpInside" id="XeV-Jb-MRw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="R4z-7h-LrR"/>
+                        <barButtonItem title="Compile" id="Ufy-J3-ylm">
+                            <connections>
+                                <action selector="compilePressed:" destination="Esg-49-CC9" id="ANH-sK-JaT"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Run" id="PlW-Hw-2CP">
+                            <connections>
+                                <action selector="runPressed:" destination="Esg-49-CC9" id="2bV-A3-XTW"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Project name" id="gld-Hc-NNv">
                         <barButtonItem key="rightBarButtonItem" title="{...}" id="O7u-SH-1L3">
                             <connections>
@@ -128,13 +156,34 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="compileItem" destination="Ufy-J3-ylm" id="ufB-Qo-TT3"/>
+                        <outlet property="flexItem" destination="R4z-7h-LrR" id="shj-Xv-mDT"/>
+                        <outlet property="runItem" destination="PlW-Hw-2CP" id="uVW-jh-71P"/>
                         <outlet property="textCode" destination="cJ0-L9-bxx" id="7v7-Tg-RvC"/>
+                        <segue destination="nty-xO-3LV" kind="push" identifier="segueEditorToOutput" id="PAM-Ob-48Q"/>
+                        <segue destination="nty-xO-3LV" kind="push" identifier="segueEditorToErrors" id="Yu7-fR-T0q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MUC-Hm-gTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="898" y="-211"/>
+        </scene>
+        <!--ResultsVC - Results-->
+        <scene sceneID="AnF-kR-cFc">
+            <objects>
+                <viewController id="nty-xO-3LV" customClass="ResultsVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tcl-bK-z0O">
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Results" id="wsW-tV-k0b"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kea-mh-W5L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1441" y="-211"/>
         </scene>
         <!--New ProjectVC - New project-->
         <scene sceneID="BC0-Zn-Fl5">
@@ -198,7 +247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9iT-TL-yYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="898" y="-901"/>
+            <point key="canvasLocation" x="372" y="-901"/>
         </scene>
         <!--SnippetsVC - Code Snippets-->
         <scene sceneID="oSm-UE-xxd">
@@ -249,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PIj-vR-MpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1953" y="-901"/>
+            <point key="canvasLocation" x="1441" y="-901"/>
         </scene>
         <!--New SnippetVC - New Snippet-->
         <scene sceneID="WDl-Ea-gAr">
@@ -299,7 +348,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPA-Zz-1bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2432" y="-901"/>
+            <point key="canvasLocation" x="1988" y="-901"/>
         </scene>
         <!--Main Nav Controller-->
         <scene sceneID="uAw-rn-YYm">
@@ -322,7 +371,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3v-Gt-HqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1371" y="-901"/>
+            <point key="canvasLocation" x="898" y="-901"/>
         </scene>
         <!--Main Nav Controller-->
         <scene sceneID="JsT-wM-sgl">
@@ -345,7 +394,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WnP-37-T1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="372" y="-901"/>
+            <point key="canvasLocation" x="-94" y="-901"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -354,7 +403,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mEh-N2-dcu"/>
         <segue reference="3fe-fd-2Ee"/>
+        <segue reference="mEh-N2-dcu"/>
+        <segue reference="PAM-Ob-48Q"/>
     </inferredMetricsTieBreakers>
 </document>

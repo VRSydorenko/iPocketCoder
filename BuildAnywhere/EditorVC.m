@@ -32,6 +32,7 @@
                                           selector:@selector(keyboardWillHide:)
                                           name:UIKeyboardWillHideNotification
                                           object:nil];
+    
     self.textCode.delegate = self;
     self.textCode.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
@@ -86,6 +87,77 @@
         
         popoverController = [[UIPopoverController alloc] initWithContentViewController:snippetsMainVC];
         [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
+
+-(void) updateToolbarWithSpinner:(BOOL)needed statusText:(NSString*)text{
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    if (needed){
+        UIActivityIndicatorView* act = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:IPAD?UIActivityIndicatorViewStyleGray:UIActivityIndicatorViewStyleWhite];
+        [act startAnimating];
+        [items addObject:[[UIBarButtonItem alloc] initWithCustomView:act]];
+    }
+    if (text.length > 0){
+        UIBarButtonItem *textItem = [[UIBarButtonItem alloc] initWithTitle:text style:UIBarButtonItemStylePlain target:nil action:nil];
+        textItem.title = text;
+        [items addObject:textItem];
+    }
+    [items addObject:self.flexItem];
+    self.compileItem.enabled = NO;
+    [items addObject:self.compileItem];
+    self.runItem.enabled = NO;
+    [items addObject:self.runItem];
+    
+    [self.navigationController.toolbar setItems:[[NSArray alloc] initWithArray:items]];
+}
+
+-(void) updateToolbarWithViewResultsButton:(BOOL)operationSucceeded{
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    
+    NSString* title = operationSucceeded ? @"View output" : @"View errors";
+    SEL action = operationSucceeded ? @selector(viewOutput) : @selector(viewErrors);
+    
+    UIBarButtonItem *btnItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleBordered target:self action:action];
+    [items addObject:btnItem];
+    
+    [items addObject:self.flexItem];
+    self.compileItem.enabled = YES;
+    [items addObject:self.compileItem];
+    self.runItem.enabled = YES;
+    [items addObject:self.runItem];
+    
+    [self.navigationController.toolbar setItems:[[NSArray alloc] initWithArray:items]];
+}
+
+
+// iPhone
+- (IBAction)hideKeyboardPressed:(id)sender {
+    [self textViewShouldEndEditing:self.textCode];
+}
+
+- (IBAction)compilePressed:(id)sender {
+    [self updateToolbarWithSpinner:YES statusText:@"Compiling..."];
+}
+
+- (IBAction)runPressed:(id)sender {
+    [self updateToolbarWithSpinner:YES statusText:@"Running..."];
+}
+
+-(void)viewErrors{
+    [navCon performSegueWithIdentifier:@"segueEditorToErrors" sender:self];
+}
+
+-(void)viewOutput{
+    [navCon performSegueWithIdentifier:@"segueEditorToOutput" sender:self];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"segueEditorToOutput"]){
+        ResultsVC* outputVC = (ResultsVC*)segue.destinationViewController;
+        outputVC.errorMode = NO;
+    } else if ([segue.identifier isEqualToString:@"segueEditorToErrors"]){
+        ResultsVC* errorsVC = (ResultsVC*)segue.destinationViewController;
+        errorsVC.errorMode = YES;
     }
 }
 
@@ -215,6 +287,9 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:nil];
+    [self setFlexItem:nil];
+    [self setCompileItem:nil];
+    [self setRunItem:nil];
 }
 
 @end

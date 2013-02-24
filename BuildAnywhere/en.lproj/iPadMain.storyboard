@@ -101,7 +101,7 @@
             </objects>
             <point key="canvasLocation" x="473" y="-790"/>
         </scene>
-        <!--EditorVC-->
+        <!--EditorVC - Editor-->
         <scene sceneID="9Qa-M9-WgR">
             <objects>
                 <viewController id="aI8-wJ-ZcF" customClass="EditorVC" sceneMemberID="viewController">
@@ -119,20 +119,54 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="vg4-RI-8br">
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="84X-rA-Afj"/>
+                        <barButtonItem title="Compile" id="FjZ-OZ-Vjm">
+                            <connections>
+                                <action selector="compilePressed:" destination="aI8-wJ-ZcF" id="NSB-iV-rcG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Run" id="bCj-6I-Ymr">
+                            <connections>
+                                <action selector="runPressed:" destination="aI8-wJ-ZcF" id="hgR-DY-jZO"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Editor" id="vg4-RI-8br">
                         <barButtonItem key="rightBarButtonItem" title="{...}" id="0Ld-Ol-1sY">
                             <connections>
                                 <action selector="snippetsPressed:" destination="aI8-wJ-ZcF" id="NJ4-fw-lFr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="compileItem" destination="FjZ-OZ-Vjm" id="Hbi-YX-5vH"/>
+                        <outlet property="flexItem" destination="84X-rA-Afj" id="Nh7-0E-8Cn"/>
+                        <outlet property="runItem" destination="bCj-6I-Ymr" id="0QI-W3-3qJ"/>
                         <outlet property="textCode" destination="Tjz-im-6oc" id="SvU-1E-MkO"/>
+                        <segue destination="Xtv-gt-Xyr" kind="push" identifier="segueEditorToErrors" id="RWz-Yf-wO1"/>
+                        <segue destination="Xtv-gt-Xyr" kind="push" identifier="segueEditorToOutput" id="S8d-BY-6Iu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLf-it-OtI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1401" y="-790"/>
+        </scene>
+        <!--ResultsVC - Results-->
+        <scene sceneID="TIs-OS-h5J">
+            <objects>
+                <viewController id="Xtv-gt-Xyr" customClass="ResultsVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qhp-cC-BPe">
+                        <rect key="frame" x="0.0" y="64" width="768" height="916"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Results" id="D8U-Yr-zZK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eUG-8e-DEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2381" y="-790"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -140,4 +174,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="S8d-BY-6Iu"/>
+    </inferredMetricsTieBreakers>
 </document>

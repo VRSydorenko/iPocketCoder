@@ -10,6 +10,7 @@
 #import "Project.h"
 #import "DataManager.h"
 #import "SnippetsVC.h"
+#import "ResultsVC.h"
 
 @interface EditorVC : UIViewController<UITextViewDelegate>
 
@@ -17,6 +18,12 @@
 @property (nonatomic, strong) IBOutlet UIView *accessoryView;
 
 @property (nonatomic) NSString* projectName;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *flexItem;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *compileItem;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *runItem;
 - (IBAction)snippetsPressed:(id)sender;
+- (IBAction)hideKeyboardPressed:(id)sender;
+- (IBAction)compilePressed:(id)sender;
+- (IBAction)runPressed:(id)sender;
 
 @end

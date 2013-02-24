@@ -21,7 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+    
     navCon = (MainNavController*)self.navigationController;
     
     if (!IPAD){ // to save more space on navigation bar
@@ -90,4 +90,5 @@
     [self.delegate newSnippetCreationFinished:YES fromController:self];
     [navCon popViewControllerAnimated:YES];
 }
+
 @end
