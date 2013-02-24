@@ -70,6 +70,7 @@
 		7FBB5B1116DA7BDD001B2241 /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB5AF216DA7BDC001B2241 /* CXMLNode_XPathExtensions.m */; };
 		7FBB5B1316DA7CC3001B2241 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBB5B1216DA7CC3001B2241 /* SystemConfiguration.framework */; };
 		7FBB5B1616DA9AD7001B2241 /* ResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB5B1516DA9AD7001B2241 /* ResultsVC.m */; };
+		7FBB5B1916DAA440001B2241 /* RunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB5B1816DAA440001B2241 /* RunManager.m */; };
 		7FC3216F16D82A3800AA6123 /* QuickSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3216E16D82A3800AA6123 /* QuickSymbol.m */; };
 		7FCA8DEA16D56C8B00DA15FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */; };
 		7FD331A316D13741006D7A0D /* crossLines.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD331A116D13741006D7A0D /* crossLines.png */; };
@@ -195,6 +196,8 @@
 		7FBB5B1216DA7CC3001B2241 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7FBB5B1416DA9AD6001B2241 /* ResultsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsVC.h; sourceTree = "<group>"; };
 		7FBB5B1516DA9AD7001B2241 /* ResultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsVC.m; sourceTree = "<group>"; };
+		7FBB5B1716DAA440001B2241 /* RunManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunManager.h; sourceTree = "<group>"; };
+		7FBB5B1816DAA440001B2241 /* RunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunManager.m; sourceTree = "<group>"; };
 		7FC3216D16D82A3800AA6123 /* QuickSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickSymbol.h; sourceTree = "<group>"; };
 		7FC3216E16D82A3800AA6123 /* QuickSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickSymbol.m; sourceTree = "<group>"; };
 		7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -326,6 +329,8 @@
 				7F51CC7216D0432000DDE28F /* ProjectCell.m */,
 				7FC3216D16D82A3800AA6123 /* QuickSymbol.h */,
 				7FC3216E16D82A3800AA6123 /* QuickSymbol.m */,
+				7FBB5B1716DAA440001B2241 /* RunManager.h */,
+				7FBB5B1816DAA440001B2241 /* RunManager.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -574,6 +579,7 @@
 				7FBB5B1016DA7BDD001B2241 /* CXMLNode_PrivateExtensions.m in Sources */,
 				7FBB5B1116DA7BDD001B2241 /* CXMLNode_XPathExtensions.m in Sources */,
 				7FBB5B1616DA9AD7001B2241 /* ResultsVC.m in Sources */,
+				7FBB5B1916DAA440001B2241 /* RunManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
