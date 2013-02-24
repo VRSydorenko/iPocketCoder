@@ -24,6 +24,7 @@
 #define T_PROJECTS @"t_projects"
 #define F_CODE @"f_code"
 #define F_LINK @"f_link"
+#define F_INPUT @"f_input"
 // F_LANG
 // F_NAME
 

@@ -25,7 +25,7 @@
 }
 
 -(void)createSubmission:(Project*)project run:(BOOL)run{
-    [service createSubmission:self action:@selector(createSubmissionHandler:) sourceCode:project.projCode language:project.projLanguage input:@"" run:run private:NO];
+    [service createSubmission:self action:@selector(createSubmissionHandler:) sourceCode:project.projCode language:project.projLanguage input:project.projInput run:run private:NO];
 }
 
 -(void)getLanguages{

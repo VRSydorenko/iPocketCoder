@@ -34,6 +34,7 @@
     [tProjects addField:F_NAME type:DBTYPE_TEXT notNull:YES];
     [tProjects addField:F_CODE type:DBTYPE_TEXT notNull:YES];
     [tProjects addField:F_LINK type:DBTYPE_TEXT notNull:NO];
+    [tProjects addField:F_INPUT type:DBTYPE_TEXT notNull:NO];
     [tables addObject:tProjects];
     
     DbTable* tSnippets = [[DbTable alloc] initWithTableName:T_SNIPPETS];

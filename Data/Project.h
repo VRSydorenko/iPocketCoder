@@ -15,11 +15,13 @@
 @property NSString* projCode;
 @property NSString* projName;
 @property NSString* projLink;
+@property NSString* projInput;
 
 -(id) initWithLanguage:(int)language name:(NSString*)name;
 
 -(void) setId:(int)iD;
 -(void) setCode:(NSString*)code;
 -(void) setLink:(NSString*)link;
+-(void) setInput:(NSString*)input;
 
 @end

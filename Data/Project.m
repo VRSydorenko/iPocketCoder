@@ -13,6 +13,7 @@
 @synthesize projId = _projId;
 @synthesize projLanguage, projCode, projName;
 @synthesize projLink  = _projLink;
+@synthesize projInput = _projInput;
 
 -(id) initWithLanguage:(int)language name:(NSString*)name{
     self = [super init];
@@ -22,6 +23,7 @@
         self.projCode = @"";
         self.projLink = @"";
         self.projId = -1;
+        self.projInput = @"";
     }
     return self;
 }
@@ -36,6 +38,10 @@
 
 -(void) setLink:(NSString*)link{
     self.projLink = link;
+}
+
+-(void) setInput:(NSString*)input{
+    self.projInput = input;
 }
 
 @end

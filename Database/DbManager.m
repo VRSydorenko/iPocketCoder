@@ -246,10 +246,10 @@
     NSString *logMsg = @"";
     
     if (exists){ // already exists so update
-        sql = [NSString stringWithFormat: @"UPDATE %@ SET %@ = ?, %@ = %d, %@ = ?, %@ = ? WHERE %@ =%d", T_PROJECTS, F_NAME, F_LANG, project.projLanguage, F_CODE, F_LINK, F_ID, exists.projId];
+        sql = [NSString stringWithFormat: @"UPDATE %@ SET %@ = ?, %@ = %d, %@ = ?, %@ = ?, %@ = ? WHERE %@ =%d", T_PROJECTS, F_NAME, F_LANG, project.projLanguage, F_CODE, F_LINK, F_INPUT, F_ID, exists.projId];
         logMsg = @"Project updated";
     } else { // doesnt exist so insert
-        sql = [NSString stringWithFormat: @"INSERT INTO %@ (%@, %@, %@, %@) VALUES (?, %d, ?, ?)", T_PROJECTS, F_NAME, F_LANG, F_CODE, F_LINK, project.projLanguage];
+        sql = [NSString stringWithFormat: @"INSERT INTO %@ (%@, %@, %@, %@, %@) VALUES (?, %d, ?, ?, ?)", T_PROJECTS, F_NAME, F_LANG, F_CODE, F_LINK, F_INPUT, project.projLanguage];
         logMsg = @"Project inserted";
     }
     const char *insert_stmt = [sql UTF8String];
@@ -259,6 +259,7 @@
         sqlite3_bind_text(statement, 1, [project.projName cStringUsingEncoding:NSUTF8StringEncoding], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 2, [project.projCode cStringUsingEncoding:NSUTF8StringEncoding], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 3, [project.projLink cStringUsingEncoding:NSUTF8StringEncoding], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 4, [project.projInput cStringUsingEncoding:NSUTF8StringEncoding], -1, SQLITE_TRANSIENT);
         
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
@@ -355,7 +356,7 @@
 }
 
 -(Project*) loadProject:(NSString*)name{
-    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@, %@, %@ FROM %@ WHERE %@=?", F_ID, F_LANG, F_CODE, F_LINK, T_PROJECTS, F_NAME];
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@, %@, %@, %@ FROM %@ WHERE %@=?", F_ID, F_LANG, F_CODE, F_LINK, F_INPUT, T_PROJECTS, F_NAME];
     const char *query_stmt = [querySQL UTF8String];
     
     Project* project = nil;
@@ -372,10 +373,13 @@
             
             NSString *linkField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 3)];
             
+            NSString *inputField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 4)];
+            
             project = [[Project alloc] initWithLanguage:language name:name];
             [project setId:iD];
             [project setCode:codeField];
             [project setLink:linkField];
+            [project setInput:inputField];
         } else {
             NSLog(@"Project not found in the database");
         }
