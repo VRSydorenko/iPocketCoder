@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BuildAnywhere/EditorVC.m"
-         timestampString = "383443378.931143"
+         timestampString = "383511094.701837"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "101"
-         endingLineNumber = "101"
+         startingLineNumber = "99"
+         endingLineNumber = "99"
          landmarkName = "-snippetsPressed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -82,15 +82,15 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BuildAnywhere/EditorVC.m"
-         timestampString = "383443377.553149"
+         timestampString = "383511094.701837"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "131"
-         endingLineNumber = "131"
+         startingLineNumber = "129"
+         endingLineNumber = "129"
          landmarkName = "-updateToolbarWithViewResultsButtonSucceeded:"
          landmarkType = "5">
       </FileBreakpoint>

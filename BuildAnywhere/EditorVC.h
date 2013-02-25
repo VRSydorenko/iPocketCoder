@@ -13,15 +13,17 @@
 #import "ResultsVC.h"
 #import "ideoneIdeone_Service_v1Service.h"
 #import "RunManager.h"
+#import "InputVC.h"
 
 @interface EditorVC : UIViewController<UITextViewDelegate,
-                                       IdeoneResponseProtocol>
+                                       IdeoneResponseProtocol,
+                                       InputUpdateDelegate>
 
 @property (nonatomic, weak) IBOutlet UITextView *textCode;
 @property (nonatomic, strong) IBOutlet UIView *accessoryView;
 
 @property (nonatomic) NSString* projectName;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *resultsItem;
+@property (strong, nonatomic) IBOutlet UIButton *btnHideKeyboard;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *flexItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *inputItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *runItem;

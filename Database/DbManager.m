@@ -159,6 +159,8 @@
     [symbols setObject:@")" forKey:@")"];
     [symbols setObject:@"[" forKey:@"["];
     [symbols setObject:@"]" forKey:@"]"];
+    [symbols setObject:@"<" forKey:@"<"];
+    [symbols setObject:@">" forKey:@">"];
     [symbols setObject:@";" forKey:@";"];
     [symbols setObject:@"@" forKey:@" @"]; // workaround
     [symbols setObject:@"-" forKey:@"-"];

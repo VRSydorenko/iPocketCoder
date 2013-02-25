@@ -117,7 +117,7 @@
                                 <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J2G-Fm-O6H">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J2G-Fm-O6H">
                                 <rect key="frame" x="283" y="5" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -158,17 +158,53 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="btnHideKeyboard" destination="J2G-Fm-O6H" id="q73-XS-49S"/>
                         <outlet property="flexItem" destination="R4z-7h-LrR" id="shj-Xv-mDT"/>
                         <outlet property="inputItem" destination="Ufy-J3-ylm" id="W9u-nw-maR"/>
                         <outlet property="runItem" destination="PlW-Hw-2CP" id="uVW-jh-71P"/>
                         <outlet property="textCode" destination="cJ0-L9-bxx" id="7v7-Tg-RvC"/>
                         <segue destination="nty-xO-3LV" kind="push" identifier="segueEditorToOutput" id="PAM-Ob-48Q"/>
                         <segue destination="nty-xO-3LV" kind="push" identifier="segueEditorToErrors" id="Yu7-fR-T0q"/>
+                        <segue destination="Nqh-Xw-h05" kind="push" identifier="segueEditorToInput" id="TPg-ee-sig"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MUC-Hm-gTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="898" y="-211"/>
+        </scene>
+        <!--InputVC - Program Input-->
+        <scene sceneID="YFx-tV-Bmm">
+            <objects>
+                <viewController storyboardIdentifier="" id="Nqh-Xw-h05" customClass="InputVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ft8-to-huA">
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="NrW-4A-7dJ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Program Input" id="5p4-F1-khu">
+                        <barButtonItem key="rightBarButtonItem" title="Clear" id="hkX-6U-w7K">
+                            <color key="tintColor" red="1" green="0.40000000596046448" blue="0.40000000596046448" alpha="0.5" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="clearPressed:" destination="Nqh-Xw-h05" id="Q3P-W1-1uE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textInput" destination="NrW-4A-7dJ" id="sd5-cn-J24"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y7h-f8-Fcu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="898" y="502"/>
         </scene>
         <!--ResultsVC - Results-->
         <scene sceneID="AnF-kR-cFc">
@@ -396,6 +432,24 @@
             </objects>
             <point key="canvasLocation" x="-94" y="-901"/>
         </scene>
+        <!--Main Nav Controller-->
+        <scene sceneID="FRP-ye-YYR">
+            <objects>
+                <navigationController storyboardIdentifier="screenInput" id="GTt-gA-Mqn" customClass="MainNavController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UGy-YP-PTY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Nqh-Xw-h05" kind="relationship" relationship="rootViewController" id="Ufh-j4-cFZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YXp-y3-Yjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="372" y="502"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -403,8 +457,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="3fe-fd-2Ee"/>
         <segue reference="Yu7-fR-T0q"/>
+        <segue reference="TPg-ee-sig"/>
         <segue reference="mEh-N2-dcu"/>
+        <segue reference="3fe-fd-2Ee"/>
     </inferredMetricsTieBreakers>
 </document>

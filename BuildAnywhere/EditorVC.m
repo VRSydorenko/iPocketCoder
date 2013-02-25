@@ -21,7 +21,6 @@
 @implementation EditorVC
 
 @synthesize projectName;
-@synthesize resultsItem = _resultsItem;
 
 - (void)viewDidLoad
 {
@@ -43,8 +42,6 @@
     
     navCon = (MainNavController*)self.navigationController;
     
-    self.resultsItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:nil];
-    
     runManager = [[RunManager alloc] init];
     runManager.handler = self;
    
@@ -59,7 +56,6 @@
         self.textCode.text = project.projCode;
         self.navigationItem.title = project.projName;
     }
-
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -68,6 +64,8 @@
 
 // iPhone
 -(void)backPressed{
+    project.projCode = self.textCode.text;
+    [project save];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -122,7 +120,7 @@
     self.runItem.enabled = !needed;
     [items addObject:self.runItem];
     
-    [self.navigationController.toolbar setItems:[[NSArray alloc] initWithArray:items]];
+    [self setToolbarItems:items animated:YES];
 }
 
 -(void) updateToolbarWithViewResultsButtonSucceeded:(BOOL)operationSucceeded{
@@ -130,19 +128,16 @@
     
     NSString* title = operationSucceeded ? @"View output" : @"View errors";
     SEL action = operationSucceeded ? @selector(viewOutput) : @selector(viewErrors);
-    self.resultsItem.title = title;
-    self.resultsItem.action = action;
-    [items addObject:self.resultsItem];
-    
+    [items addObject:[[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleBordered target:self action:action]];
+     
     [items addObject:self.flexItem];
     self.inputItem.enabled = YES;
     [items addObject:self.inputItem];
     self.runItem.enabled = YES;
     [items addObject:self.runItem];
     
-    [self.navigationController.toolbar setItems:[[NSArray alloc] initWithArray:items]];
+    [self setToolbarItems:[[NSArray alloc] initWithArray:items] animated:YES];
 }
-
 
 // iPhone
 - (IBAction)hideKeyboardPressed:(id)sender {
@@ -150,7 +145,39 @@
 }
 
 - (IBAction)inputPressed:(id)sender {
-    
+    if (IPAD){
+        if (popoverController){
+            if ([popoverController isPopoverVisible]){
+                [popoverController dismissPopoverAnimated:YES];
+                return;
+            }
+            popoverController = nil;
+        }
+        
+        MainNavController *inputVC = [[UIStoryboard storyboardWithName:@"iPhoneMain" bundle:nil] instantiateViewControllerWithIdentifier:@"screenInput"];
+        if (!inputVC){
+            return;
+        }
+        ((InputVC*)[inputVC.viewControllers objectAtIndex:0]).delegate = self;
+        
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:inputVC];
+        [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else {
+        [self performSegueWithIdentifier:@"segueEditorToInput" sender:self];
+    }
+}
+
+-(void) inputUpdatedFromController:(InputVC*)controller{
+    if (IPAD){
+        if (popoverController){
+            if ([popoverController isPopoverVisible]){
+                [popoverController dismissPopoverAnimated:YES];
+            }
+            popoverController = nil;
+        }
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)runPressed:(id)sender {
@@ -159,7 +186,7 @@
     
     [runManager createSubmission:project run:YES];
     
-    [self updateToolbarWithSpinner:YES statusText:@"Running..."];
+    [self updateToolbarWithSpinner:YES statusText:@"Processing..."];
 }
 
 -(void)viewErrors{
@@ -177,6 +204,10 @@
     } else if ([segue.identifier isEqualToString:@"segueEditorToErrors"]){
         ResultsVC* errorsVC = (ResultsVC*)segue.destinationViewController;
         errorsVC.errorMode = YES;
+    } else if ([segue.identifier isEqualToString:@"segueEditorToInput"]){
+        InputVC* inputVC = (InputVC*)segue.destinationViewController;
+        inputVC.project = project;
+        inputVC.delegate = self;
     }
 }
 
@@ -211,6 +242,7 @@
     [UIView setAnimationDuration:animationDuration];
     
     self.textCode.frame = newTextViewFrame;
+    self.btnHideKeyboard.hidden = NO;
     
     [UIView commitAnimations];
 }
@@ -225,6 +257,7 @@
     [UIView setAnimationDuration:animationDuration];
     
     self.textCode.frame = self.view.bounds;
+    self.btnHideKeyboard.hidden = YES;
     
     [UIView commitAnimations];
 }
@@ -312,8 +345,8 @@
         //check result in 2 sec
         [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkSubmissionState) userInfo:nil repeats:NO];
     } else {
-        [navCon showInfoBarWithNegativeMessage:@"Error occurred!"];
         [self updateToolbarWithViewResultsButtonSucceeded:NO];
+        [navCon showInfoBarWithNegativeMessage:@"Error occurred!"];
     }
 }
 -(void)checkSubmissionState{
@@ -323,12 +356,35 @@
 
 -(void)submissionStatusReceived:(int)status error:(int)error result:(int)result{
     if (error == OK){
-        if (result == SUCCESS || result == NOT_RUNNING){
-            [navCon showInfoBarWithPositiveMessage:@"Success!"];
-            [self updateToolbarWithViewResultsButtonSucceeded:YES];
+        if (status < 0){
+            [self updateToolbarWithSpinner:YES statusText:@"Awaiting processing..."];
+            //check result in 2 sec
+            [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkSubmissionState) userInfo:nil repeats:NO];
         } else {
-            [navCon showInfoBarWithNegativeMessage:@"Failure!"];
-            [self updateToolbarWithViewResultsButtonSucceeded:NO];
+            switch (status) {
+                case 0:{
+                    if (result == SUCCESS || result == NOT_RUNNING){
+                        [self updateToolbarWithViewResultsButtonSucceeded:YES];
+                        [navCon showInfoBarWithPositiveMessage:@"Success!"];
+                    } else {
+                        [self updateToolbarWithViewResultsButtonSucceeded:NO];
+                        [navCon showInfoBarWithNegativeMessage:@"Failure!"];
+                    }
+                    break;
+                }
+                case 1:{
+                    [self updateToolbarWithSpinner:YES statusText:@"Compiling..."];
+                    //check result in 2 sec
+                    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkSubmissionState) userInfo:nil repeats:NO];
+                    break;
+                }
+                case 3:{
+                    [self updateToolbarWithSpinner:YES statusText:@"Running..."];
+                    //check result in 2 sec
+                    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkSubmissionState) userInfo:nil repeats:NO];
+                    break;
+                }
+            }
         }
     }
 }
@@ -348,7 +404,10 @@
     [self setFlexItem:nil];
     [self setInputItem:nil];
     [self setRunItem:nil];
-    [self setResultsItem:nil];
 }
 
+- (void)viewDidUnload {
+    [self setBtnHideKeyboard:nil];
+    [super viewDidUnload];
+}
 @end
