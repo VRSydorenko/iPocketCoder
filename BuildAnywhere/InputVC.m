@@ -17,7 +17,6 @@
 @implementation InputVC
 
 @synthesize project = _project;
-@synthesize delegate = _delegate;
 
 - (void)viewDidLoad
 {
@@ -31,6 +30,7 @@
         [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
     
+    self.textInput.delegate = self;
     self.textInput.text = self.project.projInput;
 }
 
@@ -38,12 +38,18 @@
     self.textInput.text = @"";
 }
 
+//iPad
+-(void)textViewDidChange:(UITextView *)textView{
+    self.project.projInput = self.textInput.text;
+    [self.project save];
+}
+
 // iPhone
 -(void)backPressed{
     self.project.projInput = self.textInput.text;
     [self.project save];
     
-    [self.delegate inputUpdatedFromController:self];
+    [navCon popViewControllerAnimated:YES];
 }
 
 - (void)viewDidUnload {

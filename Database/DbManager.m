@@ -166,6 +166,7 @@
     [symbols setObject:@"-" forKey:@"-"];
     [symbols setObject:@"=" forKey:@"="];
     [symbols setObject:@"$" forKey:@"$"];
+    [symbols setObject:@"#" forKey:@"#"];
     [symbols setObject:@"*" forKey:@"*"];
     [symbols setObject:@"_" forKey:@"_"];
     [symbols setObject:@":" forKey:@":"];

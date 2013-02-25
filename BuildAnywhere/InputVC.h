@@ -11,15 +11,8 @@
 #import "MainNavController.h"
 #import "DataManager.h"
 
-@class InputVC;
+@interface InputVC : UIViewController<UITextViewDelegate>
 
-@protocol InputUpdateDelegate
--(void) inputUpdatedFromController:(InputVC*)controller;
-@end
-
-@interface InputVC : UIViewController
-
-@property (nonatomic) id<InputUpdateDelegate> delegate;
 @property (nonatomic) Project* project;
 @property (strong, nonatomic) IBOutlet UITextView *textInput;
 - (IBAction)clearPressed:(id)sender;

@@ -33,7 +33,7 @@
 }
 
 -(void)getSubmissionDetails:(NSString*)link{
-    [service getSubmissionDetails:self action:@selector(getSubmissionDetailsHandler:) link:link withSource:NO withInput:NO withOutput:NO withStderr:NO withCmpinfo:NO];
+    [service getSubmissionDetails:self action:@selector(getSubmissionDetailsHandler:) link:link withSource:NO withInput:NO withOutput:YES withStderr:NO withCmpinfo:YES];
 }
 
 -(void)getSubmissionStatus:(NSString*)link{
@@ -80,6 +80,19 @@
         return;
     }
     NSLog(@"%@", value);
+    
+    NSString* valueString = [(NSDictionary*)value objectForKey:@"return"];
+    
+    NSRange rangeCmpinfo = [valueString rangeOfString:@"cmpinfo"];
+    NSString* cmpinfo = [valueString substringFromIndex:NSMaxRange(rangeCmpinfo)];
+    
+    NSRange rangeRest = {0, rangeCmpinfo.location};
+    valueString = [valueString substringWithRange:rangeRest];
+    
+    NSRange rangeOutput = [valueString rangeOfString:@"output"];
+    NSString* output = [valueString substringFromIndex:NSMaxRange(rangeOutput)];
+    
+    [self.handler submissionDetailsReceived:output cmpinfo:cmpinfo];
 }
 
 - (void) getSubmissionStatusHandler:(id)value {

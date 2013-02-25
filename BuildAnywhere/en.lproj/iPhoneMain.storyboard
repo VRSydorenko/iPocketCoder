@@ -164,7 +164,6 @@
                         <outlet property="runItem" destination="PlW-Hw-2CP" id="uVW-jh-71P"/>
                         <outlet property="textCode" destination="cJ0-L9-bxx" id="7v7-Tg-RvC"/>
                         <segue destination="nty-xO-3LV" kind="push" identifier="segueEditorToOutput" id="PAM-Ob-48Q"/>
-                        <segue destination="nty-xO-3LV" kind="push" identifier="segueEditorToErrors" id="Yu7-fR-T0q"/>
                         <segue destination="Nqh-Xw-h05" kind="push" identifier="segueEditorToInput" id="TPg-ee-sig"/>
                     </connections>
                 </viewController>
@@ -190,6 +189,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Program Input" id="5p4-F1-khu">
                         <barButtonItem key="rightBarButtonItem" title="Clear" id="hkX-6U-w7K">
                             <color key="tintColor" red="1" green="0.40000000596046448" blue="0.40000000596046448" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -198,6 +198,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="textInput" destination="NrW-4A-7dJ" id="sd5-cn-J24"/>
                     </connections>
@@ -213,9 +214,36 @@
                     <view key="view" contentMode="scaleToFill" id="tcl-bK-z0O">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vwq-Ta-AJG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="0rL-aq-C8d"/>
+                        <barButtonItem title="Program output" id="rmK-Nc-QLK">
+                            <connections>
+                                <action selector="outputPressed:" destination="nty-xO-3LV" id="Inl-5n-kOZ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Compiler info" id="szE-5e-2Le">
+                            <connections>
+                                <action selector="cmpInfoPressed:" destination="nty-xO-3LV" id="LCh-Gl-Xan"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="lSW-z9-7M3"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Results" id="wsW-tV-k0b"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="textInfo" destination="vwq-Ta-AJG" id="Dur-fY-MOO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kea-mh-W5L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -457,7 +485,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Yu7-fR-T0q"/>
         <segue reference="TPg-ee-sig"/>
         <segue reference="mEh-N2-dcu"/>
         <segue reference="3fe-fd-2Ee"/>

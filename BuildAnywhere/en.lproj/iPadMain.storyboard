@@ -145,7 +145,6 @@
                         <outlet property="inputItem" destination="FjZ-OZ-Vjm" id="LrF-Bn-2Ja"/>
                         <outlet property="runItem" destination="bCj-6I-Ymr" id="0QI-W3-3qJ"/>
                         <outlet property="textCode" destination="Tjz-im-6oc" id="SvU-1E-MkO"/>
-                        <segue destination="Xtv-gt-Xyr" kind="push" identifier="segueEditorToErrors" id="RWz-Yf-wO1"/>
                         <segue destination="Xtv-gt-Xyr" kind="push" identifier="segueEditorToOutput" id="S8d-BY-6Iu"/>
                     </connections>
                 </viewController>
@@ -160,9 +159,36 @@
                     <view key="view" contentMode="scaleToFill" id="Qhp-cC-BPe">
                         <rect key="frame" x="0.0" y="64" width="768" height="916"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="GeQ-We-M2b">
+                                <rect key="frame" x="20" y="20" width="728" height="876"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ZCX-ij-yG5"/>
+                        <barButtonItem title="Program output" id="Ja5-Wk-fhp">
+                            <connections>
+                                <action selector="outputPressed:" destination="Xtv-gt-Xyr" id="oAj-C3-rbm"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Compiler info" id="TXB-mZ-DfZ">
+                            <connections>
+                                <action selector="cmpInfoPressed:" destination="Xtv-gt-Xyr" id="Z3C-ik-uqu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="E5k-6c-Wsk"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Results" id="D8U-Yr-zZK"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="textInfo" destination="GeQ-We-M2b" id="DgZ-Ad-msz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUG-8e-DEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -174,7 +200,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="S8d-BY-6Iu"/>
-    </inferredMetricsTieBreakers>
 </document>

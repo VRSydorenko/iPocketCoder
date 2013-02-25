@@ -11,6 +11,11 @@
 
 @interface ResultsVC : UIViewController
 
-@property (nonatomic) BOOL errorMode;
+@property (nonatomic) NSString* cmpInfo;
+@property (nonatomic) NSString* output;
+@property (strong, nonatomic) IBOutlet UITextView *textInfo;
+
+- (IBAction)cmpInfoPressed:(id)sender;
+- (IBAction)outputPressed:(id)sender;
 
 @end

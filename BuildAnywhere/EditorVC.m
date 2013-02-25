@@ -14,7 +14,11 @@
     MainNavController* navCon;
     NSDictionary* quickSymbols;
     RunManager* runManager;
-    BOOL operationInProgress;
+    BOOL detailsRequested;
+    BOOL showResultsOnArrive;
+    
+    NSString* lastCmpInfo;
+    NSString* lastOutput;
 }
 @end
 
@@ -45,7 +49,8 @@
     runManager = [[RunManager alloc] init];
     runManager.handler = self;
    
-    operationInProgress = NO;
+    detailsRequested = NO;
+    showResultsOnArrive = NO;
     
     if (!IPAD){ // to save more space on navigation bar 
         [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
@@ -123,12 +128,10 @@
     [self setToolbarItems:items animated:YES];
 }
 
--(void) updateToolbarWithViewResultsButtonSucceeded:(BOOL)operationSucceeded{
+-(void) updateToolbarWithViewResultsButton{
     NSMutableArray *items = [[NSMutableArray alloc] init];
     
-    NSString* title = operationSucceeded ? @"View output" : @"View errors";
-    SEL action = operationSucceeded ? @selector(viewOutput) : @selector(viewErrors);
-    [items addObject:[[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleBordered target:self action:action]];
+    [items addObject:[[UIBarButtonItem alloc] initWithTitle:@"View results" style:UIBarButtonItemStyleBordered target:self action:@selector(viewOutput)]];
      
     [items addObject:self.flexItem];
     self.inputItem.enabled = YES;
@@ -158,25 +161,12 @@
         if (!inputVC){
             return;
         }
-        ((InputVC*)[inputVC.viewControllers objectAtIndex:0]).delegate = self;
+        ((InputVC*)[inputVC.viewControllers objectAtIndex:0]).project = project;
         
         popoverController = [[UIPopoverController alloc] initWithContentViewController:inputVC];
         [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else {
         [self performSegueWithIdentifier:@"segueEditorToInput" sender:self];
-    }
-}
-
--(void) inputUpdatedFromController:(InputVC*)controller{
-    if (IPAD){
-        if (popoverController){
-            if ([popoverController isPopoverVisible]){
-                [popoverController dismissPopoverAnimated:YES];
-            }
-            popoverController = nil;
-        }
-    } else {
-        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -189,25 +179,24 @@
     [self updateToolbarWithSpinner:YES statusText:@"Processing..."];
 }
 
--(void)viewErrors{
-    [self performSegueWithIdentifier:@"segueEditorToErrors" sender:self];
-}
-
 -(void)viewOutput{
-    [self performSegueWithIdentifier:@"segueEditorToOutput" sender:self];
+    if (detailsRequested){
+        [self updateToolbarWithSpinner:YES statusText:@"Working..."];
+        showResultsOnArrive = YES;
+    } else {
+        [self performSegueWithIdentifier:@"segueEditorToOutput" sender:self];
+        showResultsOnArrive = NO;
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"segueEditorToOutput"]){
         ResultsVC* outputVC = (ResultsVC*)segue.destinationViewController;
-        outputVC.errorMode = NO;
-    } else if ([segue.identifier isEqualToString:@"segueEditorToErrors"]){
-        ResultsVC* errorsVC = (ResultsVC*)segue.destinationViewController;
-        errorsVC.errorMode = YES;
+        outputVC.output = lastOutput;
+        outputVC.cmpInfo = lastCmpInfo;
     } else if ([segue.identifier isEqualToString:@"segueEditorToInput"]){
         InputVC* inputVC = (InputVC*)segue.destinationViewController;
         inputVC.project = project;
-        inputVC.delegate = self;
     }
 }
 
@@ -345,7 +334,7 @@
         //check result in 2 sec
         [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkSubmissionState) userInfo:nil repeats:NO];
     } else {
-        [self updateToolbarWithViewResultsButtonSucceeded:NO];
+        [self updateToolbarWithViewResultsButton];
         [navCon showInfoBarWithNegativeMessage:@"Error occurred!"];
     }
 }
@@ -364,12 +353,13 @@
             switch (status) {
                 case 0:{
                     if (result == SUCCESS || result == NOT_RUNNING){
-                        [self updateToolbarWithViewResultsButtonSucceeded:YES];
                         [navCon showInfoBarWithPositiveMessage:@"Success!"];
                     } else {
-                        [self updateToolbarWithViewResultsButtonSucceeded:NO];
                         [navCon showInfoBarWithNegativeMessage:@"Failure!"];
                     }
+                    [runManager getSubmissionDetails:project.projLink];
+                    [self updateToolbarWithViewResultsButton];
+                    detailsRequested = YES;
                     break;
                 }
                 case 1:{
@@ -388,8 +378,16 @@
         }
     }
 }
--(void)submissionDetailsReceived{
+-(void)submissionDetailsReceived:(NSString*)output cmpinfo:(NSString*)cmpinfo{
+    lastCmpInfo = cmpinfo;
+    lastOutput = output;
     
+    detailsRequested = NO;
+    
+    [self updateToolbarWithViewResultsButton];
+    if (showResultsOnArrive){
+        [self viewOutput];
+    }
 }
 -(void)testResponseReceived{
     
