@@ -324,6 +324,8 @@
     
     [text replaceCharactersInRange:selectedRange withString:content];
     self.textCode.text = text;
+    NSRange newSelectedRange = {selectedRange.location + content.length, 0};
+    self.textCode.selectedRange = newSelectedRange;
 }
 
 -(void)submissionCreatedWithError:(int)errorCode andLink:(NSString*)link{
