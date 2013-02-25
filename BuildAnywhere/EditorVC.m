@@ -83,6 +83,9 @@
             }
             popoverController = nil;
         }
+        
+        project.projCode = self.textCode.text;
+        [project save];
     }
 }
 
@@ -100,7 +103,9 @@
         if (!snippetsMainVC){
             return;
         }
-        ((SnippetsVC*)[snippetsMainVC.viewControllers objectAtIndex:0]).language = project.projLanguage;
+        SnippetsVC* snippetsVC = ((SnippetsVC*)[snippetsMainVC.viewControllers objectAtIndex:0]);
+        snippetsVC.language = project.projLanguage;
+        snippetsVC.delegate = self;
         
         popoverController = [[UIPopoverController alloc] initWithContentViewController:snippetsMainVC];
         [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -197,6 +202,10 @@
     } else if ([segue.identifier isEqualToString:@"segueEditorToInput"]){
         InputVC* inputVC = (InputVC*)segue.destinationViewController;
         inputVC.project = project;
+    } else if ([segue.identifier isEqualToString:@"segueEditorToSnippets"]){
+        SnippetsVC* snippetsVC = (SnippetsVC*)segue.destinationViewController;
+        snippetsVC.language = project.projLanguage;
+        snippetsVC.delegate = self;
     }
 }
 
@@ -311,6 +320,21 @@
                                           
 }
 
+-(void)snippetSelected:(NSString*)code{
+    if (IPAD){
+        if (popoverController){
+            if ([popoverController isPopoverVisible]){
+                [popoverController dismissPopoverAnimated:YES];
+            }
+            popoverController = nil;
+        }
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+    [self insertTextInEditor:code];
+}
+
 - (IBAction)accessoryButtonPressed:(UIGestureRecognizer*)gestureRecognizer {
     UILabel* accessoryButton = (UILabel*)gestureRecognizer.view;
     if (!accessoryButton){
@@ -318,14 +342,22 @@
     }
     
     NSString* content = (NSString*)[quickSymbols objectForKey:[NSNumber numberWithInt:accessoryButton.tag]];
-        
+    [self insertTextInEditor:content];
+}
+
+-(void)insertTextInEditor:(NSString*)content{
     NSMutableString *text = [self.textCode.text mutableCopy];
-    NSRange selectedRange = self.textCode.selectedRange;
     
-    [text replaceCharactersInRange:selectedRange withString:content];
-    self.textCode.text = text;
-    NSRange newSelectedRange = {selectedRange.location + content.length, 0};
-    self.textCode.selectedRange = newSelectedRange;
+    @try {
+        NSRange selectedRange = self.textCode.selectedRange;
+        [text replaceCharactersInRange:selectedRange withString:content];
+        self.textCode.text = text;
+        NSRange newSelectedRange = {selectedRange.location + content.length, 0};
+        self.textCode.selectedRange = newSelectedRange;
+    }
+    @catch (NSException *exception) {
+        self.textCode.text = [self.textCode.text stringByAppendingString:content];
+    }
 }
 
 -(void)submissionCreatedWithError:(int)errorCode andLink:(NSString*)link{

@@ -13,7 +13,7 @@
 @class NewProjectVC;
 
 @protocol NewProjectCreationDelegate
--(void) newProjectCreationFinished:(BOOL)projectCreated fromController:(NewProjectVC*)controller;
+-(void) newProjectCreationFinished:(BOOL)projectCreated;
 @end
 
 @interface NewProjectVC : UIViewController<UITableViewDataSource,

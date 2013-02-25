@@ -69,6 +69,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (snippets.count >= indexPath.row+1){
+        [self.delegate snippetSelected:[snippets objectAtIndex:indexPath.row]];
+    }
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

@@ -103,7 +103,7 @@
     }
 }
 
--(void) newProjectCreationFinished:(BOOL)projectCreated fromController:(NewProjectVC*)controller{
+-(void) newProjectCreationFinished:(BOOL)projectCreated{
     if (IPAD){
         if (popoverController){
             if ([popoverController isPopoverVisible]){

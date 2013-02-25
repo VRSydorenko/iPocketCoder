@@ -109,7 +109,7 @@
     int language = ((NSNumber*)[languages.allValues objectAtIndex:selectedPath.row]).intValue;
     Project* newProject = [[Project alloc] initWithLanguage:language name:self.textName.text];
     [DataManager saveProject:newProject];
-    [self.delegate newProjectCreationFinished:YES fromController:self];
+    [self.delegate newProjectCreationFinished:YES];
 }
 
 -(void)backPressed{

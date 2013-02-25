@@ -202,6 +202,10 @@
     sqlite3_finalize(statement);
 }
 
+-(void) initInitialSnippets{
+    
+}
+
 // public methods
 -(NSDictionary*) getLanguages{ // key: name, value:language
     NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@ FROM %@", F_NAME, F_LANG, T_LANGS];

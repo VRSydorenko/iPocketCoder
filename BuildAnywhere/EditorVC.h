@@ -16,7 +16,8 @@
 #import "InputVC.h"
 
 @interface EditorVC : UIViewController<UITextViewDelegate,
-                                       IdeoneResponseProtocol>
+                                       IdeoneResponseProtocol,
+                                       SnippetSelectionDelegate>
 
 @property (nonatomic, weak) IBOutlet UITextView *textCode;
 @property (nonatomic, strong) IBOutlet UIView *accessoryView;

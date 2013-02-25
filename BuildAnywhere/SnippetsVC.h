@@ -12,10 +12,17 @@
 #import "DataManager.h"
 #import "NewSnippetVC.h"
 
+@class SnippetsVC;
+
+@protocol SnippetSelectionDelegate <NSObject>
+-(void)snippetSelected:(NSString*)code;
+@end
+
 @interface SnippetsVC : UIViewController<UITableViewDataSource,
                                          UITableViewDelegate,
                                          NewSnippetCreationDelegate>
 
+@property (nonatomic) id<SnippetSelectionDelegate> delegate;
 @property (nonatomic) int language;
 @property (strong, nonatomic) IBOutlet UITableView *tableSnippets;
 
