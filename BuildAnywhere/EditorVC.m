@@ -13,12 +13,15 @@
     UIPopoverController* popoverController;
     MainNavController* navCon;
     NSDictionary* quickSymbols;
+    RunManager* runManager;
+    BOOL operationInProgress;
 }
 @end
 
 @implementation EditorVC
 
 @synthesize projectName;
+@synthesize resultsItem = _resultsItem;
 
 - (void)viewDidLoad
 {
@@ -40,12 +43,23 @@
     
     navCon = (MainNavController*)self.navigationController;
     
+    self.resultsItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:nil];
+    
+    runManager = [[RunManager alloc] init];
+    runManager.handler = self;
+   
+    operationInProgress = NO;
+    
     if (!IPAD){ // to save more space on navigation bar 
         [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
     
     project = self.projectName.length > 0 ? [DataManager loadProject:self.projectName] : nil;
-    self.navigationItem.title = project.projName;
+    if (project){
+        self.textCode.text = project.projCode;
+        self.navigationItem.title = project.projName;
+    }
+
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -103,26 +117,26 @@
         [items addObject:textItem];
     }
     [items addObject:self.flexItem];
-    self.compileItem.enabled = NO;
-    [items addObject:self.compileItem];
-    self.runItem.enabled = NO;
+    self.inputItem.enabled = !needed;
+    [items addObject:self.inputItem];
+    self.runItem.enabled = !needed;
     [items addObject:self.runItem];
     
     [self.navigationController.toolbar setItems:[[NSArray alloc] initWithArray:items]];
 }
 
--(void) updateToolbarWithViewResultsButton:(BOOL)operationSucceeded{
+-(void) updateToolbarWithViewResultsButtonSucceeded:(BOOL)operationSucceeded{
     NSMutableArray *items = [[NSMutableArray alloc] init];
     
     NSString* title = operationSucceeded ? @"View output" : @"View errors";
     SEL action = operationSucceeded ? @selector(viewOutput) : @selector(viewErrors);
-    
-    UIBarButtonItem *btnItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleBordered target:self action:action];
-    [items addObject:btnItem];
+    self.resultsItem.title = title;
+    self.resultsItem.action = action;
+    [items addObject:self.resultsItem];
     
     [items addObject:self.flexItem];
-    self.compileItem.enabled = YES;
-    [items addObject:self.compileItem];
+    self.inputItem.enabled = YES;
+    [items addObject:self.inputItem];
     self.runItem.enabled = YES;
     [items addObject:self.runItem];
     
@@ -135,20 +149,25 @@
     [self textViewShouldEndEditing:self.textCode];
 }
 
-- (IBAction)compilePressed:(id)sender {
-    [self updateToolbarWithSpinner:YES statusText:@"Compiling..."];
+- (IBAction)inputPressed:(id)sender {
+    
 }
 
 - (IBAction)runPressed:(id)sender {
+    project.projCode = self.textCode.text;
+    [project save];
+    
+    [runManager createSubmission:project run:YES];
+    
     [self updateToolbarWithSpinner:YES statusText:@"Running..."];
 }
 
 -(void)viewErrors{
-    [navCon performSegueWithIdentifier:@"segueEditorToErrors" sender:self];
+    [self performSegueWithIdentifier:@"segueEditorToErrors" sender:self];
 }
 
 -(void)viewOutput{
-    [navCon performSegueWithIdentifier:@"segueEditorToOutput" sender:self];
+    [self performSegueWithIdentifier:@"segueEditorToOutput" sender:self];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -285,11 +304,51 @@
     self.textCode.text = text;
 }
 
+-(void)submissionCreatedWithError:(int)errorCode andLink:(NSString*)link{
+    if (errorCode == OK){
+        [project setLink:link];
+        [project save];
+    
+        //check result in 2 sec
+        [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkSubmissionState) userInfo:nil repeats:NO];
+    } else {
+        [navCon showInfoBarWithNegativeMessage:@"Error occurred!"];
+        [self updateToolbarWithViewResultsButtonSucceeded:NO];
+    }
+}
+-(void)checkSubmissionState{
+    [runManager getSubmissionStatus:project.projLink];
+    NSLog(@"check submission status called");
+}
+
+-(void)submissionStatusReceived:(int)status error:(int)error result:(int)result{
+    if (error == OK){
+        if (result == SUCCESS || result == NOT_RUNNING){
+            [navCon showInfoBarWithPositiveMessage:@"Success!"];
+            [self updateToolbarWithViewResultsButtonSucceeded:YES];
+        } else {
+            [navCon showInfoBarWithNegativeMessage:@"Failure!"];
+            [self updateToolbarWithViewResultsButtonSucceeded:NO];
+        }
+    }
+}
+-(void)submissionDetailsReceived{
+    
+}
+-(void)testResponseReceived{
+    
+}
+-(void)errorOccurred{
+    [self updateToolbarWithSpinner:NO statusText:@""];
+    [navCon showInfoBarWithNegativeMessage:@"Service error"];
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:nil];
     [self setFlexItem:nil];
-    [self setCompileItem:nil];
+    [self setInputItem:nil];
     [self setRunItem:nil];
+    [self setResultsItem:nil];
 }
 
 @end

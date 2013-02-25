@@ -31,4 +31,9 @@
     }
 }
 
+// iPhone
+-(void)backPressed{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end

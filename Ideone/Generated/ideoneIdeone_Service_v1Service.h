@@ -5,7 +5,17 @@
 */
 				
 #import "Soap.h"
-	
+
+@protocol IdeoneResponseProtocol <NSObject>
+
+-(void)submissionCreatedWithError:(int)errorCode andLink:(NSString*)link;
+-(void)submissionStatusReceived:(int)status error:(int)error result:(int)result;
+-(void)submissionDetailsReceived;
+-(void)testResponseReceived;
+-(void)errorOccurred;
+
+@end
+
 /* Interface for the service */
 				
 @interface ideoneIdeone_Service_v1Service : SoapService

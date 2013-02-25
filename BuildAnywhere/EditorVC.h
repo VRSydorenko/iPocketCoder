@@ -11,19 +11,23 @@
 #import "DataManager.h"
 #import "SnippetsVC.h"
 #import "ResultsVC.h"
+#import "ideoneIdeone_Service_v1Service.h"
+#import "RunManager.h"
 
-@interface EditorVC : UIViewController<UITextViewDelegate>
+@interface EditorVC : UIViewController<UITextViewDelegate,
+                                       IdeoneResponseProtocol>
 
 @property (nonatomic, weak) IBOutlet UITextView *textCode;
 @property (nonatomic, strong) IBOutlet UIView *accessoryView;
 
 @property (nonatomic) NSString* projectName;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *resultsItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *flexItem;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *compileItem;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *inputItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *runItem;
 - (IBAction)snippetsPressed:(id)sender;
 - (IBAction)hideKeyboardPressed:(id)sender;
-- (IBAction)compilePressed:(id)sender;
+- (IBAction)inputPressed:(id)sender;
 - (IBAction)runPressed:(id)sender;
 
 @end

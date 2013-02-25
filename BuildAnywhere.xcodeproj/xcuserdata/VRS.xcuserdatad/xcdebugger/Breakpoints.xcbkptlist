@@ -34,12 +34,64 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BuildAnywhere/EditorVC.m"
-         timestampString = "383426428.659012"
+         timestampString = "383443378.931143"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "94"
-         endingLineNumber = "94"
-         landmarkName = "-updateToolbarWithSpinner:statusText:"
+         startingLineNumber = "101"
+         endingLineNumber = "101"
+         landmarkName = "-snippetsPressed:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Data/RunManager.m"
+         timestampString = "383441536.220761"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "68"
+         endingLineNumber = "68"
+         landmarkName = "-createSubmissionHandler:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Data/RunManager.m"
+         timestampString = "383441560.000235"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "108"
+         endingLineNumber = "108"
+         landmarkName = "-getSubmissionStatusHandler:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Data/RunManager.m"
+         timestampString = "383442385.640692"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
+         landmarkName = "-getSubmissionStatusHandler:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BuildAnywhere/EditorVC.m"
+         timestampString = "383443377.553149"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "131"
+         endingLineNumber = "131"
+         landmarkName = "-updateToolbarWithViewResultsButtonSucceeded:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

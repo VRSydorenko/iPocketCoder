@@ -121,9 +121,9 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="84X-rA-Afj"/>
-                        <barButtonItem title="Compile" id="FjZ-OZ-Vjm">
+                        <barButtonItem title="Input (stdin)" id="FjZ-OZ-Vjm">
                             <connections>
-                                <action selector="compilePressed:" destination="aI8-wJ-ZcF" id="NSB-iV-rcG"/>
+                                <action selector="inputPressed:" destination="aI8-wJ-ZcF" id="eAJ-xF-3ur"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem title="Run" id="bCj-6I-Ymr">
@@ -141,8 +141,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="compileItem" destination="FjZ-OZ-Vjm" id="Hbi-YX-5vH"/>
                         <outlet property="flexItem" destination="84X-rA-Afj" id="Nh7-0E-8Cn"/>
+                        <outlet property="inputItem" destination="FjZ-OZ-Vjm" id="LrF-Bn-2Ja"/>
                         <outlet property="runItem" destination="bCj-6I-Ymr" id="0QI-W3-3qJ"/>
                         <outlet property="textCode" destination="Tjz-im-6oc" id="SvU-1E-MkO"/>
                         <segue destination="Xtv-gt-Xyr" kind="push" identifier="segueEditorToErrors" id="RWz-Yf-wO1"/>

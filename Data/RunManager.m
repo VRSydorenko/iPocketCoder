@@ -25,7 +25,7 @@
 }
 
 -(void)createSubmission:(Project*)project run:(BOOL)run{
-    [service createSubmission:self action:@selector(createSubmissionHandler:) sourceCode:project.projCode language:project.projLanguage input:project.projInput run:run private:NO];
+    [service createSubmission:self action:@selector(createSubmissionHandler:) sourceCode:[self wrapCode:project.projCode] language:project.projLanguage input:project.projInput run:run private:NO];
 }
 
 -(void)getLanguages{
@@ -47,96 +47,128 @@
 // handlers
 
 - (void) createSubmissionHandler:(id)value {
-	// Handle errors
-	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"%@", value);
-		return;
-	}
+	if ([self isError:value]){
+        return;
+    }
     
-	// Handle faults
-	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"%@", value);
-		return;
-	}
+    NSLog(@"%@", value);
     
-	// Do something with the ideoneArray* result
-	//	ideoneArray* result = (ideoneArray*)value;
-	//NSLog(@"createSubmission returned the value: %@", result);
+    NSString* valueString = [(NSDictionary*)value objectForKey:@"return"];
+    
+    NSRange rangeLink = [valueString rangeOfString:@"link"];
+    NSString *link = [valueString substringFromIndex:NSMaxRange(rangeLink)];
+    
+    NSRange rangeRest = {0, rangeLink.location};
+    valueString = [valueString substringWithRange:rangeRest];
+    
+    NSRange rangeError = [valueString rangeOfString:@"error"];
+    NSString* error = [valueString substringFromIndex:NSMaxRange(rangeError)];
+    ErrorCodes errorCode = [self stringToErrorCode:error];
+    
+    [self.handler submissionCreatedWithError:errorCode andLink:link];
 }
 
 - (void) getLanguagesHandler:(id)value {
-    
-	// Handle errors
-	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"%@", value);
-		return;
-	}
-    
-	// Handle faults
-	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"%@", value);
-		return;
-	}
-    
-	// Do something with the ideoneArray* result
-	//	ideoneArray* result = (ideoneArray*)value;
-	NSLog(@"getLanguages returned the value: %@", value);
+    if ([self isError:value]){
+        return;
+    }
+    NSLog(@"%@", value);
 }
 
 - (void) getSubmissionDetailsHandler:(id)value {
-	// Handle errors
-	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"%@", value);
-		return;
-	}
-    
-	// Handle faults
-	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"%@", value);
-		return;
-	}
-
-	// Do something with the ideoneArray* result
-	//	ideoneArray* result = (ideoneArray*)value;
-	NSLog(@"getSubmissionDetails returned the value: %@", value);
+	if ([self isError:value]){
+        return;
+    }
+    NSLog(@"%@", value);
 }
 
 - (void) getSubmissionStatusHandler:(id)value {
+    if ([self isError:value]){
+        return;
+    }
     
-	// Handle errors
-	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"%@", value);
-		return;
-	}
+    NSString* valueString = [(NSDictionary*)value objectForKey:@"return"];
     
-	// Handle faults
-	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"%@", value);
-		return;
-	}
+    NSRange rangeResult = [valueString rangeOfString:@"result"];
+    int result = [valueString substringFromIndex:NSMaxRange(rangeResult)].intValue;
     
-	// Do something with the ideoneArray* result
-	//	ideoneArray* result = (ideoneArray*)value;
-	NSLog(@"getSubmissionStatus returned the value: %@", value);
+    NSRange rangeRest = {0, rangeResult.location};
+    valueString = [valueString substringWithRange:rangeRest];
+    
+    NSRange rangeStatus = [valueString rangeOfString:@"status"];
+    int status = [valueString substringFromIndex:NSMaxRange(rangeStatus)].intValue;
+    
+    NSRange rangeRest2 = {0, rangeStatus.location};
+    valueString = [valueString substringWithRange:rangeRest2];
+    
+    NSRange rangeError = [valueString rangeOfString:@"error"];
+    NSString* error = [valueString substringFromIndex:NSMaxRange(rangeError)];
+    ErrorCodes errorCode = [self stringToErrorCode:error];
+    
+    [self.handler submissionStatusReceived:status error:errorCode result:result];
 }
 
 
-- (void) testFunctionHandler: (id) value {
+- (void) testFunctionHandler:(id)value {
+    if ([self isError:value]){
+        return;
+    }
+    NSLog(@"%@", value);
+}
+
+-(BOOL)isError:(id)value{
     // Handle errors
 	if([value isKindOfClass:[NSError class]]) {
 		NSLog(@"%@", value);
-		return;
+		return YES;
 	}
     
 	// Handle faults
 	if([value isKindOfClass:[SoapFault class]]) {
 		NSLog(@"%@", value);
-		return;
+		return YES;
 	}
-        
-	// Do something with the ideoneArray* result
-	//	ideoneArray* result = (ideoneArray*)value;
-	NSLog(@"testFunction returned the value: %@", value);
+    return NO;
+}
+
+-(NSString*)wrapCode:(NSString*)code{
+    return [NSString stringWithFormat:@"<![CDATA[%@]]>", code];
+}
+
+-(NSString*)getErrorDescription:(ErrorCodes)error{
+    switch (error) {
+        case OK:
+            return @"OK";
+        case AUTH_ERROR:
+            return @"User name or user's password are invalid";
+        case PASTE_NOT_FOUND:
+            return @"Paste with specified link could not be found";
+        case WRONG_LANG_ID:
+            return @"Language with specified id does not exist";
+        case ACCESS_DENIED:
+            return @"Access to the resource id denied for the specified user";
+        case CANNOT_SUBMIT_THIS_MONTH_ANYMORE:
+            return @"You have reached a monthly limit";
+        case UNDEFINED:
+            return @"Unknown error";
+    }
+    return @"";
+}
+-(ErrorCodes)stringToErrorCode:(NSString*)string{
+    if ([string isEqualToString:@"OK"]){
+        return OK;
+    } else if ([string isEqualToString:@"AUTH_ERROR"]){
+        return AUTH_ERROR;
+    } else if ([string isEqualToString:@"PASTE_NOT_FOUND"]){
+        return PASTE_NOT_FOUND;
+    } else if ([string isEqualToString:@"WRONG_LANG_ID"]){
+        return WRONG_LANG_ID;
+    } else if ([string isEqualToString:@"ACCESS_DENIED"]){
+        return ACCESS_DENIED;
+    } else if ([string isEqualToString:@"CANNOT_SUBMIT_THIS_MONTH_ANYMORE"]){
+        return CANNOT_SUBMIT_THIS_MONTH_ANYMORE;
+    }
+    return UNDEFINED;
 }
 
 @end

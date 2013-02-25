@@ -24,4 +24,6 @@
 -(void) setLink:(NSString*)link;
 -(void) setInput:(NSString*)input;
 
+-(void)save;
+
 @end

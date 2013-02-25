@@ -7,6 +7,7 @@
 //
 
 #import "Project.h"
+#import "DataManager.h"
 
 @implementation Project
 
@@ -42,6 +43,10 @@
 
 -(void) setInput:(NSString*)input{
     self.projInput = input;
+}
+
+-(void)save{
+    [DataManager saveProject:self];
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "DataManager.h"
 #import "NewProjectVC.h"
 #import "EditorVC.h"
+#import "ProjectCell.h"
 
 @interface MainVC : UIViewController<UICollectionViewDataSource,
                                      UICollectionViewDelegate,

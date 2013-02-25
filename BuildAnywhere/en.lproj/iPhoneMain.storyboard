@@ -137,9 +137,9 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="R4z-7h-LrR"/>
-                        <barButtonItem title="Compile" id="Ufy-J3-ylm">
+                        <barButtonItem title="Input (stdin)" id="Ufy-J3-ylm">
                             <connections>
-                                <action selector="compilePressed:" destination="Esg-49-CC9" id="ANH-sK-JaT"/>
+                                <action selector="inputPressed:" destination="Esg-49-CC9" id="Uw5-Cx-BY1"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem title="Run" id="PlW-Hw-2CP">
@@ -158,8 +158,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="compileItem" destination="Ufy-J3-ylm" id="ufB-Qo-TT3"/>
                         <outlet property="flexItem" destination="R4z-7h-LrR" id="shj-Xv-mDT"/>
+                        <outlet property="inputItem" destination="Ufy-J3-ylm" id="W9u-nw-maR"/>
                         <outlet property="runItem" destination="PlW-Hw-2CP" id="uVW-jh-71P"/>
                         <outlet property="textCode" destination="cJ0-L9-bxx" id="7v7-Tg-RvC"/>
                         <segue destination="nty-xO-3LV" kind="push" identifier="segueEditorToOutput" id="PAM-Ob-48Q"/>
@@ -404,7 +404,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="3fe-fd-2Ee"/>
+        <segue reference="Yu7-fR-T0q"/>
         <segue reference="mEh-N2-dcu"/>
-        <segue reference="PAM-Ob-48Q"/>
     </inferredMetricsTieBreakers>
 </document>

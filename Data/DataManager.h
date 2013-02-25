@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
 #import "Utils.h"
-#import "ProjectCell.h"
+#import "Project.h"
+#import "Snippet.h"
 
 @interface DataManager : NSObject
 
