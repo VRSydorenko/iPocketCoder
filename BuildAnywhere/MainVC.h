@@ -14,7 +14,8 @@
 
 @interface MainVC : UIViewController<UICollectionViewDataSource,
                                      UICollectionViewDelegate,
-                                     NewProjectCreationDelegate>
+                                     NewProjectCreationDelegate,
+                                     ProjectDeletionProtocol>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionProjects;
 @property (strong, nonatomic) IBOutlet UILabel *labelHeader;

@@ -51,6 +51,7 @@
     NSString *projectName = [projectBasicData.allKeys objectAtIndex:indexPath.row];
     int projectLanguage = ((NSNumber*)[projectBasicData objectForKey:projectName]).intValue;
 
+    cell.delegate = self;
     cell.labelProjectName.text = projectName;
     cell.labelProjectLanguage.text =  [DataManager getLanguageName:projectLanguage];
     
@@ -118,6 +119,10 @@
     if (projectCreated){
         [self updateData];
     }
+}
+
+-(void)projectDeleted{
+    [self updateData];
 }
 
 - (void)dealloc {
