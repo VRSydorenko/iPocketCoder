@@ -74,6 +74,8 @@
 		7FC3216F16D82A3800AA6123 /* QuickSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3216E16D82A3800AA6123 /* QuickSymbol.m */; };
 		7FCA8DEA16D56C8B00DA15FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */; };
 		7FD10ADC16DBD1E100253B15 /* InputVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FD10ADB16DBD1E100253B15 /* InputVC.m */; };
+		7FDC830B16DD2D98005596C8 /* kb.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FDC830916DD2D98005596C8 /* kb.png */; };
+		7FDC830C16DD2D98005596C8 /* kb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FDC830A16DD2D98005596C8 /* kb@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -202,6 +204,8 @@
 		7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7FD10ADA16DBD1E100253B15 /* InputVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputVC.h; sourceTree = "<group>"; };
 		7FD10ADB16DBD1E100253B15 /* InputVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputVC.m; sourceTree = "<group>"; };
+		7FDC830916DD2D98005596C8 /* kb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kb.png; sourceTree = "<group>"; };
+		7FDC830A16DD2D98005596C8 /* kb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kb@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -451,6 +455,8 @@
 		7FD331A016D13741006D7A0D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7FDC830916DD2D98005596C8 /* kb.png */,
+				7FDC830A16DD2D98005596C8 /* kb@2x.png */,
 				7F78A46D16D17F3D00BCE579 /* backArrow.png */,
 			);
 			path = Images;
@@ -514,6 +520,8 @@
 				7F51CC2F16CFFCBF00DDE28F /* iPhoneMain.storyboard in Resources */,
 				7F51CC3216CFFCBF00DDE28F /* iPadMain.storyboard in Resources */,
 				7F78A46E16D17F3D00BCE579 /* backArrow.png in Resources */,
+				7FDC830B16DD2D98005596C8 /* kb.png in Resources */,
+				7FDC830C16DD2D98005596C8 /* kb@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
