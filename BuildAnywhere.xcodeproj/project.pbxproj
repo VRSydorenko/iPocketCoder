@@ -74,8 +74,6 @@
 		7FC3216F16D82A3800AA6123 /* QuickSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3216E16D82A3800AA6123 /* QuickSymbol.m */; };
 		7FCA8DEA16D56C8B00DA15FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */; };
 		7FD10ADC16DBD1E100253B15 /* InputVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FD10ADB16DBD1E100253B15 /* InputVC.m */; };
-		7FD331A316D13741006D7A0D /* crossLines.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD331A116D13741006D7A0D /* crossLines.png */; };
-		7FD331A416D13741006D7A0D /* crossLines@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD331A216D13741006D7A0D /* crossLines@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -204,8 +202,6 @@
 		7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7FD10ADA16DBD1E100253B15 /* InputVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputVC.h; sourceTree = "<group>"; };
 		7FD10ADB16DBD1E100253B15 /* InputVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputVC.m; sourceTree = "<group>"; };
-		7FD331A116D13741006D7A0D /* crossLines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crossLines.png; sourceTree = "<group>"; };
-		7FD331A216D13741006D7A0D /* crossLines@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "crossLines@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -456,8 +452,6 @@
 			isa = PBXGroup;
 			children = (
 				7F78A46D16D17F3D00BCE579 /* backArrow.png */,
-				7FD331A116D13741006D7A0D /* crossLines.png */,
-				7FD331A216D13741006D7A0D /* crossLines@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -519,8 +513,6 @@
 				7F51CC2C16CFFCBF00DDE28F /* Default-568h@2x.png in Resources */,
 				7F51CC2F16CFFCBF00DDE28F /* iPhoneMain.storyboard in Resources */,
 				7F51CC3216CFFCBF00DDE28F /* iPadMain.storyboard in Resources */,
-				7FD331A316D13741006D7A0D /* crossLines.png in Resources */,
-				7FD331A416D13741006D7A0D /* crossLines@2x.png in Resources */,
 				7F78A46E16D17F3D00BCE579 /* backArrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

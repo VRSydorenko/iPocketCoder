@@ -44,8 +44,20 @@
     return [[self getDbManager] loadProject:name];
 }
 
++(Snippet*) loadSnippet:(NSString*)name language:(int)lang{
+    return [[self getDbManager] loadSnippet:name language:lang];
+}
+
 +(NSArray*) getQuickSymbols{
     return [[self getDbManager] getQuickSymbols];
+}
+
++(void) deleteSnippet:(NSString*)name language:(int)lang{
+    [[self getDbManager] deleteSnippet:name language:lang];
+}
+
++(void) deleteProject:(NSString*)name{
+    [[self getDbManager] deleteProject:name];
 }
 
 @end

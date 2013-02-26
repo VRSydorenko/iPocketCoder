@@ -416,7 +416,7 @@
 }
 
 -(void) deleteSnippet:(NSString*)name language:(int)lang{
-    NSString *deleteSQL = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = ? AND %@=%d", T_PROJECTS, F_NAME, F_LANG, lang];
+    NSString *deleteSQL = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = ? AND %@=%d", T_SNIPPETS, F_NAME, F_LANG, lang];
     const char *delete_stmt = [deleteSQL UTF8String];
     
     sqlite3_stmt *statement;

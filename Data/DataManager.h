@@ -23,7 +23,11 @@
 +(NSArray*) getSnippetNamesForLanguage:(int)lang;
 
 +(Project*) loadProject:(NSString*)name;
++(Snippet*) loadSnippet:(NSString*)name language:(int)lang;
 
 +(NSArray*) getQuickSymbols;
+
++(void) deleteSnippet:(NSString*)name language:(int)lang;
++(void) deleteProject:(NSString*)name;
 
 @end

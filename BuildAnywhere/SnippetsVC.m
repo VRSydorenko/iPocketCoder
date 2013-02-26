@@ -35,11 +35,7 @@
     if (!IPAD){ // to save more space on navigation bar
         [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
-    
-    [navCon hideToolBarAnimated:NO];
-    
-    snippets = [DataManager getSnippetNamesForLanguage:self.language];
-    
+        
     self.tableSnippets.dataSource = self;
     self.tableSnippets.delegate = self;
     
@@ -70,7 +66,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (snippets.count >= indexPath.row+1){
-        [self.delegate snippetSelected:[snippets objectAtIndex:indexPath.row]];
+        Snippet* selected = [DataManager loadSnippet:[snippets objectAtIndex:indexPath.row] language:self.language];
+        [self.delegate snippetSelected:selected.snipCode];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [DataManager deleteSnippet:[snippets objectAtIndex:indexPath.row] language:self.language];
+        [self updateData];
     }
 }
 
