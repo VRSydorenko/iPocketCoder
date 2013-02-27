@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:BuildAnywhere.xcodeproj">
+      location = "self:PocketCoder.xcodeproj">
    </FileRef>
 </Workspace>

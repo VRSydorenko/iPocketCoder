@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7F51CC1116CFFCBF00DDE28F"
                BuildableName = "BuildAnywhere.app"
-               BlueprintName = "BuildAnywhere"
-               ReferencedContainer = "container:BuildAnywhere.xcodeproj">
+               BlueprintName = "PocketCoder"
+               ReferencedContainer = "container:PocketCoder.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F51CC1116CFFCBF00DDE28F"
             BuildableName = "BuildAnywhere.app"
-            BlueprintName = "BuildAnywhere"
-            ReferencedContainer = "container:BuildAnywhere.xcodeproj">
+            BlueprintName = "PocketCoder"
+            ReferencedContainer = "container:PocketCoder.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,8 +53,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F51CC1116CFFCBF00DDE28F"
             BuildableName = "BuildAnywhere.app"
-            BlueprintName = "BuildAnywhere"
-            ReferencedContainer = "container:BuildAnywhere.xcodeproj">
+            BlueprintName = "PocketCoder"
+            ReferencedContainer = "container:PocketCoder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,8 +71,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F51CC1116CFFCBF00DDE28F"
             BuildableName = "BuildAnywhere.app"
-            BlueprintName = "BuildAnywhere"
-            ReferencedContainer = "container:BuildAnywhere.xcodeproj">
+            BlueprintName = "PocketCoder"
+            ReferencedContainer = "container:PocketCoder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

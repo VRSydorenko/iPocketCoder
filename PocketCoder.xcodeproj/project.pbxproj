@@ -80,14 +80,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7F51CC1216CFFCBF00DDE28F /* BuildAnywhere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildAnywhere.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F51CC1216CFFCBF00DDE28F /* PocketCoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketCoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F51CC1516CFFCBF00DDE28F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7F51CC1716CFFCBF00DDE28F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F51CC1916CFFCBF00DDE28F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		7F51CC1D16CFFCBF00DDE28F /* BuildAnywhere-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BuildAnywhere-Info.plist"; sourceTree = "<group>"; };
+		7F51CC1D16CFFCBF00DDE28F /* PocketCoder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PocketCoder-Info.plist"; sourceTree = "<group>"; };
 		7F51CC1F16CFFCBF00DDE28F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7F51CC2116CFFCBF00DDE28F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7F51CC2316CFFCBF00DDE28F /* BuildAnywhere-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BuildAnywhere-Prefix.pch"; sourceTree = "<group>"; };
+		7F51CC2316CFFCBF00DDE28F /* PocketCoder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PocketCoder-Prefix.pch"; sourceTree = "<group>"; };
 		7F51CC2416CFFCBF00DDE28F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7F51CC2516CFFCBF00DDE28F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7F51CC2716CFFCBF00DDE28F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 				7F6CD07916D10C51009750F4 /* CustomControls */,
 				7F51CC4C16D0002B00DDE28F /* Database */,
 				7F51CC5E16D004A400DDE28F /* Data */,
-				7F51CC1B16CFFCBF00DDE28F /* BuildAnywhere */,
+				7F51CC1B16CFFCBF00DDE28F /* PocketCoder */,
 				7F51CC1416CFFCBF00DDE28F /* Frameworks */,
 				7F51CC1316CFFCBF00DDE28F /* Products */,
 			);
@@ -244,7 +244,7 @@
 		7F51CC1316CFFCBF00DDE28F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F51CC1216CFFCBF00DDE28F /* BuildAnywhere.app */,
+				7F51CC1216CFFCBF00DDE28F /* PocketCoder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,7 +262,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7F51CC1B16CFFCBF00DDE28F /* BuildAnywhere */ = {
+		7F51CC1B16CFFCBF00DDE28F /* PocketCoder */ = {
 			isa = PBXGroup;
 			children = (
 				7FD331A016D13741006D7A0D /* Images */,
@@ -286,6 +286,7 @@
 				7FD10ADB16DBD1E100253B15 /* InputVC.m */,
 				7F51CC1C16CFFCBF00DDE28F /* Supporting Files */,
 			);
+			name = PocketCoder;
 			path = BuildAnywhere;
 			sourceTree = "<group>";
 		};
@@ -294,10 +295,10 @@
 			children = (
 				7F51CC2416CFFCBF00DDE28F /* AppDelegate.h */,
 				7F51CC2516CFFCBF00DDE28F /* AppDelegate.m */,
-				7F51CC1D16CFFCBF00DDE28F /* BuildAnywhere-Info.plist */,
+				7F51CC1D16CFFCBF00DDE28F /* PocketCoder-Info.plist */,
 				7F51CC1E16CFFCBF00DDE28F /* InfoPlist.strings */,
 				7F51CC2116CFFCBF00DDE28F /* main.m */,
-				7F51CC2316CFFCBF00DDE28F /* BuildAnywhere-Prefix.pch */,
+				7F51CC2316CFFCBF00DDE28F /* PocketCoder-Prefix.pch */,
 				7F51CC2716CFFCBF00DDE28F /* Default.png */,
 				7F51CC2916CFFCBF00DDE28F /* Default@2x.png */,
 				7F51CC2B16CFFCBF00DDE28F /* Default-568h@2x.png */,
@@ -468,9 +469,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7F51CC1116CFFCBF00DDE28F /* BuildAnywhere */ = {
+		7F51CC1116CFFCBF00DDE28F /* PocketCoder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7F51CC3816CFFCBF00DDE28F /* Build configuration list for PBXNativeTarget "BuildAnywhere" */;
+			buildConfigurationList = 7F51CC3816CFFCBF00DDE28F /* Build configuration list for PBXNativeTarget "PocketCoder" */;
 			buildPhases = (
 				7F51CC0E16CFFCBF00DDE28F /* Sources */,
 				7F51CC0F16CFFCBF00DDE28F /* Frameworks */,
@@ -480,9 +481,9 @@
 			);
 			dependencies = (
 			);
-			name = BuildAnywhere;
+			name = PocketCoder;
 			productName = BuildAnywhere;
-			productReference = 7F51CC1216CFFCBF00DDE28F /* BuildAnywhere.app */;
+			productReference = 7F51CC1216CFFCBF00DDE28F /* PocketCoder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -494,7 +495,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Viktor Sydorenko";
 			};
-			buildConfigurationList = 7F51CC0D16CFFCBF00DDE28F /* Build configuration list for PBXProject "BuildAnywhere" */;
+			buildConfigurationList = 7F51CC0D16CFFCBF00DDE28F /* Build configuration list for PBXProject "PocketCoder" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -506,7 +507,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7F51CC1116CFFCBF00DDE28F /* BuildAnywhere */,
+				7F51CC1116CFFCBF00DDE28F /* PocketCoder */,
 			);
 		};
 /* End PBXProject section */
@@ -685,12 +686,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BuildAnywhere/BuildAnywhere-Prefix.pch";
+				GCC_PREFIX_HEADER = "BuildAnywhere/PocketCoder-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
-				INFOPLIST_FILE = "BuildAnywhere/BuildAnywhere-Info.plist";
+				INFOPLIST_FILE = "BuildAnywhere/PocketCoder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lxml2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PocketCoder;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -699,12 +700,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BuildAnywhere/BuildAnywhere-Prefix.pch";
+				GCC_PREFIX_HEADER = "BuildAnywhere/PocketCoder-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
-				INFOPLIST_FILE = "BuildAnywhere/BuildAnywhere-Info.plist";
+				INFOPLIST_FILE = "BuildAnywhere/PocketCoder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-lxml2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PocketCoder;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -712,7 +713,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7F51CC0D16CFFCBF00DDE28F /* Build configuration list for PBXProject "BuildAnywhere" */ = {
+		7F51CC0D16CFFCBF00DDE28F /* Build configuration list for PBXProject "PocketCoder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F51CC3616CFFCBF00DDE28F /* Debug */,
@@ -721,7 +722,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7F51CC3816CFFCBF00DDE28F /* Build configuration list for PBXNativeTarget "BuildAnywhere" */ = {
+		7F51CC3816CFFCBF00DDE28F /* Build configuration list for PBXNativeTarget "PocketCoder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F51CC3916CFFCBF00DDE28F /* Debug */,

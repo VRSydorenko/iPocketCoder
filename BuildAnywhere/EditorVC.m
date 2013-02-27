@@ -197,7 +197,8 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"segueEditorToOutput"]){
         ResultsVC* outputVC = (ResultsVC*)segue.destinationViewController;
-        outputVC.output = lastOutput;
+        int maxOutputLength = 3000;
+        outputVC.output = lastOutput.length > maxOutputLength ? [lastOutput substringToIndex:maxOutputLength] : lastOutput;
         outputVC.cmpInfo = lastCmpInfo;
     } else if ([segue.identifier isEqualToString:@"segueEditorToInput"]){
         InputVC* inputVC = (InputVC*)segue.destinationViewController;
