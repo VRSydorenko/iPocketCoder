@@ -230,7 +230,7 @@
     keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
     
     CGFloat keyboardTop = keyboardRect.origin.y;
-    CGRect newTextViewFrame = self.view.bounds;
+    CGRect newTextViewFrame = self.textCode.bounds;
     newTextViewFrame.size.height = keyboardTop - self.view.bounds.origin.y;
     
     NSValue *animationDurationValue = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];

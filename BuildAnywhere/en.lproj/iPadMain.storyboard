@@ -23,7 +23,7 @@
             </objects>
             <point key="canvasLocation" x="-458" y="-790"/>
         </scene>
-        <!--MainVC - Pocket Coder-->
+        <!--MainVC-->
         <scene sceneID="DRa-sG-JGP">
             <objects>
                 <viewController id="HIc-k8-SfY" customClass="MainVC" sceneMemberID="viewController">
@@ -100,7 +100,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Pocket Coder" id="kcQ-NE-l7f">
+                    <navigationItem key="navigationItem" id="kcQ-NE-l7f">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HEt-a5-1l1">
                             <connections>
                                 <action selector="createNewProjectPressed:" destination="HIc-k8-SfY" id="87v-gB-hFN"/>

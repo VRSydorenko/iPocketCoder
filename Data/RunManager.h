@@ -10,8 +10,8 @@
 #import "ideoneIdeone_Service_v1Service.h"
 #import "Project.h"
 
-#define USER @"ideonevrs"
-#define PASS @"ideonevrsapi"
+#define USER @"pocketcoder"
+#define PASS @"ideonepocketcoderapi"
 
 typedef enum ErrorCodes{
     OK              = 0,

@@ -34,6 +34,8 @@
     self.collectionProjects.dataSource = self;
     self.collectionProjects.delegate = self;
     
+    self.title = @"Pocket Coder";
+    
     [self updateData];
 }
 
