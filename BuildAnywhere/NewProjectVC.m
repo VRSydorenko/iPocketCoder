@@ -39,7 +39,6 @@
 - (void)dealloc {
     [self setTableLanguages:nil];
     [self setTextName:nil];
-    [super viewDidUnload];
 }
 
 -(void) viewDidAppear:(BOOL)animated{

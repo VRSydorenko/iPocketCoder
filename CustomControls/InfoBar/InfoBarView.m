@@ -34,8 +34,8 @@
         
         infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         infoLabel.numberOfLines = 0;
-        infoLabel.lineBreakMode = UILineBreakModeWordWrap;
-        infoLabel.textAlignment = UITextAlignmentCenter;
+        infoLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        infoLabel.textAlignment = NSTextAlignmentCenter;
         infoLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         infoLabel.textColor = [UIColor whiteColor];
         infoLabel.backgroundColor = [UIColor clearColor];
