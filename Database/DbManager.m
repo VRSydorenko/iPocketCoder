@@ -96,43 +96,67 @@
         [self saveSnippet:[[Snippet alloc] initWithLanguage:27 name:@"sample" code:@"using System;\n\nclass Program {\n    public static void Main() {\n        Console.WriteLine(\"Hello, world!\");\n    }\n}"]];
         
         [self saveLanguage:1 withName:@"C++"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:1 name:@"template" code:@"#include <iostream>\n\nint main() {\n\n    return 0;\n\n}"]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:1 name:@"sample" code:@"#include <iostream>\n\nint main() {\n\n    std::cout << \"Hello, World.\";\n    return 0;\n\n}"]];
+        
+        
         [self saveLanguage:44 withName:@"C++ 11"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:44 name:@"template" code:@"#include <iostream>\n\nint main() {\n\n    return 0;\n\n}"]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:44 name:@"sample" code:@"#include <iostream>\nusing namespace std;\n\nint main() {\n  auto func = [] () {\n    cout << \"Hello world\";\n  };\n  func();\n}"]];
+        
         [self saveLanguage:34 withName:@"C99"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:34 name:@"template" code:@"#include <stdio.h>\n\nint main(void) {\n\n}"]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:34 name:@"sample" code:@"#include <stdio.h>\n\nint main(void)\n{\n    puts(\"Hello World!\");\n}"]];
+        
         [self saveLanguage:14 withName:@"CLIPS"];
         //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        
         [self saveLanguage:111 withName:@"Clojure"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:111 name:@"sample" code:@"(println \"Hello, world!\")"]];
+        
         [self saveLanguage:118 withName:@"COBOL"];
         //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        
         [self saveLanguage:106 withName:@"COBOL 85"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:106 name:@"sample" code:@"identification division.\nprogram-id. SimpleHelloWorld.\n\nprocedure division.\n000-Main.\n    display 'Hello World'.\n    stop run.\n"]];
+        
         [self saveLanguage:32 withName:@"Common Lisp (clisp)"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:32 name:@"sample" code:@"(format t \"Hello, world!~%\")"]];
+        
         [self saveLanguage:102 withName:@"D (dmd)"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:102 name:@"template" code:@"import std.stdio;\n\nvoid main() {\n\n}"]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:102 name:@"sample" code:@"import std.stdio;\n\nvoid main()\n{\n    writeln(\"Hello, world!\");\n}"]];
+        
         [self saveLanguage:36 withName:@"Erlang"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:36 name:@"sample" code:@"-module(prog).\n-export([main/0]).\n\nmain() ->\n    io:fwrite(\"Hello, world!\")."]];
+        
         [self saveLanguage:124 withName:@"F#"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:124 name:@"sample" code:@"printfn \"Hello, world!\""]];
+        
         [self saveLanguage:123 withName:@"Factor"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:123 name:@"sample" code:@"USE: io\n\n\"Hello, World!\" print"]];
+        
         [self saveLanguage:125 withName:@"Falcon"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:125 name:@"sample" code:@"printl( \"Hello, world!\" )"]];
+        
         [self saveLanguage:107 withName:@"Forth"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:107 name:@"sample" code:@".\" Hello, world! \""]];
+        
         [self saveLanguage:5 withName:@"Fortran"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:5 name:@"sample" code:@"program hello\n    write (*,*) 'Hello, world!'\nend program hello"]];
+        
         [self saveLanguage:114 withName:@"Go"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:114 name:@"sample" code:@"package main\nimport \"fmt\"\n\nfunc main() {\n    fmt.Printf(\"Hello, World\")\n}"]];
+        
         [self saveLanguage:121 withName:@"Groovy"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:121 name:@"sample" code:@"println \"Hello, world!\""]];
+        
         [self saveLanguage:21 withName:@"Haskell"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:21 name:@"sample" code:@"main = putStrLn \"Hello, world!\""]];
+        
         [self saveLanguage:16 withName:@"Icon"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:16 name:@"sample" code:@"procedure main(args)\n    write(\"Hello, World!\");\nend"]];
+        
         [self saveLanguage:9 withName:@"Intercal"];
         //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
         [self saveLanguage:10 withName:@"Java"];
@@ -251,6 +275,8 @@
     [symbols setObject:@"*" forKey:@"*"];
     [symbols setObject:@"_" forKey:@"_"];
     [symbols setObject:@":" forKey:@":"];
+    [symbols setObject:@"&" forKey:@"&"];
+    [symbols setObject:@"." forKey:@"."];
     //[symbols setObject:@"" forKey:@""];
 
     for (int i = 0; i < symbols.count; i++) {
