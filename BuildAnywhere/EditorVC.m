@@ -348,10 +348,11 @@
 
 -(void)insertTextInEditor:(NSString*)content{
     NSMutableString *text = [self.textCode.text mutableCopy];
-    
+    self.textCode.scrollEnabled = NO;
     @try {
         NSRange selectedRange = self.textCode.selectedRange;
         [text replaceCharactersInRange:selectedRange withString:content];
+        
         self.textCode.text = text;
         NSRange newSelectedRange = {selectedRange.location + content.length, 0};
         self.textCode.selectedRange = newSelectedRange;
@@ -359,6 +360,7 @@
     @catch (NSException *exception) {
         self.textCode.text = [self.textCode.text stringByAppendingString:content];
     }
+    self.textCode.scrollEnabled = YES;
 }
 
 -(void)submissionCreatedWithError:(int)errorCode andLink:(NSString*)link{
