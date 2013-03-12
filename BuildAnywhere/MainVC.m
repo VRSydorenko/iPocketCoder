@@ -68,7 +68,10 @@
 -(void) updateData{
     projectBasicData = [DataManager getProjectsBasicInfo];
     self.labelHeader.text = projectBasicData.count == 0 ? @"No projects yet" : @"Projects";
-    [self.collectionProjects reloadData];
+    [self.collectionProjects performBatchUpdates:^{
+        [self.collectionProjects reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    } completion:nil];
+//    [self.collectionProjects reloadData];
 }
 
 - (IBAction)createNewProjectPressed:(id)sender {

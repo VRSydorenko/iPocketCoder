@@ -18,6 +18,7 @@
 
 @synthesize cmpInfo = _cmpInfo;
 @synthesize output = _output;
+@synthesize stdErr = _stdErr;
 
 - (void)viewDidLoad
 {
@@ -29,7 +30,7 @@
         [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
     
-    if (self.cmpInfo.length > 0){
+    if (self.cmpInfo.length > 0 || self.stdErr > 0){
         [self cmpInfoPressed:nil];
     } else {
         [self outputPressed:nil];
@@ -45,9 +46,18 @@
     [self setTextInfo:nil];
     [super viewDidUnload];
 }
+
 - (IBAction)cmpInfoPressed:(id)sender {
-    self.title = @"Compiler info";
-    self.textInfo.text = self.cmpInfo;
+    if (self.cmpInfo.length > 0 && self.stdErr.length > 0){
+        self.title = @"Info";
+        self.textInfo = [NSString stringWithFormat:@"Compiler info:\n\n%@\n\n\nStdErr output:\n\n%@", self.cmpInfo, self.stdErr];
+    } else if (self.cmpInfo.length > 0 && self.stdErr.length == 0){
+        self.title = @"Compiler info";
+        self.textInfo.text = self.cmpInfo;
+    } else {
+        self.title = @"StdErr output";
+        self.textInfo.text = self.stdErr;
+    }
 }
 
 - (IBAction)outputPressed:(id)sender {

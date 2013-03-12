@@ -33,7 +33,7 @@
 }
 
 -(void)getSubmissionDetails:(NSString*)link{
-    [service getSubmissionDetails:self action:@selector(getSubmissionDetailsHandler:) link:link withSource:NO withInput:NO withOutput:YES withStderr:NO withCmpinfo:YES];
+    [service getSubmissionDetails:self action:@selector(getSubmissionDetailsHandler:) link:link withSource:NO withInput:NO withOutput:YES withStderr:YES withCmpinfo:YES];
 }
 
 -(void)getSubmissionStatus:(NSString*)link{
@@ -89,10 +89,16 @@
     NSRange rangeRest = {0, rangeCmpinfo.location};
     valueString = [valueString substringWithRange:rangeRest];
     
+    NSRange rangeStderr = [valueString rangeOfString:@"stderr"];
+    NSString* stdErr = [valueString substringFromIndex:NSMaxRange(rangeStderr)];
+    
+    NSRange rangeRest2 = {0, rangeStderr.location};
+    valueString = [valueString substringWithRange:rangeRest2];
+    
     NSRange rangeOutput = [valueString rangeOfString:@"output"];
     NSString* output = [valueString substringFromIndex:NSMaxRange(rangeOutput)];
     
-    [self.handler submissionDetailsReceived:output cmpinfo:cmpinfo];
+    [self.handler submissionDetailsReceived:output cmpinfo:cmpinfo stdErr:stdErr];
 }
 
 - (void) getSubmissionStatusHandler:(id)value {
@@ -133,6 +139,7 @@
     // Handle errors
 	if([value isKindOfClass:[NSError class]]) {
 		NSLog(@"%@", value);
+        [self.handler errorOccurred:(NSError*)value];
 		return YES;
 	}
     

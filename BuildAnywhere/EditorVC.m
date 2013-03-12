@@ -19,6 +19,7 @@
     
     NSString* lastCmpInfo;
     NSString* lastOutput;
+    NSString* lastStdErr;
 }
 @end
 
@@ -200,6 +201,7 @@
         int maxOutputLength = 3000;
         outputVC.output = lastOutput.length > maxOutputLength ? [lastOutput substringToIndex:maxOutputLength] : lastOutput;
         outputVC.cmpInfo = lastCmpInfo;
+        outputVC.stdErr = lastStdErr;
     } else if ([segue.identifier isEqualToString:@"segueEditorToInput"]){
         InputVC* inputVC = (InputVC*)segue.destinationViewController;
         inputVC.project = project;
@@ -415,9 +417,10 @@
         }
     }
 }
--(void)submissionDetailsReceived:(NSString*)output cmpinfo:(NSString*)cmpinfo{
+-(void)submissionDetailsReceived:(NSString*)output cmpinfo:(NSString*)cmpinfo stdErr:(NSString *)stdErr{
     lastCmpInfo = cmpinfo;
     lastOutput = output;
+    lastStdErr = stdErr;
     
     detailsRequested = NO;
     
@@ -429,9 +432,9 @@
 -(void)testResponseReceived{
     
 }
--(void)errorOccurred{
+-(void)errorOccurred:(NSError*)error{
     [self updateToolbarWithSpinner:NO statusText:@""];
-    [navCon showInfoBarWithNegativeMessage:@"Service error"];
+    [navCon showInfoBarWithNegativeMessage:error.localizedDescription];
 }
 
 - (void)dealloc {

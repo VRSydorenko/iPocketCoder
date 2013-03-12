@@ -11,8 +11,16 @@
 @implementation ProjectCell
 
 - (IBAction)deletePressed:(id)sender {
-    [DataManager deleteProject:self.labelProjectName.text];
-    [self.delegate projectDeleted];
+    NSString* question = [NSString stringWithFormat:@"Delete '%@'?", self.labelProjectName.text];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Confirm deleting" message:question delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1){
+        [DataManager deleteProject:self.labelProjectName.text];
+        [self.delegate projectDeleted];
+    }
 }
 
 @end

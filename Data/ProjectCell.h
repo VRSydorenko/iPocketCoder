@@ -13,7 +13,7 @@
 -(void)projectDeleted;
 @end
 
-@interface ProjectCell : UICollectionViewCell
+@interface ProjectCell : UICollectionViewCell<UIAlertViewDelegate>
 
 @property (nonatomic) id<ProjectDeletionProtocol> delegate;
 @property (strong, nonatomic) IBOutlet UILabel *labelProjectName;

@@ -10,6 +10,7 @@
 
 @interface NewProjectVC (){
     NSDictionary *languages;
+    NSArray *sortedKeys;
     NSIndexPath *selectedPath;
     NSDictionary* projectBasicData;
     MainNavController* navCon;
@@ -22,6 +23,8 @@
 {
     [super viewDidLoad];
     
+    [self generateProjectName];
+    
     navCon = (MainNavController*)self.navigationController;
     
     if (!IPAD){
@@ -32,6 +35,7 @@
     
     selectedPath = nil;
     languages = [DataManager getLanguages];
+    sortedKeys = [languages.allKeys sortedArrayUsingSelector:@selector(compare:)];
     self.tableLanguages.dataSource = self;
     self.tableLanguages.delegate = self;
 }
@@ -54,7 +58,7 @@
     if (!cell){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellLanguage"];
     }
-    cell.textLabel.text = [languages.allKeys objectAtIndex:indexPath.row];
+    cell.textLabel.text = [sortedKeys objectAtIndex:indexPath.row];
     cell.accessoryType = indexPath == selectedPath ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
     return cell;
@@ -105,7 +109,7 @@
         return;
     }
     
-    int language = ((NSNumber*)[languages.allValues objectAtIndex:selectedPath.row]).intValue;
+    int language = ((NSNumber*)[languages objectForKey:[sortedKeys objectAtIndex:selectedPath.row]]).intValue;
     Project* newProject = [[Project alloc] initWithLanguage:language name:self.textName.text];
     [DataManager saveProject:newProject];
     [self.delegate newProjectCreationFinished:YES];
@@ -113,6 +117,23 @@
 
 -(void)backPressed{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)generateProjectName{    
+    NSString* template = @"New project";
+    
+    if (![DataManager loadProject:template]){
+        self.textName.text = template;
+        return;
+    }
+    
+    NSString* result;
+    int i = 2;
+    do {
+        result = [NSString stringWithFormat:@"%@ %d", template, i++];
+    } while ([DataManager loadProject:result]);
+    
+    self.textName.text = result;
 }
 
 @end
