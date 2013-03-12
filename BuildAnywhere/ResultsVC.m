@@ -30,7 +30,7 @@
         [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
     
-    if (self.cmpInfo.length > 0 || self.stdErr > 0){
+    if (self.cmpInfo.length > 0 || self.stdErr.length > 0){
         [self cmpInfoPressed:nil];
     } else {
         [self outputPressed:nil];
