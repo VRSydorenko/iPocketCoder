@@ -10,6 +10,7 @@
 #import "Project.h"
 #import "Snippet.h"
 #import "QuickSymbol.h"
+#import "UserSettings.h"
 
 @interface DbManager : NSObject
 
@@ -35,5 +36,7 @@
 -(NSString*) getLanguageName:(int)language;
 
 -(NSArray*) getQuickSymbols;
+-(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang;
+-(void) putQuickSymbol:(QuickSymbol*)symbol toLanguageUsage:(int)lang atIndex:(int)index;
 
 @end

@@ -48,6 +48,12 @@
     [tSymbols addField:F_NAME type:DBTYPE_TEXT notNull:YES];
     [tSymbols addField:F_CODE type:DBTYPE_TEXT notNull:YES];
     [tables addObject:tSymbols];
+    
+    DbTable* tSymbolsOrder = [[DbTable alloc] initWithTableName:T_SYMBOLS_ORDER];
+    [tSymbolsOrder addField:F_SYMB_ID type:DBTYPE_REAL notNull:YES];
+    [tSymbolsOrder addField:F_LANG type:DBTYPE_REAL notNull:YES];
+    [tSymbolsOrder addField:F_SYMB_ORDER type:DBTYPE_REAL notNull:YES];
+    [tables addObject:tSymbolsOrder];
 }
 
 -(NSString*) getTablesCreationSQL{

@@ -19,7 +19,7 @@
     if (self){
         [self initDatabase];
         [self initLanguages];
-        [self initQuickSymbols];
+        [self initBaseQuickSymbols];
     }
     return self;
 }
@@ -252,8 +252,9 @@
     sqlite3_finalize(statement);
 }
 
--(void) initQuickSymbols{
-    if ([self loadQuickSymbol:0]){
+-(void) initBaseQuickSymbols{
+    if ([UserSettings getBaseSymbolsInitialized] || [self getSymbolsCount] > 0){
+        [UserSettings setBaseSymbolsInitialized];
         return;
     }
     
@@ -283,6 +284,8 @@
         NSString* key = [symbols.allKeys objectAtIndex:i];
         [self saveQuickSymbol:[[QuickSymbol alloc] initWithId:i title:key content:[symbols valueForKey:key]]];
     }
+    
+    [UserSettings setBaseSymbolsInitialized];
 }
 
 -(void) saveQuickSymbol:(QuickSymbol*)symbol{
@@ -576,8 +579,42 @@
     return [[NSArray alloc] initWithArray:result];
 }
 
+-(void) putQuickSymbol:(QuickSymbol*)symbol toLanguageUsage:(int)lang atIndex:(int)index{
+    int symbolsForLang = [self getSymbolsCountForLanguage:lang];
+    int indexToPutAt = MAX(0, MIN(index, symbolsForLang));
+    int currentOrder = [self getOrderIndexForSymbolId:symbol.symbId forLaguageUsage:lang];
+    
+    if (indexToPutAt == currentOrder){
+        return;
+    }
+    
+    NSMutableArray* queries = [[NSMutableArray alloc] initWithObjects:@"begin;", nil];
+    
+    if (currentOrder == -1){ // inserting new symbol to order
+        if (symbolsForLang > indexToPutAt){
+            [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%@+1 WHERE %@=%d AND %@>=%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, F_SYMB_ORDER, F_LANG, lang, F_SYMB_ORDER, indexToPutAt]];
+        }
+        [queries addObject:[NSString stringWithFormat:@"INSERT INTO %@ (%@, %@, %@) VALUES (%d, %d, %d)", T_SYMBOLS_ORDER, F_SYMB_ID, F_LANG, F_SYMB_ORDER, symbol.symbId, lang, indexToPutAt]];
+    } else { // 'moving' symbol inside table
+        if (indexToPutAt > currentOrder){ // moving symbol down
+            [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%@-1 WHERE %@=%d AND %@>%d AND %@<=%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, F_SYMB_ORDER, F_LANG, lang, F_SYMB_ORDER, currentOrder, F_SYMB_ORDER, indexToPutAt]];
+        } else { // moving symbol up
+            [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%@+1 WHERE %@=%d AND %@>=%d AND %@<%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, F_SYMB_ORDER, F_LANG, lang, F_SYMB_ORDER, indexToPutAt, F_SYMB_ORDER, currentOrder]];
+        }
+        
+        [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%d WHERE %@=%d AND %@=%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, indexToPutAt, F_LANG, lang, F_SYMB_ID, symbol.symbId]];
+    }
+    
+    [queries addObject:@"commit;"];
+    
+    for (NSString* query in queries) {
+        const char *query_stmt = [query UTF8String];
+        sqlite3_exec(buildAnywhereDb, query_stmt, NULL, NULL, NULL);
+    }
+}
+
 -(NSArray*) getQuickSymbols{
-    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@, %@ FROM %@ ORDER BY %@", F_SYMB_ID, F_NAME, F_CODE, T_SYMBOLS, F_SYMB_ID];
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@, %@ FROM %@", F_SYMB_ID, F_NAME, F_CODE, T_SYMBOLS];
     const char *query_stmt = [querySQL UTF8String];
     
     NSMutableArray* result = [[NSMutableArray alloc] init];
@@ -597,7 +634,80 @@
     sqlite3_finalize(statement);
     
     return [[NSArray alloc] initWithArray:result];
+}
 
+-(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@ FROM %@ WHERE %@=%d ORDER BY %@ ASC", F_SYMB_ID, F_SYMB_ORDER, T_SYMBOLS_ORDER, F_LANG, lang, F_SYMB_ORDER];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        while (sqlite3_step(statement) == SQLITE_ROW){
+            NSNumber *iD = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
+            NSNumber *order = [NSNumber numberWithInt:sqlite3_column_int(statement, 1)];
+            [result setObject:iD forKey:order];
+        }
+    }  else {
+        NSLog(@"Failed to prepare query");
+        NSLog(@"Info:%s", sqlite3_errmsg(buildAnywhereDb));
+    }
+    sqlite3_finalize(statement);
+    
+    return result;
+}
+
+-(int) getSymbolsCount{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT COUNT(%@) FROM %@", F_ID, T_SYMBOLS];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    int result = 0;
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        if (sqlite3_step(statement) == SQLITE_ROW){
+            result = sqlite3_column_int(statement, 0);
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return result;
+}
+
+// private methods
+-(int) getOrderIndexForSymbolId:(int)iD forLaguageUsage:(int)lang{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@ FROM %@ WHERE %@=%d AND %@=%d", F_SYMB_ORDER, T_SYMBOLS_ORDER, F_SYMB_ID, iD, F_LANG, lang];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    int result = -1;
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        if (sqlite3_step(statement) == SQLITE_ROW){
+            result = sqlite3_column_int(statement, 0);
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return result;
+}
+
+-(int) getSymbolsCountForLanguage:(int)lang{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT COUNT(%@) FROM %@ WHERE %@=%d", F_ID, T_SYMBOLS_ORDER, F_LANG, lang];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    int result = 0;
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        if (sqlite3_step(statement) == SQLITE_ROW){
+            result = sqlite3_column_int(statement, 0);
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return result;
 }
 
 @end

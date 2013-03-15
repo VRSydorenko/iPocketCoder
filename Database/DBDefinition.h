@@ -38,6 +38,11 @@
 // F_NAME
 // F_CODE
 
+#define T_SYMBOLS_ORDER @"t_symbols_order"
+// F_SYMB_ID
+// F_LANG
+#define F_SYMB_ORDER @"f_order"
+
 @interface DBDefinition : NSObject
 
 -(NSString*) getTablesCreationSQL;

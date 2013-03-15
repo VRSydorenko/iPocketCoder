@@ -14,6 +14,7 @@
 #import "ideoneIdeone_Service_v1Service.h"
 #import "RunManager.h"
 #import "InputVC.h"
+#import "UserSettings.h"
 
 @interface EditorVC : UIViewController<UITextViewDelegate,
                                        IdeoneResponseProtocol,

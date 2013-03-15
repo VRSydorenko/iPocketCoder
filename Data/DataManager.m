@@ -48,8 +48,18 @@
     return [[self getDbManager] loadSnippet:name language:lang];
 }
 
++(QuickSymbol*) loadQuickSymbol:(int)iD{
+    return [[self getDbManager] loadQuickSymbol:iD];
+}
+
 +(NSArray*) getQuickSymbols{
     return [[self getDbManager] getQuickSymbols];
+}
++(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang{
+    return [[self getDbManager] getOrderedSymbolIDsForLanguage:lang];
+}
++(void) putQuickSymbol:(QuickSymbol*)symbol toLanguageUsage:(int)lang atIndex:(int)index{
+    [[self getDbManager] putQuickSymbol:symbol toLanguageUsage:lang atIndex:index];
 }
 
 +(void) deleteSnippet:(NSString*)name language:(int)lang{

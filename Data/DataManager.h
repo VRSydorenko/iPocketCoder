@@ -24,8 +24,11 @@
 
 +(Project*) loadProject:(NSString*)name;
 +(Snippet*) loadSnippet:(NSString*)name language:(int)lang;
++(QuickSymbol*) loadQuickSymbol:(int)iD;
 
 +(NSArray*) getQuickSymbols;
++(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang;
++(void) putQuickSymbol:(QuickSymbol*)symbol toLanguageUsage:(int)lang atIndex:(int)index;
 
 +(void) deleteSnippet:(NSString*)name language:(int)lang;
 +(void) deleteProject:(NSString*)name;

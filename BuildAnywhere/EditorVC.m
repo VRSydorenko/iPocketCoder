@@ -43,8 +43,6 @@
     self.textCode.delegate = self;
     self.textCode.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
-    [self setupAccessoryView];
-    
     navCon = (MainNavController*)self.navigationController;
     
     runManager = [[RunManager alloc] init];
@@ -61,7 +59,18 @@
     if (project){
         self.textCode.text = project.projCode;
         self.navigationItem.title = project.projName;
+        
+        if (![UserSettings getSymbolsInitializedForLang:project.projLanguage]){
+            int i = 0;
+            for (QuickSymbol* symbol in [DataManager getQuickSymbols]) {
+                [DataManager putQuickSymbol:symbol toLanguageUsage:project.projLanguage atIndex:i];
+                i++;
+            }
+            [UserSettings setSymbolsInitializedForLang:project.projLanguage];
+        }
     }
+    
+    [self setupAccessoryView];
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -266,7 +275,7 @@
 - (void)setupAccessoryView
 {
     if (self.accessoryView){
-        return;
+        self.accessoryView = nil;
     }
     
     float buttonWidth = IPAD ? 50.0 : 25.0;
@@ -286,9 +295,12 @@
     UIFont *accessoryButtonFont = [UIFont fontWithName:@"Helvetica" size:buttonFontSize];
     
     NSMutableDictionary* symbolsMap = [[NSMutableDictionary alloc] init];
-    NSArray *symbols = [DataManager getQuickSymbols];
-    for (QuickSymbol* symbol in symbols) {
-        float btnX = symbol.symbId*buttonWidth + (symbol.symbId+1.0)*buttonPadding;
+    NSDictionary* symbolsForCurrentLanguage = [DataManager getOrderedSymbolIDsForLanguage:project.projLanguage];
+    for (int i = 0; i < symbolsForCurrentLanguage.count; i++) {
+        NSNumber* symbId = (NSNumber*)[symbolsForCurrentLanguage objectForKey:[NSNumber numberWithInt:i]];
+        QuickSymbol* operatingSymbol = [DataManager loadQuickSymbol:symbId.intValue];
+        
+        float btnX = i*buttonWidth + (i+1.0)*buttonPadding;
         float btnHeight = barHeight - 2.0*barPadding;
         float btnWidth = buttonWidth;
 		CGRect btnRect = CGRectMake(btnX, 0.0, btnWidth, btnHeight);
@@ -298,7 +310,7 @@
         button.layer.borderColor = [UIColor blackColor].CGColor;
         button.layer.borderWidth = 0.5f;
         button.backgroundColor = [UIColor whiteColor];
-        button.text = [symbol.symbTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        button.text = [operatingSymbol.symbTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 ;
         button.textAlignment = NSTextAlignmentCenter;
         button.font = accessoryButtonFont;
@@ -307,20 +319,45 @@
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessoryButtonPressed:)];
         [button addGestureRecognizer:tapGesture];
         
-        button.tag = symbol.symbId;
+        button.tag = symbId.intValue;
         
         [scrollView addSubview:button];
         button.center = CGPointMake(btnRect.origin.x+btnWidth/2.0, barRect.size.height/2.0);
         
-        [symbolsMap setObject:symbol.symbContent forKey:[NSNumber numberWithInt:symbol.symbId]];
+        [symbolsMap setObject:operatingSymbol.symbContent forKey:symbId];
 	}
-	
-	[scrollView setContentSize:CGSizeMake(symbols.count*(buttonPadding+buttonWidth)+buttonPadding, barHeight)];
     
+    // space & settings button
+    float btnX = (symbolsForCurrentLanguage.count+1)*buttonWidth + symbolsForCurrentLanguage.count*buttonPadding;
+    float btnHeight = barHeight - 2.0*barPadding;
+    float btnWidth = buttonWidth;
+    CGRect btnRect = CGRectMake(btnX, 0.0, btnWidth, btnHeight);
+    
+    UILabel *btnSettings = [[UILabel alloc] initWithFrame:btnRect];
+    btnSettings.layer.cornerRadius = 5.0;
+    btnSettings.layer.borderColor = [UIColor blackColor].CGColor;
+    btnSettings.layer.borderWidth = 0.5f;
+    btnSettings.backgroundColor = [UIColor whiteColor];
+    btnSettings.text = @"E";
+    ;
+    btnSettings.textAlignment = NSTextAlignmentCenter;
+    btnSettings.font = accessoryButtonFont;
+    
+    btnSettings.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessorySettingsButtonPressed:)];
+    [btnSettings addGestureRecognizer:tapGesture];
+    
+    [scrollView addSubview:btnSettings];
+    btnSettings.center = CGPointMake(btnRect.origin.x+btnWidth/2.0, barRect.size.height/2.0);
+    
+    // setting scroll size
+	
+	[scrollView setContentSize:CGSizeMake((symbolsForCurrentLanguage.count+2/*extra room for space & settings button*/)*(buttonPadding+buttonWidth)-buttonPadding, barHeight)];
+    
+    quickSymbols = nil;
     quickSymbols = [[NSDictionary alloc] initWithDictionary:symbolsMap];
     
     self.accessoryView = scrollView;
-                                          
 }
 
 -(void)snippetSelected:(NSString*)code{
@@ -346,6 +383,9 @@
     
     NSString* content = (NSString*)[quickSymbols objectForKey:[NSNumber numberWithInt:accessoryButton.tag]];
     [self insertTextInEditor:content];
+}
+
+- (IBAction)accessorySettingsButtonPressed:(UIGestureRecognizer*)gestureRecognizer {
 }
 
 -(void)insertTextInEditor:(NSString*)content{
