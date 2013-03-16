@@ -52,14 +52,23 @@
     return [[self getDbManager] loadQuickSymbol:iD];
 }
 
++(int) getLanguagesCountSymbolUsedFor:(int)iD{
+    return [[self getDbManager] getLanguagesCountSymbolUsedFor:iD];
+}
 +(NSArray*) getQuickSymbols{
     return [[self getDbManager] getQuickSymbols];
+}
++(NSDictionary*) getQuickSymbolsDictionary{
+    return [[self getDbManager] getQuickSymbolsDictionary];
 }
 +(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang{
     return [[self getDbManager] getOrderedSymbolIDsForLanguage:lang];
 }
 +(void) putQuickSymbol:(QuickSymbol*)symbol toLanguageUsage:(int)lang atIndex:(int)index{
     [[self getDbManager] putQuickSymbol:symbol toLanguageUsage:lang atIndex:index];
+}
++(void)removeQuickSymbol:(int)iD fomLanguageUsage:(int)lang{
+    [[self getDbManager] removeQuickSymbol:iD fomLanguageUsage:lang];
 }
 
 +(void) deleteSnippet:(NSString*)name language:(int)lang{

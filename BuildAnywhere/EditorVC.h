@@ -15,10 +15,12 @@
 #import "RunManager.h"
 #import "InputVC.h"
 #import "UserSettings.h"
+#import "QuickSymbolManager.h"
 
 @interface EditorVC : UIViewController<UITextViewDelegate,
                                        IdeoneResponseProtocol,
-                                       SnippetSelectionDelegate>
+                                       SnippetSelectionDelegate,
+                                       SymbolsEditorDelegate>
 
 @property (nonatomic, weak) IBOutlet UITextView *textCode;
 @property (nonatomic, strong) IBOutlet UIView *accessoryView;

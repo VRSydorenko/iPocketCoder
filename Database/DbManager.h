@@ -35,8 +35,11 @@
 -(NSDictionary*) getLanguages;
 -(NSString*) getLanguageName:(int)language;
 
+-(int) getLanguagesCountSymbolUsedFor:(int)iD;
 -(NSArray*) getQuickSymbols;
+-(NSDictionary*) getQuickSymbolsDictionary;
 -(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang;
 -(void) putQuickSymbol:(QuickSymbol*)symbol toLanguageUsage:(int)lang atIndex:(int)index;
+-(void)removeQuickSymbol:(int)iD fomLanguageUsage:(int)lang;
 
 @end

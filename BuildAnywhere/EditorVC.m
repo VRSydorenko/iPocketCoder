@@ -218,6 +218,10 @@
         SnippetsVC* snippetsVC = (SnippetsVC*)segue.destinationViewController;
         snippetsVC.language = project.projLanguage;
         snippetsVC.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"segueEditorToSymbolsManager"]){
+        QuickSymbolManager* symbolsManagerVC = (QuickSymbolManager*)segue.destinationViewController;
+        symbolsManagerVC.projectLanguge = project.projLanguage;
+        symbolsManagerVC.delegate = self;
     }
 }
 
@@ -231,6 +235,7 @@
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)aTextView {
     [self.textCode resignFirstResponder];
+    self.textCode.inputAccessoryView = nil;
     return YES;
 }
 
@@ -360,6 +365,12 @@
     self.accessoryView = scrollView;
 }
 
+-(void)symbolsLayoutChanged{
+    self.textCode.inputAccessoryView = nil;
+    [self setupAccessoryView];
+    self.textCode.inputAccessoryView = self.accessoryView;
+}
+
 -(void)snippetSelected:(NSString*)code{
     if (IPAD){
         if (popoverController){
@@ -386,6 +397,7 @@
 }
 
 - (IBAction)accessorySettingsButtonPressed:(UIGestureRecognizer*)gestureRecognizer {
+    [self performSegueWithIdentifier:@"segueEditorToSymbolsManager" sender:self];
 }
 
 -(void)insertTextInEditor:(NSString*)content{

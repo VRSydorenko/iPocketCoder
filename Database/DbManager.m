@@ -613,6 +613,22 @@
     }
 }
 
+-(void)removeQuickSymbol:(int)iD fomLanguageUsage:(int)lang{
+    int currentOrder = [self getOrderIndexForSymbolId:iD forLaguageUsage:lang];
+    
+    NSMutableArray* queries = [[NSMutableArray alloc] initWithObjects:@"begin;", nil];
+    
+    [queries addObject: [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@=%d AND %@=%d", T_SYMBOLS_ORDER, F_SYMB_ID, iD, F_LANG, lang]];
+    [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%@-1 WHERE %@=%d AND %@>%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, F_SYMB_ORDER, F_LANG, lang, F_SYMB_ORDER, currentOrder]];
+    
+    [queries addObject:@"commit;"];
+    
+    for (NSString* query in queries) {
+        const char *query_stmt = [query UTF8String];
+        sqlite3_exec(buildAnywhereDb, query_stmt, NULL, NULL, NULL);
+    }
+}
+
 -(NSArray*) getQuickSymbols{
     NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@, %@ FROM %@", F_SYMB_ID, F_NAME, F_CODE, T_SYMBOLS];
     const char *query_stmt = [querySQL UTF8String];
@@ -634,6 +650,29 @@
     sqlite3_finalize(statement);
     
     return [[NSArray alloc] initWithArray:result];
+}
+
+-(NSDictionary*) getQuickSymbolsDictionary{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@, %@ FROM %@", F_SYMB_ID, F_NAME, F_CODE, T_SYMBOLS];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        while (sqlite3_step(statement) == SQLITE_ROW){
+            int iD = sqlite3_column_int(statement, 0);
+            
+            NSString *titleField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
+            
+            NSString *contentField = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
+            
+            [result setObject:[[QuickSymbol alloc] initWithId:iD title:titleField content:contentField] forKey:[NSNumber numberWithInt:iD]];
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return [[NSDictionary alloc] initWithDictionary:result];
 }
 
 -(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang{
@@ -660,6 +699,23 @@
 
 -(int) getSymbolsCount{
     NSString *querySQL = [NSString stringWithFormat: @"SELECT COUNT(%@) FROM %@", F_ID, T_SYMBOLS];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    int result = 0;
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        if (sqlite3_step(statement) == SQLITE_ROW){
+            result = sqlite3_column_int(statement, 0);
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return result;
+}
+
+-(int) getLanguagesCountSymbolUsedFor:(int)iD{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT COUNT(%@) FROM %@ WHERE %@=%d", F_ID, T_SYMBOLS, F_SYMB_ID, iD];
     const char *query_stmt = [querySQL UTF8String];
     
     int result = 0;

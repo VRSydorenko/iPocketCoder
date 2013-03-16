@@ -80,6 +80,7 @@
 		7FBB5B1616DA9AD7001B2241 /* ResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB5B1516DA9AD7001B2241 /* ResultsVC.m */; };
 		7FBB5B1916DAA440001B2241 /* RunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB5B1816DAA440001B2241 /* RunManager.m */; };
 		7FC3216F16D82A3800AA6123 /* QuickSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3216E16D82A3800AA6123 /* QuickSymbol.m */; };
+		7FC3306B16F3DED900E57E11 /* QuickSymbolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3306A16F3DED900E57E11 /* QuickSymbolManager.m */; };
 		7FC3865D16F2566D00F85860 /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3865C16F2566D00F85860 /* UserSettings.m */; };
 		7FCA8DEA16D56C8B00DA15FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */; };
 		7FD10ADC16DBD1E100253B15 /* InputVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FD10ADB16DBD1E100253B15 /* InputVC.m */; };
@@ -221,6 +222,8 @@
 		7FBB5B1816DAA440001B2241 /* RunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunManager.m; sourceTree = "<group>"; };
 		7FC3216D16D82A3800AA6123 /* QuickSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickSymbol.h; sourceTree = "<group>"; };
 		7FC3216E16D82A3800AA6123 /* QuickSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickSymbol.m; sourceTree = "<group>"; };
+		7FC3306916F3DED900E57E11 /* QuickSymbolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickSymbolManager.h; sourceTree = "<group>"; };
+		7FC3306A16F3DED900E57E11 /* QuickSymbolManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickSymbolManager.m; sourceTree = "<group>"; };
 		7FC3865B16F2566D00F85860 /* UserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettings.h; sourceTree = "<group>"; };
 		7FC3865C16F2566D00F85860 /* UserSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettings.m; sourceTree = "<group>"; };
 		7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -322,6 +325,8 @@
 				7FBB5B1516DA9AD7001B2241 /* ResultsVC.m */,
 				7FD10ADA16DBD1E100253B15 /* InputVC.h */,
 				7FD10ADB16DBD1E100253B15 /* InputVC.m */,
+				7FC3306916F3DED900E57E11 /* QuickSymbolManager.h */,
+				7FC3306A16F3DED900E57E11 /* QuickSymbolManager.m */,
 				7F51CC1C16CFFCBF00DDE28F /* Supporting Files */,
 			);
 			name = PocketCoder;
@@ -639,6 +644,7 @@
 				7FBB5B1916DAA440001B2241 /* RunManager.m in Sources */,
 				7FD10ADC16DBD1E100253B15 /* InputVC.m in Sources */,
 				7FC3865D16F2566D00F85860 /* UserSettings.m in Sources */,
+				7FC3306B16F3DED900E57E11 /* QuickSymbolManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
