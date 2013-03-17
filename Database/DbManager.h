@@ -26,6 +26,7 @@
 -(Project*) loadProject:(NSString*)name;
 -(QuickSymbol*) loadQuickSymbol:(int)iD;
 -(void) deleteProject:(NSString*)name;
+-(void) deleteQuickSymbol:(int)iD;
 -(void) deleteSnippet:(NSString*)name language:(int)lang;
 
 // actions on multipte objects
@@ -35,7 +36,7 @@
 -(NSDictionary*) getLanguages;
 -(NSString*) getLanguageName:(int)language;
 
--(int) getLanguagesCountSymbolUsedFor:(int)iD;
+-(NSArray*) getLanguagesSymbolUsedFor:(int)iD;
 -(NSArray*) getQuickSymbols;
 -(NSDictionary*) getQuickSymbolsDictionary;
 -(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang;

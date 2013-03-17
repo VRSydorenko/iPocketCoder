@@ -332,21 +332,24 @@
         [symbolsMap setObject:operatingSymbol.symbContent forKey:symbId];
 	}
     
+    float scrollContentWidth = MAX(barWidth, (symbolsForCurrentLanguage.count+2/*extra room for space & settings button*/)*(buttonPadding+buttonWidth)-buttonPadding);
+    
     // space & settings button
-    float btnX = (symbolsForCurrentLanguage.count+1)*buttonWidth + symbolsForCurrentLanguage.count*buttonPadding;
+    float btnX = scrollContentWidth - buttonWidth - buttonPadding;
     float btnHeight = barHeight - 2.0*barPadding;
     float btnWidth = buttonWidth;
     CGRect btnRect = CGRectMake(btnX, 0.0, btnWidth, btnHeight);
     
-    UILabel *btnSettings = [[UILabel alloc] initWithFrame:btnRect];
+    UIImageView *btnSettings = [[UIImageView alloc] initWithFrame:btnRect];
     btnSettings.layer.cornerRadius = 5.0;
     btnSettings.layer.borderColor = [UIColor blackColor].CGColor;
     btnSettings.layer.borderWidth = 0.5f;
     btnSettings.backgroundColor = [UIColor whiteColor];
-    btnSettings.text = @"E";
-    ;
-    btnSettings.textAlignment = NSTextAlignmentCenter;
-    btnSettings.font = accessoryButtonFont;
+    //btnSettings.text = @"E";
+    btnSettings.image = [UIImage imageNamed:IPAD?@"padSettings.png":@"phoneSettings.png"];
+    //btnSettings.textAlignment = NSTextAlignmentCenter;
+    //btnSettings.font = accessoryButtonFont;
+    btnSettings.contentMode = UIViewContentModeScaleAspectFit;
     
     btnSettings.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessorySettingsButtonPressed:)];
@@ -357,7 +360,7 @@
     
     // setting scroll size
 	
-	[scrollView setContentSize:CGSizeMake((symbolsForCurrentLanguage.count+2/*extra room for space & settings button*/)*(buttonPadding+buttonWidth)-buttonPadding, barHeight)];
+	[scrollView setContentSize:CGSizeMake(scrollContentWidth, barHeight)];
     
     quickSymbols = nil;
     quickSymbols = [[NSDictionary alloc] initWithDictionary:symbolsMap];

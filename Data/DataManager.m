@@ -52,8 +52,8 @@
     return [[self getDbManager] loadQuickSymbol:iD];
 }
 
-+(int) getLanguagesCountSymbolUsedFor:(int)iD{
-    return [[self getDbManager] getLanguagesCountSymbolUsedFor:iD];
++(NSArray*) getLanguagesSymbolUsedFor:(int)iD{
+    return [[self getDbManager] getLanguagesSymbolUsedFor:iD];
 }
 +(NSArray*) getQuickSymbols{
     return [[self getDbManager] getQuickSymbols];
@@ -77,6 +77,9 @@
 
 +(void) deleteProject:(NSString*)name{
     [[self getDbManager] deleteProject:name];
+}
++(void) deleteQuickSymbol:(int)iD{
+    [[self getDbManager] deleteQuickSymbol:iD];
 }
 
 @end

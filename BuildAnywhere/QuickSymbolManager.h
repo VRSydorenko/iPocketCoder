@@ -15,7 +15,8 @@
 @end
 
 @interface QuickSymbolManager : UIViewController<UITableViewDataSource,
-                                                 UITableViewDelegate>
+                                                 UITableViewDelegate,
+                                                 UIActionSheetDelegate>
 
 @property (nonatomic) int projectLanguge;
 @property (nonatomic) id<SymbolsEditorDelegate> delegate;

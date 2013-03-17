@@ -79,6 +79,10 @@
 		7FBB5B1316DA7CC3001B2241 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBB5B1216DA7CC3001B2241 /* SystemConfiguration.framework */; };
 		7FBB5B1616DA9AD7001B2241 /* ResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB5B1516DA9AD7001B2241 /* ResultsVC.m */; };
 		7FBB5B1916DAA440001B2241 /* RunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB5B1816DAA440001B2241 /* RunManager.m */; };
+		7FBDAE2F16F5FD5400364031 /* padSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FBDAE2B16F5FD5400364031 /* padSettings.png */; };
+		7FBDAE3016F5FD5400364031 /* padSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FBDAE2C16F5FD5400364031 /* padSettings@2x.png */; };
+		7FBDAE3116F5FD5400364031 /* phoneSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FBDAE2D16F5FD5400364031 /* phoneSettings.png */; };
+		7FBDAE3216F5FD5400364031 /* phoneSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FBDAE2E16F5FD5400364031 /* phoneSettings@2x.png */; };
 		7FC3216F16D82A3800AA6123 /* QuickSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3216E16D82A3800AA6123 /* QuickSymbol.m */; };
 		7FC3306B16F3DED900E57E11 /* QuickSymbolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3306A16F3DED900E57E11 /* QuickSymbolManager.m */; };
 		7FC3865D16F2566D00F85860 /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3865C16F2566D00F85860 /* UserSettings.m */; };
@@ -220,6 +224,10 @@
 		7FBB5B1516DA9AD7001B2241 /* ResultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsVC.m; sourceTree = "<group>"; };
 		7FBB5B1716DAA440001B2241 /* RunManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunManager.h; sourceTree = "<group>"; };
 		7FBB5B1816DAA440001B2241 /* RunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunManager.m; sourceTree = "<group>"; };
+		7FBDAE2B16F5FD5400364031 /* padSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = padSettings.png; sourceTree = "<group>"; };
+		7FBDAE2C16F5FD5400364031 /* padSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "padSettings@2x.png"; sourceTree = "<group>"; };
+		7FBDAE2D16F5FD5400364031 /* phoneSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phoneSettings.png; sourceTree = "<group>"; };
+		7FBDAE2E16F5FD5400364031 /* phoneSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phoneSettings@2x.png"; sourceTree = "<group>"; };
 		7FC3216D16D82A3800AA6123 /* QuickSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickSymbol.h; sourceTree = "<group>"; };
 		7FC3216E16D82A3800AA6123 /* QuickSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickSymbol.m; sourceTree = "<group>"; };
 		7FC3306916F3DED900E57E11 /* QuickSymbolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickSymbolManager.h; sourceTree = "<group>"; };
@@ -504,6 +512,10 @@
 		7FD331A016D13741006D7A0D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7FBDAE2B16F5FD5400364031 /* padSettings.png */,
+				7FBDAE2C16F5FD5400364031 /* padSettings@2x.png */,
+				7FBDAE2D16F5FD5400364031 /* phoneSettings.png */,
+				7FBDAE2E16F5FD5400364031 /* phoneSettings@2x.png */,
 				7FDC830916DD2D98005596C8 /* kb.png */,
 				7FDC830A16DD2D98005596C8 /* kb@2x.png */,
 				7F78A46D16D17F3D00BCE579 /* backArrow.png */,
@@ -579,6 +591,10 @@
 				7F0244EB16E0160B00430F9D /* Default-Portrait@2x~ipad.png in Resources */,
 				7F0244ED16E0161F00430F9D /* Default-Landscape~ipad.png in Resources */,
 				7F0244EF16E0162F00430F9D /* Default-Landscape@2x~ipad.png in Resources */,
+				7FBDAE2F16F5FD5400364031 /* padSettings.png in Resources */,
+				7FBDAE3016F5FD5400364031 /* padSettings@2x.png in Resources */,
+				7FBDAE3116F5FD5400364031 /* phoneSettings.png in Resources */,
+				7FBDAE3216F5FD5400364031 /* phoneSettings@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

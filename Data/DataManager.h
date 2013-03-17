@@ -26,7 +26,7 @@
 +(Snippet*) loadSnippet:(NSString*)name language:(int)lang;
 +(QuickSymbol*) loadQuickSymbol:(int)iD;
 
-+(int) getLanguagesCountSymbolUsedFor:(int)iD;
++(NSArray*) getLanguagesSymbolUsedFor:(int)iD;
 +(NSArray*) getQuickSymbols;
 +(NSDictionary*) getQuickSymbolsDictionary;
 +(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang;
@@ -35,5 +35,6 @@
 
 +(void) deleteSnippet:(NSString*)name language:(int)lang;
 +(void) deleteProject:(NSString*)name;
++(void) deleteQuickSymbol:(int)iD;
 
 @end

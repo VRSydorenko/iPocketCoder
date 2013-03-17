@@ -525,6 +525,21 @@
     sqlite3_finalize(statement);
 }
 
+-(void) deleteQuickSymbol:(int)iD{
+    NSString *deleteSQL = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@=%d", T_SYMBOLS, F_SYMB_ID, iD];
+    const char *delete_stmt = [deleteSQL UTF8String];
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, delete_stmt, -1, &statement, NULL) == SQLITE_OK){
+        if (sqlite3_step(statement) == SQLITE_DONE){
+        } else {
+            NSLog(@"Error deleting symbol from database");
+            NSLog(@"Info:%s", sqlite3_errmsg(buildAnywhereDb));
+        }
+    }
+    sqlite3_finalize(statement);
+}
+
 -(void) deleteSnippet:(NSString*)name language:(int)lang{
     NSString *deleteSQL = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = ? AND %@=%d", T_SNIPPETS, F_NAME, F_LANG, lang];
     const char *delete_stmt = [deleteSQL UTF8String];
@@ -594,7 +609,7 @@
         if (symbolsForLang > indexToPutAt){
             [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%@+1 WHERE %@=%d AND %@>=%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, F_SYMB_ORDER, F_LANG, lang, F_SYMB_ORDER, indexToPutAt]];
         }
-        [queries addObject:[NSString stringWithFormat:@"INSERT INTO %@ (%@, %@, %@) VALUES (%d, %d, %d)", T_SYMBOLS_ORDER, F_SYMB_ID, F_LANG, F_SYMB_ORDER, symbol.symbId, lang, indexToPutAt]];
+        [queries addObject:[NSString stringWithFormat:@"INSERT INTO %@ (%@, %@, %@) VALUES (%d, %d, %d);", T_SYMBOLS_ORDER, F_SYMB_ID, F_LANG, F_SYMB_ORDER, symbol.symbId, lang, indexToPutAt]];
     } else { // 'moving' symbol inside table
         if (indexToPutAt > currentOrder){ // moving symbol down
             [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%@-1 WHERE %@=%d AND %@>%d AND %@<=%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, F_SYMB_ORDER, F_LANG, lang, F_SYMB_ORDER, currentOrder, F_SYMB_ORDER, indexToPutAt]];
@@ -616,9 +631,13 @@
 -(void)removeQuickSymbol:(int)iD fomLanguageUsage:(int)lang{
     int currentOrder = [self getOrderIndexForSymbolId:iD forLaguageUsage:lang];
     
+    if (currentOrder < 0){
+        return;
+    }
+    
     NSMutableArray* queries = [[NSMutableArray alloc] initWithObjects:@"begin;", nil];
     
-    [queries addObject: [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@=%d AND %@=%d", T_SYMBOLS_ORDER, F_SYMB_ID, iD, F_LANG, lang]];
+    [queries addObject: [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@=%d AND %@=%d;", T_SYMBOLS_ORDER, F_SYMB_ID, iD, F_LANG, lang]];
     [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%@-1 WHERE %@=%d AND %@>%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, F_SYMB_ORDER, F_LANG, lang, F_SYMB_ORDER, currentOrder]];
     
     [queries addObject:@"commit;"];
@@ -714,16 +733,16 @@
     return result;
 }
 
--(int) getLanguagesCountSymbolUsedFor:(int)iD{
-    NSString *querySQL = [NSString stringWithFormat: @"SELECT COUNT(%@) FROM %@ WHERE %@=%d", F_ID, T_SYMBOLS, F_SYMB_ID, iD];
+-(NSArray*) getLanguagesSymbolUsedFor:(int)iD{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@ FROM %@ WHERE %@=%d", F_LANG, T_SYMBOLS_ORDER, F_SYMB_ID, iD];
     const char *query_stmt = [querySQL UTF8String];
     
-    int result = 0;
+    NSMutableArray *result = [[NSMutableArray alloc] init];
     
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
-        if (sqlite3_step(statement) == SQLITE_ROW){
-            result = sqlite3_column_int(statement, 0);
+        while (sqlite3_step(statement) == SQLITE_ROW){
+            [result addObject:[NSNumber numberWithInt:sqlite3_column_int(statement, 0)]];
         }
     }
     sqlite3_finalize(statement);
