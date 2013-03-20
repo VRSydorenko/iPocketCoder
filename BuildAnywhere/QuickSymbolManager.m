@@ -48,20 +48,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"symbolCell"];
+    ShortkeyCell* cell = [tableView dequeueReusableCellWithIdentifier:@"symbolCell"];
     
     if (!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"symbolCell"];
+        cell = [[ShortkeyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"symbolCell"];
     }
     
     NSNumber* row = [NSNumber numberWithInt:indexPath.row];
-    if ([selectedSymbols.allKeys containsObject:row]){
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    cell.isActive = [selectedSymbols.allKeys containsObject:row];
+    
     QuickSymbol* symbolForCurrentCell = (QuickSymbol*)[tableData objectForKey:row];
-    cell.textLabel.text = symbolForCurrentCell.symbTitle;
+    cell.labelShortkey.text = [Utils trimWhitespaces:symbolForCurrentCell.symbTitle];
     cell.tag = symbolForCurrentCell.symbId;
     
     return cell;

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MainNavController.h"
 #import "DataManager.h"
+#import "ShortkeyCell.h"
+#import "Utils.h"
 
 @protocol SymbolsEditorDelegate <NSObject>
 -(void)symbolsLayoutChanged;

@@ -10,6 +10,6 @@
 
 @interface Utils : NSObject
 
-
++(NSString*) trimWhitespaces:(NSString*)string;
 
 @end
