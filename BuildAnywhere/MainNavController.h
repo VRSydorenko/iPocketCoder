@@ -11,7 +11,13 @@
 
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
+@protocol RotationTrigger <NSObject>
+-(void)screenOrientationChanged;
+@end
+
 @interface MainNavController : UINavigationController
+
+@property (nonatomic) id<RotationTrigger> rotationTrigger;
 
 -(void)createMiniBackButtonWithBackPressedSelectorOnTarget:(UIViewController*)viewController;
 
@@ -20,9 +26,9 @@
 
 -(void)resetInfoBar;
 
-- (void)showInfoBarWithNegativeMessage:(NSString*)text;
-- (void)showInfoBarWithNeutralMessage:(NSString*)text;
-- (void)showInfoBarWithPositiveMessage:(NSString*)text;
+-(void)showInfoBarWithNegativeMessage:(NSString*)text;
+-(void)showInfoBarWithNeutralMessage:(NSString*)text;
+-(void)showInfoBarWithPositiveMessage:(NSString*)text;
 -(void) showMessageBox:(NSString*)title text:(NSString*)text;
 
 @end

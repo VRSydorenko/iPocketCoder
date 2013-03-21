@@ -16,6 +16,7 @@
     RunManager* runManager;
     BOOL detailsRequested;
     BOOL showResultsOnArrive;
+    BOOL keyboardActive;
     
     NSString* lastCmpInfo;
     NSString* lastOutput;
@@ -44,6 +45,7 @@
     self.textCode.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
     navCon = (MainNavController*)self.navigationController;
+    navCon.rotationTrigger = self;
     
     runManager = [[RunManager alloc] init];
     runManager.handler = self;
@@ -70,7 +72,7 @@
         }
     }
     
-    [self setupAccessoryView];
+    keyboardActive = NO;
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -225,11 +227,17 @@
     }
 }
 
+-(void)screenOrientationChanged{
+    [self symbolsLayoutChanged];
+}
+
 - (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
     if (self.textCode.inputAccessoryView == nil) {
+        if (!self.accessoryView){
+            [self setupAccessoryView];
+        }
         self.textCode.inputAccessoryView = self.accessoryView;
     }
-    
     return YES;
 }
 
@@ -258,6 +266,7 @@
     
     self.textCode.frame = newTextViewFrame;
     self.btnHideKeyboard.hidden = NO;
+    keyboardActive = YES;
     
     [UIView commitAnimations];
 }
@@ -273,6 +282,7 @@
     
     self.textCode.frame = self.view.bounds;
     self.btnHideKeyboard.hidden = YES;
+    keyboardActive = NO;
     
     [UIView commitAnimations];
 }
@@ -369,9 +379,17 @@
 }
 
 -(void)symbolsLayoutChanged{
+    BOOL needBecome = NO;
+    if (keyboardActive){
+        needBecome = YES;
+        [self.textCode resignFirstResponder];
+    }
     self.textCode.inputAccessoryView = nil;
     [self setupAccessoryView];
     self.textCode.inputAccessoryView = self.accessoryView;
+    if (needBecome){
+        [self.textCode becomeFirstResponder];
+    }
 }
 
 -(void)snippetSelected:(NSString*)code{
@@ -400,7 +418,30 @@
 }
 
 - (IBAction)accessorySettingsButtonPressed:(UIGestureRecognizer*)gestureRecognizer {
-    [self performSegueWithIdentifier:@"segueEditorToSymbolsManager" sender:self];
+    if (IPAD){
+        if (popoverController){
+            if ([popoverController isPopoverVisible]){
+                [popoverController dismissPopoverAnimated:YES];
+                return;
+            }
+            popoverController = nil;
+        }
+        
+        MainNavController *shortkeysManagerVC = [[UIStoryboard storyboardWithName:@"iPhoneMain" bundle:nil] instantiateViewControllerWithIdentifier:@"screenSymbolsManager"];
+        if (!shortkeysManagerVC){
+            return;
+        }
+        QuickSymbolManager* manager = (QuickSymbolManager*)[shortkeysManagerVC.viewControllers objectAtIndex:0];
+        manager.projectLanguge = project.projLanguage;
+        manager.delegate = self;
+        
+        float settingsBtnWidth = 50.0;
+        CGRect showPointRect = CGRectMake(self.textCode.bounds.size.width - settingsBtnWidth, self.textCode.bounds.size.height, settingsBtnWidth, settingsBtnWidth);
+        popoverController = [[UIPopoverController alloc] initWithContentViewController:shortkeysManagerVC];
+        [popoverController presentPopoverFromRect:showPointRect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else {
+        [self performSegueWithIdentifier:@"segueEditorToSymbolsManager" sender:self];
+    }
 }
 
 -(void)insertTextInEditor:(NSString*)content{

@@ -15,17 +15,17 @@
 
 @implementation MainNavController
 
+@synthesize rotationTrigger = _rotationTrigger;
 
 -(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-    if (!IPAD){
-        // if it has already been created on iPad so do nothing here
-        // because it has fixed size on iPad
-        [self resetInfoBar];
-    }
+    [self resetInfoBar];
 }
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-     [self initInfoBar];
+    [self initInfoBar];
+    if (self.rotationTrigger){
+        [self.rotationTrigger screenOrientationChanged];
+    }
 }
 
 -(void)createMiniBackButtonWithBackPressedSelectorOnTarget:(UIViewController*)viewController{

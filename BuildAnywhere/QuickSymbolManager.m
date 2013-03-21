@@ -96,30 +96,14 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-        NSArray* langs = [DataManager getLanguagesSymbolUsedFor:cell.tag];
-        int usage = langs.count;
-        if (usage == 0){
-            [DataManager deleteQuickSymbol:cell.tag];
-            [self updateData];
-            [self.delegate symbolsLayoutChanged];
-        } else if ([langs containsObject:[NSNumber numberWithInt:self.projectLanguge]]){
-            if (usage > 1){
-                NSString* title = [NSString stringWithFormat:@"The shortcut is also used for %d  more %@", usage - 1, usage>2?@"languages":@"language"];
-                UIActionSheet* deleteActionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete for all languages" otherButtonTitles:@"Delete for current language", nil];
-                deleteActionSheet.tag = cell.tag;
-                [deleteActionSheet showInView:self.view];
-            } else {
-                [DataManager removeQuickSymbol:cell.tag fomLanguageUsage:self.projectLanguge];
-                [DataManager deleteQuickSymbol:cell.tag];
-                [self updateData];
-                [self.delegate symbolsLayoutChanged];
-            }
-        } else { // symbol is used for other languages
-            NSString* title = [NSString stringWithFormat:@"The shortcut is used for %d other %@", usage, usage>1?@"languages":@"language"];
-            UIActionSheet* deleteActionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete anyway" otherButtonTitles:nil];
-            deleteActionSheet.tag = cell.tag;
-            [deleteActionSheet showInView:self.view];
+        int symbId = cell.tag;
+        
+        for (NSNumber* lang in [DataManager getLanguagesSymbolUsedFor:symbId]) {
+            [DataManager removeQuickSymbol:symbId fomLanguageUsage:lang.intValue];
         }
+        [DataManager deleteQuickSymbol:symbId];
+        [self updateData];
+        [self.delegate symbolsLayoutChanged];
     }
 }
 
@@ -165,41 +149,9 @@
     [self.tableSymbols reloadData];
 }
 
--(void) actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    int symbId = actionSheet.tag;
-    
-    if (buttonIndex == 2){ // 'cancel'
-        return;
-    } else if (buttonIndex == 1){ // 'cancel' or 'delete for current'
-        NSArray* langs = [DataManager getLanguagesSymbolUsedFor:symbId];
-        if (![langs containsObject:[NSNumber numberWithInt:self.projectLanguge]]){ // 'cancel'
-            return;
-        }
-    }
-    
-    switch (buttonIndex) {
-        case 0:{ // delete for all
-            for (NSNumber* lang in [DataManager getLanguagesSymbolUsedFor:symbId]) {
-                [DataManager removeQuickSymbol:symbId fomLanguageUsage:lang.intValue];
-            }
-            [DataManager deleteQuickSymbol:symbId];
-            break;
-        }
-        case 1:{ // delete for current
-            [DataManager removeQuickSymbol:symbId fomLanguageUsage:self.projectLanguge];
-            break;
-        }
-    }
-    
-    [self updateData];
-    [self.delegate symbolsLayoutChanged];
-}
-
 // iPhone
 -(void)backPressed{
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
 
 @end

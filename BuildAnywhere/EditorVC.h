@@ -20,7 +20,8 @@
 @interface EditorVC : UIViewController<UITextViewDelegate,
                                        IdeoneResponseProtocol,
                                        SnippetSelectionDelegate,
-                                       SymbolsEditorDelegate>
+                                       SymbolsEditorDelegate,
+                                       RotationTrigger>
 
 @property (nonatomic, weak) IBOutlet UITextView *textCode;
 @property (nonatomic, strong) IBOutlet UIView *accessoryView;

@@ -287,11 +287,11 @@
             <objects>
                 <viewController storyboardIdentifier="" title="Shortcuts" id="dDt-35-bcp" customClass="QuickSymbolManager" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rsr-3J-azw">
-                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="46" sectionHeaderHeight="22" sectionFooterHeight="22" id="AwK-JY-f3N">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -579,8 +579,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="eCf-Qe-pbV"/>
-        <segue reference="tP9-dw-dkh"/>
         <segue reference="mEh-N2-dcu"/>
+        <segue reference="Rzd-JB-uQ0"/>
         <segue reference="Ufh-j4-cFZ"/>
     </inferredMetricsTieBreakers>
 </document>
