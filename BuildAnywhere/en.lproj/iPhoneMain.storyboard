@@ -149,6 +149,21 @@
                                     <action selector="hideKeyboardPressed:" destination="Esg-49-CC9" eventType="touchUpInside" id="XeV-Jb-MRw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Jt-no-IQP">
+                                <rect key="frame" x="296" y="436" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="phoneSettings.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="accessorySmallSettingsButtonPressed" destination="Esg-49-CC9" eventType="touchUpInside" id="sPV-Al-2yc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -176,6 +191,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnHideKeyboard" destination="J2G-Fm-O6H" id="q73-XS-49S"/>
+                        <outlet property="btnShortkeysSettings" destination="9Jt-no-IQP" id="THr-Cy-53o"/>
                         <outlet property="flexItem" destination="R4z-7h-LrR" id="shj-Xv-mDT"/>
                         <outlet property="inputItem" destination="Ufy-J3-ylm" id="W9u-nw-maR"/>
                         <outlet property="runItem" destination="PlW-Hw-2CP" id="uVW-jh-71P"/>
@@ -287,11 +303,11 @@
             <objects>
                 <viewController storyboardIdentifier="" title="Shortcuts" id="dDt-35-bcp" customClass="QuickSymbolManager" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rsr-3J-azw">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="46" sectionHeaderHeight="22" sectionFooterHeight="22" id="AwK-JY-f3N">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -571,6 +587,7 @@
     </scenes>
     <resources>
         <image name="kb.png" width="32" height="32"/>
+        <image name="phoneSettings.png" width="24" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -578,9 +595,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="TPg-ee-sig"/>
         <segue reference="eCf-Qe-pbV"/>
+        <segue reference="tP9-dw-dkh"/>
         <segue reference="mEh-N2-dcu"/>
-        <segue reference="Rzd-JB-uQ0"/>
-        <segue reference="Ufh-j4-cFZ"/>
     </inferredMetricsTieBreakers>
 </document>

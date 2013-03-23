@@ -73,6 +73,7 @@
     }
     
     keyboardActive = NO;
+    self.btnShortkeysSettings.hidden = YES;
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -228,6 +229,16 @@
 }
 
 -(void)screenOrientationChanged{
+    if (IPAD){
+        // TODO: moving popover to look nice after orientation change
+        if (popoverController){
+            if ([popoverController isPopoverVisible]){
+                [popoverController dismissPopoverAnimated:YES];
+                return;
+            }
+            popoverController = nil;
+        }
+    }
     [self symbolsLayoutChanged];
 }
 
@@ -254,8 +265,13 @@
     keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
     
     CGFloat keyboardTop = keyboardRect.origin.y;
-    CGRect newTextViewFrame = self.textCode.bounds;
+    CGRect newTextViewFrame = CGRectMake(0.0, 0.0, self.textCode.frame.size.width, self.textCode.frame.size.width);// self.textCode.bounds;
     newTextViewFrame.size.height = keyboardTop - self.view.bounds.origin.y;
+    
+    CGPoint smallBtnSettingCenterPoint = self.btnShortkeysSettings.center;
+    smallBtnSettingCenterPoint.y = keyboardTop - self.btnShortkeysSettings.frame.size.height/2;
+    
+    int symbolsCountForCurrLang = [DataManager getOrderedSymbolIDsForLanguage:project.projLanguage].count;
     
     NSValue *animationDurationValue = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     NSTimeInterval animationDuration;
@@ -266,12 +282,17 @@
     
     self.textCode.frame = newTextViewFrame;
     self.btnHideKeyboard.hidden = NO;
+    self.btnShortkeysSettings.hidden = symbolsCountForCurrLang > 0;
+    self.btnShortkeysSettings.center = smallBtnSettingCenterPoint;
     keyboardActive = YES;
     
     [UIView commitAnimations];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
+    CGPoint smallBtnSettingCenterPoint = self.btnShortkeysSettings.center;
+    smallBtnSettingCenterPoint.y = self.view.bounds.size.height - self.btnShortkeysSettings.frame.size.height/2;
+    
     NSValue *animationDurationValue = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     
     NSTimeInterval animationDuration;
@@ -282,6 +303,8 @@
     
     self.textCode.frame = self.view.bounds;
     self.btnHideKeyboard.hidden = YES;
+    self.btnShortkeysSettings.hidden = YES;
+    self.btnShortkeysSettings.center = smallBtnSettingCenterPoint;
     keyboardActive = NO;
     
     [UIView commitAnimations];
@@ -302,80 +325,70 @@
     float barPadding = 5.0; // top & bottom
     CGRect barRect = CGRectMake(0.0, self.view.frame.size.height - barHeight, barWidth, barHeight);
     
-	UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:barRect];
-    [scrollView setShowsHorizontalScrollIndicator:NO];
-    [scrollView setShowsVerticalScrollIndicator:NO];
-    scrollView.backgroundColor = [UIColor lightGrayColor];
-    
-    UIFont *accessoryButtonFont = [UIFont fontWithName:@"Helvetica" size:buttonFontSize];
-    
-    NSMutableDictionary* symbolsMap = [[NSMutableDictionary alloc] init];
     NSDictionary* symbolsForCurrentLanguage = [DataManager getOrderedSymbolIDsForLanguage:project.projLanguage];
-    for (int i = 0; i < symbolsForCurrentLanguage.count; i++) {
-        NSNumber* symbId = (NSNumber*)[symbolsForCurrentLanguage objectForKey:[NSNumber numberWithInt:i]];
-        QuickSymbol* operatingSymbol = [DataManager loadQuickSymbol:symbId.intValue];
+    if (symbolsForCurrentLanguage.count > 0){
+        UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:barRect];
+        [scrollView setShowsHorizontalScrollIndicator:NO];
+        [scrollView setShowsVerticalScrollIndicator:NO];
+        scrollView.backgroundColor = [UIColor lightGrayColor];
+    
+        UIFont *accessoryButtonFont = [UIFont fontWithName:@"Helvetica" size:buttonFontSize];
+    
+        NSMutableDictionary* symbolsMap = [[NSMutableDictionary alloc] init];
+        for (int i = 0; i < symbolsForCurrentLanguage.count; i++) {
+            NSNumber* symbId = (NSNumber*)[symbolsForCurrentLanguage objectForKey:[NSNumber numberWithInt:i]];
+            QuickSymbol* operatingSymbol = [DataManager loadQuickSymbol:symbId.intValue];
         
-        float btnX = i*buttonWidth + (i+1.0)*buttonPadding;
+            float btnX = i*buttonWidth + (i+1.0)*buttonPadding;
+            float btnHeight = barHeight - 2.0*barPadding;
+            float btnWidth = buttonWidth;
+            CGRect btnRect = CGRectMake(btnX, 0.0, btnWidth, btnHeight);
+        
+            UILabel *button = [[UILabel alloc] initWithFrame:btnRect];
+            [self setupShortKeyButtonCommonProperties:&button];
+            button.text = [operatingSymbol.symbTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            button.font = accessoryButtonFont;
+
+            
+            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessoryButtonPressed:)];
+            [button addGestureRecognizer:tapGesture];
+        
+            button.tag = symbId.intValue;
+        
+            [scrollView addSubview:button];
+            button.center = CGPointMake(btnRect.origin.x+btnWidth/2.0, barRect.size.height/2.0);
+        
+            [symbolsMap setObject:operatingSymbol.symbContent forKey:symbId];
+        }
+    
+        float scrollContentWidth = MAX(barWidth, (symbolsForCurrentLanguage.count+2/*extra room for space & settings button*/)*(buttonPadding+buttonWidth)-buttonPadding);
+    
+        // space & settings button
+        float btnX = scrollContentWidth - buttonWidth - buttonPadding;
         float btnHeight = barHeight - 2.0*barPadding;
         float btnWidth = buttonWidth;
-		CGRect btnRect = CGRectMake(btnX, 0.0, btnWidth, btnHeight);
+        CGRect btnRect = CGRectMake(btnX, 0.0, btnWidth, btnHeight);
+    
+        UIImageView *btnSettings = [[UIImageView alloc] initWithFrame:btnRect];
+        [self setupShortKeyButtonCommonProperties:&btnSettings];
+        btnSettings.image = [UIImage imageNamed:IPAD?@"padSettings.png":@"phoneSettings.png"];
+        btnSettings.contentMode = UIViewContentModeScaleAspectFit;
+    
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessorySettingsButtonPressed:)];
+        [btnSettings addGestureRecognizer:tapGesture];
+    
+        [scrollView addSubview:btnSettings];
+        btnSettings.center = CGPointMake(btnRect.origin.x+btnWidth/2.0, barRect.size.height/2.0);
         
-        UILabel *button = [[UILabel alloc] initWithFrame:btnRect];
-        button.layer.cornerRadius = 5.0;
-        button.layer.borderColor = [UIColor blackColor].CGColor;
-        button.layer.borderWidth = 0.5f;
-        button.backgroundColor = [UIColor whiteColor];
-        button.text = [operatingSymbol.symbTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-;
-        button.textAlignment = NSTextAlignmentCenter;
-        button.font = accessoryButtonFont;
-        
-        button.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessoryButtonPressed:)];
-        [button addGestureRecognizer:tapGesture];
-        
-        button.tag = symbId.intValue;
-        
-        [scrollView addSubview:button];
-        button.center = CGPointMake(btnRect.origin.x+btnWidth/2.0, barRect.size.height/2.0);
-        
-        [symbolsMap setObject:operatingSymbol.symbContent forKey:symbId];
-	}
-    
-    float scrollContentWidth = MAX(barWidth, (symbolsForCurrentLanguage.count+2/*extra room for space & settings button*/)*(buttonPadding+buttonWidth)-buttonPadding);
-    
-    // space & settings button
-    float btnX = scrollContentWidth - buttonWidth - buttonPadding;
-    float btnHeight = barHeight - 2.0*barPadding;
-    float btnWidth = buttonWidth;
-    CGRect btnRect = CGRectMake(btnX, 0.0, btnWidth, btnHeight);
-    
-    UIImageView *btnSettings = [[UIImageView alloc] initWithFrame:btnRect];
-    btnSettings.layer.cornerRadius = 5.0;
-    btnSettings.layer.borderColor = [UIColor blackColor].CGColor;
-    btnSettings.layer.borderWidth = 0.5f;
-    btnSettings.backgroundColor = [UIColor whiteColor];
-    //btnSettings.text = @"E";
-    btnSettings.image = [UIImage imageNamed:IPAD?@"padSettings.png":@"phoneSettings.png"];
-    //btnSettings.textAlignment = NSTextAlignmentCenter;
-    //btnSettings.font = accessoryButtonFont;
-    btnSettings.contentMode = UIViewContentModeScaleAspectFit;
-    
-    btnSettings.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(accessorySettingsButtonPressed:)];
-    [btnSettings addGestureRecognizer:tapGesture];
-    
-    [scrollView addSubview:btnSettings];
-    btnSettings.center = CGPointMake(btnRect.origin.x+btnWidth/2.0, barRect.size.height/2.0);
-    
-    // setting scroll size
+        // setting scroll size
 	
-	[scrollView setContentSize:CGSizeMake(scrollContentWidth, barHeight)];
+        [scrollView setContentSize:CGSizeMake(scrollContentWidth, barHeight)];
     
-    quickSymbols = nil;
-    quickSymbols = [[NSDictionary alloc] initWithDictionary:symbolsMap];
+        quickSymbols = nil;
+        quickSymbols = [[NSDictionary alloc] initWithDictionary:symbolsMap];
     
-    self.accessoryView = scrollView;
+        self.accessoryView = scrollView;
+    }
 }
 
 -(void)symbolsLayoutChanged{
@@ -389,6 +402,17 @@
     self.textCode.inputAccessoryView = self.accessoryView;
     if (needBecome){
         [self.textCode becomeFirstResponder];
+    }
+}
+
+-(void)setupShortKeyButtonCommonProperties:(UIView**)btn{
+    (*btn).layer.cornerRadius = 5.0;
+    (*btn).layer.borderColor = [UIColor blackColor].CGColor;
+    (*btn).layer.borderWidth = 0.5f;
+    (*btn).backgroundColor = [UIColor whiteColor];
+    (*btn).userInteractionEnabled = YES;
+    if ([(*btn) isKindOfClass:[UILabel class]]){
+        ((UILabel*)(*btn)).textAlignment = NSTextAlignmentCenter;
     }
 }
 
@@ -417,6 +441,10 @@
     [self insertTextInEditor:content];
 }
 
+- (IBAction)accessorySmallSettingsButtonPressed{
+    [self accessorySettingsButtonPressed:nil];
+}
+
 - (IBAction)accessorySettingsButtonPressed:(UIGestureRecognizer*)gestureRecognizer {
     if (IPAD){
         if (popoverController){
@@ -435,8 +463,7 @@
         manager.projectLanguge = project.projLanguage;
         manager.delegate = self;
         
-        float settingsBtnWidth = 50.0;
-        CGRect showPointRect = CGRectMake(self.textCode.bounds.size.width - settingsBtnWidth, self.textCode.bounds.size.height, settingsBtnWidth, settingsBtnWidth);
+        CGRect showPointRect = CGRectMake(self.textCode.bounds.size.width, self.textCode.bounds.size.height, 1, 1);
         popoverController = [[UIPopoverController alloc] initWithContentViewController:shortkeysManagerVC];
         [popoverController presentPopoverFromRect:showPointRect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else {

@@ -24,6 +24,7 @@
                                        RotationTrigger>
 
 @property (nonatomic, weak) IBOutlet UITextView *textCode;
+@property (nonatomic, weak) IBOutlet UIButton *btnShortkeysSettings;
 @property (nonatomic, strong) IBOutlet UIView *accessoryView;
 
 @property (nonatomic) NSString* projectName;
@@ -35,5 +36,6 @@
 - (IBAction)hideKeyboardPressed:(id)sender;
 - (IBAction)inputPressed:(id)sender;
 - (IBAction)runPressed:(id)sender;
+- (IBAction)accessorySmallSettingsButtonPressed;
 
 @end
