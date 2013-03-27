@@ -288,14 +288,24 @@
     [UserSettings setBaseSymbolsInitialized];
 }
 
--(void) saveQuickSymbol:(QuickSymbol*)symbol{
+-(int) createQuickSymbol:(NSString*)symbol{
+    int newId = [self getMaxSymbolId] + 1;
+    if (newId == 0){
+        return -1;
+    }
+    QuickSymbol* newSymb = [[QuickSymbol alloc] initWithId:newId title:symbol content:symbol];
+    return [self saveQuickSymbol:newSymb] ? newId : -1;
+}
+
+-(BOOL) saveQuickSymbol:(QuickSymbol*)symbol{
     if ([self loadQuickSymbol:symbol.symbId]){
-        return;
+        return NO;
     }
     
     NSString* sql = [NSString stringWithFormat: @"INSERT INTO %@ (%@, %@, %@) VALUES (%d, ?, ?)", T_SYMBOLS, F_SYMB_ID, F_NAME, F_CODE, symbol.symbId];
     const char *insert_stmt = [sql UTF8String];
     
+    BOOL errCode = NO;
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(buildAnywhereDb, insert_stmt, -1, &statement, NULL) == SQLITE_OK){
         sqlite3_bind_text(statement, 1, [symbol.symbTitle cStringUsingEncoding:NSUTF8StringEncoding], -1, SQLITE_TRANSIENT);
@@ -304,12 +314,15 @@
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             NSLog(@"Symbol inserted");
+            errCode = YES;
         } else {
             NSLog(@"Failed to save symbol");
             NSLog(@"Info:%s", sqlite3_errmsg(buildAnywhereDb));
         }
     }
     sqlite3_finalize(statement);
+    
+    return errCode;
 }
 
 -(void) initInitialSnippets{
@@ -594,10 +607,10 @@
     return [[NSArray alloc] initWithArray:result];
 }
 
--(void) putQuickSymbol:(QuickSymbol*)symbol toLanguageUsage:(int)lang atIndex:(int)index{
+-(void) putQuickSymbol:(int)symbId toLanguageUsage:(int)lang atIndex:(int)index{
     int symbolsForLang = [self getSymbolsCountForLanguage:lang];
     int indexToPutAt = MAX(0, MIN(index, symbolsForLang));
-    int currentOrder = [self getOrderIndexForSymbolId:symbol.symbId forLaguageUsage:lang];
+    int currentOrder = [self getOrderIndexForSymbolId:symbId forLaguageUsage:lang];
     
     if (indexToPutAt == currentOrder){
         return;
@@ -609,7 +622,7 @@
         if (symbolsForLang > indexToPutAt){
             [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%@+1 WHERE %@=%d AND %@>=%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, F_SYMB_ORDER, F_LANG, lang, F_SYMB_ORDER, indexToPutAt]];
         }
-        [queries addObject:[NSString stringWithFormat:@"INSERT INTO %@ (%@, %@, %@) VALUES (%d, %d, %d);", T_SYMBOLS_ORDER, F_SYMB_ID, F_LANG, F_SYMB_ORDER, symbol.symbId, lang, indexToPutAt]];
+        [queries addObject:[NSString stringWithFormat:@"INSERT INTO %@ (%@, %@, %@) VALUES (%d, %d, %d);", T_SYMBOLS_ORDER, F_SYMB_ID, F_LANG, F_SYMB_ORDER, symbId, lang, indexToPutAt]];
     } else { // 'moving' symbol inside table
         if (indexToPutAt > currentOrder){ // moving symbol down
             [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%@-1 WHERE %@=%d AND %@>%d AND %@<=%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, F_SYMB_ORDER, F_LANG, lang, F_SYMB_ORDER, currentOrder, F_SYMB_ORDER, indexToPutAt]];
@@ -617,7 +630,7 @@
             [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%@+1 WHERE %@=%d AND %@>=%d AND %@<%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, F_SYMB_ORDER, F_LANG, lang, F_SYMB_ORDER, indexToPutAt, F_SYMB_ORDER, currentOrder]];
         }
         
-        [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%d WHERE %@=%d AND %@=%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, indexToPutAt, F_LANG, lang, F_SYMB_ID, symbol.symbId]];
+        [queries addObject: [NSString stringWithFormat:@"UPDATE %@ SET %@=%d WHERE %@=%d AND %@=%d;", T_SYMBOLS_ORDER, F_SYMB_ORDER, indexToPutAt, F_LANG, lang, F_SYMB_ID, symbId]];
     }
     
     [queries addObject:@"commit;"];
@@ -770,6 +783,23 @@
 
 -(int) getSymbolsCountForLanguage:(int)lang{
     NSString *querySQL = [NSString stringWithFormat: @"SELECT COUNT(%@) FROM %@ WHERE %@=%d", F_ID, T_SYMBOLS_ORDER, F_LANG, lang];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    int result = 0;
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        if (sqlite3_step(statement) == SQLITE_ROW){
+            result = sqlite3_column_int(statement, 0);
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return result;
+}
+
+-(int) getMaxSymbolId{
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT MAX(%@) FROM %@", F_ID, T_SYMBOLS];
     const char *query_stmt = [querySQL UTF8String];
     
     int result = 0;

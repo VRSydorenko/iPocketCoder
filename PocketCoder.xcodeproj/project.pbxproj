@@ -87,6 +87,7 @@
 		7FC3216F16D82A3800AA6123 /* QuickSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3216E16D82A3800AA6123 /* QuickSymbol.m */; };
 		7FC3306B16F3DED900E57E11 /* QuickSymbolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3306A16F3DED900E57E11 /* QuickSymbolManager.m */; };
 		7FC3865D16F2566D00F85860 /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3865C16F2566D00F85860 /* UserSettings.m */; };
+		7FC3D4E3170354800024FF9A /* AddShortkeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3D4E2170354800024FF9A /* AddShortkeyCell.m */; };
 		7FCA8DEA16D56C8B00DA15FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */; };
 		7FD10ADC16DBD1E100253B15 /* InputVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FD10ADB16DBD1E100253B15 /* InputVC.m */; };
 		7FDC830B16DD2D98005596C8 /* kb.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FDC830916DD2D98005596C8 /* kb.png */; };
@@ -237,6 +238,8 @@
 		7FC3306A16F3DED900E57E11 /* QuickSymbolManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickSymbolManager.m; sourceTree = "<group>"; };
 		7FC3865B16F2566D00F85860 /* UserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettings.h; sourceTree = "<group>"; };
 		7FC3865C16F2566D00F85860 /* UserSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettings.m; sourceTree = "<group>"; };
+		7FC3D4E1170354800024FF9A /* AddShortkeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddShortkeyCell.h; sourceTree = "<group>"; };
+		7FC3D4E2170354800024FF9A /* AddShortkeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddShortkeyCell.m; sourceTree = "<group>"; };
 		7FCA8DE916D56C8B00DA15FB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7FD10ADA16DBD1E100253B15 /* InputVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputVC.h; sourceTree = "<group>"; };
 		7FD10ADB16DBD1E100253B15 /* InputVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputVC.m; sourceTree = "<group>"; };
@@ -398,6 +401,8 @@
 				7FC3865C16F2566D00F85860 /* UserSettings.m */,
 				7FC26D2716FA319E0056FB58 /* ShortkeyCell.h */,
 				7FC26D2816FA319E0056FB58 /* ShortkeyCell.m */,
+				7FC3D4E1170354800024FF9A /* AddShortkeyCell.h */,
+				7FC3D4E2170354800024FF9A /* AddShortkeyCell.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -667,6 +672,7 @@
 				7FC3865D16F2566D00F85860 /* UserSettings.m in Sources */,
 				7FC3306B16F3DED900E57E11 /* QuickSymbolManager.m in Sources */,
 				7FC26D2916FA319E0056FB58 /* ShortkeyCell.m in Sources */,
+				7FC3D4E3170354800024FF9A /* AddShortkeyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,7 +732,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -752,7 +758,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -808,7 +814,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "424251C1-5AC3-43AB-BA9D-F1091FB02DAC";
 				SDKROOT = iphoneos;

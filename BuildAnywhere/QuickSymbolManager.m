@@ -25,6 +25,18 @@
 {
     [super viewDidLoad];
     
+    if (!IPAD){ // causes wrong behaviour on iPad
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    }
+
+    
     navCon = (MainNavController*)self.navigationController;
     
     if (!IPAD){ // to save more space on navigation bar
@@ -33,6 +45,8 @@
         
     self.tableSymbols.delegate = self;
     self.tableSymbols.dataSource = self;
+    
+   // [self.tableSymbols registerClass:[AddShortkeyCell class] forCellReuseIdentifier:@"addSymbolCell"];
     
     [self updateData];
     [self updateEditButton];
@@ -43,12 +57,31 @@
     [super viewDidUnload];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [navCon hideToolBarAnimated:YES];
+}
+
+-(BOOL)shouldAutorotate{
+    return NO;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return allSymbols.count;
+    int n = tableData.count + /*row for new symbols in editing mode*/ (self.editing?1:0);
+    return n;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ShortkeyCell* cell = [tableView dequeueReusableCellWithIdentifier:@"symbolCell"];
+    if (self.editing && indexPath.row == tableData.count){ // extra row for new symbols
+        AddShortkeyCell* addKeyCell = [tableView dequeueReusableCellWithIdentifier:@"addSymbolCell" forIndexPath:indexPath];
+        if (!addKeyCell){
+            addKeyCell = [[AddShortkeyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"addSymbolCell"];
+        }
+        addKeyCell.shortkeyCreationDelegate = self;
+        
+        return addKeyCell;
+    }
+    
+    ShortkeyCell* cell = [tableView dequeueReusableCellWithIdentifier:@"symbolCell" forIndexPath:indexPath];
     
     if (!cell){
         cell = [[ShortkeyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"symbolCell"];
@@ -65,15 +98,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == tableData.count){ // extra row (add new symbol)
+        return;
+    }
+    
     NSNumber* row = [NSNumber numberWithInt:indexPath.row];
     QuickSymbol* checkedSymbol = [tableData objectForKey:row];
     if ([selectedSymbols.allValues containsObject:[NSNumber numberWithInt:checkedSymbol.symbId]]){
         [DataManager removeQuickSymbol:checkedSymbol.symbId fomLanguageUsage:self.projectLanguge];
     } else {
-        [DataManager putQuickSymbol:checkedSymbol toLanguageUsage:self.projectLanguge atIndex:selectedSymbols.count];
+        [DataManager putQuickSymbol:checkedSymbol.symbId toLanguageUsage:self.projectLanguge atIndex:selectedSymbols.count];
     }
     [self updateData];
-    [self.delegate symbolsLayoutChanged];
+    [self.delegate symbolsLayoutChanged:SYMBOL_STATE_CHANGED];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -87,9 +124,9 @@
 - (void)tableView:(UITableView*)tableView moveRowAtIndexPath:(NSIndexPath*)fromIndexPath toIndexPath:(NSIndexPath*)toIndexPath {
     NSNumber* row = [NSNumber numberWithInt:fromIndexPath.row];
     QuickSymbol* symbolFromCell = (QuickSymbol*)[tableData objectForKey:row];
-    [DataManager putQuickSymbol:symbolFromCell toLanguageUsage:self.projectLanguge atIndex:toIndexPath.row];
+    [DataManager putQuickSymbol:symbolFromCell.symbId toLanguageUsage:self.projectLanguge atIndex:toIndexPath.row];
     [self updateData];
-    [self.delegate symbolsLayoutChanged];
+    [self.delegate symbolsLayoutChanged:SYMBOL_MOVED];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,13 +140,13 @@
         }
         [DataManager deleteQuickSymbol:symbId];
         [self updateData];
-        [self.delegate symbolsLayoutChanged];
+        [self.delegate symbolsLayoutChanged:SYMBOL_DELETED];
     }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.editing;
+    return self.editing && indexPath.row < tableData.count;
 }
 
 - (IBAction)editTablePressed:(id)sender{
@@ -117,6 +154,7 @@
     
     [self.tableSymbols setEditing:self.editing animated:YES];
     [self updateEditButton];
+    [self.tableSymbols reloadData];
 }
 
 -(void)updateEditButton{
@@ -149,9 +187,63 @@
     [self.tableSymbols reloadData];
 }
 
+-(void)wishToCreateNewShortkeyWithSymbol:(NSString *)text{
+    NSString* toAdd = [text substringToIndex:1];
+    int newSymbolId = [DataManager createQuickSymbol:toAdd];
+    if (newSymbolId != -1){
+        [DataManager putQuickSymbol:newSymbolId toLanguageUsage:self.projectLanguge atIndex:selectedSymbols.count];
+        [self updateData];
+        [self.delegate symbolsLayoutChanged:SYMBOL_ADDED];
+    }
+}
+
 // iPhone
 -(void)backPressed{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    if (IPAD){
+        return;
+    }
+    
+    NSValue *aValue = [notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    
+    CGRect keyboardRect = [aValue CGRectValue];
+    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
+    
+    CGFloat keyboardTop = keyboardRect.origin.y;
+    CGRect newTextViewFrame = CGRectMake(0.0, 0.0, self.tableSymbols.frame.size.width, self.tableSymbols.frame.size.width);// self.textCode.bounds;
+    newTextViewFrame.size.height = keyboardTop - self.view.bounds.origin.y;
+    
+    NSValue *animationDurationValue = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:animationDuration];
+    
+    self.tableSymbols.frame = newTextViewFrame;
+    
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    if (IPAD){
+        return;
+    }
+    
+    NSValue *animationDurationValue = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:animationDuration];
+    
+    self.tableSymbols.frame = self.view.bounds;
+    
+    [UIView commitAnimations];
 }
 
 @end

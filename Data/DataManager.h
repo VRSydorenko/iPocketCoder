@@ -16,6 +16,7 @@
 
 +(int) saveProject:(Project*)project;
 +(int) saveSnippet:(Snippet*)snippet;
++(int) createQuickSymbol:(NSString*)symbol;
 
 +(NSDictionary*) getLanguages;
 +(NSString*) getLanguageName:(int)language;
@@ -30,7 +31,7 @@
 +(NSArray*) getQuickSymbols;
 +(NSDictionary*) getQuickSymbolsDictionary;
 +(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang;
-+(void) putQuickSymbol:(QuickSymbol*)symbol toLanguageUsage:(int)lang atIndex:(int)index;
++(void) putQuickSymbol:(int)symbId toLanguageUsage:(int)lang atIndex:(int)index;
 +(void)removeQuickSymbol:(int)iD fomLanguageUsage:(int)lang;
 
 +(void) deleteSnippet:(NSString*)name language:(int)lang;

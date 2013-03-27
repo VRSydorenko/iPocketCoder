@@ -28,6 +28,13 @@
     }
 }
 
+-(BOOL)shouldAutorotate{
+    if ([[self topViewController] respondsToSelector:@selector(shouldAutorotate)]){
+            return [[self topViewController] shouldAutorotate];
+    }
+    return YES;
+}
+
 -(void)createMiniBackButtonWithBackPressedSelectorOnTarget:(UIViewController*)viewController{
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *backBtnImage = [UIImage imageNamed:@"backArrow.png"] ;

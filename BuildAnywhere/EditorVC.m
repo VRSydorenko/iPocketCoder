@@ -65,7 +65,7 @@
         if (![UserSettings getSymbolsInitializedForLang:project.projLanguage]){
             int i = 0;
             for (QuickSymbol* symbol in [DataManager getQuickSymbols]) {
-                [DataManager putQuickSymbol:symbol toLanguageUsage:project.projLanguage atIndex:i];
+                [DataManager putQuickSymbol:symbol.symbId toLanguageUsage:project.projLanguage atIndex:i];
                 i++;
             }
             [UserSettings setSymbolsInitializedForLang:project.projLanguage];
@@ -229,6 +229,7 @@
 }
 
 -(void)screenOrientationChanged{
+    [self symbolsLayoutChanged:SCREEN_ROTATED];
     if (IPAD){
         // TODO: moving popover to look nice after orientation change
         if (popoverController){
@@ -239,7 +240,6 @@
             popoverController = nil;
         }
     }
-    [self symbolsLayoutChanged];
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
@@ -391,9 +391,9 @@
     }
 }
 
--(void)symbolsLayoutChanged{
+-(void)symbolsLayoutChanged:(SymbolsLayoutChange)action{
     BOOL needBecome = NO;
-    if (keyboardActive){
+    if (keyboardActive || action == SYMBOL_ADDED){
         needBecome = YES;
         [self.textCode resignFirstResponder];
     }

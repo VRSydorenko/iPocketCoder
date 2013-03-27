@@ -24,6 +24,10 @@
     return [[self getDbManager] saveSnippet:snippet];
 }
 
++(int) createQuickSymbol:(NSString*)symbol{
+    return [[self getDbManager] createQuickSymbol:symbol];
+}
+
 +(NSString*) getLanguageName:(int)language{
     return [[self getDbManager] getLanguageName:language];
 }
@@ -64,8 +68,8 @@
 +(NSDictionary*)getOrderedSymbolIDsForLanguage:(int)lang{
     return [[self getDbManager] getOrderedSymbolIDsForLanguage:lang];
 }
-+(void) putQuickSymbol:(QuickSymbol*)symbol toLanguageUsage:(int)lang atIndex:(int)index{
-    [[self getDbManager] putQuickSymbol:symbol toLanguageUsage:lang atIndex:index];
++(void) putQuickSymbol:(int)symbId toLanguageUsage:(int)lang atIndex:(int)index{
+    [[self getDbManager] putQuickSymbol:symbId toLanguageUsage:lang atIndex:index];
 }
 +(void)removeQuickSymbol:(int)iD fomLanguageUsage:(int)lang{
     [[self getDbManager] removeQuickSymbol:iD fomLanguageUsage:lang];
