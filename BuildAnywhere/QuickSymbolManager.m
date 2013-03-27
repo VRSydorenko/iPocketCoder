@@ -188,7 +188,7 @@
 }
 
 -(void)wishToCreateNewShortkeyWithSymbol:(NSString *)text{
-    NSString* toAdd = [text substringToIndex:1];
+    NSString* toAdd = text;
     int newSymbolId = [DataManager createQuickSymbol:toAdd];
     if (newSymbolId != -1){
         [DataManager putQuickSymbol:newSymbolId toLanguageUsage:self.projectLanguge atIndex:selectedSymbols.count];
