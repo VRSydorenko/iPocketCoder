@@ -74,6 +74,7 @@
     
     keyboardActive = NO;
     self.btnShortkeysSettings.hidden = YES;
+    [self textViewDidEndEditing:self.textCode]; // updating Share button state
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -136,6 +137,9 @@
         UIBarButtonItem *textItem = [[UIBarButtonItem alloc] initWithTitle:text style:UIBarButtonItemStylePlain target:nil action:nil];
         textItem.title = text;
         [items addObject:textItem];
+    } else {
+        [items addObject:self.shareItem];
+        self.shareItem.enabled = !needed;
     }
     [items addObject:self.flexItem];
     self.inputItem.enabled = !needed;
@@ -150,7 +154,9 @@
     NSMutableArray *items = [[NSMutableArray alloc] init];
     
     [items addObject:[[UIBarButtonItem alloc] initWithTitle:@"View results" style:UIBarButtonItemStyleBordered target:self action:@selector(viewOutput)]];
-     
+
+    [items addObject:self.shareItem];
+    self.shareItem.enabled = YES;
     [items addObject:self.flexItem];
     self.inputItem.enabled = YES;
     [items addObject:self.inputItem];
@@ -211,6 +217,7 @@
     if ([segue.identifier isEqualToString:@"segueEditorToOutput"]){
         ResultsVC* outputVC = (ResultsVC*)segue.destinationViewController;
         int maxOutputLength = 3000;
+        outputVC.projectName = project.projName;
         outputVC.output = lastOutput.length > maxOutputLength ? [lastOutput substringToIndex:maxOutputLength] : lastOutput;
         outputVC.cmpInfo = lastCmpInfo;
         outputVC.stdErr = lastStdErr;
@@ -242,7 +249,7 @@
     }
 }
 
-- (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
+-(BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
     if (self.textCode.inputAccessoryView == nil) {
         if (!self.accessoryView){
             [self setupAccessoryView];
@@ -252,10 +259,17 @@
     return YES;
 }
 
-- (BOOL)textViewShouldEndEditing:(UITextView *)aTextView {
+-(BOOL)textViewShouldEndEditing:(UITextView *)aTextView {
     [self.textCode resignFirstResponder];
     self.textCode.inputAccessoryView = nil;
     return YES;
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    NSString *trimmedCode = [Utils trimWhitespaces:self.textCode.text];
+    self.shareItem.enabled = trimmedCode.length > 0 // code is not whitespaces only
+                             || (project.projLanguage == 6 && self.textCode.text.length > 0) // it's OK for Whitespace lang (code 6)
+                             || project.projLink.length > 0;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -558,6 +572,43 @@
 -(void)errorOccurred:(NSError*)error{
     [self updateToolbarWithSpinner:NO statusText:@""];
     [navCon showInfoBarWithNegativeMessage:error.localizedDescription];
+}
+
+-(IBAction)sharePressed:(id)sender{
+    if (self.textCode.text.length == 0 && project.projLink.length == 0){
+        return;
+    }
+    
+    UIActionSheet *shareActionSheet = [[UIActionSheet alloc] initWithTitle:@"Sharing options:" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    
+    if (self.textCode.text.length > 0){
+        [shareActionSheet addButtonWithTitle:@"Source code"];
+    }
+    if (project.projLink.length > 0){
+        [shareActionSheet addButtonWithTitle:@"The latest code run (URL)"];
+    }
+    [shareActionSheet addButtonWithTitle:@"Cancel"];
+    shareActionSheet.cancelButtonIndex = shareActionSheet.numberOfButtons - 1;
+    
+    [shareActionSheet showFromToolbar:navCon.toolbar];
+    //[shareActionSheet showInView:self.view];
+}
+
+-(void) actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == actionSheet.cancelButtonIndex){
+        return;
+    }
+    
+    NSString* shareIntroString = [NSString stringWithFormat:@"%@ source code from iPocketCoder:", [DataManager getLanguageName:project.projLanguage]];
+    
+    NSString* textToShare = @"";
+    if (buttonIndex == 0 && project.projLink.length == 0){ // [source]
+        textToShare = [NSString stringWithFormat:@"%@\n\n%@", shareIntroString, self.textCode.text];
+    } else { // [link]
+        textToShare = [NSString stringWithFormat:@"Link to the %@ http://ideone.com/%@", shareIntroString, project.projLink];
+    }
+    
+    [Utils shareText:textToShare overViewController:self];
 }
 
 - (void)dealloc {

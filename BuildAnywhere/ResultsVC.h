@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "MainNavController.h"
+#import "ShareManagerVC.h"
+#import "Utils.h"
+#import "Project.h"
+#import "DataManager.h"
 
-@interface ResultsVC : UIViewController
+@interface ResultsVC : UIViewController<ShareManagerProtocol>
 
+@property (nonatomic) NSString* projectName;
 @property (nonatomic) NSString* cmpInfo;
 @property (nonatomic) NSString* output;
 @property (nonatomic) NSString* stdErr;
@@ -18,5 +23,6 @@
 
 - (IBAction)cmpInfoPressed:(id)sender;
 - (IBAction)outputPressed:(id)sender;
+- (IBAction)sharePressed:(id)sender;
 
 @end

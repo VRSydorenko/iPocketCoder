@@ -21,7 +21,8 @@
                                        IdeoneResponseProtocol,
                                        SnippetSelectionDelegate,
                                        SymbolsEditorDelegate,
-                                       RotationTrigger>
+                                       RotationTrigger,
+                                       UIActionSheetDelegate>
 
 @property (nonatomic, weak) IBOutlet UITextView *textCode;
 @property (nonatomic, weak) IBOutlet UIButton *btnShortkeysSettings;
@@ -32,10 +33,12 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *flexItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *inputItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *runItem;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *shareItem;
 - (IBAction)snippetsPressed:(id)sender;
 - (IBAction)hideKeyboardPressed:(id)sender;
 - (IBAction)inputPressed:(id)sender;
 - (IBAction)runPressed:(id)sender;
+- (IBAction)sharePressed:(id)sender;
 - (IBAction)accessorySmallSettingsButtonPressed;
 
 @end

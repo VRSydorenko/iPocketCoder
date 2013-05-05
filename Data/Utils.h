@@ -11,5 +11,6 @@
 @interface Utils : NSObject
 
 +(NSString*) trimWhitespaces:(NSString*)string;
++(void)shareText:(NSString*)textToShare overViewController:(UIViewController*)viewController;
 
 @end

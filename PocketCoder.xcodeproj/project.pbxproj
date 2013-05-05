@@ -18,6 +18,7 @@
 		7F025EE316E00810004D6ACC /* icon_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F025EE216E00810004D6ACC /* icon_iPhone@2x.png */; };
 		7F025EE516E00836004D6ACC /* icon_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F025EE416E00836004D6ACC /* icon_iPad.png */; };
 		7F025EE716E008C0004D6ACC /* icon_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F025EE616E008C0004D6ACC /* icon_iPad@2x.png */; };
+		7F23A9681736C02600308B5B /* ShareManagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A9671736C02600308B5B /* ShareManagerVC.m */; };
 		7F51CC1616CFFCBF00DDE28F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F51CC1516CFFCBF00DDE28F /* UIKit.framework */; };
 		7F51CC1816CFFCBF00DDE28F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F51CC1716CFFCBF00DDE28F /* Foundation.framework */; };
 		7F51CC1A16CFFCBF00DDE28F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F51CC1916CFFCBF00DDE28F /* CoreGraphics.framework */; };
@@ -106,6 +107,8 @@
 		7F025EE216E00810004D6ACC /* icon_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_iPhone@2x.png"; sourceTree = "<group>"; };
 		7F025EE416E00836004D6ACC /* icon_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_iPad.png; sourceTree = "<group>"; };
 		7F025EE616E008C0004D6ACC /* icon_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_iPad@2x.png"; sourceTree = "<group>"; };
+		7F23A9661736C02600308B5B /* ShareManagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManagerVC.h; sourceTree = "<group>"; };
+		7F23A9671736C02600308B5B /* ShareManagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManagerVC.m; sourceTree = "<group>"; };
 		7F51CC1216CFFCBF00DDE28F /* PocketCoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketCoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F51CC1516CFFCBF00DDE28F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7F51CC1716CFFCBF00DDE28F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -341,6 +344,8 @@
 				7FD10ADB16DBD1E100253B15 /* InputVC.m */,
 				7FC3306916F3DED900E57E11 /* QuickSymbolManager.h */,
 				7FC3306A16F3DED900E57E11 /* QuickSymbolManager.m */,
+				7F23A9661736C02600308B5B /* ShareManagerVC.h */,
+				7F23A9671736C02600308B5B /* ShareManagerVC.m */,
 				7F51CC1C16CFFCBF00DDE28F /* Supporting Files */,
 			);
 			name = PocketCoder;
@@ -673,6 +678,7 @@
 				7FC3306B16F3DED900E57E11 /* QuickSymbolManager.m in Sources */,
 				7FC26D2916FA319E0056FB58 /* ShortkeyCell.m in Sources */,
 				7FC3D4E3170354800024FF9A /* AddShortkeyCell.m in Sources */,
+				7F23A9681736C02600308B5B /* ShareManagerVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
