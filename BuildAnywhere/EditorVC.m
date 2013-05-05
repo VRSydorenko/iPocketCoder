@@ -500,6 +500,7 @@
         self.textCode.text = [self.textCode.text stringByAppendingString:content];
     }
     self.textCode.scrollEnabled = YES;
+    [self textViewDidEndEditing:self.textCode]; // updating Share button state
 }
 
 -(void)submissionCreatedWithError:(int)errorCode andLink:(NSString*)link{
@@ -602,7 +603,7 @@
     NSString* shareIntroString = [NSString stringWithFormat:@"%@ source code from iPocketCoder:", [DataManager getLanguageName:project.projLanguage]];
     
     NSString* textToShare = @"";
-    if (buttonIndex == 0 && project.projLink.length == 0){ // [source]
+    if (buttonIndex == 0 && self.textCode.text.length > 0){ // [source]
         textToShare = [NSString stringWithFormat:@"%@\n\n%@", shareIntroString, self.textCode.text];
     } else { // [link]
         textToShare = [NSString stringWithFormat:@"Link to the %@ http://ideone.com/%@", shareIntroString, project.projLink];
