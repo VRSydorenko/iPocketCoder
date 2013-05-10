@@ -20,6 +20,7 @@
 @synthesize cmpInfo = _cmpInfo;
 @synthesize output = _output;
 @synthesize stdErr = _stdErr;
+@synthesize signal = _signal;
 
 - (void)viewDidLoad
 {
@@ -31,7 +32,7 @@
         [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
     
-    if (self.cmpInfo.length > 0 || self.stdErr.length > 0){
+    if (self.cmpInfo.length > 0 || self.stdErr.length > 0 || self.signal > 0){
         [self cmpInfoPressed:nil];
     } else {
         [self outputPressed:nil];
@@ -61,16 +62,28 @@
 }
 
 - (IBAction)cmpInfoPressed:(id)sender {
+    NSString* content = @"";
+    
     if (self.cmpInfo.length > 0 && self.stdErr.length > 0){
-        self.title = @"Info";
-        self.textInfo = [NSString stringWithFormat:@"Compiler info:\n\n%@\n\n\nStdErr output:\n\n%@", self.cmpInfo, self.stdErr];
+        self.title = @"info";
+        content = [NSString stringWithFormat:@"Compiler info:\n\n%@\n\n\nStdErr output:\n\n%@", self.cmpInfo, self.stdErr];
     } else if (self.cmpInfo.length > 0 && self.stdErr.length == 0){
-        self.title = @"Compiler info";
-        self.textInfo.text = self.cmpInfo;
+        self.title = @"compiler info";
+        content = self.cmpInfo;
     } else {
-        self.title = @"StdErr output";
-        self.textInfo.text = self.stdErr;
+        self.title = @"stderr";
+        content = self.stdErr;
     }
+    if (self.signal > 0){
+        if (content.length > 0){
+            content = [content stringByAppendingString:@"\n\n"];
+        } else {
+            self.title = @"runtime error info";
+        }
+        content = [content stringByAppendingString:[Utils getSignalDescription:self.signal]];
+    }
+    
+    self.textInfo.text = content;
 }
 
 - (IBAction)outputPressed:(id)sender {
@@ -129,6 +142,9 @@
     if (self.stdErr.length > 0){
         [types addObject:[NSNumber numberWithUnsignedInt:STDERRINFO]];
     }
+    if (self.signal > 0){
+        [types addObject:[NSNumber numberWithUnsignedInt:RUNTIMEERRINFO]];
+    }
     return [NSArray arrayWithArray:types];
 }
 
@@ -174,34 +190,45 @@
     NSString* textToShare = [NSString stringWithFormat:@"%@ project information from iPocketCoder.", [DataManager getLanguageName:project.projLanguage]];
     
     NSNumber* type;
-    for (int i = 0; i < 6; i++) { // all content types
+    for (int i = 0; i < 7; i++) { // all content types
         type = [NSNumber numberWithUnsignedInt:i];
         if (![contentTypes containsObject:type]){
             continue;
         }
         switch (i) {
             case LINK:{
-                textToShare = [textToShare stringByAppendingFormat:@"\n\nA link to the code: http://ideone.com/%@", project.projLink];
+                textToShare = [Utils returnCaretIfNotEmpty:textToShare returnNumbers:2];
+                textToShare = [textToShare stringByAppendingFormat:@"A link to the code: http://ideone.com/%@", project.projLink];
                 break;
             }
             case SOURCE:{
-                textToShare = [textToShare stringByAppendingFormat:@"\n\nSource code:\n%@", project.projCode];
+                textToShare = [Utils returnCaretIfNotEmpty:textToShare returnNumbers:2];
+                textToShare = [textToShare stringByAppendingFormat:@"Source code:\n%@", project.projCode];
                 break;
             }
             case INPUT:{
-                textToShare = [textToShare stringByAppendingFormat:@"\n\nInput:\n%@", project.projInput];
+                textToShare = [Utils returnCaretIfNotEmpty:textToShare returnNumbers:2];
+                textToShare = [textToShare stringByAppendingFormat:@"Input:\n%@", project.projInput];
                 break;
             }
             case OUTPUT:{
-                textToShare = [textToShare stringByAppendingFormat:@"\n\nOutput:\n%@", self.output];
+                textToShare = [Utils returnCaretIfNotEmpty:textToShare returnNumbers:2];
+                textToShare = [textToShare stringByAppendingFormat:@"Output:\n%@", self.output];
                 break;
             }
             case CMPINFO:{
-                textToShare = [textToShare stringByAppendingFormat:@"\n\nCompiler info:\n%@", self.cmpInfo];
+                textToShare = [Utils returnCaretIfNotEmpty:textToShare returnNumbers:2];
+                textToShare = [textToShare stringByAppendingFormat:@"Compiler info:\n%@", self.cmpInfo];
                 break;
             }
             case STDERRINFO:{
-                textToShare = [textToShare stringByAppendingFormat:@"\n\nStderr output:\n%@", self.stdErr];
+                textToShare = [Utils returnCaretIfNotEmpty:textToShare returnNumbers:2];
+                textToShare = [textToShare stringByAppendingFormat:@"Stderr output:\n%@", self.stdErr];
+                break;
+            }
+            case RUNTIMEERRINFO:{
+                textToShare = [Utils returnCaretIfNotEmpty:textToShare returnNumbers:2];
+                textToShare = [textToShare stringByAppendingFormat:@"Runtime error info:\n%@",[Utils getSignalDescription:self.signal]];
                 break;
             }
         }

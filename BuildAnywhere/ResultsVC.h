@@ -19,6 +19,7 @@
 @property (nonatomic) NSString* cmpInfo;
 @property (nonatomic) NSString* output;
 @property (nonatomic) NSString* stdErr;
+@property (nonatomic) int       signal;
 @property (strong, nonatomic) IBOutlet UITextView *textInfo;
 
 - (IBAction)cmpInfoPressed:(id)sender;

@@ -19,6 +19,7 @@ typedef NS_ENUM(NSUInteger, ShareContentType) {
     OUTPUT,
     CMPINFO,
     STDERRINFO,
+    RUNTIMEERRINFO,
 };
 
 @interface ShareManagerVC : UIViewController<UITableViewDataSource,

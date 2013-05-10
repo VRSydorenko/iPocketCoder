@@ -49,7 +49,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 6; // all content types
+    return 7; // all content types
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,6 +82,10 @@
         }
         case 5:{
             [self setupCell:cell ofType:STDERRINFO withText:@"Stderr info"];
+            break;
+        }
+        case 6:{
+            [self setupCell:cell ofType:RUNTIMEERRINFO withText:@"Runtime error info"];
             break;
         }
     }

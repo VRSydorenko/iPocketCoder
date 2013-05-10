@@ -10,7 +10,7 @@
 
 -(void)submissionCreatedWithError:(int)errorCode andLink:(NSString*)link;
 -(void)submissionStatusReceived:(int)status error:(int)error result:(int)result;
--(void)submissionDetailsReceived:(NSString*)output cmpinfo:(NSString*)cmpinfo stdErr:(NSString*)stdErr;
+-(void)submissionDetailsReceived:(NSString*)output cmpinfo:(NSString*)cmpinfo stdErr:(NSString*)stdErr signal:(int)signal;
 -(void)testResponseReceived;
 -(void)errorOccurred:(NSError*)error;
 

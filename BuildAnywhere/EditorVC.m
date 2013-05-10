@@ -21,6 +21,7 @@
     NSString* lastCmpInfo;
     NSString* lastOutput;
     NSString* lastStdErr;
+    int       lastSignal;
 }
 @end
 
@@ -52,6 +53,7 @@
    
     detailsRequested = NO;
     showResultsOnArrive = NO;
+    lastSignal = 0;
     
     if (!IPAD){ // to save more space on navigation bar 
         [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
@@ -221,6 +223,7 @@
         outputVC.output = lastOutput.length > maxOutputLength ? [lastOutput substringToIndex:maxOutputLength] : lastOutput;
         outputVC.cmpInfo = lastCmpInfo;
         outputVC.stdErr = lastStdErr;
+        outputVC.signal = lastSignal;
     } else if ([segue.identifier isEqualToString:@"segueEditorToInput"]){
         InputVC* inputVC = (InputVC*)segue.destinationViewController;
         inputVC.project = project;
@@ -512,7 +515,7 @@
         [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkSubmissionState) userInfo:nil repeats:NO];
     } else {
         [self updateToolbarWithViewResultsButton];
-        [navCon showInfoBarWithNegativeMessage:@"Error occurred!"];
+        [navCon showInfoBarWithNegativeMessage:@"Internal error occurred!"];
     }
 }
 -(void)checkSubmissionState{
@@ -532,7 +535,7 @@
                     if (result == SUCCESS || result == NOT_RUNNING){
                         [navCon showInfoBarWithPositiveMessage:@"Success!"];
                     } else {
-                        [navCon showInfoBarWithNegativeMessage:@"Failure!"];
+                        [navCon showInfoBarWithNegativeMessage:[Utils getShortDescriptionOfResultCode:result]];
                     }
                     [runManager getSubmissionDetails:project.projLink];
                     [self updateToolbarWithViewResultsButton];
@@ -555,10 +558,11 @@
         }
     }
 }
--(void)submissionDetailsReceived:(NSString*)output cmpinfo:(NSString*)cmpinfo stdErr:(NSString *)stdErr{
+-(void)submissionDetailsReceived:(NSString*)output cmpinfo:(NSString*)cmpinfo stdErr:(NSString *)stdErr signal:(int)signal{
     lastCmpInfo = cmpinfo;
     lastOutput = output;
     lastStdErr = stdErr;
+    lastSignal = signal;
     
     detailsRequested = NO;
     

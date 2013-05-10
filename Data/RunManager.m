@@ -25,7 +25,7 @@
 }
 
 -(void)createSubmission:(Project*)project run:(BOOL)run{
-    [service createSubmission:self action:@selector(createSubmissionHandler:) sourceCode:[self wrapCode:project.projCode] language:project.projLanguage input:project.projInput run:run private:NO];
+    [service createSubmission:self action:@selector(createSubmissionHandler:) sourceCode:[self wrapCode:project.projCode] language:project.projLanguage input:project.projInput run:run private:YES];
 }
 
 -(void)getLanguages{
@@ -98,7 +98,19 @@
     NSRange rangeOutput = [valueString rangeOfString:@"output"];
     NSString* output = [valueString substringFromIndex:NSMaxRange(rangeOutput)];
     
-    [self.handler submissionDetailsReceived:output cmpinfo:cmpinfo stdErr:stdErr];
+    //NSRange rangeRest3 = {0, rangeOutput.location};
+    //valueString = [valueString substringWithRange:rangeRest3];
+    
+    NSRange rangePublic = [valueString rangeOfString:@"public"];
+    //NSString* public = [valueString substringFromIndex:NSMaxRange(rangePublic)];
+    
+    NSRange rangeRest4 = {0, rangePublic.location};
+    valueString = [valueString substringWithRange:rangeRest4];
+    
+    NSRange rangeSignal = [valueString rangeOfString:@"signal"];
+    NSString* signal = [valueString substringFromIndex:NSMaxRange(rangeSignal)];
+    
+    [self.handler submissionDetailsReceived:output cmpinfo:cmpinfo stdErr:stdErr signal:signal.intValue];
 }
 
 - (void) getSubmissionStatusHandler:(id)value {
