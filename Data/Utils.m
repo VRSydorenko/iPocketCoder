@@ -7,6 +7,8 @@
 //
 
 #import "Utils.h"
+#import "LangDefinition.h"
+#import "SourceCodeDefinition.h"
 
 @implementation Utils
 
@@ -133,6 +135,21 @@
         result = [result stringByAppendingString:@"\n"];
     }
     return result;
+}
+
++(NSString*)codeTemplateForLanguage:(int)langId{
+    switch (langId) {
+        case LANG_ADA: return TEMPL_ADA;
+        case LANG_ASM_GCC472: return TEMPL_ASM_GCC472;
+        case LANG_ASM_NASM207: return TEMPL_ASM_NASM207;
+        case LANG_AWK_GAWK: return TEMPL_AWK_GAWK;
+        case LANG_AWK_MAWK: return TEMPL_AWK_MAWK;
+        case LANG_BASH: return TEMPL_BASH;
+        case LANG_BC: return TEMPL_BC;
+        case LANG_BRAINFUCK: return TEMPL_BRAINFUCK;
+        default:return @"";
+    }
+    return @"";
 }
 
 @end

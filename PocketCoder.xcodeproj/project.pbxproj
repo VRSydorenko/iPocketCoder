@@ -47,6 +47,7 @@
 		7F78A46E16D17F3D00BCE579 /* backArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F78A46D16D17F3D00BCE579 /* backArrow.png */; };
 		7F78A47416D18AD900BCE579 /* SnippetsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F78A47316D18AD800BCE579 /* SnippetsVC.m */; };
 		7F78A47716D1990200BCE579 /* NewSnippetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F78A47616D1990100BCE579 /* NewSnippetVC.m */; };
+		7F951ADA184214C0008E8E33 /* SourceCodeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F951AD9184214C0008E8E33 /* SourceCodeProvider.m */; };
 		7FBB5AF416DA7BDC001B2241 /* ideoneIdeone_Service_v1Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB5AB516DA7BDC001B2241 /* ideoneIdeone_Service_v1Service.m */; };
 		7FBB5AF516DA7BDC001B2241 /* ideoneSudzc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB5AB716DA7BDC001B2241 /* ideoneSudzc.m */; };
 		7FBB5AF616DA7BDC001B2241 /* Soap+Prefix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB5AB916DA7BDC001B2241 /* Soap+Prefix.m */; };
@@ -162,6 +163,10 @@
 		7F78A47316D18AD800BCE579 /* SnippetsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnippetsVC.m; sourceTree = "<group>"; };
 		7F78A47516D1990100BCE579 /* NewSnippetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewSnippetVC.h; sourceTree = "<group>"; };
 		7F78A47616D1990100BCE579 /* NewSnippetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewSnippetVC.m; sourceTree = "<group>"; };
+		7F951AD8184214C0008E8E33 /* SourceCodeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceCodeProvider.h; sourceTree = "<group>"; };
+		7F951AD9184214C0008E8E33 /* SourceCodeProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceCodeProvider.m; sourceTree = "<group>"; };
+		7F951ADB1842241E008E8E33 /* LangDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LangDefinition.h; sourceTree = "<group>"; };
+		7F951ADE18423151008E8E33 /* SourceCodeDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceCodeDefinition.h; sourceTree = "<group>"; };
 		7FBB5AB416DA7BDC001B2241 /* ideoneIdeone_Service_v1Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ideoneIdeone_Service_v1Service.h; sourceTree = "<group>"; };
 		7FBB5AB516DA7BDC001B2241 /* ideoneIdeone_Service_v1Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ideoneIdeone_Service_v1Service.m; sourceTree = "<group>"; };
 		7FBB5AB616DA7BDC001B2241 /* ideoneSudzc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ideoneSudzc.h; sourceTree = "<group>"; };
@@ -408,6 +413,10 @@
 				7FC26D2816FA319E0056FB58 /* ShortkeyCell.m */,
 				7FC3D4E1170354800024FF9A /* AddShortkeyCell.h */,
 				7FC3D4E2170354800024FF9A /* AddShortkeyCell.m */,
+				7F951AD8184214C0008E8E33 /* SourceCodeProvider.h */,
+				7F951AD9184214C0008E8E33 /* SourceCodeProvider.m */,
+				7F951ADB1842241E008E8E33 /* LangDefinition.h */,
+				7F951ADE18423151008E8E33 /* SourceCodeDefinition.h */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -566,6 +575,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Viktor Sydorenko";
+				TargetAttributes = {
+					7F51CC1116CFFCBF00DDE28F = {
+						DevelopmentTeam = LB9983BHHS;
+					};
+				};
 			};
 			buildConfigurationList = 7F51CC0D16CFFCBF00DDE28F /* Build configuration list for PBXProject "PocketCoder" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -626,6 +640,7 @@
 				7F51CC5816D0002C00DDE28F /* DbField.m in Sources */,
 				7F51CC5916D0002C00DDE28F /* DbForeignKey.m in Sources */,
 				7F51CC5A16D0002C00DDE28F /* DbManager.m in Sources */,
+				7F951ADA184214C0008E8E33 /* SourceCodeProvider.m in Sources */,
 				7F51CC5B16D0002C00DDE28F /* DbTable.m in Sources */,
 				7F51CC6116D004BF00DDE28F /* Project.m in Sources */,
 				7F51CC6416D007A100DDE28F /* Snippet.m in Sources */,
@@ -740,6 +755,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "E16572F1-A2E2-43D3-8F28-D14A84A4F609";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -766,6 +782,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "E16572F1-A2E2-43D3-8F28-D14A84A4F609";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -775,13 +792,16 @@
 		7F51CC3916CFFCBF00DDE28F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BuildAnywhere/PocketCoder-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "BuildAnywhere/PocketCoder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = PocketCoder;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -789,13 +809,16 @@
 		7F51CC3A16CFFCBF00DDE28F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BuildAnywhere/PocketCoder-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "BuildAnywhere/PocketCoder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = PocketCoder;
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
@@ -822,6 +845,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "424251C1-5AC3-43AB-BA9D-F1091FB02DAC";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "424251C1-5AC3-43AB-BA9D-F1091FB02DAC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -832,13 +856,16 @@
 		7FCAD2B516E27D3400FE1748 /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BuildAnywhere/PocketCoder-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "BuildAnywhere/PocketCoder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = PocketCoder;
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};

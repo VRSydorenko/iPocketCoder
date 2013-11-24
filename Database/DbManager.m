@@ -9,6 +9,8 @@
 #import "DbManager.h"
 #import "DBDefinition.h"
 #import "sqlite3.h"
+#import "LangDefinition.h"
+#import "SourceCodeDefinition.h"
 
 @implementation DbManager{
     sqlite3 *buildAnywhereDb;
@@ -19,6 +21,7 @@
     if (self){
         [self initDatabase];
         [self initLanguages];
+        [self initCodeSamples];
         [self initBaseQuickSymbols];
     }
     return self;
@@ -58,177 +61,144 @@
 }
 
 -(void) initLanguages{
-    if ([self getLanguageName:1].length == 0){
-        [self saveLanguage:7 withName:@"Ada"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:7 name:@"sample" code:@"with Ada.Text_IO;\n\nprocedure Hello_World is\n  use Ada.Text_IO;\nbegin\n  Put_Line(\"Hello, world!\");\nend;"]];
-         
-        [self saveLanguage:13 withName:@"Assembler (nasm-2.07)"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:13 name:@"template" code:@"global _start\nsection .data\nsection .text\n\n_start:\n    je  exit\n\nexit:\n    mov    eax,  01h\n    xor    ebx,  ebx\n    int    80h"]];
-        
-        [self saveLanguage:45 withName:@"Assembler (gcc-4.7.2)"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:45 name:@"sample" code:@".data\nx:\n    .string \"Hello \"\ns:\n    .string \"world!\\n\\0\"\n.text\n.global main\nmain:\n    pushl  $x\n    call  printf\n    pushl  $s\n    call  printf\n    addl  $8,  %esp\n\nbreak:\n    xor  %eax,  %eax\n    ret"]];
+    if ([self getLanguageName:LANG_ADA].length == 0){
+        [self saveLanguage:LANG_ADA withName:@"Ada"];
+        [self saveLanguage:LANG_ASM_NASM207 withName:@"Assembler (nasm-2.07)"];
+        [self saveLanguage:LANG_ASM_GCC472 withName:@"Assembler (gcc-4.7.2)"];
+        [self saveLanguage:LANG_AWK_GAWK withName:@"AWK (gawk)"];
+        [self saveLanguage:LANG_AWK_MAWK withName:@"AWK (mawk)"];
+        [self saveLanguage:LANG_BASH withName:@"Bash"];
+        [self saveLanguage:LANG_BC withName:@"bc"];
+        [self saveLanguage:LANG_BRAINFUCK withName:@"Brainf**k"];
+        [self saveLanguage:LANG_C withName:@"C"];
+        [self saveLanguage:LANG_C_SHARP withName:@"C#"];
+        [self saveLanguage:LANG_CPP withName:@"C++"];
+        [self saveLanguage:LANG_CPP11 withName:@"C++ 11"];
+        [self saveLanguage:LANG_C99 withName:@"C99"];
+        [self saveLanguage:LANG_CLIPS withName:@"CLIPS"];
+        [self saveLanguage:LANG_CLOJURE withName:@"Clojure"];
+        [self saveLanguage:LANG_COBOL withName:@"COBOL"];
+        [self saveLanguage:LANG_COBOL85 withName:@"COBOL 85"];
+        [self saveLanguage:LANG_CLISP withName:@"Common Lisp (clisp)"];
+        [self saveLanguage:LANG_D_DMD withName:@"D (dmd)"];
+        [self saveLanguage:LANG_ERLANG withName:@"Erlang"];
+        [self saveLanguage:LANG_F_SHARP withName:@"F#"];
+        [self saveLanguage:LANG_FACTOR withName:@"Factor"];
+        [self saveLanguage:LANG_FALCON withName:@"Falcon"];
+        [self saveLanguage:LANG_FORTH withName:@"Forth"];
+        [self saveLanguage:LANG_FORTRAN withName:@"Fortran"];
+        [self saveLanguage:LANG_GO withName:@"Go"];
+        [self saveLanguage:LANG_GROOVY withName:@"Groovy"];
+        [self saveLanguage:LANG_HASKELL withName:@"Haskell"];
+        [self saveLanguage:LANG_ICON withName:@"Icon"];
+        [self saveLanguage:LANG_INTERCAL withName:@"Intercal"];
+        [self saveLanguage:LANG_JAVA withName:@"Java"];
+        [self saveLanguage:LANG_JAVA7 withName:@"Java 7"];
+        [self saveLanguage:LANG_JAVASCRIPT_RHINO withName:@"JavaScript (rhino)"];
+        [self saveLanguage:LANG_JAVASCRIPT_SPIDER withName:@"JavaScript (spidermonkey)"];
+        [self saveLanguage:LANG_LUA withName:@"Lua"];
+        [self saveLanguage:LANG_NEMERLE withName:@"Nemerle"];
+        [self saveLanguage:LANG_NICE withName:@"Nice"];
+        [self saveLanguage:LANG_NIMROD withName:@"Nimrod"];
+        [self saveLanguage:LANG_NODE_JS withName:@"Node.js"];
+        [self saveLanguage:LANG_OBJ_C withName:@"Objective-C"];
+        [self saveLanguage:LANG_OCAML withName:@"Ocaml"];
+        [self saveLanguage:LANG_OCTAVE withName:@"Octave"];
+        [self saveLanguage:LANG_OZ withName:@"Oz"];
+        [self saveLanguage:LANG_PARI_GP withName:@"PARI/GP"];
+        [self saveLanguage:LANG_PASCAL_FPC withName:@"Pascal (fpc)"];
+        [self saveLanguage:LANG_PASCAL_GPC withName:@"Pascal (gpc)"];
+        [self saveLanguage:LANG_PERL withName:@"Perl"];
+        [self saveLanguage:LANG_PERL_6 withName:@"Perl 6"];
+        [self saveLanguage:LANG_PHP withName:@"PHP"];
+        [self saveLanguage:LANG_PIKE withName:@"Pike"];
+        [self saveLanguage:LANG_PROLOG_GNU withName:@"Prolog (gnu)"];
+        [self saveLanguage:LANG_PROlOG_SWI withName:@"Prolog (swi)"];
+        [self saveLanguage:LANG_PYTHON withName:@"Python"];
+        [self saveLanguage:LANG_PYTHON3 withName:@"Python 3"];
+        [self saveLanguage:LANG_R withName:@"R"];
+        [self saveLanguage:LANG_RUBY withName:@"Ruby"];
+        [self saveLanguage:LANG_SCALA withName:@"Scala"];
+        [self saveLanguage:LANG_SCHEME withName:@"Scheme (guile)"];
+        [self saveLanguage:LANG_SMALLTALK withName:@"Smalltalk"];
+        [self saveLanguage:LANG_SQL withName:@"SQL"];
+        [self saveLanguage:LANG_TCL withName:@"Tcl"];
+        [self saveLanguage:LANG_TEXT withName:@"Text"];
+        [self saveLanguage:LANG_UNLAMBDA withName:@"Unlambda"];
+        [self saveLanguage:LANG_VB_NET withName:@"VB.NET"];
+        [self saveLanguage:LANG_WHITESPACE withName:@"Whitespace"];
+    }
+}
 
-        [self saveLanguage:104 withName:@"AWK (gawk)"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:104 name:@"template" code:@"BEGIN {\n}\n\n{\n\n}\n\nEND {\n}"]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:104 name:@"sample" code:@"BEGIN {\n\n    print \"Hello, world!\"\n\n}"]];
-
+-(void)initCodeSamples{
+    if (![UserSettings getCodeSamplesInitialized]){
+        NSString *sampleName = @"code template";
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ADA name:sampleName code:TEMPL_ADA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ASM_NASM207 name:sampleName code:TEMPL_ASM_NASM207]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ASM_GCC472 name:sampleName code:TEMPL_ASM_GCC472]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_AWK_GAWK name:sampleName code:TEMPL_AWK_GAWK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_AWK_MAWK name:sampleName code:TEMPL_AWK_MAWK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BASH name:sampleName code:TEMPL_BASH]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BC name:sampleName code:TEMPL_BC]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BRAINFUCK name:sampleName code:TEMPL_BRAINFUCK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_C name:sampleName code:TEMPL_C]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_C_SHARP name:sampleName code:TEMPL_C_SHARP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP name:sampleName code:TEMPL_CPP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP11 name:sampleName code:TEMPL_CPP11]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLIPS name:sampleName code:TEMPL_CLIPS]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLOJURE name:sampleName code:TEMPL_CLOJURE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_COBOL name:sampleName code:TEMPL_COBOL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_COBOL85 name:sampleName code:TEMPL_COBOL85]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLISP name:sampleName code:TEMPL_CLISP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_D_DMD name:sampleName code:TEMPL_D_DMD]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ERLANG name:sampleName code:TEMPL_ERLANG]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_F_SHARP name:sampleName code:TEMPL_F_SHARP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FACTOR name:sampleName code:TEMPL_FACTOR]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FALCON name:sampleName code:TEMPL_FALCON]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTH name:sampleName code:TEMPL_FORTH]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTRAN name:sampleName code:TEMPL_FORTRAN]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GO name:sampleName code:TEMPL_GO]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GROOVY name:sampleName code:TEMPL_GROOVY]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_HASKELL name:sampleName code:TEMPL_HASKELL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ICON name:sampleName code:TEMPL_ICON]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_INTERCAL name:sampleName code:TEMPL_INTERCAL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVA name:sampleName code:TEMPL_JAVA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVA7 name:sampleName code:TEMPL_JAVA7]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_RHINO name:sampleName code:TEMPL_JAVASCRIPT_RHINO]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_SPIDER name:sampleName code:TEMPL_JAVASCRIPT_SPIDER]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_LUA name:sampleName code:TEMPL_LUA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NEMERLE name:sampleName code:TEMPL_NEMERLE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NICE name:sampleName code:TEMPL_NICE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NIMROD name:sampleName code:TEMPL_NIMROD]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NODE_JS name:sampleName code:TEMPL_NODE_JS]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OBJ_C name:sampleName code:TEMPL_OBJ_C]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCAML name:sampleName code:TEMPL_OCAML]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCTAVE name:sampleName code:TEMPL_OCTAVE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OZ name:sampleName code:TEMPL_OZ]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PARI_GP name:sampleName code:TEMPL_PARI_GP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PASCAL_FPC name:sampleName code:TEMPL_PASCAL_FPC]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PASCAL_GPC name:sampleName code:TEMPL_PASCAL_GPC]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PERL name:sampleName code:TEMPL_PERL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PERL_6 name:sampleName code:TEMPL_PERL_6]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PHP name:sampleName code:TEMPL_PHP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PIKE name:sampleName code:TEMPL_PIKE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PROLOG_GNU name:sampleName code:TEMPL_PROLOG_GNU]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PROlOG_SWI name:sampleName code:TEMPL_PROlOG_SWI]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON name:sampleName code:TEMPL_PYTHON]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON3 name:sampleName code:TEMPL_PYTHON3]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_R name:sampleName code:TEMPL_R]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_RUBY name:sampleName code:TEMPL_RUBY]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCALA name:sampleName code:TEMPL_SCALA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCHEME name:sampleName code:TEMPL_SCHEME]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SMALLTALK name:sampleName code:TEMPL_SMALLTALK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SQL name:sampleName code:TEMPL_SQL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TCL name:sampleName code:TEMPL_TCL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TEXT name:sampleName code:TEMPL_TEXT]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_UNLAMBDA name:sampleName code:TEMPL_UNLAMBDA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_VB_NET name:sampleName code:TEMPL_VB_NET]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_WHITESPACE name:sampleName code:TEMPL_WHITESPACE]];
         
-        [self saveLanguage:105 withName:@"AWK (mawk)"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:105 name:@"template" code:@"BEGIN {\n}\n\n{\n\n}\n\nEND {\n}"]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:105 name:@"sample" code:@"BEGIN {\n\n    print \"Hello, world!\"\n\n}"]];
-        
-        [self saveLanguage:28 withName:@"Bash"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:28 name:@"template" code:@"#!/bin/bash"]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:28 name:@"sample" code:@"#!/bin/bash\n\necho Hello, world!"]];
-        
-        [self saveLanguage:110 withName:@"bc"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:110 name:@"sample" code:@"x = 5;\n\n/* multiplication table */\nfor (i=1; i<=x; ++i) {\n    for (j=1; j<=x; ++j)\n        print i*j, \"\\t\"\n    print \"\\n\"\n}\n\n/* compute the pi number accurately to 5 decimal places */\nscale=x\nprint \"\\npi = \", 4*a(1), \"\\n\"\n\n/* factorial */\ndefine f(n) {\n    if (n <= 1)\n        return 1;\n    return n * f(n-1);\n}\n\nprint \"\\n\";\nprint \"1! = \", f(1), \"\\n\";\nprint \"5! = \", f(5), \"\\n\";\nprint x, \"! = \", f(x), \"\\n\";"]];
-        
-        [self saveLanguage:12 withName:@"Brainf**k"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:12 name:@"sample" code:@"+++++ +++++ [ > +++++ ++  > +++++ +++++ > +++ > + <<<< - ] > ++ . > + . +++++ ++ . . +++ . > ++ . << +++++ +++++ +++++ . > . +++ . ----- - . ----- --- . > + . > ."]];
-        
-        [self saveLanguage:11 withName:@"C"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:11 name:@"template" code:@"#include <stdio.h>\n\nint main(int argc, char *argv[]) {\n    return 0;\n}"]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:11 name:@"sample" code:@"#include <stdio.h>\n\nint main(int argc, char *argv[]) {\n    printf(\"Hello, world!\\n\");\n    return 0;\n}"]];
-        
-        [self saveLanguage:27 withName:@"C#"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:27 name:@"template" code:@"using System;\n\nclass Program {\n    public static void Main() {\n    }\n}"]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:27 name:@"sample" code:@"using System;\n\nclass Program {\n    public static void Main() {\n        Console.WriteLine(\"Hello, world!\");\n    }\n}"]];
-        
-        [self saveLanguage:1 withName:@"C++"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:1 name:@"template" code:@"#include <iostream>\n\nint main() {\n\n    return 0;\n\n}"]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:1 name:@"sample" code:@"#include <iostream>\n\nint main() {\n\n    std::cout << \"Hello, World.\";\n    return 0;\n\n}"]];
-        
-        
-        [self saveLanguage:44 withName:@"C++ 11"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:44 name:@"template" code:@"#include <iostream>\n\nint main() {\n\n    return 0;\n\n}"]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:44 name:@"sample" code:@"#include <iostream>\nusing namespace std;\n\nint main() {\n  auto func = [] () {\n    cout << \"Hello world\";\n  };\n  func();\n}"]];
-        
-        [self saveLanguage:34 withName:@"C99"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:34 name:@"template" code:@"#include <stdio.h>\n\nint main(void) {\n\n}"]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:34 name:@"sample" code:@"#include <stdio.h>\n\nint main(void)\n{\n    puts(\"Hello World!\");\n}"]];
-        
-        [self saveLanguage:14 withName:@"CLIPS"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        
-        [self saveLanguage:111 withName:@"Clojure"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:111 name:@"sample" code:@"(println \"Hello, world!\")"]];
-        
-        [self saveLanguage:118 withName:@"COBOL"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        
-        [self saveLanguage:106 withName:@"COBOL 85"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:106 name:@"sample" code:@"identification division.\nprogram-id. SimpleHelloWorld.\n\nprocedure division.\n000-Main.\n    display 'Hello World'.\n    stop run.\n"]];
-        
-        [self saveLanguage:32 withName:@"Common Lisp (clisp)"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:32 name:@"sample" code:@"(format t \"Hello, world!~%\")"]];
-        
-        [self saveLanguage:102 withName:@"D (dmd)"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:102 name:@"template" code:@"import std.stdio;\n\nvoid main() {\n\n}"]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:102 name:@"sample" code:@"import std.stdio;\n\nvoid main()\n{\n    writeln(\"Hello, world!\");\n}"]];
-        
-        [self saveLanguage:36 withName:@"Erlang"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:36 name:@"sample" code:@"-module(prog).\n-export([main/0]).\n\nmain() ->\n    io:fwrite(\"Hello, world!\")."]];
-        
-        [self saveLanguage:124 withName:@"F#"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:124 name:@"sample" code:@"printfn \"Hello, world!\""]];
-        
-        [self saveLanguage:123 withName:@"Factor"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:123 name:@"sample" code:@"USE: io\n\n\"Hello, World!\" print"]];
-        
-        [self saveLanguage:125 withName:@"Falcon"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:125 name:@"sample" code:@"printl( \"Hello, world!\" )"]];
-        
-        [self saveLanguage:107 withName:@"Forth"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:107 name:@"sample" code:@".\" Hello, world! \""]];
-        
-        [self saveLanguage:5 withName:@"Fortran"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:5 name:@"sample" code:@"program hello\n    write (*,*) 'Hello, world!'\nend program hello"]];
-        
-        [self saveLanguage:114 withName:@"Go"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:114 name:@"sample" code:@"package main\nimport \"fmt\"\n\nfunc main() {\n    fmt.Printf(\"Hello, World\")\n}"]];
-        
-        [self saveLanguage:121 withName:@"Groovy"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:121 name:@"sample" code:@"println \"Hello, world!\""]];
-        
-        [self saveLanguage:21 withName:@"Haskell"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:21 name:@"sample" code:@"main = putStrLn \"Hello, world!\""]];
-        
-        [self saveLanguage:16 withName:@"Icon"];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:16 name:@"sample" code:@"procedure main(args)\n    write(\"Hello, World!\");\nend"]];
-        
-        [self saveLanguage:9 withName:@"Intercal"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:10 withName:@"Java"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:55 withName:@"Java 7"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:35 withName:@"JavaScript (rhino)"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:112 withName:@"JavaScript (spidermonkey)"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:26 withName:@"Lua"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:30 withName:@"Nemerle"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:25 withName:@"Nice"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:122 withName:@"Nimrod"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:56 withName:@"Node.js"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:43 withName:@"Objective-C"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:8 withName:@"Ocaml"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:127 withName:@"Octave"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:119 withName:@"Oz"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:57 withName:@"PARI/GP"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:22 withName:@"Pascal (fpc)"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:2 withName:@"Pascal (gpc)"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:3 withName:@"Perl"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:54 withName:@"Perl 6"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:29 withName:@"PHP"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:19 withName:@"Pike"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:108 withName:@"Prolog (gnu)"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:15 withName:@"Prolog (swi)"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:4 withName:@"Python"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:116 withName:@"Python 3"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:117 withName:@"R"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:17 withName:@"Ruby"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:39 withName:@"Scala"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:33 withName:@"Scheme (guile)"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:23 withName:@"Smalltalk"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:40 withName:@"SQL"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:38 withName:@"Tcl"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:62 withName:@"Text"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:115 withName:@"Unlambda"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:101 withName:@"VB.NET"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
-        [self saveLanguage:6 withName:@"Whitespace"];
-        //[self saveSnippet:[[Snippet alloc] initWithLanguage: name:@"sample" code:@""]];
+        [UserSettings setCodeSamplesInitialized];
     }
 }
 
@@ -323,10 +293,6 @@
     sqlite3_finalize(statement);
     
     return errCode;
-}
-
--(void) initInitialSnippets{
-    
 }
 
 // public methods

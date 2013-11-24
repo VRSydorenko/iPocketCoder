@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="TmM-Wb-YAV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4457.9" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="TmM-Wb-YAV">
     <dependencies>
-        <deployment version="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment version="1536" defaultVersion="1280" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.9"/>
     </dependencies>
     <scenes>
         <!--Main Nav Controller-->
         <scene sceneID="HUe-C1-4vM">
             <objects>
                 <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="TmM-Wb-YAV" customClass="MainNavController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pla-dZ-mye">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -102,6 +103,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="IyX-sa-8JC">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="daI-2t-Ivg">
                             <connections>
@@ -167,6 +169,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
                         <barButtonItem enabled="NO" systemItem="action" id="wUs-Yh-5Uf">
                             <connections>
@@ -215,7 +218,7 @@
         <!--InputVC - Program Input-->
         <scene sceneID="YFx-tV-Bmm">
             <objects>
-                <viewController storyboardIdentifier="" id="Nqh-Xw-h05" customClass="InputVC" sceneMemberID="viewController">
+                <viewController id="Nqh-Xw-h05" customClass="InputVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ft8-to-huA">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -230,6 +233,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Program Input" id="5p4-F1-khu">
                         <barButtonItem key="rightBarButtonItem" title="Clear" id="hkX-6U-w7K">
@@ -266,6 +270,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="0rL-aq-C8d"/>
                         <barButtonItem title="Program output" id="rmK-Nc-QLK">
@@ -301,6 +306,7 @@
         <scene sceneID="bSY-EK-OaC">
             <objects>
                 <navigationController storyboardIdentifier="screenSymbolsManager" definesPresentationContext="YES" id="DSs-lW-wuO" customClass="MainNavController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XiH-dr-zxs">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -315,7 +321,7 @@
         <!--Quick Symbol Manager - Shortcuts-->
         <scene sceneID="WzC-cm-ISh">
             <objects>
-                <viewController storyboardIdentifier="" title="Shortcuts" id="dDt-35-bcp" customClass="QuickSymbolManager" sceneMemberID="viewController">
+                <viewController title="Shortcuts" id="dDt-35-bcp" customClass="QuickSymbolManager" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rsr-3J-azw">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -414,6 +420,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Short keys" id="5SE-i0-fXg"/>
                     <connections>
                         <outlet property="tableSymbols" destination="AwK-JY-f3N" id="xQl-l6-LTq"/>
@@ -440,18 +447,18 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="283" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8YA-Ag-3Xg">
-                                                    <rect key="frame" x="10" y="11" width="35" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4ie-cD-Ewk">
-                                                    <rect key="frame" x="246" y="11" width="44" height="21"/>
+                                                    <rect key="frame" x="244" y="11" width="41" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
@@ -466,6 +473,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="EWd-Po-AtE"/>
                         <barButtonItem enabled="NO" title="Share" id="BCl-O6-Tq0">
@@ -489,7 +497,7 @@
         <!--New ProjectVC - New project-->
         <scene sceneID="BC0-Zn-Fl5">
             <objects>
-                <viewController storyboardIdentifier="" id="whh-L9-eYI" customClass="NewProjectVC" sceneMemberID="viewController">
+                <viewController id="whh-L9-eYI" customClass="NewProjectVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="def-ka-yAF">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -516,7 +524,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="noW-3x-udb">
-                                                    <rect key="frame" x="10" y="0.0" width="301" height="33"/>
+                                                    <rect key="frame" x="15" y="0.0" width="291" height="33"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -530,6 +538,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="qqt-R5-C2s"/>
                         <barButtonItem title="Create" id="MML-kc-7r3">
@@ -553,7 +562,7 @@
         <!--SnippetsVC - Code Snippets-->
         <scene sceneID="oSm-UE-xxd">
             <objects>
-                <viewController storyboardIdentifier="" id="VE0-ln-Ad1" customClass="SnippetsVC" sceneMemberID="viewController">
+                <viewController id="VE0-ln-Ad1" customClass="SnippetsVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kwc-VI-MMO">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -571,7 +580,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kuc-gt-SKM">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -586,6 +595,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Code Snippets" id="EhG-Tf-iqs">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="JCd-5Q-0Dx">
                             <connections>
@@ -625,6 +635,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="rge-2a-x0Y"/>
                         <barButtonItem systemItem="save" id="ac5-Xd-y6E">
@@ -655,6 +666,7 @@
         <scene sceneID="uAw-rn-YYm">
             <objects>
                 <navigationController storyboardIdentifier="screenSnippets" toolbarHidden="NO" id="QKF-3a-GLn" customClass="MainNavController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="C2W-F6-ZPE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="F87-cw-ghl">
@@ -678,6 +690,7 @@
         <scene sceneID="JsT-wM-sgl">
             <objects>
                 <navigationController storyboardIdentifier="screenNewProject" toolbarHidden="NO" id="hj2-oc-PKR" customClass="MainNavController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="yQG-xZ-Dat"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a3c-HI-9Tv">
@@ -701,6 +714,7 @@
         <scene sceneID="FRP-ye-YYR">
             <objects>
                 <navigationController storyboardIdentifier="screenInput" id="GTt-gA-Mqn" customClass="MainNavController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UGy-YP-PTY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -719,6 +733,7 @@
         <scene sceneID="cgz-AJ-FBW">
             <objects>
                 <navigationController storyboardIdentifier="screenShareManager" toolbarHidden="NO" id="lsV-L9-edO" customClass="MainNavController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Uq7-iV-GJg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CsL-UW-akf">
@@ -740,7 +755,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="kb.png" width="32" height="32"/>
+        <image name="kb.png" width="64" height="64"/>
         <image name="phoneSettings.png" width="24" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

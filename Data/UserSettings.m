@@ -26,4 +26,11 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SYMBOLS_INITIALISED];
 }
 
++(BOOL) getCodeSamplesInitialized{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:SAMPLES_INITIALISED];
+}
++(void) setCodeSamplesInitialized{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SAMPLES_INITIALISED];
+}
+
 @end

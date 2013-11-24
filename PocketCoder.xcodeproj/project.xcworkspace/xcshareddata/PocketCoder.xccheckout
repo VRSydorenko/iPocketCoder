@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5EEEC3C8-554F-4A2E-92AD-C14D2D878D32</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PocketCoder</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BAAD700C-74C3-42CB-877D-6CB772E3F72D</key>
+		<string>https://github.com/VRSydorenko/BuildAnywhere.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PocketCoder.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BAAD700C-74C3-42CB-877D-6CB772E3F72D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/VRSydorenko/BuildAnywhere.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BAAD700C-74C3-42CB-877D-6CB772E3F72D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BAAD700C-74C3-42CB-877D-6CB772E3F72D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iPocketCoder</string>
+		</dict>
+	</array>
+</dict>
+</plist>

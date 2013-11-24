@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define SYMBOLS_INITIALISED @"symbols_initialised"
+#define SAMPLES_INITIALISED @"samples_initialised"
 
 @interface UserSettings : NSObject
 
@@ -16,5 +17,7 @@
 +(void) setSymbolsInitializedForLang:(int)lang;
 +(BOOL) getBaseSymbolsInitialized;
 +(void) setBaseSymbolsInitialized;
++(BOOL) getCodeSamplesInitialized;
++(void) setCodeSamplesInitialized;
 
 @end

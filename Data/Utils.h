@@ -16,5 +16,6 @@
 +(NSString*)getShortDescriptionOfResultCode:(ResultCodes)code;
 +(NSString*)getSignalDescription:(int)signal;
 +(NSString*)returnCaretIfNotEmpty:(NSString*)targetString returnNumbers:(int)returns;
++(NSString*)codeTemplateForLanguage:(int)langId;
 
 @end
