@@ -21,7 +21,7 @@
     if (self){
         self.projLanguage = language;
         self.projName = name;
-        self.projCode = @"";
+        self.projCode = [Utils codeTemplateForLanguage:language];
         self.projLink = @"";
         self.projId = -1;
         self.projInput = @"";
