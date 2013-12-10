@@ -85,8 +85,8 @@
 
 // iPhone
 -(void)backPressed{
-    project.projCode = self.textCode.text;
-    [project save];
+    [project setCode:self.textCode.text];
+    [DataManager saveProject:project];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -100,8 +100,8 @@
             popoverController = nil;
         }
         
-        project.projCode = self.textCode.text;
-        [project save];
+        [project setCode:self.textCode.text];
+        [DataManager saveProject:project];
     }
 }
 
@@ -197,8 +197,8 @@
 }
 
 - (IBAction)runPressed:(id)sender {
-    project.projCode = self.textCode.text;
-    [project save];
+    [project setCode:self.textCode.text];
+    [DataManager saveProject:project];
     
     [runManager createSubmission:project run:YES];
     
@@ -509,7 +509,7 @@
 -(void)submissionCreatedWithError:(int)errorCode andLink:(NSString*)link{
     if (errorCode == OK){
         [project setLink:link];
-        [project save];
+        [DataManager saveProject:project];
     
         //check result in 2 sec
         [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkSubmissionState) userInfo:nil repeats:NO];

@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Project : NSObject
+@interface Project : UIDocument
 
-@property int projId;
-@property int projLanguage;
-@property NSString* projCode;
-@property NSString* projName;
-@property NSString* projLink;
-@property NSString* projInput;
+@property (readonly) int projId;
+@property (readonly) int projLanguage;
+@property (readonly) NSString* projCode;
+@property (readonly) NSString* projName;
+@property (readonly) NSString* projLink;
+@property (readonly) NSString* projInput;
+
+@property (readonly) BOOL isInCloud;
 
 -(id) initWithLanguage:(int)language name:(NSString*)name;
 
@@ -25,5 +27,6 @@
 -(void) setInput:(NSString*)input;
 
 -(void)save;
+-(void)remove;
 
 @end

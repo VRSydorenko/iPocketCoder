@@ -32,8 +32,8 @@
     return [[self getDbManager] getLanguageName:language];
 }
 
-+(NSDictionary*) getProjectsBasicInfo{
-    return [[self getDbManager] getProjectsBasicInfo];
++(NSDictionary*) getBasicInfosForEntity:(EntityType)entity{
+    return [[self getDbManager] getBasicInfosForEntity:entity];
 }
 
 +(NSArray*) getSnippetNamesForLanguage:(int)lang{
@@ -54,6 +54,13 @@
 
 +(QuickSymbol*) loadQuickSymbol:(int)iD{
     return [[self getDbManager] loadQuickSymbol:iD];
+}
+
++(void)addDeletionRecord:(EntityType)entitiy withCreationDate:(int)when{
+}
+
++(int)findDeletionRecord:(EntityType)entitiy withCreationDate:(int)when{
+    return 0;
 }
 
 +(NSArray*) getLanguagesSymbolUsedFor:(int)iD{

@@ -66,7 +66,7 @@
 }
 
 -(void) updateData{
-    projectBasicData = [DataManager getProjectsBasicInfo];
+    projectBasicData = [DataManager getBasicInfosForEntity:ENTITY_PROJECT];
     self.labelHeader.text = projectBasicData.count == 0 ? @"No projects yet" : @"Projects";
     [self.collectionProjects performBatchUpdates:^{
         [self.collectionProjects reloadSections:[NSIndexSet indexSetWithIndex:0]];
@@ -134,4 +134,16 @@
     [self setLabelHeader:nil];
     selectedIndexPath = nil;
 }
+
+#pragma mark iCloudHandler delegate methods
+
+-(void)availableProjectsChanged:(NSDictionary*)cloudDocs{ // key: NSString name; value: NSURL dor URL
+}
+
+-(void)projectUpdated:(BOOL)success{
+}
+
+-(void)projectDeleted:(BOOL)success{
+}
+
 @end

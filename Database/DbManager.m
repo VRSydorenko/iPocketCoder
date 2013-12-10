@@ -35,6 +35,52 @@
     sqlite3_close(buildAnywhereDb);
 }
 
+-(BOOL)column:(NSString*)column existInTable:(NSString*)table{
+    NSString *querySQL = [NSString stringWithFormat:@"PRAGMA table_info(%@)", table];
+    const char *query_stmt = [querySQL UTF8String];
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, query_stmt, -1, &statement, NULL) == SQLITE_OK){
+        if (sqlite3_step(statement) == SQLITE_ROW){
+            int columnsCount = sqlite3_column_count(statement);
+            for (int i = 0; i < columnsCount; i++){
+                NSString *columnName = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_name(statement, i)];
+                if ([column isEqualToString:columnName]){
+                    return YES;
+                }
+            }
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return NO;
+}
+
+-(BOOL)addColumn:(NSString*)column ofType:(NSString*)type toTable:(NSString*)table{
+    if ([self column:column existInTable:table]){
+        return NO;
+    }
+    
+    BOOL result = YES;
+    NSString *sql = [NSString stringWithFormat:@"ALTER TABLE %@ ADD COLUMN %@ %@", table, column, type];
+    const char *insert_stmt = [sql UTF8String];
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(buildAnywhereDb, insert_stmt, -1, &statement, NULL) == SQLITE_OK){
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            NSLog(@"Column '%@ %@' added to table '%@'", type, column, table);
+        } else {
+            NSLog(@"Failed to add column to table");
+            NSLog(@"Info:%s", sqlite3_errmsg(buildAnywhereDb));
+            result = NO;
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return result;
+}
+
 -(void) initDatabase{
     // Get the documents directory
     NSArray* dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -49,13 +95,14 @@
         char *errMsg;
         DBDefinition* dbDef = [[DBDefinition alloc] init];
         const char *sql = [[dbDef getTablesCreationSQL] UTF8String];
-        if (sqlite3_exec(buildAnywhereDb, sql, NULL, NULL, &errMsg) != SQLITE_OK)
+        if (sqlite3_exec(buildAnywhereDb, sql, NULL, NULL, &errMsg) == SQLITE_OK)
         {
+        } else {
             NSLog(@"Error creating DB table(s)");
             NSLog(@"Info:%s", sqlite3_errmsg(buildAnywhereDb));
         }
     } else {
-        NSLog(@"Failed to open/create database");
+        NSLog(@"Failed to open database");
         NSLog(@"Info:%s", sqlite3_errmsg(buildAnywhereDb));
     }
 }
@@ -127,78 +174,6 @@
         [self saveLanguage:LANG_UNLAMBDA withName:@"Unlambda"];
         [self saveLanguage:LANG_VB_NET withName:@"VB.NET"];
         [self saveLanguage:LANG_WHITESPACE withName:@"Whitespace"];
-    }
-}
-
--(void)initCodeSamples{
-    if (![UserSettings getCodeSamplesInitialized]){
-        NSString *sampleName = @"code template";
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ADA name:sampleName code:TEMPL_ADA]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ASM_NASM207 name:sampleName code:TEMPL_ASM_NASM207]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ASM_GCC472 name:sampleName code:TEMPL_ASM_GCC472]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_AWK_GAWK name:sampleName code:TEMPL_AWK_GAWK]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_AWK_MAWK name:sampleName code:TEMPL_AWK_MAWK]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BASH name:sampleName code:TEMPL_BASH]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BC name:sampleName code:TEMPL_BC]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BRAINFUCK name:sampleName code:TEMPL_BRAINFUCK]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_C name:sampleName code:TEMPL_C]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_C_SHARP name:sampleName code:TEMPL_C_SHARP]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP name:sampleName code:TEMPL_CPP]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP11 name:sampleName code:TEMPL_CPP11]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLIPS name:sampleName code:TEMPL_CLIPS]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLOJURE name:sampleName code:TEMPL_CLOJURE]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_COBOL name:sampleName code:TEMPL_COBOL]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_COBOL85 name:sampleName code:TEMPL_COBOL85]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLISP name:sampleName code:TEMPL_CLISP]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_D_DMD name:sampleName code:TEMPL_D_DMD]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ERLANG name:sampleName code:TEMPL_ERLANG]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_F_SHARP name:sampleName code:TEMPL_F_SHARP]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FACTOR name:sampleName code:TEMPL_FACTOR]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FALCON name:sampleName code:TEMPL_FALCON]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTH name:sampleName code:TEMPL_FORTH]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTRAN name:sampleName code:TEMPL_FORTRAN]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GO name:sampleName code:TEMPL_GO]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GROOVY name:sampleName code:TEMPL_GROOVY]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_HASKELL name:sampleName code:TEMPL_HASKELL]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ICON name:sampleName code:TEMPL_ICON]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_INTERCAL name:sampleName code:TEMPL_INTERCAL]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVA name:sampleName code:TEMPL_JAVA]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVA7 name:sampleName code:TEMPL_JAVA7]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_RHINO name:sampleName code:TEMPL_JAVASCRIPT_RHINO]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_SPIDER name:sampleName code:TEMPL_JAVASCRIPT_SPIDER]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_LUA name:sampleName code:TEMPL_LUA]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NEMERLE name:sampleName code:TEMPL_NEMERLE]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NICE name:sampleName code:TEMPL_NICE]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NIMROD name:sampleName code:TEMPL_NIMROD]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NODE_JS name:sampleName code:TEMPL_NODE_JS]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OBJ_C name:sampleName code:TEMPL_OBJ_C]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCAML name:sampleName code:TEMPL_OCAML]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCTAVE name:sampleName code:TEMPL_OCTAVE]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OZ name:sampleName code:TEMPL_OZ]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PARI_GP name:sampleName code:TEMPL_PARI_GP]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PASCAL_FPC name:sampleName code:TEMPL_PASCAL_FPC]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PASCAL_GPC name:sampleName code:TEMPL_PASCAL_GPC]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PERL name:sampleName code:TEMPL_PERL]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PERL_6 name:sampleName code:TEMPL_PERL_6]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PHP name:sampleName code:TEMPL_PHP]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PIKE name:sampleName code:TEMPL_PIKE]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PROLOG_GNU name:sampleName code:TEMPL_PROLOG_GNU]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PROlOG_SWI name:sampleName code:TEMPL_PROlOG_SWI]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON name:sampleName code:TEMPL_PYTHON]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON3 name:sampleName code:TEMPL_PYTHON3]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_R name:sampleName code:TEMPL_R]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_RUBY name:sampleName code:TEMPL_RUBY]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCALA name:sampleName code:TEMPL_SCALA]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCHEME name:sampleName code:TEMPL_SCHEME]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SMALLTALK name:sampleName code:TEMPL_SMALLTALK]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SQL name:sampleName code:TEMPL_SQL]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TCL name:sampleName code:TEMPL_TCL]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TEXT name:sampleName code:TEMPL_TEXT]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_UNLAMBDA name:sampleName code:TEMPL_UNLAMBDA]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_VB_NET name:sampleName code:TEMPL_VB_NET]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_WHITESPACE name:sampleName code:TEMPL_WHITESPACE]];
-        
-        [UserSettings setCodeSamplesInitialized];
     }
 }
 
@@ -535,8 +510,9 @@
     sqlite3_finalize(statement);
 }
 
--(NSDictionary*) getProjectsBasicInfo{ // key: name, value:language
-    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@ FROM %@", F_NAME, F_LANG, T_PROJECTS];
+-(NSDictionary*) getBasicInfosForEntity:(EntityType)entity{ // key: name, value:language
+    NSString *table = entity == ENTITY_PROJECT ? T_PROJECTS : T_SNIPPETS;
+    NSString *querySQL = [NSString stringWithFormat: @"SELECT %@, %@ FROM %@", F_NAME, F_LANG, table];
     const char *query_stmt = [querySQL UTF8String];
     
     NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
@@ -779,6 +755,78 @@
     sqlite3_finalize(statement);
     
     return result;
+}
+
+-(void)initCodeSamples{
+    if (![UserSettings getCodeSamplesInitialized]){
+        NSString *sampleName = @"code template";
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ADA name:sampleName code:TEMPL_ADA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ASM_NASM207 name:sampleName code:TEMPL_ASM_NASM207]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ASM_GCC472 name:sampleName code:TEMPL_ASM_GCC472]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_AWK_GAWK name:sampleName code:TEMPL_AWK_GAWK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_AWK_MAWK name:sampleName code:TEMPL_AWK_MAWK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BASH name:sampleName code:TEMPL_BASH]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BC name:sampleName code:TEMPL_BC]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BRAINFUCK name:sampleName code:TEMPL_BRAINFUCK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_C name:sampleName code:TEMPL_C]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_C_SHARP name:sampleName code:TEMPL_C_SHARP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP name:sampleName code:TEMPL_CPP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP11 name:sampleName code:TEMPL_CPP11]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLIPS name:sampleName code:TEMPL_CLIPS]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLOJURE name:sampleName code:TEMPL_CLOJURE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_COBOL name:sampleName code:TEMPL_COBOL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_COBOL85 name:sampleName code:TEMPL_COBOL85]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLISP name:sampleName code:TEMPL_CLISP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_D_DMD name:sampleName code:TEMPL_D_DMD]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ERLANG name:sampleName code:TEMPL_ERLANG]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_F_SHARP name:sampleName code:TEMPL_F_SHARP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FACTOR name:sampleName code:TEMPL_FACTOR]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FALCON name:sampleName code:TEMPL_FALCON]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTH name:sampleName code:TEMPL_FORTH]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTRAN name:sampleName code:TEMPL_FORTRAN]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GO name:sampleName code:TEMPL_GO]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GROOVY name:sampleName code:TEMPL_GROOVY]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_HASKELL name:sampleName code:TEMPL_HASKELL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ICON name:sampleName code:TEMPL_ICON]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_INTERCAL name:sampleName code:TEMPL_INTERCAL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVA name:sampleName code:TEMPL_JAVA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVA7 name:sampleName code:TEMPL_JAVA7]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_RHINO name:sampleName code:TEMPL_JAVASCRIPT_RHINO]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_SPIDER name:sampleName code:TEMPL_JAVASCRIPT_SPIDER]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_LUA name:sampleName code:TEMPL_LUA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NEMERLE name:sampleName code:TEMPL_NEMERLE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NICE name:sampleName code:TEMPL_NICE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NIMROD name:sampleName code:TEMPL_NIMROD]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NODE_JS name:sampleName code:TEMPL_NODE_JS]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OBJ_C name:sampleName code:TEMPL_OBJ_C]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCAML name:sampleName code:TEMPL_OCAML]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCTAVE name:sampleName code:TEMPL_OCTAVE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OZ name:sampleName code:TEMPL_OZ]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PARI_GP name:sampleName code:TEMPL_PARI_GP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PASCAL_FPC name:sampleName code:TEMPL_PASCAL_FPC]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PASCAL_GPC name:sampleName code:TEMPL_PASCAL_GPC]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PERL name:sampleName code:TEMPL_PERL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PERL_6 name:sampleName code:TEMPL_PERL_6]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PHP name:sampleName code:TEMPL_PHP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PIKE name:sampleName code:TEMPL_PIKE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PROLOG_GNU name:sampleName code:TEMPL_PROLOG_GNU]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PROlOG_SWI name:sampleName code:TEMPL_PROlOG_SWI]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON name:sampleName code:TEMPL_PYTHON]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON3 name:sampleName code:TEMPL_PYTHON3]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_R name:sampleName code:TEMPL_R]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_RUBY name:sampleName code:TEMPL_RUBY]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCALA name:sampleName code:TEMPL_SCALA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCHEME name:sampleName code:TEMPL_SCHEME]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SMALLTALK name:sampleName code:TEMPL_SMALLTALK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SQL name:sampleName code:TEMPL_SQL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TCL name:sampleName code:TEMPL_TCL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TEXT name:sampleName code:TEMPL_TEXT]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_UNLAMBDA name:sampleName code:TEMPL_UNLAMBDA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_VB_NET name:sampleName code:TEMPL_VB_NET]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_WHITESPACE name:sampleName code:TEMPL_WHITESPACE]];
+        
+        [UserSettings setCodeSamplesInitialized];
+    }
 }
 
 @end

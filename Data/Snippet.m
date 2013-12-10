@@ -7,23 +7,22 @@
 //
 
 #import "Snippet.h"
+#import "DataManager.h"
 
 @implementation Snippet
-
-@synthesize snipLanguage, snipCode, snipName;
 
 -(id) initWithLanguage:(int)language name:(NSString*)name code:(NSString*)code{
     self = [super init];
     if (self){
-        self.snipLanguage = language;
-        self.snipName = name;
-        self.snipCode = code;
+        _snipLanguage = language;
+        _snipName = name;
+        _snipCode = code;
     }
     return self;
 }
 
--(void) setId:(int)iD{
-    self.snipId = iD;
+-(void)setId:(int)iD{
+    _snipId = iD;
 }
 
 @end

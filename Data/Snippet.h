@@ -10,13 +10,13 @@
 
 @interface Snippet : NSObject
 
-@property int snipId;
-@property int snipLanguage;
-@property NSString* snipCode;
-@property NSString* snipName;
+@property (readonly) int snipId;
+@property (readonly) int snipLanguage;
+@property (readonly) NSString* snipCode;
+@property (readonly) NSString* snipName;
 
 -(id) initWithLanguage:(int)language name:(NSString*)name code:(NSString*)code;
 
--(void) setId:(int)iD;
+-(void)setId:(int)iD;
 
 @end

@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "DbManager.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,
+                                      UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property DbManager* dbManager;
+@property DbManager *dbManager;
+@property (readonly) NSURL *ubiquityContainerUrl;
 
 @end

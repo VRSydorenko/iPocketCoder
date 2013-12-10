@@ -31,7 +31,7 @@
         [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
     
-    projectBasicData = [DataManager getProjectsBasicInfo];
+    projectBasicData = [DataManager getBasicInfosForEntity:ENTITY_PROJECT];
     
     selectedPath = nil;
     languages = [DataManager getLanguages];

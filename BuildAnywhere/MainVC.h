@@ -11,11 +11,13 @@
 #import "NewProjectVC.h"
 #import "EditorVC.h"
 #import "ProjectCell.h"
+#import "iCloudHandler.h"
 
 @interface MainVC : UIViewController<UICollectionViewDataSource,
                                      UICollectionViewDelegate,
                                      NewProjectCreationDelegate,
-                                     ProjectDeletionProtocol>
+                                     ProjectDeletionProtocol,
+                                     iCloudHandlerDelegate>
 
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionProjects;

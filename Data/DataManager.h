@@ -20,12 +20,14 @@
 
 +(NSDictionary*) getLanguages;
 +(NSString*) getLanguageName:(int)language;
-+(NSDictionary*) getProjectsBasicInfo;
++(NSDictionary*) getBasicInfosForEntity:(EntityType)entity;
 +(NSArray*) getSnippetNamesForLanguage:(int)lang;
 
 +(Project*) loadProject:(NSString*)name;
 +(Snippet*) loadSnippet:(NSString*)name language:(int)lang;
 +(QuickSymbol*) loadQuickSymbol:(int)iD;
++(void)addDeletionRecord:(EntityType)entitiy withCreationDate:(int)when;
++(int)findDeletionRecord:(EntityType)entitiy withCreationDate:(int)when;
 
 +(NSArray*) getLanguagesSymbolUsedFor:(int)iD;
 +(NSArray*) getQuickSymbols;

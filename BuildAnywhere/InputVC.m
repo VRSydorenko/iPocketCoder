@@ -40,14 +40,14 @@
 
 //iPad
 -(void)textViewDidChange:(UITextView *)textView{
-    self.project.projInput = self.textInput.text;
-    [self.project save];
+    [self.project setInput:self.textInput.text];
+    [DataManager saveProject:self.project];
 }
 
 // iPhone
 -(void)backPressed{
-    self.project.projInput = self.textInput.text;
-    [self.project save];
+    [self.project setInput:self.textInput.text];
+    [DataManager saveProject:self.project];
     
     [navCon popViewControllerAnimated:YES];
 }

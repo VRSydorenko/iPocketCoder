@@ -31,7 +31,7 @@
 -(void) deleteSnippet:(NSString*)name language:(int)lang;
 
 // actions on multipte objects
--(NSDictionary*) getProjectsBasicInfo; // <key: name, value:language>
+-(NSDictionary*) getBasicInfosForEntity:(EntityType)entity; // <key: name, value:language>
 -(NSArray*) getSnippetNamesForLanguage:(int)lang;
 
 -(NSDictionary*) getLanguages;

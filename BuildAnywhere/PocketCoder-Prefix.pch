@@ -12,3 +12,23 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+typedef enum{
+    ENTITY_PROJECT = 1,
+    ENTITY_SNIPPET = 2
+} EntityType;
+
+typedef enum{
+    CHANGE_CREATE = 1,
+    CHANGE_EDIT = 2,
+    CHANGE_DELETE = 3
+} EntityChange;
+
+#ifdef DEBUG
+#   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog(...)
+#endif
+
+// ALog always displays output regardless of the DEBUG setting
+#define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
