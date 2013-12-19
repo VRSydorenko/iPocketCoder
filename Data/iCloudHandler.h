@@ -13,6 +13,8 @@
 -(void)availableProjectsChanged:(NSDictionary*)cloudDocs; // key: NSString name; value: NSURL dor URL
 -(void)projectUpdated:(BOOL)success;
 -(void)projectDeleted:(BOOL)success;
+-(void)projectOpened:(Project*)opened;
+-(void)projectClosed:(Project*)closed;
 @end
 
 @interface iCloudHandler : NSObject
@@ -21,10 +23,14 @@
 
 @property id<iCloudHandlerDelegate> delegate;
 @property (readonly) NSDictionary *cloudDocs;
+@property (readonly) BOOL iCloudAccessible;
 
 @property NSMetadataQuery *query;
 
+-(void)openDocument:(NSURL*)fileUrl;
+-(void)closeDocument:(Project*)proj;
 -(void)updateInCloud:(Project*)project;
 -(void)deleteFromCloud:(NSString*)projName;
+-(NSURL*)makeDocURLForProject:(NSString*)name;
 
 @end

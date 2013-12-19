@@ -18,6 +18,7 @@
 @property (nonatomic) id<ProjectDeletionProtocol> delegate;
 @property (strong, nonatomic) IBOutlet UILabel *labelProjectName;
 @property (strong, nonatomic) IBOutlet UILabel *labelProjectLanguage;
+@property (nonatomic) BOOL isProjectLocal;
 
 - (IBAction)deletePressed:(id)sender;
 @end

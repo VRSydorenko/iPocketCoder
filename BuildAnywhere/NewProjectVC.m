@@ -7,6 +7,10 @@
 //
 
 #import "NewProjectVC.h"
+#import "iCloudHandler.h"
+
+#define SEGMENT_CLOUD 0
+#define SEGMENT_LOCAL 1
 
 @interface NewProjectVC (){
     NSDictionary *languages;
@@ -36,6 +40,8 @@
     selectedPath = nil;
     languages = [DataManager getLanguages];
     sortedKeys = [languages.allKeys sortedArrayUsingSelector:@selector(compare:)];
+    self.segmentStorage.selectedSegmentIndex = SEGMENT_LOCAL;
+    [self.segmentStorage setEnabled:[iCloudHandler getInstance].iCloudAccessible forSegmentAtIndex:SEGMENT_CLOUD];
     self.tableLanguages.dataSource = self;
     self.tableLanguages.delegate = self;
 }
@@ -76,7 +82,6 @@
     }
 }
 
-
 - (IBAction)didEndOnExit:(UITextField *)sender {
     [sender resignFirstResponder];
 }
@@ -92,7 +97,7 @@
         }
         return;
     }
-    if ([projectBasicData.allKeys containsObject:self.textName.text]){
+    if ([projectBasicData.allKeys containsObject:self.textName.text] || [[iCloudHandler getInstance].cloudDocs.allKeys containsObject:self.textName.text]){
         if (IPAD){
             [navCon showMessageBox:@"Project exists" text:@""];
         } else {
@@ -110,8 +115,14 @@
     }
     
     int language = ((NSNumber*)[languages objectForKey:[sortedKeys objectAtIndex:selectedPath.row]]).intValue;
-    Project* newProject = [[Project alloc] initWithLanguage:language name:self.textName.text];
-    [DataManager saveProject:newProject];
+    Project* newProject = nil;
+    if (self.segmentStorage.selectedSegmentIndex == SEGMENT_LOCAL){
+        newProject = [[Project alloc] initWithLanguage:language name:self.textName.text];
+    } else {
+        newProject = [[Project alloc] initInCloudWithLanguage:language name:self.textName.text];
+    }
+    [newProject save];
+    
     [self.delegate newProjectCreationFinished:YES];
 }
 

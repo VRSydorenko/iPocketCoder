@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *textName;
 @property (strong, nonatomic) IBOutlet UITableView *tableLanguages;
 @property (strong, nonatomic) id<NewProjectCreationDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentStorage;
 
 - (IBAction)didEndOnExit:(UITextField *)sender;
 - (IBAction)createPressed:(id)sender;

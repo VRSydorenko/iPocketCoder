@@ -7,6 +7,7 @@
 //
 
 #import "ProjectCell.h"
+#import "iCloudHandler.h"
 
 @implementation ProjectCell
 
@@ -18,8 +19,12 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1){
-        [DataManager deleteProject:self.labelProjectName.text];
-        [self.delegate projectDeleted];
+        if (self.isProjectLocal){
+            [DataManager deleteProject:self.labelProjectName.text];
+            [self.delegate projectDeleted];
+        } else {
+            [[iCloudHandler getInstance] deleteFromCloud:self.labelProjectName.text];
+        }
     }
 }
 

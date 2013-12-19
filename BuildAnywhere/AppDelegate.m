@@ -30,16 +30,33 @@
 }
 
 -(void)iCloudAccountAvailabilityChanged{
+    DLog(@"iCloudAccountAvailabilityChanged");
     [self initUbiqURL];
 }
 
 -(void)initUbiqURL{
+    _ubiquityContainerUrl = nil;
     dispatch_async (dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         _ubiquityContainerUrl = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-//        if (_ubiquityContainerUrl != nil) {
-//            dispatch_async (dispatch_get_main_queue (), ^(void) {
-//            });
-//        }
+        if (_ubiquityContainerUrl != nil) {
+            dispatch_async (dispatch_get_main_queue (), ^(void) {
+                NSMetadataQuery *query = [[NSMetadataQuery alloc] init];
+                [iCloudHandler getInstance].query = query;
+                [query setSearchScopes:[NSArray arrayWithObject:
+                                        NSMetadataQueryUbiquitousDocumentsScope]];
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K ENDSWITH '.proj'", NSMetadataItemFSNameKey];
+                DLog(@"Predicate: %@", pred.description);
+                [query setPredicate:pred];
+                
+                [[NSNotificationCenter defaultCenter] addObserver:[iCloudHandler getInstance] selector:@selector(queryDidFinishGathering:)
+                 name:NSMetadataQueryDidFinishGatheringNotification object:query];
+                
+                [[NSNotificationCenter defaultCenter] addObserver:[iCloudHandler getInstance] selector:@selector(queryDidFinishUpdating:)
+                name:NSMetadataQueryDidUpdateNotification object:query];
+                
+                [query startQuery];
+            });
+        }
     });
 }
 							

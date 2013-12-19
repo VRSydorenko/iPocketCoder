@@ -9,7 +9,6 @@
 #import "EditorVC.h"
 
 @interface EditorVC (){
-    Project* project;
     UIPopoverController* popoverController;
     MainNavController* navCon;
     NSDictionary* quickSymbols;
@@ -26,8 +25,6 @@
 @end
 
 @implementation EditorVC
-
-@synthesize projectName;
 
 - (void)viewDidLoad
 {
@@ -59,18 +56,17 @@
         [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
     
-    project = self.projectName.length > 0 ? [DataManager loadProject:self.projectName] : nil;
-    if (project){
-        self.textCode.text = project.projCode;
-        self.navigationItem.title = project.projName;
+    if (self.project){
+        self.textCode.text = self.project.projCode;
+        self.navigationItem.title = self.project.projName;
         
-        if (![UserSettings getSymbolsInitializedForLang:project.projLanguage]){
+        if (![UserSettings getSymbolsInitializedForLang:self.project.projLanguage]){
             int i = 0;
             for (QuickSymbol* symbol in [DataManager getQuickSymbols]) {
-                [DataManager putQuickSymbol:symbol.symbId toLanguageUsage:project.projLanguage atIndex:i];
+                [DataManager putQuickSymbol:symbol.symbId toLanguageUsage:self.project.projLanguage atIndex:i];
                 i++;
             }
-            [UserSettings setSymbolsInitializedForLang:project.projLanguage];
+            [UserSettings setSymbolsInitializedForLang:self.project.projLanguage];
         }
     }
     
@@ -85,8 +81,8 @@
 
 // iPhone
 -(void)backPressed{
-    [project setCode:self.textCode.text];
-    [DataManager saveProject:project];
+    [self.project setCode:self.textCode.text];
+    [self.project close];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -100,8 +96,8 @@
             popoverController = nil;
         }
         
-        [project setCode:self.textCode.text];
-        [DataManager saveProject:project];
+        [self.project setCode:self.textCode.text];
+        [self.project close];
     }
 }
 
@@ -120,7 +116,7 @@
             return;
         }
         SnippetsVC* snippetsVC = ((SnippetsVC*)[snippetsMainVC.viewControllers objectAtIndex:0]);
-        snippetsVC.language = project.projLanguage;
+        snippetsVC.language = self.project.projLanguage;
         snippetsVC.delegate = self;
         
         popoverController = [[UIPopoverController alloc] initWithContentViewController:snippetsMainVC];
@@ -187,7 +183,7 @@
         if (!inputVC){
             return;
         }
-        ((InputVC*)[inputVC.viewControllers objectAtIndex:0]).project = project;
+        ((InputVC*)[inputVC.viewControllers objectAtIndex:0]).project = self.project;
         
         popoverController = [[UIPopoverController alloc] initWithContentViewController:inputVC];
         [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -197,10 +193,10 @@
 }
 
 - (IBAction)runPressed:(id)sender {
-    [project setCode:self.textCode.text];
-    [DataManager saveProject:project];
+    [self.project setCode:self.textCode.text];
+    [self.project save];
     
-    [runManager createSubmission:project run:YES];
+    [runManager createSubmission:self.project run:YES];
     
     [self updateToolbarWithSpinner:YES statusText:@"Processing..."];
 }
@@ -219,21 +215,21 @@
     if ([segue.identifier isEqualToString:@"segueEditorToOutput"]){
         ResultsVC* outputVC = (ResultsVC*)segue.destinationViewController;
         int maxOutputLength = 3000;
-        outputVC.projectName = project.projName;
+        outputVC.projectName = self.project.projName;
         outputVC.output = lastOutput.length > maxOutputLength ? [lastOutput substringToIndex:maxOutputLength] : lastOutput;
         outputVC.cmpInfo = lastCmpInfo;
         outputVC.stdErr = lastStdErr;
         outputVC.signal = lastSignal;
     } else if ([segue.identifier isEqualToString:@"segueEditorToInput"]){
         InputVC* inputVC = (InputVC*)segue.destinationViewController;
-        inputVC.project = project;
+        inputVC.project = self.project;
     } else if ([segue.identifier isEqualToString:@"segueEditorToSnippets"]){
         SnippetsVC* snippetsVC = (SnippetsVC*)segue.destinationViewController;
-        snippetsVC.language = project.projLanguage;
+        snippetsVC.language = self.project.projLanguage;
         snippetsVC.delegate = self;
     } else if ([segue.identifier isEqualToString:@"segueEditorToSymbolsManager"]){
         QuickSymbolManager* symbolsManagerVC = (QuickSymbolManager*)segue.destinationViewController;
-        symbolsManagerVC.projectLanguge = project.projLanguage;
+        symbolsManagerVC.projectLanguge = self.project.projLanguage;
         symbolsManagerVC.delegate = self;
     }
 }
@@ -271,8 +267,8 @@
 -(void)textViewDidEndEditing:(UITextView *)textView{
     NSString *trimmedCode = [Utils trimWhitespaces:self.textCode.text];
     self.shareItem.enabled = trimmedCode.length > 0 // code is not whitespaces only
-                             || (project.projLanguage == 6 && self.textCode.text.length > 0) // it's OK for Whitespace lang (code 6)
-                             || project.projLink.length > 0;
+                             || (self.project.projLanguage == 6 && self.textCode.text.length > 0) // it's OK for Whitespace lang (code 6)
+                             || self.project.projLink.length > 0;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -288,7 +284,7 @@
     CGPoint smallBtnSettingCenterPoint = self.btnShortkeysSettings.center;
     smallBtnSettingCenterPoint.y = keyboardTop - self.btnShortkeysSettings.frame.size.height/2;
     
-    int symbolsCountForCurrLang = [DataManager getOrderedSymbolIDsForLanguage:project.projLanguage].count;
+    int symbolsCountForCurrLang = [DataManager getOrderedSymbolIDsForLanguage:self.project.projLanguage].count;
     
     NSValue *animationDurationValue = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     NSTimeInterval animationDuration;
@@ -342,7 +338,7 @@
     float barPadding = 5.0; // top & bottom
     CGRect barRect = CGRectMake(0.0, self.view.frame.size.height - barHeight, barWidth, barHeight);
     
-    NSDictionary* symbolsForCurrentLanguage = [DataManager getOrderedSymbolIDsForLanguage:project.projLanguage];
+    NSDictionary* symbolsForCurrentLanguage = [DataManager getOrderedSymbolIDsForLanguage:self.project.projLanguage];
     if (symbolsForCurrentLanguage.count > 0){
         UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:barRect];
         [scrollView setShowsHorizontalScrollIndicator:NO];
@@ -477,7 +473,7 @@
             return;
         }
         QuickSymbolManager* manager = (QuickSymbolManager*)[shortkeysManagerVC.viewControllers objectAtIndex:0];
-        manager.projectLanguge = project.projLanguage;
+        manager.projectLanguge = self.project.projLanguage;
         manager.delegate = self;
         
         CGRect showPointRect = CGRectMake(self.textCode.bounds.size.width, self.textCode.bounds.size.height, 1, 1);
@@ -508,8 +504,8 @@
 
 -(void)submissionCreatedWithError:(int)errorCode andLink:(NSString*)link{
     if (errorCode == OK){
-        [project setLink:link];
-        [DataManager saveProject:project];
+        [self.project setLink:link];
+        [self.project save];
     
         //check result in 2 sec
         [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkSubmissionState) userInfo:nil repeats:NO];
@@ -519,7 +515,7 @@
     }
 }
 -(void)checkSubmissionState{
-    [runManager getSubmissionStatus:project.projLink];
+    [runManager getSubmissionStatus:self.project.projLink];
     NSLog(@"check submission status called");
 }
 
@@ -537,7 +533,7 @@
                     } else {
                         [navCon showInfoBarWithNegativeMessage:[Utils getShortDescriptionOfResultCode:result]];
                     }
-                    [runManager getSubmissionDetails:project.projLink];
+                    [runManager getSubmissionDetails:self.project.projLink];
                     [self updateToolbarWithViewResultsButton];
                     detailsRequested = YES;
                     break;
@@ -580,7 +576,7 @@
 }
 
 -(IBAction)sharePressed:(id)sender{
-    if (self.textCode.text.length == 0 && project.projLink.length == 0){
+    if (self.textCode.text.length == 0 && self.project.projLink.length == 0){
         return;
     }
     
@@ -589,7 +585,7 @@
     if (self.textCode.text.length > 0){
         [shareActionSheet addButtonWithTitle:@"Source code"];
     }
-    if (project.projLink.length > 0){
+    if (self.project.projLink.length > 0){
         [shareActionSheet addButtonWithTitle:@"The latest code run (URL)"];
     }
     [shareActionSheet addButtonWithTitle:@"Cancel"];
@@ -604,13 +600,13 @@
         return;
     }
     
-    NSString* shareIntroString = [NSString stringWithFormat:@"%@ source code from iPocketCoder:", [DataManager getLanguageName:project.projLanguage]];
+    NSString* shareIntroString = [NSString stringWithFormat:@"%@ source code from iPocketCoder:", [DataManager getLanguageName:self.project.projLanguage]];
     
     NSString* textToShare = @"";
     if (buttonIndex == 0 && self.textCode.text.length > 0){ // [source]
         textToShare = [NSString stringWithFormat:@"%@\n\n%@", shareIntroString, self.textCode.text];
     } else { // [link]
-        textToShare = [NSString stringWithFormat:@"Link to the %@ http://ideone.com/%@", shareIntroString, project.projLink];
+        textToShare = [NSString stringWithFormat:@"Link to the %@ http://ideone.com/%@", shareIntroString, self.project.projLink];
     }
     
     [Utils shareText:textToShare overViewController:self];

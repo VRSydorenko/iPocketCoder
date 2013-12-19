@@ -28,7 +28,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *btnShortkeysSettings;
 @property (nonatomic, strong) IBOutlet UIView *accessoryView;
 
-@property (nonatomic) NSString* projectName;
+@property (nonatomic) Project* project;
 @property (strong, nonatomic) IBOutlet UIButton *btnHideKeyboard;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *flexItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *inputItem;

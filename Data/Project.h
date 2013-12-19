@@ -20,6 +20,7 @@
 @property (readonly) BOOL isInCloud;
 
 -(id) initWithLanguage:(int)language name:(NSString*)name;
+-(id) initInCloudWithLanguage:(int)language name:(NSString*)name;
 
 -(void) setId:(int)iD;
 -(void) setCode:(NSString*)code;
@@ -28,5 +29,6 @@
 
 -(void)save;
 -(void)remove;
+-(void)close;
 
 @end

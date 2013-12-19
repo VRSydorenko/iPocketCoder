@@ -15,7 +15,9 @@
 @implementation Project
 
 -(id) initInCloudWithLanguage:(int)language name:(NSString*)name{
-    self = [super init];
+    NSURL *url = [[iCloudHandler getInstance] makeDocURLForProject:name];
+    
+    self = [super initWithFileURL:url];
     if (self){
         [self baseInitWithLanguage:language name:name];
         _isInCloud = YES;
@@ -24,7 +26,9 @@
 }
 
 -(id) initWithLanguage:(int)language name:(NSString*)name{
-    self = [super init];
+    NSURL *url = [[iCloudHandler getInstance] makeDocURLForProject:name];
+    
+    self = [super initWithFileURL:url];
     if (self){
         [self baseInitWithLanguage:language name:name];
         _isInCloud = NO;
@@ -59,8 +63,10 @@
 
 -(void)save{
     if (self.isInCloud){
+        DLog(@"Project will be saved in cloud");
         [[iCloudHandler getInstance] updateInCloud:self];
     } else {
+        DLog(@"Project will be saved locally");
         [DataManager saveProject:self];
     }
 }
@@ -73,7 +79,20 @@
     }
 }
 
+-(void)close{
+    if (self.isInCloud){
+        [[iCloudHandler getInstance] closeDocument:self];
+    } else {
+        [self save];
+    }
+}
+
 #pragma mark UIDocument methods
+
+- (void) handleError:(NSError *)error userInteractionPermitted:(BOOL)userInteractionPermitted{
+    NSLog(@"error: %@", [error description]);
+    NSLog(@"permitted: %d", userInteractionPermitted);
+}
 
 -(id)contentsForType:(NSString *)typeName error:(NSError *__autoreleasing *)outError{
     NSString *content = [self serializeProject];
@@ -116,7 +135,9 @@
     _projName = [parts objectAtIndex:1];
     _projCode = [parts objectAtIndex:2];
     _projInput = [parts objectAtIndex:3];
-    _projLink = [parts objectAtIndex:4];
+    if (parts.count > 4){
+        _projLink = [parts objectAtIndex:4];
+    }
 }
 
 @end
