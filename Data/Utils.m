@@ -210,10 +210,8 @@
     return @"";
 }
 
-+(NSString*)composeDocFileNameFor:(EntityType)entity name:(NSString*)name language:(int)lang ext:(NSString*)ext{
-    NSString *ent = entity == ENTITY_PROJECT ? @"proj" : @"snip";
-    NSString *tail = ext && ext.length > 0 ? [NSString stringWithFormat:@".%@", ext] : @"";
-    return [NSString stringWithFormat:@"%@_%@_%d%@", ent, name, lang, tail];
++(NSString*)make3digitsStringFromNumber:(int)number{
+    return [NSString stringWithFormat:@"%03d", number];
 }
 
 @end

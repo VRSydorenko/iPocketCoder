@@ -23,7 +23,7 @@
             [DataManager deleteProject:self.labelProjectName.text];
             [self.delegate projectDeleted];
         } else {
-            [[iCloudHandler getInstance] deleteFromCloud:self.labelProjectName.text];
+            [[iCloudHandler getInstance] deleteFromCloud:self.labelProjectName.text language:self.tag];
         }
     }
 }

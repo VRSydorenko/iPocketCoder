@@ -9,6 +9,7 @@
 #import "iCloudHandler.h"
 
 #define DOCS_DIR @"Documents"
+#define LANG_NAME_SEP @"_"
 
 @implementation iCloudHandler
 
@@ -37,16 +38,16 @@
     }];
 }
 
--(void)closeDocument:(Project*)proj{
-    DLog(@"Requested closing file: %@", proj.fileURL);
+-(void)closeDocument:(Project*)project{
+    DLog(@"Requested closing file: %@", project.fileURL);
     
-    [proj saveToURL:proj.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+    [project saveToURL:project.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
         if (success){
             DLog(@"Cloud save succeeded");
-            [proj closeWithCompletionHandler:^(BOOL success){
+            [project closeWithCompletionHandler:^(BOOL success){
                 if (success){
                     DLog(@"Cloud close succeeded");
-                    [self.delegate projectClosed:proj];
+                    [self.delegate projectClosed:project];
                 } else {
                     DLog(@"Cloud close failed");
                     [self.delegate projectClosed:nil];
@@ -82,7 +83,9 @@
              }
              if (operation == UIDocumentSaveForCreating){
                  NSMutableDictionary *tmp = [[NSMutableDictionary alloc] initWithDictionary:self.cloudDocs];
-                 [tmp setValue:project.fileURL forKey:project.projName];
+                 NSString *langStr = [Utils make3digitsStringFromNumber:project.projLanguage];
+                 NSString *projNameKey = [NSString stringWithFormat:@"%@%@%@", langStr, LANG_NAME_SEP, project.projName];
+                 [tmp setValue:project.fileURL forKey:projNameKey];
                  _cloudDocs = nil;
                  _cloudDocs = [[NSDictionary alloc] initWithDictionary:tmp];
              }
@@ -94,7 +97,7 @@
      ];
 }
 
--(void)deleteFromCloud:(NSString*)projName{
+-(void)deleteFromCloud:(NSString*)projName language:(int)language{
     if (![self iCloudAccessible]){
         return;
     }
@@ -102,11 +105,13 @@
     NSFileManager *fileMgr = [NSFileManager defaultManager];
     
     NSError *error = nil;
-    [fileMgr removeItemAtURL:[self makeDocURLForProject:projName] error:&error];
+    [fileMgr removeItemAtURL:[self makeDocURLForProject:projName language:language] error:&error];
     
     if (!error){
         NSMutableDictionary *tmp = [[NSMutableDictionary alloc] initWithDictionary:self.cloudDocs];
-        [tmp removeObjectForKey:projName];
+        NSString *langStr = [Utils make3digitsStringFromNumber:language];
+        NSString *projNameKey = [NSString stringWithFormat:@"%@%@%@.proj", langStr, LANG_NAME_SEP, projName];
+        [tmp removeObjectForKey:projNameKey];
         _cloudDocs = nil;
         _cloudDocs = [[NSDictionary alloc] initWithDictionary:tmp];
     } else {
@@ -152,11 +157,11 @@
     [self.delegate availableProjectsChanged:self.cloudDocs];
 }
 
--(NSURL*)makeDocURLForProject:(NSString*)name{
+-(NSURL*)makeDocURLForProject:(NSString*)name language:(int)lang{
     NSURL *ubiq = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).ubiquityContainerUrl;
     if (ubiq){
-        return [[ubiq URLByAppendingPathComponent:DOCS_DIR] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.proj", name]];
-        //return [ubiq URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.proj", name]];
+        NSString *langStr = [Utils make3digitsStringFromNumber:lang];
+        return [[ubiq URLByAppendingPathComponent:DOCS_DIR] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@%@%@.proj", langStr, LANG_NAME_SEP, name]];
     }
     DLog(@"Ubiquity container is inaccessible");
     return nil;

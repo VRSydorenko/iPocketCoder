@@ -15,7 +15,7 @@
 @implementation Project
 
 -(id) initInCloudWithLanguage:(int)language name:(NSString*)name{
-    NSURL *url = [[iCloudHandler getInstance] makeDocURLForProject:name];
+    NSURL *url = [[iCloudHandler getInstance] makeDocURLForProject:name language:language];
     
     self = [super initWithFileURL:url];
     if (self){
@@ -26,7 +26,7 @@
 }
 
 -(id) initWithLanguage:(int)language name:(NSString*)name{
-    NSURL *url = [[iCloudHandler getInstance] makeDocURLForProject:name];
+    NSURL *url = [[iCloudHandler getInstance] makeDocURLForProject:name language:language];
     
     self = [super initWithFileURL:url];
     if (self){
@@ -73,7 +73,7 @@
 
 -(void)remove{
     if (self.isInCloud){
-        [[iCloudHandler getInstance] deleteFromCloud:self.projName];
+        [[iCloudHandler getInstance] deleteFromCloud:self.projName language:self.projLanguage];
     } else {
         [DataManager deleteProject:self.projName];
     }

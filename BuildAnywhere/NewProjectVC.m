@@ -27,8 +27,6 @@
 {
     [super viewDidLoad];
     
-    [self generateProjectName];
-    
     navCon = (MainNavController*)self.navigationController;
     
     if (!IPAD){
@@ -36,6 +34,7 @@
     }
     
     projectBasicData = [DataManager getBasicInfosForEntity:ENTITY_PROJECT];
+    [self generateProjectName];
     
     selectedPath = nil;
     languages = [DataManager getLanguages];
@@ -97,7 +96,7 @@
         }
         return;
     }
-    if ([projectBasicData.allKeys containsObject:self.textName.text] || [[iCloudHandler getInstance].cloudDocs.allKeys containsObject:self.textName.text]){
+    if ([self isProjectExist:self.textName.text]){
         if (IPAD){
             [navCon showMessageBox:@"Project exists" text:@""];
         } else {
@@ -126,23 +125,29 @@
     [self.delegate newProjectCreationFinished:YES];
 }
 
+-(BOOL)isProjectExist:(NSString*)name{
+    if ([projectBasicData.allKeys containsObject:name]){
+        return YES;
+    }
+    for (NSString *cloudName in [iCloudHandler getInstance].cloudDocs.allKeys) {
+        NSString *nameOnly = [cloudName substringFromIndex:4];
+        if ([name isEqualToString:nameOnly]){
+            return YES;
+        }
+    }
+    return NO;
+}
+
 -(void)backPressed{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)generateProjectName{    
-    NSString* template = @"New project";
-    
-    if (![DataManager loadProject:template]){
-        self.textName.text = template;
-        return;
-    }
-    
+-(void)generateProjectName{
     NSString* result;
-    int i = 2;
+    int i = 1;
     do {
-        result = [NSString stringWithFormat:@"%@ %d", template, i++];
-    } while ([DataManager loadProject:result]);
+        result = [NSString stringWithFormat:@"Project %d", i++];
+    } while ([self isProjectExist:result]);
     
     self.textName.text = result;
 }

@@ -28,9 +28,9 @@
 @property NSMetadataQuery *query;
 
 -(void)openDocument:(NSURL*)fileUrl;
--(void)closeDocument:(Project*)proj;
+-(void)closeDocument:(Project*)project;
 -(void)updateInCloud:(Project*)project;
--(void)deleteFromCloud:(NSString*)projName;
--(NSURL*)makeDocURLForProject:(NSString*)name;
+-(void)deleteFromCloud:(NSString*)projName language:(int)language;
+-(NSURL*)makeDocURLForProject:(NSString*)name language:(int)lang;
 
 @end

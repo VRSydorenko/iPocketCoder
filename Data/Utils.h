@@ -17,6 +17,6 @@
 +(NSString*)getSignalDescription:(int)signal;
 +(NSString*)returnCaretIfNotEmpty:(NSString*)targetString returnNumbers:(int)returns;
 +(NSString*)codeTemplateForLanguage:(int)langId;
-+(NSString*)composeDocFileNameFor:(EntityType)entity name:(NSString*)name language:(int)lang ext:(NSString*)ext;
++(NSString*)make3digitsStringFromNumber:(int)number;
 
 @end

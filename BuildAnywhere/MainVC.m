@@ -80,13 +80,14 @@
         cell.isProjectLocal = NO;
         
         NSString *fromCloud = [cloudProjects.allKeys objectAtIndex:indexPath.row];
-        projectName = fromCloud;
-        projectLanguage = 0;
+        projectName = [fromCloud substringFromIndex:4]; // here the actual name begins
+        projectLanguage = [fromCloud substringToIndex:3].intValue; // language is stored within first 3 symbols
     }
 
     cell.delegate = self;
     cell.labelProjectName.text = projectName;
     cell.labelProjectLanguage.text =  [DataManager getLanguageName:projectLanguage];
+    cell.tag = projectLanguage;
     
     return cell;
 }
@@ -109,7 +110,7 @@
     projectBasicData = [DataManager getBasicInfosForEntity:ENTITY_PROJECT];
     cloudProjects = [iCloudHandler getInstance].cloudDocs;
     
-    self.labelHeader.text = projectBasicData.count == 0 ? @"No projects yet" : @"Projects";
+    self.labelHeader.text = (projectBasicData.count == 0 && cloudProjects.count == 0) ? @"No projects yet" : @"Projects";
     [self.collectionProjects performBatchUpdates:^{
         NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
         for (int i = 0; i < [self numberOfSectionsInCollectionView:self.collectionProjects]; i++) {
@@ -117,7 +118,6 @@
         }
         [self.collectionProjects reloadSections:indexSet];
     } completion:nil];
-//    [self.collectionProjects reloadData];
 }
 
 - (IBAction)createNewProjectPressed:(id)sender {
