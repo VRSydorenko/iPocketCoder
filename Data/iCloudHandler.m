@@ -27,6 +27,14 @@
     DLog(@"Requested opening file: %@", fileUrl.description);
     
     Project *proj = [[Project alloc] initWithFileURL:fileUrl];
+    
+    UIDocumentState state = proj.documentState;
+    
+    if (state != UIDocumentStateClosed){
+        DLog(@"The file is opened on another device");
+        return;
+    }
+    
     [proj openWithCompletionHandler:^(BOOL success){
         if (success){
             DLog(@"Cloud open succeeded");

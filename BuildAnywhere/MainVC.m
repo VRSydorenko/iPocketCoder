@@ -67,7 +67,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProjectCell* cell = [cv dequeueReusableCellWithReuseIdentifier:@"cellProject" forIndexPath:indexPath];
+    NSString *cellId = indexPath.section == SECTION_LOCAL ? @"cellProject" : @"cellCloudProject";
+    ProjectCell* cell = [cv dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     NSString *projectName = @"";
     int projectLanguage = -1;
     
