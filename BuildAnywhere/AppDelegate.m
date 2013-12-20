@@ -36,6 +36,8 @@
 
 -(void)initUbiqURL{
     _ubiquityContainerUrl = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:[iCloudHandler getInstance]];
+    
     dispatch_async (dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         _ubiquityContainerUrl = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
         if (_ubiquityContainerUrl != nil) {
