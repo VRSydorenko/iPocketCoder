@@ -131,13 +131,12 @@
 -(void)deserializeProject:(NSString*)projectString{
     NSArray *parts = [projectString componentsSeparatedByString:KEY_SEP_DATA];
     
+    NSAssert(parts.count == 5, @"Project deserialization: wrong number of data parts (%d)", parts.count);
     _projLanguage = ((NSString*)[parts objectAtIndex:0]).intValue;
     _projName = [parts objectAtIndex:1];
     _projCode = [parts objectAtIndex:2];
     _projInput = [parts objectAtIndex:3];
-    if (parts.count > 4){
-        _projLink = [parts objectAtIndex:4];
-    }
+    _projLink = [parts objectAtIndex:4];
 }
 
 @end

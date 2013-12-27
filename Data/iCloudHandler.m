@@ -51,7 +51,6 @@
     
     [project saveToURL:project.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
         if (success){
-            DLog(@"Cloud save succeeded");
             [project closeWithCompletionHandler:^(BOOL success){
                 if (success){
                     DLog(@"Cloud close succeeded");
@@ -66,8 +65,6 @@
             [self.delegate projectClosed:nil];
         }
     }];
-    
-    
 }
 
 -(void)updateInCloud:(Project *)project{
