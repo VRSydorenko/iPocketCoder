@@ -102,11 +102,13 @@
 }
 
 -(BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError{
-    NSString *content = [[NSString alloc] initWithBytes:[contents bytes] length:[contents length] encoding:NSUTF8StringEncoding];
-    DLog(@"Deserialization: %@", content);
+    if ([contents length] > 0){
+        NSString *content = [[NSString alloc] initWithBytes:[contents bytes] length:[contents length] encoding:NSUTF8StringEncoding];
+        DLog(@"Deserialization: %@", content);
     
-    [self deserializeProject:content];
-    _isInCloud = YES;
+        [self deserializeProject:content];
+        _isInCloud = YES;
+    }
     return YES;
 }
 

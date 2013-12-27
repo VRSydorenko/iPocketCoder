@@ -87,17 +87,19 @@
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
-    if ([navCon.viewControllers indexOfObject:self] == NSNotFound){ // back button
-        if (popoverController){
-            if ([popoverController isPopoverVisible]){
-                [popoverController dismissPopoverAnimated:YES];
-                return;
+    if (IPAD){
+        if ([navCon.viewControllers indexOfObject:self] == NSNotFound){ // back button
+            if (popoverController){
+                if ([popoverController isPopoverVisible]){
+                    [popoverController dismissPopoverAnimated:YES];
+                    return;
+                }
+                popoverController = nil;
             }
-            popoverController = nil;
-        }
         
-        [self.project setCode:self.textCode.text];
-        [self.project close];
+            [self.project setCode:self.textCode.text];
+            [self.project close];
+        }
     }
 }
 

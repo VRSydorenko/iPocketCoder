@@ -14,6 +14,7 @@
 -(void)projectUpdated:(BOOL)success;
 -(void)projectDeleted:(BOOL)success;
 -(void)projectOpened:(Project*)opened;
+-(void)projectWillBeClosed:(Project*)closed;
 -(void)projectClosed:(Project*)closed;
 @end
 

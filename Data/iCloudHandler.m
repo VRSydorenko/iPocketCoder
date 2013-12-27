@@ -49,6 +49,7 @@
 -(void)closeDocument:(Project*)project{
     DLog(@"Requested closing file: %@", project.fileURL);
     
+    [self.delegate projectWillBeClosed:project];
     [project saveToURL:project.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
         if (success){
             [project closeWithCompletionHandler:^(BOOL success){

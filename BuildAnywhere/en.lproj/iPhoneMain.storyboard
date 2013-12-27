@@ -87,11 +87,24 @@
                                                         <action selector="deletePressed:" destination="NTW-ve-eix" eventType="touchUpInside" id="VYe-DP-PoI"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="k4r-Zh-JhV">
+                                                    <rect key="frame" x="5" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="HPl-W5-nl1"/>
+                                                        <constraint firstAttribute="width" constant="20" id="f6J-W4-aGK"/>
+                                                    </constraints>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="k4r-Zh-JhV" firstAttribute="leading" secondItem="NTW-ve-eix" secondAttribute="leading" constant="5" id="XBa-DF-qAw"/>
+                                            <constraint firstItem="k4r-Zh-JhV" firstAttribute="top" secondItem="NTW-ve-eix" secondAttribute="top" constant="5" id="k3o-Gy-Htf"/>
+                                        </constraints>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="k4r-Zh-JhV" id="46d-Gh-4xL"/>
                                             <outlet property="labelProjectLanguage" destination="uEK-kX-W45" id="4MY-3v-3w0"/>
                                             <outlet property="labelProjectName" destination="nke-P9-afw" id="nTl-Rf-vEZ"/>
                                         </connections>
@@ -135,11 +148,24 @@
                                                         <action selector="deletePressed:" destination="wtF-YT-D67" eventType="touchUpInside" id="RfJ-cM-Ygr"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="5kZ-6K-Upn">
+                                                    <rect key="frame" x="5" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="3j6-3j-2SU"/>
+                                                        <constraint firstAttribute="width" constant="20" id="6VB-Q3-MWp"/>
+                                                    </constraints>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="5kZ-6K-Upn" firstAttribute="leading" secondItem="wtF-YT-D67" secondAttribute="leading" constant="5" id="ORD-Mb-2ID"/>
+                                            <constraint firstItem="5kZ-6K-Upn" firstAttribute="top" secondItem="wtF-YT-D67" secondAttribute="top" constant="5" id="OiD-EG-4Y4"/>
+                                        </constraints>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="5kZ-6K-Upn" id="nEd-kX-1ux"/>
                                             <outlet property="labelProjectLanguage" destination="1rF-6r-LQV" id="Xfi-fq-bxm"/>
                                             <outlet property="labelProjectName" destination="HeK-PH-kNb" id="YdC-HP-M05"/>
                                         </connections>

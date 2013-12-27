@@ -9,16 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "DataManager.h"
 
-@protocol ProjectDeletionProtocol <NSObject>
+@protocol ProjectCellDelegate <NSObject>
 -(void)projectDeleted;
+-(void)projectWillBeDeleted:(NSString*)name language:(int)lang;
 @end
 
 @interface ProjectCell : UICollectionViewCell<UIAlertViewDelegate>
 
-@property (nonatomic) id<ProjectDeletionProtocol> delegate;
+@property (nonatomic) id<ProjectCellDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UILabel *labelProjectName;
 @property (strong, nonatomic) IBOutlet UILabel *labelProjectLanguage;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic) BOOL isProjectLocal;
 
 - (IBAction)deletePressed:(id)sender;
+
+-(void)setBehaviour:(ProjectStates)projState;
+
 @end

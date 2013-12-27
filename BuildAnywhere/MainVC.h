@@ -16,7 +16,7 @@
 @interface MainVC : UIViewController<UICollectionViewDataSource,
                                      UICollectionViewDelegate,
                                      NewProjectCreationDelegate,
-                                     ProjectDeletionProtocol,
+                                     ProjectCellDelegate,
                                      iCloudHandlerDelegate>
 
 

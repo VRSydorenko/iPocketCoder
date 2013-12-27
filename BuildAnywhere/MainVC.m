@@ -19,6 +19,7 @@
     MainNavController* navCon;
     
     Project *bufferProj;
+    NSMutableDictionary *projectStates;
 }
 
 @end
@@ -30,6 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    projectStates = [[NSMutableDictionary alloc] init];
     
     navCon = (MainNavController*)self.navigationController;
     [navCon hideToolBarAnimated:NO];
@@ -90,6 +93,11 @@
     cell.labelProjectLanguage.text =  [DataManager getLanguageName:projectLanguage];
     cell.tag = projectLanguage;
     
+    NSString *fullProjName = [NSString stringWithFormat:@"%@_%@", [Utils make3digitsStringFromNumber:projectLanguage], projectName];
+    NSNumber *state = [projectStates objectForKey:fullProjName];
+    DLog(@"Setting %@ for the cell for project: %@", state, fullProjName);
+    [cell setBehaviour:state.intValue];
+    
     return cell;
 }
 
@@ -111,6 +119,8 @@
     projectBasicData = [DataManager getBasicInfosForEntity:ENTITY_PROJECT];
     cloudProjects = [iCloudHandler getInstance].cloudDocs;
     
+    [self syncStates];
+    
     self.labelHeader.text = (projectBasicData.count == 0 && cloudProjects.count == 0) ? @"No projects yet" : @"Projects";
     [self.collectionProjects performBatchUpdates:^{
         NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
@@ -119,6 +129,27 @@
         }
         [self.collectionProjects reloadSections:indexSet];
     } completion:nil];
+}
+
+-(void)syncStates{ // in terms of IDLE and DELETING states
+    for (NSString *projName in cloudProjects) {
+        DLog(@"Syncing states...");
+        if (![projectStates.allKeys containsObject:projName]){
+            DLog(@"projectStates miss %@ project so adding %@ for it", projName, [NSNumber numberWithInt:IDLE]);
+            [projectStates setObject:[NSNumber numberWithInt:IDLE] forKey:projName];
+        } else {
+            DLog(@"projectStates already has project %@ (with value %@)", projName, [projectStates objectForKey:projName]);
+        }
+    }
+    for (NSString *projName in projectStates.allKeys) {
+        DLog(@"Syncing removed states...");
+        if (![cloudProjects.allKeys containsObject:projName]){
+            DLog(@"%@ does not exist in cloudProjects so delete it from projectStates", projName);
+            [projectStates removeObjectForKey:projName];
+        } else {
+            DLog(@"%@ exists in cloudDocs", projName);
+        }
+    }
 }
 
 - (IBAction)createNewProjectPressed:(id)sender {
@@ -170,12 +201,21 @@
     }
 }
 
--(void)projectDeleted{
-    [self updateData];
-}
-
 - (void)dealloc {
     [self setLabelHeader:nil];
+}
+
+#pragma mark ProjectCellDelegate
+
+-(void)projectWillBeDeleted:(NSString *)name language:(int)lang{
+    NSString *fullProjName = [NSString stringWithFormat:@"%@_%@", [Utils make3digitsStringFromNumber:lang], name];
+    NSNumber *stateDeleting = [NSNumber numberWithInt:DELETING];
+    DLog(@"Updating state with value %@ for project %@", stateDeleting, fullProjName);
+    [projectStates setObject:stateDeleting forKey:fullProjName];
+}
+
+-(void)projectDeleted{
+    [self updateData];
 }
 
 #pragma mark iCloudHandler delegate methods
@@ -198,6 +238,17 @@
 }
 
 -(void)projectClosed:(Project*)closed{
+    NSString *fullProjName = [NSString stringWithFormat:@"%@_%@", [Utils make3digitsStringFromNumber:closed.projLanguage], closed.projName];
+    NSNumber *stateIdle = [NSNumber numberWithInt:IDLE];
+    DLog(@"Updating state with value %@ for project %@", stateIdle, fullProjName);
+    [projectStates setObject:stateIdle forKey:fullProjName];
+}
+
+-(void)projectWillBeClosed:(Project*)closing{
+    NSString *fullProjName = [NSString stringWithFormat:@"%@_%@", [Utils make3digitsStringFromNumber:closing.projLanguage], closing.projName];
+    NSNumber *stateClosing = [NSNumber numberWithInt:CLOSING];
+    DLog(@"Updating state with value %@ for project %@", stateClosing, fullProjName);
+    [projectStates setObject:stateClosing forKey:fullProjName];
 }
 
 @end

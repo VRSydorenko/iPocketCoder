@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    IDLE = 0,
+    OPENING,
+    SAVING,
+    DELETING,
+    CLOSING,
+} ProjectStates;
+
 @interface Project : UIDocument
 
 @property (readonly) int projId;
@@ -18,6 +26,7 @@
 @property (readonly) NSString* projInput;
 
 @property (readonly) BOOL isInCloud;
+@property (readonly) ProjectStates currentState;
 
 -(id) initWithLanguage:(int)language name:(NSString*)name;
 -(id) initInCloudWithLanguage:(int)language name:(NSString*)name;
