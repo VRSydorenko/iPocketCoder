@@ -107,6 +107,15 @@
         bufferProj = [DataManager loadProject:projectName];
         [self performSegueWithIdentifier:@"segueMainToEditor" sender:self];
     } else if (indexPath.section == SECTION_CLOUD){
+        NSString *fromCloud = [cloudProjects.allKeys objectAtIndex:indexPath.row];
+        NSString *projectName = [fromCloud substringFromIndex:4]; // here the actual name begins
+        int projectLanguage = [fromCloud substringToIndex:3].intValue; // language is stored within first 3 symbols
+        NSString *fullProjName = [NSString stringWithFormat:@"%@_%@", [Utils make3digitsStringFromNumber:projectLanguage], projectName];
+        NSNumber *state = [NSNumber numberWithInt:OPENING];
+        DLog(@"Setting %@ for the cell for project: %@", state, fullProjName);
+        [projectStates setObject:state forKey:fullProjName];
+        [collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+        
         [[iCloudHandler getInstance] openDocument:[cloudProjects.allValues objectAtIndex:indexPath.row]];
     }
 }
@@ -233,8 +242,15 @@
 }
 
 -(void)projectOpened:(Project*)opened{
+    NSString *fullProjName = [NSString stringWithFormat:@"%@_%@", [Utils make3digitsStringFromNumber:opened.projLanguage], opened.projName];
+    NSNumber *stateIdle = [NSNumber numberWithInt:IDLE];
+    DLog(@"Updating state with value %@ for project %@", stateIdle, fullProjName);
+    [projectStates setObject:stateIdle forKey:fullProjName];
+    
     bufferProj = opened;
     [self performSegueWithIdentifier:@"segueMainToEditor" sender:self];
+    
+    [self updateData];
 }
 
 -(void)projectClosed:(Project*)closed{
@@ -242,6 +258,7 @@
     NSNumber *stateIdle = [NSNumber numberWithInt:IDLE];
     DLog(@"Updating state with value %@ for project %@", stateIdle, fullProjName);
     [projectStates setObject:stateIdle forKey:fullProjName];
+    [self updateData];
 }
 
 -(void)projectWillBeClosed:(Project*)closing{
@@ -249,6 +266,7 @@
     NSNumber *stateClosing = [NSNumber numberWithInt:CLOSING];
     DLog(@"Updating state with value %@ for project %@", stateClosing, fullProjName);
     [projectStates setObject:stateClosing forKey:fullProjName];
+    [self updateData];
 }
 
 @end

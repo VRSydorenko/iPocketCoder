@@ -9,12 +9,6 @@
 #import "ProjectCell.h"
 #import "iCloudHandler.h"
 
-@interface ProjectCell(){
-    NSString *labelProjectNameValue; // used as a temporary string variable when updating cell behaviour
-    ProjectStates lastProjState;
-}
-@end
-
 @implementation ProjectCell
 
 - (IBAction)deletePressed:(id)sender {
@@ -40,13 +34,9 @@
         return; // activity indicator is currently only for iCloud projects
     }
     
-    if (lastProjState == IDLE){
-        labelProjectNameValue = self.labelProjectName.text;
-    }
     switch (projState) {
         case IDLE:
             [self.activityIndicator stopAnimating];
-            self.labelProjectName.text = labelProjectNameValue;
             break;
         case SAVING:
             [self.activityIndicator startAnimating];
@@ -65,7 +55,6 @@
             self.labelProjectName.text = @"Closing...";
             break;
     }
-    lastProjState = projState;
 }
 
 @end
