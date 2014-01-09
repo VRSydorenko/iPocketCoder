@@ -22,6 +22,7 @@
                                        SnippetSelectionDelegate,
                                        SymbolsEditorDelegate,
                                        RotationTrigger,
+                                       InputTextDelegate,
                                        UIActionSheetDelegate>
 
 @property (nonatomic, weak) IBOutlet UITextView *textCode;

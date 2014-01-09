@@ -79,6 +79,18 @@
     [navCon showToolbarAnimated:YES];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:nil];
+    [self setFlexItem:nil];
+    [self setInputItem:nil];
+    [self setRunItem:nil];
+}
+
+- (void)viewDidUnload {
+    [self setBtnHideKeyboard:nil];
+    [super viewDidUnload];
+}
+
 // iPhone
 -(void)backPressed{
     [self.project setCode:self.textCode.text];
@@ -185,7 +197,8 @@
         if (!inputVC){
             return;
         }
-        ((InputVC*)[inputVC.viewControllers objectAtIndex:0]).project = self.project;
+        ((InputVC*)[inputVC.viewControllers objectAtIndex:0]).delegate = self;
+        ((InputVC*)[inputVC.viewControllers objectAtIndex:0]).textForInputInit = self.project.projInput;
         
         popoverController = [[UIPopoverController alloc] initWithContentViewController:inputVC];
         [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -224,7 +237,8 @@
         outputVC.signal = lastSignal;
     } else if ([segue.identifier isEqualToString:@"segueEditorToInput"]){
         InputVC* inputVC = (InputVC*)segue.destinationViewController;
-        inputVC.project = self.project;
+        inputVC.delegate = self;
+        inputVC.textForInputInit = self.project.projInput;
     } else if ([segue.identifier isEqualToString:@"segueEditorToSnippets"]){
         SnippetsVC* snippetsVC = (SnippetsVC*)segue.destinationViewController;
         snippetsVC.language = self.project.projLanguage;
@@ -597,6 +611,8 @@
     //[shareActionSheet showInView:self.view];
 }
 
+#pragma mark UIActionSheetDelegate
+
 -(void) actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex == actionSheet.cancelButtonIndex){
         return;
@@ -614,15 +630,11 @@
     [Utils shareText:textToShare overViewController:self];
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:nil];
-    [self setFlexItem:nil];
-    [self setInputItem:nil];
-    [self setRunItem:nil];
+#pragma mark InputTextDelegate
+
+-(void) inputTextChangedTo:(NSString *)input{
+    [self.project setInput:input];
+    [self.project save];
 }
 
-- (void)viewDidUnload {
-    [self setBtnHideKeyboard:nil];
-    [super viewDidUnload];
-}
 @end

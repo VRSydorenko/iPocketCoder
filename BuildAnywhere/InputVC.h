@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Project.h"
 #import "MainNavController.h"
-#import "DataManager.h"
+
+@protocol InputTextDelegate <NSObject>
+-(void)inputTextChangedTo:(NSString*)input;
+@end
 
 @interface InputVC : UIViewController<UITextViewDelegate>
 
-@property (nonatomic) Project* project;
+@property (nonatomic) id<InputTextDelegate> delegate;
+@property NSString* textForInputInit;
+
 @property (strong, nonatomic) IBOutlet UITextView *textInput;
 - (IBAction)clearPressed:(id)sender;
 @end
