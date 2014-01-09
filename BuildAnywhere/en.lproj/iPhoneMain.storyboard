@@ -960,10 +960,10 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mEh-N2-dcu"/>
-        <segue reference="eCf-Qe-pbV"/>
-        <segue reference="tP9-dw-dkh"/>
         <segue reference="TPg-ee-sig"/>
+        <segue reference="mEh-N2-dcu"/>
+        <segue reference="tP9-dw-dkh"/>
         <segue reference="CQ8-nt-QBV"/>
+        <segue reference="3fe-fd-2Ee"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -98,7 +98,8 @@
     NSString *content = [self serializeProject];
     DLog(@"Serialization: %@", content);
     
-    return [NSData dataWithBytes:content.UTF8String length:[content length]];
+    NSUInteger utf8Length = [content lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    return [NSData dataWithBytes:content.UTF8String length:utf8Length];
 }
 
 -(BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError{
@@ -125,7 +126,8 @@
     [content appendFormat:@"%@%@", self.projName, KEY_SEP_DATA];
     [content appendFormat:@"%@%@", self.projCode, KEY_SEP_DATA];
     [content appendFormat:@"%@%@", self.projInput, KEY_SEP_DATA];
-    [content appendFormat:@"%@%@", self.projLink, KEY_SEP_DATA];
+    [content appendString:self.projLink];
+    //[content appendFormat:@"%@%@", self.projLink, KEY_SEP_DATA];
     
     return content;
 }
