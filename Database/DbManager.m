@@ -119,7 +119,7 @@
         [self saveLanguage:LANG_BRAINFUCK withName:@"Brainf**k"];
         [self saveLanguage:LANG_C withName:@"C"];
         [self saveLanguage:LANG_C_SHARP withName:@"C#"];
-        [self saveLanguage:LANG_CPP withName:@"C++"];
+        [self saveLanguage:LANG_CPP_481 withName:@"C++ (gcc 4.8.1)"];
         [self saveLanguage:LANG_CPP11 withName:@"C++ 11"];
         [self saveLanguage:LANG_C99 withName:@"C99"];
         [self saveLanguage:LANG_CLIPS withName:@"CLIPS"];
@@ -174,6 +174,11 @@
         [self saveLanguage:LANG_UNLAMBDA withName:@"Unlambda"];
         [self saveLanguage:LANG_VB_NET withName:@"VB.NET"];
         [self saveLanguage:LANG_WHITESPACE withName:@"Whitespace"];
+    }
+    
+    // should be checked separately
+    if ([self getLanguageName:LANG_CPP_432].length == 0){
+        [self saveLanguage:LANG_CPP_432 withName:@"C++ (gcc 4.3.2)"];
     }
 }
 
@@ -766,43 +771,44 @@
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_AWK_GAWK name:sampleName code:TEMPL_AWK_GAWK]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_AWK_MAWK name:sampleName code:TEMPL_AWK_MAWK]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BASH name:sampleName code:TEMPL_BASH]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BC name:sampleName code:TEMPL_BC]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BRAINFUCK name:sampleName code:TEMPL_BRAINFUCK]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BC name:sampleName code:TEMPL_BC]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BRAINFUCK name:sampleName code:TEMPL_BRAINFUCK]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_C name:sampleName code:TEMPL_C]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_C_SHARP name:sampleName code:TEMPL_C_SHARP]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP name:sampleName code:TEMPL_CPP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP_432 name:sampleName code:TEMPL_CPP_432]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP_481 name:sampleName code:TEMPL_CPP_481]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP11 name:sampleName code:TEMPL_CPP11]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLIPS name:sampleName code:TEMPL_CLIPS]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLOJURE name:sampleName code:TEMPL_CLOJURE]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLOJURE name:sampleName code:TEMPL_CLOJURE]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_COBOL name:sampleName code:TEMPL_COBOL]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_COBOL85 name:sampleName code:TEMPL_COBOL85]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLISP name:sampleName code:TEMPL_CLISP]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_D_DMD name:sampleName code:TEMPL_D_DMD]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_D_DMD name:sampleName code:TEMPL_D_DMD]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ERLANG name:sampleName code:TEMPL_ERLANG]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_F_SHARP name:sampleName code:TEMPL_F_SHARP]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FACTOR name:sampleName code:TEMPL_FACTOR]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FALCON name:sampleName code:TEMPL_FALCON]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTH name:sampleName code:TEMPL_FORTH]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FALCON name:sampleName code:TEMPL_FALCON]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTH name:sampleName code:TEMPL_FORTH]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTRAN name:sampleName code:TEMPL_FORTRAN]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GO name:sampleName code:TEMPL_GO]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GROOVY name:sampleName code:TEMPL_GROOVY]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GROOVY name:sampleName code:TEMPL_GROOVY]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_HASKELL name:sampleName code:TEMPL_HASKELL]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ICON name:sampleName code:TEMPL_ICON]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_INTERCAL name:sampleName code:TEMPL_INTERCAL]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVA name:sampleName code:TEMPL_JAVA]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVA7 name:sampleName code:TEMPL_JAVA7]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_RHINO name:sampleName code:TEMPL_JAVASCRIPT_RHINO]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_SPIDER name:sampleName code:TEMPL_JAVASCRIPT_SPIDER]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_LUA name:sampleName code:TEMPL_LUA]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_SPIDER name:sampleName code:TEMPL_JAVASCRIPT_SPIDER]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_LUA name:sampleName code:TEMPL_LUA]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NEMERLE name:sampleName code:TEMPL_NEMERLE]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NICE name:sampleName code:TEMPL_NICE]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NIMROD name:sampleName code:TEMPL_NIMROD]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NIMROD name:sampleName code:TEMPL_NIMROD]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NODE_JS name:sampleName code:TEMPL_NODE_JS]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OBJ_C name:sampleName code:TEMPL_OBJ_C]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCAML name:sampleName code:TEMPL_OCAML]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCTAVE name:sampleName code:TEMPL_OCTAVE]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCAML name:sampleName code:TEMPL_OCAML]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCTAVE name:sampleName code:TEMPL_OCTAVE]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OZ name:sampleName code:TEMPL_OZ]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PARI_GP name:sampleName code:TEMPL_PARI_GP]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PARI_GP name:sampleName code:TEMPL_PARI_GP]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PASCAL_FPC name:sampleName code:TEMPL_PASCAL_FPC]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PASCAL_GPC name:sampleName code:TEMPL_PASCAL_GPC]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PERL name:sampleName code:TEMPL_PERL]];
@@ -811,19 +817,19 @@
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PIKE name:sampleName code:TEMPL_PIKE]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PROLOG_GNU name:sampleName code:TEMPL_PROLOG_GNU]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PROlOG_SWI name:sampleName code:TEMPL_PROlOG_SWI]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON name:sampleName code:TEMPL_PYTHON]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON3 name:sampleName code:TEMPL_PYTHON3]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_R name:sampleName code:TEMPL_R]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_RUBY name:sampleName code:TEMPL_RUBY]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON name:sampleName code:TEMPL_PYTHON]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON3 name:sampleName code:TEMPL_PYTHON3]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_R name:sampleName code:TEMPL_R]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_RUBY name:sampleName code:TEMPL_RUBY]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCALA name:sampleName code:TEMPL_SCALA]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCHEME name:sampleName code:TEMPL_SCHEME]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SMALLTALK name:sampleName code:TEMPL_SMALLTALK]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SQL name:sampleName code:TEMPL_SQL]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TCL name:sampleName code:TEMPL_TCL]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TEXT name:sampleName code:TEMPL_TEXT]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_UNLAMBDA name:sampleName code:TEMPL_UNLAMBDA]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCHEME name:sampleName code:TEMPL_SCHEME]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SMALLTALK name:sampleName code:TEMPL_SMALLTALK]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SQL name:sampleName code:TEMPL_SQL]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TCL name:sampleName code:TEMPL_TCL]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TEXT name:sampleName code:TEMPL_TEXT]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_UNLAMBDA name:sampleName code:TEMPL_UNLAMBDA]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_VB_NET name:sampleName code:TEMPL_VB_NET]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_WHITESPACE name:sampleName code:TEMPL_WHITESPACE]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_WHITESPACE name:sampleName code:TEMPL_WHITESPACE]];
         
         [UserSettings setCodeSamplesInitialized];
     }

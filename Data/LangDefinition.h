@@ -18,7 +18,8 @@
 #define LANG_BRAINFUCK 12
 #define LANG_C 11
 #define LANG_C_SHARP 27
-#define LANG_CPP 1
+#define LANG_CPP_432 41
+#define LANG_CPP_481 1
 #define LANG_CPP11 44
 #define LANG_C99 34
 #define LANG_CLIPS 14
