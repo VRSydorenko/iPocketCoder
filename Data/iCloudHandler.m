@@ -85,7 +85,7 @@
          if (success){
              DLog(@"Cloud save succeeded");
              if (deleteAfterSave){
-                 [DataManager deleteProject:project.projName];
+                 [DataManager deleteProject:project.projName]; // has to be deleted by DataManager (not using project's remove method)
              }
              if (operation == UIDocumentSaveForCreating){
                  NSMutableDictionary *tmp = [[NSMutableDictionary alloc] initWithDictionary:self.cloudDocs];

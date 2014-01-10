@@ -127,7 +127,6 @@
     [content appendFormat:@"%@%@", self.projCode, KEY_SEP_DATA];
     [content appendFormat:@"%@%@", self.projInput, KEY_SEP_DATA];
     [content appendString:self.projLink];
-    //[content appendFormat:@"%@%@", self.projLink, KEY_SEP_DATA];
     
     return content;
 }

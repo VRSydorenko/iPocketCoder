@@ -7,7 +7,6 @@
 //
 
 #import "Snippet.h"
-#import "DataManager.h"
 
 @implementation Snippet
 

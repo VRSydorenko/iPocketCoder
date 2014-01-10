@@ -16,7 +16,6 @@
     NSDictionary *cloudProjects;
     
     UIPopoverController* popoverController;
-    MainNavController* navCon;
     
     Project *bufferProj;
     NSMutableDictionary *projectStates;
@@ -34,8 +33,7 @@
     
     projectStates = [[NSMutableDictionary alloc] init];
     
-    navCon = (MainNavController*)self.navigationController;
-    [navCon hideToolBarAnimated:NO];
+    [(MainNavController*)self.navigationController hideToolBarAnimated:NO];
     
     bufferProj = nil;
     
@@ -50,12 +48,11 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [navCon hideToolBarAnimated:YES];
+    [(MainNavController*)self.navigationController hideToolBarAnimated:YES];
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 2;
-    //return cloudProjects.count > 0 ? 2 : 1;
+    return 2; // local & cloud projects
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section{
@@ -108,12 +105,9 @@
         [self performSegueWithIdentifier:@"segueMainToEditor" sender:self];
     } else if (indexPath.section == SECTION_CLOUD){
         NSString *fromCloud = [cloudProjects.allKeys objectAtIndex:indexPath.row];
-        NSString *projectName = [fromCloud substringFromIndex:4]; // here the actual name begins
-        int projectLanguage = [fromCloud substringToIndex:3].intValue; // language is stored within first 3 symbols
-        NSString *fullProjName = [NSString stringWithFormat:@"%@_%@", [Utils make3digitsStringFromNumber:projectLanguage], projectName];
         NSNumber *state = [NSNumber numberWithInt:OPENING];
-        DLog(@"Setting %@ for the cell for project: %@", state, fullProjName);
-        [projectStates setObject:state forKey:fullProjName];
+        DLog(@"Setting %@ for the cell for project: %@", state, fromCloud);
+        [projectStates setObject:state forKey:fromCloud];
         [collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
         
         [[iCloudHandler getInstance] openDocument:[cloudProjects.allValues objectAtIndex:indexPath.row]];

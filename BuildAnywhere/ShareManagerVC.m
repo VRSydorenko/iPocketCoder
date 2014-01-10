@@ -10,7 +10,6 @@
 #import "MainNavController.h"
 
 @interface ShareManagerVC (){
-    MainNavController *navCon;
     NSMutableArray* contentTypesToShare;
 }
 @end
@@ -22,10 +21,9 @@
     [super viewDidLoad];
 	
     contentTypesToShare = [[NSMutableArray alloc] init];
-    navCon = (MainNavController*)self.navigationController;
     
     if (!IPAD){ // to save more space on navigation bar
-        [navCon createMiniBackButtonWithBackPressedSelectorOnTarget:self];
+        [(MainNavController*)self.navigationController createMiniBackButtonWithBackPressedSelectorOnTarget:self];
     }
     
     self.tableContent.delegate = self;
