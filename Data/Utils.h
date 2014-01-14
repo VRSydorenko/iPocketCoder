@@ -17,6 +17,7 @@
 +(NSString*)getSignalDescription:(int)signal;
 +(NSString*)returnCaretIfNotEmpty:(NSString*)targetString returnNumbers:(int)returns;
 +(NSString*)codeTemplateForLanguage:(int)langId;
++(NSString*)helloWorldForLanguage:(int)langId;
 +(NSString*)make3digitsStringFromNumber:(int)number;
 
 @end

@@ -211,6 +211,80 @@
     return @"";
 }
 
++(NSString*)helloWorldForLanguage:(int)langId{
+    switch (langId) {
+        case LANG_ADA: return HW_ADA;
+        case LANG_ASM_GCC472: return HW_ASM_GCC472;
+        case LANG_ASM_NASM207: return HW_ASM_NASM207;
+        case LANG_AWK_GAWK: return HW_AWK_GAWK;
+        case LANG_AWK_MAWK: return HW_AWK_MAWK;
+        case LANG_BASH: return HW_BASH;
+        case LANG_BC: return HW_BC;
+        case LANG_BRAINFUCK: return HW_BRAINFUCK;
+        case LANG_C: return HW_C;
+        case LANG_C99: return HW_C99;
+        case LANG_C_SHARP: return HW_C_SHARP;
+        case LANG_CLIPS: return HW_CLIPS;
+        case LANG_CLISP: return HW_CLISP;
+        case LANG_CLOJURE: return HW_CLOJURE;
+        case LANG_COBOL: return HW_COBOL;
+        case LANG_COBOL85: return HW_COBOL85;
+        case LANG_CPP_432: return HW_CPP_432;
+        case LANG_CPP_481: return HW_CPP_481;
+        case LANG_CPP11: return HW_CPP11;
+        case LANG_D_DMD: return HW_D_DMD;
+        case LANG_ERLANG: return HW_ERLANG;
+        case LANG_F_SHARP: return HW_F_SHARP;
+        case LANG_FACTOR: return HW_FACTOR;
+        case LANG_FALCON: return HW_FALCON;
+        case LANG_FORTH: return HW_FORTH;
+        case LANG_FORTRAN: return HW_FORTRAN;
+        case LANG_GO: return HW_GO;
+        case LANG_GROOVY: return HW_GROOVY;
+        case LANG_HASKELL: return HW_HASKELL;
+        case LANG_ICON: return HW_ICON;
+        case LANG_INTERCAL: return HW_INTERCAL;
+        case LANG_JAVA: return HW_JAVA;
+        case LANG_JAVA7: return HW_JAVA7;
+        case LANG_JAVASCRIPT_RHINO: return HW_JAVASCRIPT_RHINO;
+        case LANG_JAVASCRIPT_SPIDER: return HW_JAVASCRIPT_SPIDER;
+        case LANG_LUA: return HW_LUA;
+        case LANG_NEMERLE: return HW_NEMERLE;
+        case LANG_NICE: return HW_NICE;
+        case LANG_NIMROD: return HW_NIMROD;
+        case LANG_NODE_JS: return HW_NODE_JS;
+        case LANG_OBJ_C: return HW_OBJ_C;
+        case LANG_OCAML: return HW_OCAML;
+        case LANG_OCTAVE: return HW_OCTAVE;
+        case LANG_OZ: return HW_OZ;
+        case LANG_PARI_GP: return HW_PARI_GP;
+        case LANG_PASCAL_FPC: return HW_PASCAL_FPC;
+        case LANG_PASCAL_GPC: return HW_PASCAL_GPC;
+        case LANG_PERL: return HW_PERL;
+        case LANG_PERL_6: return HW_PERL_6;
+        case LANG_PHP: return HW_PHP;
+        case LANG_PIKE: return HW_PIKE;
+        case LANG_PROLOG_GNU: return HW_PROLOG_GNU;
+        case LANG_PROlOG_SWI: return HW_PROlOG_SWI;
+        case LANG_PYTHON: return HW_PYTHON;
+        case LANG_PYTHON3: return HW_PYTHON3;
+        case LANG_R: return HW_R;
+        case LANG_RUBY: return HW_RUBY;
+        case LANG_SCALA: return HW_SCALA;
+        case LANG_SCHEME: return HW_SCHEME;
+        case LANG_SMALLTALK: return HW_SMALLTALK;
+        case LANG_SQL: return HW_SQL;
+        case LANG_TCL: return HW_TCL;
+        case LANG_TEXT: return HW_TEXT;
+        case LANG_UNLAMBDA: return HW_UNLAMBDA;
+        case LANG_VB_NET: return HW_VB_NET;
+        case LANG_WHITESPACE: return HW_WHITESPACE;
+            
+        default:return @"";
+    }
+    return @"";
+}
+
 +(NSString*)make3digitsStringFromNumber:(int)number{
     return [NSString stringWithFormat:@"%03d", number];
 }
