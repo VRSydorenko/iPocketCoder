@@ -33,4 +33,11 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SAMPLES_INITIALISED];
 }
 
++(BOOL) getHelloWorldsInitialized{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:HELLOWORLDS_INITIALISED];
+}
++(void) setHelloWorldsInitialized{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:HELLOWORLDS_INITIALISED];
+}
+
 @end

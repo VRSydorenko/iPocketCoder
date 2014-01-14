@@ -10,6 +10,7 @@
 
 #define SYMBOLS_INITIALISED @"symbols_initialised"
 #define SAMPLES_INITIALISED @"samples_initialised"
+#define HELLOWORLDS_INITIALISED @"helloworlds_initialised"
 
 @interface UserSettings : NSObject
 
@@ -19,5 +20,7 @@
 +(void) setBaseSymbolsInitialized;
 +(BOOL) getCodeSamplesInitialized;
 +(void) setCodeSamplesInitialized;
++(BOOL) getHelloWorldsInitialized;
++(void) setHelloWorldsInitialized;
 
 @end

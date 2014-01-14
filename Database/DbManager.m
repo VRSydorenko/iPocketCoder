@@ -22,6 +22,7 @@
         [self initDatabase];
         [self initLanguages];
         [self initCodeSamples];
+        [self initHelloWorlds];
         [self initBaseQuickSymbols];
     }
     return self;
@@ -832,6 +833,79 @@
         //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_WHITESPACE name:sampleName code:TEMPL_WHITESPACE]];
         
         [UserSettings setCodeSamplesInitialized];
+    }
+}
+
+-(void)initHelloWorlds{
+    if (![UserSettings getHelloWorldsInitialized]){
+        NSString *sampleName = @"hello world";
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ADA name:sampleName code:HW_ADA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ASM_NASM207 name:sampleName code:HW_ASM_NASM207]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ASM_GCC472 name:sampleName code:HW_ASM_GCC472]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_AWK_GAWK name:sampleName code:HW_AWK_GAWK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_AWK_MAWK name:sampleName code:HW_AWK_MAWK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BASH name:sampleName code:HW_BASH]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BC name:sampleName code:HW_BC]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_BRAINFUCK name:sampleName code:HW_BRAINFUCK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_C name:sampleName code:HW_C]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_C_SHARP name:sampleName code:HW_C_SHARP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP_432 name:sampleName code:HW_CPP_432]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP_481 name:sampleName code:HW_CPP_481]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CPP11 name:sampleName code:HW_CPP11]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLIPS name:sampleName code:HW_CLIPS]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLOJURE name:sampleName code:HW_CLOJURE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_COBOL name:sampleName code:HW_COBOL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_COBOL85 name:sampleName code:HW_COBOL85]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_CLISP name:sampleName code:HW_CLISP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_D_DMD name:sampleName code:HW_D_DMD]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ERLANG name:sampleName code:HW_ERLANG]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_F_SHARP name:sampleName code:HW_F_SHARP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FACTOR name:sampleName code:HW_FACTOR]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FALCON name:sampleName code:HW_FALCON]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTH name:sampleName code:HW_FORTH]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_FORTRAN name:sampleName code:HW_FORTRAN]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GO name:sampleName code:HW_GO]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_GROOVY name:sampleName code:HW_GROOVY]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_HASKELL name:sampleName code:HW_HASKELL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_ICON name:sampleName code:HW_ICON]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_INTERCAL name:sampleName code:HW_INTERCAL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVA name:sampleName code:HW_JAVA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVA7 name:sampleName code:HW_JAVA7]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_RHINO name:sampleName code:HW_JAVASCRIPT_RHINO]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_JAVASCRIPT_SPIDER name:sampleName code:HW_JAVASCRIPT_SPIDER]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_LUA name:sampleName code:HW_LUA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NEMERLE name:sampleName code:HW_NEMERLE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NICE name:sampleName code:HW_NICE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NIMROD name:sampleName code:HW_NIMROD]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_NODE_JS name:sampleName code:HW_NODE_JS]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OBJ_C name:sampleName code:HW_OBJ_C]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCAML name:sampleName code:HW_OCAML]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OCTAVE name:sampleName code:HW_OCTAVE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_OZ name:sampleName code:TEMPL_OZ]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PARI_GP name:sampleName code:HW_PARI_GP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PASCAL_FPC name:sampleName code:HW_PASCAL_FPC]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PASCAL_GPC name:sampleName code:HW_PASCAL_GPC]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PERL name:sampleName code:HW_PERL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PERL_6 name:sampleName code:HW_PERL_6]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PHP name:sampleName code:HW_PHP]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PIKE name:sampleName code:HW_PIKE]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PROLOG_GNU name:sampleName code:HW_PROLOG_GNU]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PROlOG_SWI name:sampleName code:HW_PROlOG_SWI]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON name:sampleName code:HW_PYTHON]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_PYTHON3 name:sampleName code:HW_PYTHON3]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_R name:sampleName code:HW_R]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_RUBY name:sampleName code:HW_RUBY]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCALA name:sampleName code:HW_SCALA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SCHEME name:sampleName code:HW_SCHEME]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SMALLTALK name:sampleName code:HW_SMALLTALK]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SQL name:sampleName code:HW_SQL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TCL name:sampleName code:HW_TCL]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TEXT name:sampleName code:HW_TEXT]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_UNLAMBDA name:sampleName code:HW_UNLAMBDA]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_VB_NET name:sampleName code:HW_VB_NET]];
+        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_WHITESPACE name:sampleName code:HW_WHITESPACE]];
+        
+        [UserSettings setHelloWorldsInitialized];
     }
 }
 

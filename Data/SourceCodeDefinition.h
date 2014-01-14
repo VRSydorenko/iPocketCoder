@@ -127,7 +127,7 @@
 #define HW_PARI_GP @"print(\"Hello, world!\")"
 #define HW_PASCAL_FPC @"program ideone;\nbegin\n\nwriteln('Hello, world!');\n\nend."
 #define HW_PASCAL_GPC HW_PASCAL_FPC
-#define HW_PERL @"#!/usr/bin/perl\nprint \"Hello, world!\\n";
+#define HW_PERL @"#!/usr/bin/perl\nprint \"Hello, world!\"\\n"
 #define HW_PERL_6 HW_PERL
 #define HW_PHP @"<?php\n\necho \"Hello, world!\n\";\n\n?>"
 #define HW_PIKE @"int main() {\nwrite(\"Hello, world!\\n\");\n}"
