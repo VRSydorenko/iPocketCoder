@@ -19,6 +19,7 @@
 +(void)shareText:(NSString*)textToShare overViewController:(UIViewController*)viewController{
     NSArray *activityItems = @[textToShare];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityVC setValue:@"Source code from iPocketCoder" forKey:@"subject"];
     
     NSMutableArray *excludedTypes = [[NSMutableArray alloc] init];
     [excludedTypes addObject:UIActivityTypeAssignToContact];
