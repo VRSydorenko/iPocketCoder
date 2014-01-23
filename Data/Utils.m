@@ -169,7 +169,7 @@
         case LANG_GROOVY: return TEMPL_EMPTY_GROOVY;
         case LANG_HASKELL: return TEMPL_HASKELL;
         case LANG_ICON: return TEMPL_ICON;
-        case LANG_INTERCAL: return TEMPL_INTERCAL;
+        case LANG_INTERCAL: return TEMPL_EMPTY_INTERCAL;
         case LANG_JAVA: return TEMPL_JAVA;
         case LANG_JAVA7: return TEMPL_JAVA7;
         case LANG_JAVASCRIPT_RHINO: return TEMPL_JAVASCRIPT_RHINO;
