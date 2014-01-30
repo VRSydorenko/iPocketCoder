@@ -36,7 +36,7 @@
 #define TEMPL_EMPTY_FALCON @"// your code goes here\n"
 #define TEMPL_EMPTY_FORTH @"( your code goes here )\n"
 #define TEMPL_FORTRAN @"program TEST\n    ! your code goes here\n    stop\nend"
-#define TEMPL_GO @"package main\nimport \"fmt\"\n\nfunc main(){\n    // your code goes here\n}"
+#define TEMPL_GO @"package main\n//import \"fmt\"\n\nfunc main(){\n    // your code goes here\n}"
 #define TEMPL_EMPTY_GROOVY @"// your code goes here\n"
 #define TEMPL_HASKELL @"main = -- your code goes here"
 #define TEMPL_ICON @"procedure main()\n# your code goes here\nend"
@@ -44,7 +44,7 @@
 #define TEMPL_JAVA @"/* package whatever; // don't place package name! */\n\nimport java.util.*;\nimport java.lang.*;\nimport java.io.*;\n\n/* Name of the class has to be \"Main\" only if the class is public. */\nclass iPocketCoder\n{\n    public static void main (String[] args) throws java.lang.Exception\n    {\n        // your code goes here\n    }\n}"
 #define TEMPL_JAVA7 TEMPL_JAVA
 #define TEMPL_JAVASCRIPT_RHINO @"importPackage(java.io);\nimportPackage(java.lang);\n\n// your code goes here"
-#define TEMPL_EMPTY_JAVASCRIPT_SPIDER @"// your code goes here"
+#define TEMPL_EMPTY_JAVASCRIPT_SPIDER @"// your code goes here\n"
 #define TEMPL_EMPTY_LUA @"-- your code goes here"
 #define TEMPL_NEMERLE @"using System;\npublic class Test\n{\n    public static Main() : void\n    {\n        // your code goes here\n    }\n}"
 #define TEMPL_NICE @"void main (String[] args)\n{\n    // your code goes here\n}"
@@ -74,7 +74,7 @@
 #define TEMPL_EMPTY_TCL @";# your code goes here"
 #define TEMPL_EMPTY_TEXT @""
 #define TEMPL_EMPTY_UNLAMBDA @""
-#define TEMPL_VB_NET @"Imports System\n\nPublic Class Test\n    Public Shared Sub Main()\n        ' your code goes here\n    End Sub\nEnd Class"
+#define TEMPL_VB_NET @"Imports System\n\nPublic Class iPocketCoder\n    Public Shared Sub Main()\n        ' your code goes here\n    End Sub\nEnd Class"
 #define TEMPL_EMPTY_WHITESPACE @""
 
 
@@ -106,7 +106,7 @@
 #define HW_FALCON @"> \"Hello, world!\""
 #define HW_FORTH @".\" Hello, world! \""
 #define HW_FORTRAN @"program hello\n    write (*,*) 'Hello, world!'\nend program hello"
-#define HW_GO @"package main\nimport \"fmt\"\n\nfunc main() {\n    fmt.Printf(\"Hello, world\")\n}"
+#define HW_GO @"package main\nimport \"fmt\"\n\nfunc main() {\n    fmt.Printf(\"Hello, world!\")\n}"
 #define HW_GROOVY @"println \"Hello, world!\""
 #define HW_HASKELL @"main = putStrLn \"Hello, world!\""
 #define HW_ICON @"procedure main(args)\n    write(\"Hello, world!\");\nend"
@@ -144,5 +144,5 @@
 #define HW_TCL @"puts \"Hello, world!\""
 #define HW_TEXT @"out:\"Hello, world!\""
 #define HW_UNLAMBDA @"`r`````````````.H.e.l.l.o.,. .w.o.r.l.d.!i"
-#define HW_VB_NET @"Imports System\n\nPublic Class Test\n    Public Shared Sub Main()\n        Console.WriteLine (\"Hello, world!\")\n    End Sub\nEnd Class"
+#define HW_VB_NET @"Imports System\n\nPublic Class iPocketCoder\n    Public Shared Sub Main()\n        Console.WriteLine (\"Hello, world!\")\n    End Sub\nEnd Class"
 #define HW_WHITESPACE @""
