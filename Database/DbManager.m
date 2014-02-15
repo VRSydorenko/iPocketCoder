@@ -902,7 +902,7 @@
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SMALLTALK name:sampleName code:HW_SMALLTALK]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_SQL name:sampleName code:HW_SQL]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TCL name:sampleName code:HW_TCL]];
-        [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TEXT name:sampleName code:HW_TEXT]];
+        //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_TEXT name:sampleName code:HW_TEXT]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_UNLAMBDA name:sampleName code:HW_UNLAMBDA]];
         [self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_VB_NET name:sampleName code:HW_VB_NET]];
         //[self saveSnippet:[[Snippet alloc] initWithLanguage:LANG_WHITESPACE name:sampleName code:HW_WHITESPACE]];

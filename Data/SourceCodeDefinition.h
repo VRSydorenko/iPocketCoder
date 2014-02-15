@@ -142,7 +142,7 @@
 #define HW_SMALLTALK @"Transcript show: 'Hello, world!'; cr.\n"
 #define HW_SQL @"create table tbl(str varchar(20));\ninsert into tbl values('Hello, world!');\nselect * from tbl;"
 #define HW_TCL @"puts \"Hello, world!\""
-#define HW_TEXT @"out:\"Hello, world!\""
+#define HW_TEXT @""
 #define HW_UNLAMBDA @"`r`````````````.H.e.l.l.o.,. .w.o.r.l.d.!i"
 #define HW_VB_NET @"Imports System\n\nPublic Class iPocketCoder\n    Public Shared Sub Main()\n        Console.WriteLine (\"Hello, world!\")\n    End Sub\nEnd Class"
 #define HW_WHITESPACE @""
