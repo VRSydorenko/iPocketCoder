@@ -23,6 +23,7 @@
             [DataManager deleteProject:self.labelProjectName.text];
             [self.delegate projectDeleted];
         } else {
+            self.buttonDelete.hidden = YES;
             [self.delegate projectWillBeDeleted:self.labelProjectName.text language:self.tag];
             [[iCloudHandler getInstance] deleteFromCloud:self.labelProjectName.text language:self.tag];
         }

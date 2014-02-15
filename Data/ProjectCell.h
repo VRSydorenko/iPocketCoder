@@ -20,6 +20,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelProjectName;
 @property (strong, nonatomic) IBOutlet UILabel *labelProjectLanguage;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) IBOutlet UIButton *buttonDelete;
+
 @property (nonatomic) BOOL isProjectLocal;
 
 - (IBAction)deletePressed:(id)sender;

@@ -105,6 +105,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="activityIndicator" destination="k4r-Zh-JhV" id="46d-Gh-4xL"/>
+                                            <outlet property="buttonDelete" destination="uuB-PE-jJn" id="fTe-nn-jo5"/>
                                             <outlet property="labelProjectLanguage" destination="uEK-kX-W45" id="4MY-3v-3w0"/>
                                             <outlet property="labelProjectName" destination="nke-P9-afw" id="nTl-Rf-vEZ"/>
                                         </connections>
@@ -166,6 +167,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="activityIndicator" destination="5kZ-6K-Upn" id="nEd-kX-1ux"/>
+                                            <outlet property="buttonDelete" destination="E6O-Cx-dP7" id="5qT-88-FdB"/>
                                             <outlet property="labelProjectLanguage" destination="1rF-6r-LQV" id="Xfi-fq-bxm"/>
                                             <outlet property="labelProjectName" destination="HeK-PH-kNb" id="YdC-HP-M05"/>
                                         </connections>

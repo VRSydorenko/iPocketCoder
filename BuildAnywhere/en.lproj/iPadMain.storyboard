@@ -85,6 +85,7 @@
                                         </view>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="buttonDelete" destination="lXb-Yx-fB4" id="PBn-ph-Qem"/>
                                             <outlet property="labelProjectLanguage" destination="dTS-pn-bpb" id="l1Z-GF-lVb"/>
                                             <outlet property="labelProjectName" destination="WXs-0s-l69" id="gti-cV-gWo"/>
                                         </connections>
@@ -131,6 +132,7 @@
                                         </view>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="buttonDelete" destination="a2N-cm-yxT" id="RV0-5x-ewc"/>
                                             <outlet property="labelProjectLanguage" destination="nhi-qG-zeZ" id="4K6-8Y-7c7"/>
                                             <outlet property="labelProjectName" destination="6ps-5I-RCh" id="VpJ-FM-Y4M"/>
                                         </connections>
