@@ -80,11 +80,16 @@
                                                         <action selector="deletePressed:" destination="987-Tr-0Q9" eventType="touchUpInside" id="Bbr-jp-0JL"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" id="Tep-eK-r2G">
+                                                    <rect key="frame" x="6" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="Tep-eK-r2G" id="ECL-sh-Yci"/>
                                             <outlet property="buttonDelete" destination="lXb-Yx-fB4" id="PBn-ph-Qem"/>
                                             <outlet property="labelProjectLanguage" destination="dTS-pn-bpb" id="l1Z-GF-lVb"/>
                                             <outlet property="labelProjectName" destination="WXs-0s-l69" id="gti-cV-gWo"/>
@@ -127,11 +132,16 @@
                                                         <action selector="deletePressed:" destination="hWM-tz-ggd" eventType="touchUpInside" id="AXY-6t-vn8"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" id="2Is-Si-pfL">
+                                                    <rect key="frame" x="6" y="6" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="2Is-Si-pfL" id="Rs7-ei-1Lo"/>
                                             <outlet property="buttonDelete" destination="a2N-cm-yxT" id="RV0-5x-ewc"/>
                                             <outlet property="labelProjectLanguage" destination="nhi-qG-zeZ" id="4K6-8Y-7c7"/>
                                             <outlet property="labelProjectName" destination="6ps-5I-RCh" id="VpJ-FM-Y4M"/>

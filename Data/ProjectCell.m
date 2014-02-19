@@ -35,6 +35,8 @@
         return; // activity indicator is currently only for iCloud projects
     }
     
+    self.buttonDelete.hidden = projState == DELETING;
+    
     switch (projState) {
         case IDLE:
             [self.activityIndicator stopAnimating];
