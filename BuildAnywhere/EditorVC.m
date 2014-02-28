@@ -16,6 +16,7 @@
     BOOL detailsRequested;
     BOOL showResultsOnArrive;
     BOOL keyboardActive;
+    BOOL afterSnippetView;
     
     NSString* lastCmpInfo;
     NSString* lastOutput;
@@ -71,12 +72,17 @@
     }
     
     keyboardActive = NO;
+    afterSnippetView = NO;
     self.btnShortkeysSettings.hidden = YES;
     [self textViewDidEndEditing:self.textCode]; // updating Share button state
 }
 
 -(void) viewDidAppear:(BOOL)animated{
     [navCon showToolbarAnimated:YES];
+    if (afterSnippetView){ // if we're back from selecting a snippet
+        [self.textCode becomeFirstResponder];
+        afterSnippetView = NO;
+    }
 }
 
 - (void)dealloc {
@@ -243,6 +249,10 @@
         SnippetsVC* snippetsVC = (SnippetsVC*)segue.destinationViewController;
         snippetsVC.language = self.project.projLanguage;
         snippetsVC.delegate = self;
+        if (keyboardActive){
+            afterSnippetView = YES;
+            [self hideKeyboardPressed:nil];
+        }
     } else if ([segue.identifier isEqualToString:@"segueEditorToSymbolsManager"]){
         QuickSymbolManager* symbolsManagerVC = (QuickSymbolManager*)segue.destinationViewController;
         symbolsManagerVC.projectLanguge = self.project.projLanguage;
